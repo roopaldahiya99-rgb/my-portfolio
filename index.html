@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roopal | Investor · Explorer · Learner</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">
+        <span class="compass-icon">✦</span>
+        <span>Roopal</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#map-section">World</a></li>
+        <li><a href="#learned">Learning</a></li>
+        <li><a href="#sectors">Sectors</a></li>
+        <li><a href="#network">Network</a></li>
+        <li><a href="#contact" class="nav-cta">Connect</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ──────────────────────────────────────────────── -->
+  <section id="hero">
+    <div id="map"></div>
+
+    <!-- Legend -->
+    <div class="map-legend">
+      <div class="legend-item"><span class="dot dot-invest"></span> Investment</div>
+      <div class="legend-item"><span class="dot dot-support"></span> Supported</div>
+      <div class="legend-item"><span class="dot dot-network"></span> Network</div>
+    </div>
+
+    <!-- Hero overlay -->
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <p class="hero-eyebrow">VC · PE · MBA</p>
+        <h1 class="hero-title">Betting on <em>People</em><br />and <em>Ideas</em></h1>
+        <p class="hero-sub">
+          Investor across five continents. Learner every day.<br />
+          Creating value in companies that matter.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num" data-count="10">0</span>
+            <span class="stat-label">Countries</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num" data-count="6">0</span>
+            <span class="stat-label">Sectors</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num" data-count="8">0</span>
+            <span class="stat-label">Investments</span>
+          </div>
+        </div>
+        <a href="#map-section" class="hero-scroll">
+          <span>Explore the map</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MAP DETAIL SECTION ──────────────────────────────── -->
+  <section id="map-section" class="section">
+    <div class="section-header reveal">
+      <p class="section-label">Global Footprint</p>
+      <h2>Where I've <em>Created Impact</em></h2>
+      <p class="section-desc">
+        From Nairobi to New Delhi, Sydney to San Francisco — every pin is a story of founders backed, networks built, and problems tackled.
+      </p>
+    </div>
+    <div class="pins-grid reveal" id="pinsGrid">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── WHAT I'VE LEARNED ────────────────────────────────── -->
+  <section id="learned" class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">Intellectual Curiosity</p>
+      <h2>What I've <em>Learned</em></h2>
+      <p class="section-desc">
+        I read the FT every morning, complete a case study monthly, and keep building credentials.
+        Here's my running log of what I'm absorbing and why it matters.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs reveal" id="learnTabs">
+      <button class="tab active" data-tab="classes">Classes</button>
+      <button class="tab" data-tab="cases">Case Studies</button>
+      <button class="tab" data-tab="reading">Reading</button>
+    </div>
+
+    <div class="tab-content" id="learnContent">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── SECTORS ──────────────────────────────────────────── -->
+  <section id="sectors" class="section">
+    <div class="section-header reveal">
+      <p class="section-label">What Excites Me</p>
+      <h2>Sectors I <em>Love</em></h2>
+      <p class="section-desc">
+        The problems that keep me up at night — and the solutions I'm backing to solve them.
+      </p>
+    </div>
+    <div class="sectors-grid reveal" id="sectorsGrid">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── NETWORK ──────────────────────────────────────────── -->
+  <section id="network" class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">People & Community</p>
+      <h2>Networks I <em>Leverage</em></h2>
+      <p class="section-desc">
+        The communities that sharpen my thinking and expand my reach.
+      </p>
+    </div>
+    <div class="network-grid reveal" id="networkGrid">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ──────────────────────────────────────────── -->
+  <section id="contact" class="section contact-section">
+    <div class="contact-inner reveal">
+      <p class="section-label">Let's Connect</p>
+      <h2>Always open to <em>interesting conversations</em></h2>
+      <p class="contact-sub">
+        Whether it's a thesis to debate, a founder to meet, or a problem to explore together — reach out.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:hello@example.com" class="contact-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Me
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="contact-btn contact-btn-outline">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <span class="compass-icon">✦</span>
+      <p>Built with curiosity · &copy; 2025 Roopal</p>
+    </div>
+  </footer>
+
+  <!-- Sector modal -->
+  <div id="sectorModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
