@@ -214,9 +214,9 @@ function initLearning() {
 
 function renderLearnTab(tabKey) {
   const content = document.getElementById('learnContent');
-  const dataMap = { classes: LEARNING.classes, cases: LEARNING.cases, reading: LEARNING.reading };
+  const dataMap = { classes: LEARNING.classes, cases: LEARNING.cases, reading: LEARNING.reading, thesis: LEARNING.thesis };
   const items = dataMap[tabKey] || [];
-  const typeMap = { classes: 'class', cases: 'case', reading: 'read' };
+  const typeMap = { classes: 'class', cases: 'case', reading: 'read', thesis: 'thesis' };
   const type = typeMap[tabKey];
 
   content.innerHTML = `<div class="learn-grid">${
@@ -226,6 +226,7 @@ function renderLearnTab(tabKey) {
         <div class="learn-title">${item.title}</div>
         <div class="learn-meta">${item.meta}</div>
         <div class="learn-takeaway">${item.takeaway}</div>
+        ${item.work ? `<div class="learn-work"><strong>What I did:</strong> ${item.work}</div>` : ''}
         <div class="learn-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
       </div>
     `).join('')
