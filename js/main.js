@@ -337,7 +337,7 @@ function initAbout() {
     photoEl.innerHTML = `<img src="${ABOUT.photo}" alt="Roopal" />`;
   }
 
-  // Happy to meet — bullet list
+  // Happy to meet — bullet list + CTA buttons
   const meetList = document.getElementById('meetList');
   if (meetList) {
     meetList.innerHTML = ABOUT.happyToMeet.map(item =>
@@ -345,7 +345,21 @@ function initAbout() {
     ).join('');
   }
 
-  // Fun questions — swipeable carousel
+  const meetCta = document.getElementById('meetCta');
+  if (meetCta) {
+    meetCta.innerHTML = `
+      <a href="${ABOUT.links.calendly}" target="_blank" rel="noopener" class="meet-btn meet-btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book a call
+      </a>
+      <a href="${ABOUT.links.email}" class="meet-btn meet-btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email me
+      </a>
+    `;
+  }
+
+  // Fun questions — swipeable carousel with photo
   const faqCarousel = document.getElementById('faqCarousel');
   const faqDotsEl = document.getElementById('faqDots');
   if (faqCarousel) {
@@ -360,6 +374,9 @@ function initAbout() {
       faqCarousel.appendChild(slide);
     });
 
+    // Update photo on slide change
+    updateFaqPhoto(0);
+
     // Dots
     if (faqDotsEl) {
       ABOUT.funQuestions.forEach((_, i) => {
@@ -370,7 +387,7 @@ function initAbout() {
       });
     }
 
-    // Auto-swipe arrows
+    // Arrows
     const prevBtn = document.getElementById('faqPrev');
     const nextBtn = document.getElementById('faqNext');
     if (prevBtn) prevBtn.addEventListener('click', () => {
@@ -383,7 +400,7 @@ function initAbout() {
     });
   }
 
-  // Companies — logos only
+  // Companies — logos with name
   const logosRow = document.getElementById('logosRow');
   if (logosRow) {
     ABOUT.companies.forEach(c => {
@@ -391,53 +408,30 @@ function initAbout() {
       el.className = 'logo-item';
       if (c.url) { el.href = c.url; el.target = '_blank'; el.rel = 'noopener'; }
       el.innerHTML = c.logo
-        ? `<img src="${c.logo}" alt="${c.name}" />`
+        ? `<img src="${c.logo}" alt="${c.name}" /><span class="logo-name">${c.name}</span>`
         : `<span class="logo-text">${c.name}</span>`;
       logosRow.appendChild(el);
     });
   }
 
-  // Networks — compact rows with thumbnail + name + description
+  // Networks — enlarged photo cards with overlay
   const networksList = document.getElementById('networksList');
   if (networksList) {
     ABOUT.networks.forEach(n => {
-      const row = document.createElement('div');
-      row.className = 'network-row';
-      row.innerHTML = `
-        <div class="network-thumb">${n.photo ? `<img src="${n.photo}" alt="${n.name}" />` : ''}</div>
-        <div class="network-row-info">
-          <div class="network-row-name">${n.name}</div>
-          <div class="network-row-desc">${n.desc}</div>
+      const card = document.createElement('div');
+      card.className = 'network-card';
+      const bgStyle = n.photo ? `background-image:url('${n.photo}')` : '';
+      card.innerHTML = `
+        <div class="network-card-bg" style="${bgStyle}">
+          ${!n.photo ? `<div class="network-card-placeholder">${n.name.charAt(0)}</div>` : ''}
+        </div>
+        <div class="network-card-overlay">
+          <div class="network-card-name">${n.name}</div>
+          <div class="network-card-desc">${n.desc}</div>
         </div>
       `;
-      networksList.appendChild(row);
+      networksList.appendChild(card);
     });
-  }
-
-  // Connect links
-  const connectLinks = document.getElementById('connectLinks');
-  if (connectLinks) {
-    // LinkedIn
-    connectLinks.innerHTML = `
-      <a href="${ABOUT.links.linkedin}" target="_blank" rel="noopener" class="contact-btn">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a href="${ABOUT.links.email}" class="contact-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Email
-      </a>
-      <a href="${ABOUT.links.calendly}" target="_blank" rel="noopener" class="contact-btn contact-btn-outline">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Book a call
-      </a>
-      ${ABOUT.links.cv ? `
-      <a href="${ABOUT.links.cv}" download class="contact-btn contact-btn-outline">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download CV
-      </a>
-      ` : ''}
-    `;
   }
 }
 
@@ -449,6 +443,19 @@ function showFaqSlide(idx) {
   const dots = document.querySelectorAll('.faq-dot');
   slides.forEach((s, i) => s.classList.toggle('active', i === idx));
   dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  updateFaqPhoto(idx);
+}
+
+function updateFaqPhoto(idx) {
+  const photoEl = document.getElementById('faqPhoto');
+  if (!photoEl || typeof ABOUT === 'undefined') return;
+  const faq = ABOUT.funQuestions[idx];
+  if (faq && faq.image) {
+    photoEl.innerHTML = `<img src="${faq.image}" alt="" />`;
+  } else {
+    const icons = ['💼', '📰', '🏇'];
+    photoEl.innerHTML = `<div class="faq-photo-placeholder"><span>${icons[idx] || '?'}</span></div>`;
+  }
 }
 
 /* ════════════════════════════════════════════════════════

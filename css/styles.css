@@ -140,6 +140,37 @@ img { max-width: 100%; display: block; }
   border-radius: 2px;
 }
 
+/* Nav CTA buttons (Email Me, LinkedIn) */
+.nav-cta {
+  padding: 7px 18px !important;
+  border-radius: 24px !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+  transition: background var(--trans), color var(--trans), transform var(--trans) !important;
+}
+
+.nav-cta-email {
+  background: var(--green-pale);
+  color: var(--green) !important;
+  border: 1.5px solid var(--green-light);
+}
+
+.nav-cta-email:hover {
+  background: var(--green-light) !important;
+  transform: translateY(-2px);
+}
+
+.nav-cta-linkedin {
+  background: var(--green);
+  color: var(--white) !important;
+}
+
+.nav-cta-linkedin:hover {
+  background: var(--green-mid) !important;
+  transform: translateY(-2px);
+}
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -935,14 +966,64 @@ img { max-width: 100%; display: block; }
   opacity: 0.4;
 }
 
-/* Happy to Meet — bullet list */
-.meet-list {
-  max-width: 600px;
+/* Happy to Meet — bullet list + CTA */
+.meet-wrap {
+  max-width: 700px;
   margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.meet-list {
+  flex: 1;
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.meet-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.meet-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: var(--trans);
+  white-space: nowrap;
+}
+
+.meet-btn svg { width: 16px; height: 16px; }
+
+.meet-btn-primary {
+  background: var(--green);
+  color: var(--white);
+}
+
+.meet-btn-primary:hover {
+  background: var(--green-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(58,125,86,0.25);
+}
+
+.meet-btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--green-light);
+  color: var(--green);
+}
+
+.meet-btn-outline:hover {
+  background: var(--green-pale);
+  transform: translateY(-2px);
 }
 
 .meet-bullet {
@@ -962,10 +1043,17 @@ img { max-width: 100%; display: block; }
   font-size: 1rem;
 }
 
-/* Fun Questions — swipe carousel */
-.faq-carousel-wrap {
-  max-width: 700px;
+/* Fun Questions — side-by-side layout with photo */
+.faq-layout {
+  max-width: 900px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 40px;
+  align-items: center;
+}
+
+.faq-carousel-wrap {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -976,6 +1064,36 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   position: relative;
   min-height: 200px;
+}
+
+.faq-photo {
+  width: 280px;
+  height: 320px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--cream-mid);
+  border: 2px solid var(--cream-dark);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+}
+
+.faq-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.faq-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, var(--green-pale), var(--sky-pale));
+}
+
+.faq-photo-placeholder span {
+  font-size: 4rem;
 }
 
 .faq-slide {
@@ -1055,8 +1173,10 @@ img { max-width: 100%; display: block; }
 
 .logo-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   transition: opacity var(--trans), transform var(--trans);
 }
 
@@ -1079,54 +1199,78 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
 }
 
-/* Networks — compact rows */
-.networks-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  max-width: 800px;
+.logo-name {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--ink-faint);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Networks — enlarged photo cards in one row */
+.networks-row {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-.network-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: var(--cream);
-  border: 1px solid var(--cream-dark);
-  border-radius: var(--radius);
-  transition: border-color var(--trans);
-}
-
-.network-row:hover { border-color: var(--green-light); }
-
-.network-thumb {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--cream-mid);
-  flex-shrink: 0;
+.network-card {
+  flex: 1;
+  max-width: 300px;
+  height: 260px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  position: relative;
+  cursor: default;
+  transition: transform var(--trans), box-shadow var(--trans);
 }
 
-.network-thumb img {
+.network-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.12);
+}
+
+.network-card-bg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--cream-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.network-row-name {
+.network-card-placeholder {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 4rem;
   font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 2px;
+  color: var(--green);
+  opacity: 0.25;
 }
 
-.network-row-desc {
-  font-size: 0.78rem;
-  color: var(--ink-dim);
+.network-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(0deg, rgba(30,32,48,0.85) 0%, rgba(30,32,48,0.4) 60%, transparent 100%);
+}
+
+.network-card-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.network-card-desc {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
   line-height: 1.4;
 }
 
@@ -1404,7 +1548,13 @@ footer {
   .contact-links  { flex-direction: column; align-items: center; }
 
   .passport-grid { grid-template-columns: 1fr 1fr; }
-  .networks-list { grid-template-columns: 1fr; }
+  .networks-row { flex-direction: column; align-items: center; }
+  .network-card { max-width: 100%; width: 100%; }
+  .meet-wrap { flex-direction: column; align-items: center; gap: 24px; }
+  .meet-cta { flex-direction: row; }
+  .faq-layout { grid-template-columns: 1fr; }
+  .faq-photo { display: none; }
+  .nav-cta { display: none !important; }
 
   .about-hero-inner {
     grid-template-columns: 1fr;
@@ -1421,5 +1571,5 @@ footer {
   .hero-title  { font-size: 2.2rem; }
   .stat-num    { font-size: 1.7rem; }
   .learn-grid, .sectors-grid { grid-template-columns: 1fr; }
-  .passport-grid, .networks-list { grid-template-columns: 1fr; }
+  .passport-grid { grid-template-columns: 1fr; }
 }

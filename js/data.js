@@ -352,19 +352,20 @@ const ABOUT = {
   bio: "I'm a lifelong learner who's curious about everything — from vibe coding to sales strategies, from luxury brand moats to solar microgrids. I work in venture capital and private equity because I love betting on people and creating value in companies. I'm doing my MBA and becoming an expert in finance, which pulls me toward PE. Every day is a chance to learn something new: I read the FT every morning, do case studies monthly, write articles, and take every class I can find. The through-line is curiosity — it's what drives me to invest, to learn, and to connect with people building things that matter.",
   photo: null, // Add your photo path here: "assets/roopal.jpg"
   networks: [
-    { name: "CAFIID", desc: "Canadian Association for International Development", url: null },
-    { name: "CDL", desc: "Creative Destruction Lab — U of T Rotman", url: null },
-    { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", url: null },
+    { name: "CAFIID", desc: "Canadian Association for International Development", photo: null, url: null },
+    { name: "CDL", desc: "Creative Destruction Lab — U of T Rotman", photo: null, url: null },
+    { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", photo: null, url: null },
   ],
   companies: [
-    { name: "University of Toronto", logo: null, url: null },
-    { name: "BDC", logo: null, url: null },
-    { name: "Dalberg", logo: null, url: null },
-    { name: "Wysa", logo: null, url: null },
+    { name: "University of Toronto", logo: "assets/logos/uoft.png", url: null },
+    { name: "Dalberg", logo: "assets/logos/dalberg.png", url: null },
+    { name: "Wysa", logo: "assets/logos/wysa.png", url: null },
+    { name: "KOIS", logo: "assets/logos/kois.png", url: null },
+    { name: "BDC Capital", logo: "assets/logos/bdc.png", url: null },
   ],
   links: {
     linkedin: "https://linkedin.com", // Replace with real URL
-    email: "mailto:hello@example.com", // Replace with real email
+    email: "mailto:roopaldahiya5@gmail.com",
     calendly: "https://calendly.com", // Replace with real URL
     cv: null, // Add CV file path: "assets/Roopal_CV.pdf"
   },
@@ -377,14 +378,17 @@ const ABOUT = {
     {
       question: "What's your favourite part about VC?",
       answer: "IC presentations! It's like game day for me — everything leads to that moment. If you've done your work well, it's the most enjoyable part. The push-back on your thinking from people with experience, that interplay of details and perspective... there's nothing like it.",
+      image: null, // Add photo: "assets/faq-vc.jpg"
     },
     {
       question: "What do you read first thing in the morning?",
       answer: "The Financial Times. Every single day. It trains you to see macro forces hiding in micro stories — and it's the most valuable 30 minutes of my day.",
+      image: null, // Add photo: "assets/faq-reading.jpg"
     },
     {
       question: "What's the best investment lesson you've learned?",
       answer: "Bet on the jockey, not the horse. Markets shift, products pivot, but exceptional founders adapt. The pattern across every successful deal I've touched: an unstoppable person who simply would not quit.",
+      image: null, // Add photo: "assets/faq-lesson.jpg"
     },
   ],
 };

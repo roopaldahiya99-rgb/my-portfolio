@@ -27,6 +27,8 @@
         <li><a href="index.html">World</a></li>
         <li><a href="learning.html">Learning</a></li>
         <li><a href="about.html" class="active">About</a></li>
+        <li><a href="mailto:roopaldahiya5@gmail.com" class="nav-cta nav-cta-email">Email Me</a></li>
+        <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="nav-cta nav-cta-linkedin">LinkedIn</a></li>
       </ul>
     </div>
   </nav>
@@ -47,33 +49,43 @@
     </div>
   </section>
 
-  <!-- ─── HAPPY TO MEET (bullet points) ──────────────────── -->
+  <!-- ─── HAPPY TO MEET (bullet points + contact) ──────────── -->
   <section class="section">
     <div class="section-header reveal">
       <p class="section-label">Open Door Policy</p>
       <h2>I'm happy to <em>meet</em></h2>
     </div>
-    <ul class="meet-list reveal" id="meetList">
-      <!-- filled by JS -->
-    </ul>
+    <div class="meet-wrap reveal">
+      <ul class="meet-list" id="meetList">
+        <!-- filled by JS -->
+      </ul>
+      <div class="meet-cta" id="meetCta">
+        <!-- filled by JS: calendly + email buttons -->
+      </div>
+    </div>
   </section>
 
-  <!-- ─── FUN QUESTIONS (swipe carousel) ─────────────────── -->
+  <!-- ─── FUN QUESTIONS (swipe carousel with photo) ─────────── -->
   <section class="section section-alt">
     <div class="section-header reveal">
       <p class="section-label">Get to Know Me</p>
       <h2>Questions I <em>Love</em> Answering</h2>
     </div>
-    <div class="faq-carousel-wrap reveal">
-      <button class="faq-arrow faq-prev" id="faqPrev" aria-label="Previous">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <div class="faq-carousel" id="faqCarousel">
-        <!-- filled by JS -->
+    <div class="faq-layout reveal">
+      <div class="faq-carousel-wrap">
+        <button class="faq-arrow faq-prev" id="faqPrev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="faq-carousel" id="faqCarousel">
+          <!-- filled by JS -->
+        </div>
+        <button class="faq-arrow faq-next" id="faqNext" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
-      <button class="faq-arrow faq-next" id="faqNext" aria-label="Next">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
+      <div class="faq-photo" id="faqPhoto">
+        <div class="faq-photo-placeholder"><span>?</span></div>
+      </div>
     </div>
     <div class="faq-dots" id="faqDots"></div>
   </section>
@@ -85,26 +97,14 @@
     </div>
   </section>
 
-  <!-- ─── NETWORKS (compact rows) ────────────────────────── -->
+  <!-- ─── NETWORKS (photo cards in one row) ──────────────── -->
   <section class="section section-alt">
     <div class="section-header reveal">
       <p class="section-label">Communities</p>
-      <h2>Networks I'm <em>Part Of</em></h2>
+      <h2>My Sourcing and <em>Support Networks</em></h2>
     </div>
-    <div class="networks-list reveal" id="networksList">
+    <div class="networks-row reveal" id="networksList">
       <!-- filled by JS -->
-    </div>
-  </section>
-
-  <!-- ─── CONNECT ────────────────────────────────────────── -->
-  <section id="connect" class="section contact-section">
-    <div class="contact-inner reveal">
-      <p class="section-label">Let's Connect</p>
-      <h2>Always open to <em>interesting conversations</em></h2>
-      <p class="contact-sub">
-        Whether it's a thesis to debate, a founder to meet, or a problem to explore together — reach out.
-      </p>
-      <div class="contact-links" id="connectLinks"></div>
     </div>
   </section>
 
