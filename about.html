@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Roopal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="about">
+
+  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <span class="compass-icon">✦</span>
+        <span>Roopal</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">World</a></li>
+        <li><a href="learning.html">Learning</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── ABOUT HERO ─────────────────────────────────────── -->
+  <section class="about-hero">
+    <div class="about-hero-inner">
+      <div class="about-intro">
+        <h1 class="about-name"><em>Roopal</em></h1>
+        <p class="about-tagline">VC · PE · MBA — Betting on people and ideas across the globe</p>
+        <p class="about-bio" id="aboutBio"></p>
+      </div>
+      <div class="about-photo-wrap">
+        <div class="about-photo" id="aboutPhoto">
+          <div class="about-photo-placeholder"><span>R</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HAPPY TO MEET (bullet points) ──────────────────── -->
+  <section class="section">
+    <div class="section-header reveal">
+      <p class="section-label">Open Door Policy</p>
+      <h2>I'm happy to <em>meet</em></h2>
+    </div>
+    <ul class="meet-list reveal" id="meetList">
+      <!-- filled by JS -->
+    </ul>
+  </section>
+
+  <!-- ─── FUN QUESTIONS (swipe carousel) ─────────────────── -->
+  <section class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">Get to Know Me</p>
+      <h2>Questions I <em>Love</em> Answering</h2>
+    </div>
+    <div class="faq-carousel-wrap reveal">
+      <button class="faq-arrow faq-prev" id="faqPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="faq-carousel" id="faqCarousel">
+        <!-- filled by JS -->
+      </div>
+      <button class="faq-arrow faq-next" id="faqNext" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="faq-dots" id="faqDots"></div>
+  </section>
+
+  <!-- ─── COMPANIES (logos only) ─────────────────────────── -->
+  <section class="section">
+    <div class="logos-row reveal" id="logosRow">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── NETWORKS (compact rows) ────────────────────────── -->
+  <section class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">Communities</p>
+      <h2>Networks I'm <em>Part Of</em></h2>
+    </div>
+    <div class="networks-list reveal" id="networksList">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── CONNECT ────────────────────────────────────────── -->
+  <section id="connect" class="section contact-section">
+    <div class="contact-inner reveal">
+      <p class="section-label">Let's Connect</p>
+      <h2>Always open to <em>interesting conversations</em></h2>
+      <p class="contact-sub">
+        Whether it's a thesis to debate, a founder to meet, or a problem to explore together — reach out.
+      </p>
+      <div class="contact-links" id="connectLinks"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="compass-icon">✦</span>
+      <p>Built with curiosity · &copy; 2025 Roopal</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

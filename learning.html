@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning | Roopal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="learning">
+
+  <!-- ─── NAV ─────────────────────────────────────────────── -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <span class="compass-icon">✦</span>
+        <span>Roopal</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">World</a></li>
+        <li><a href="learning.html" class="active">Learning</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── PAGE HERO ──────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="section-label">Intellectual Curiosity</p>
+      <h1 class="page-hero-title">What I've <em>Learned</em></h1>
+      <p class="page-hero-sub">
+        I read the FT every morning, complete a case study monthly, and keep building credentials.
+        Here's my running log of what I'm absorbing and why it matters.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── LEARNING TABS ──────────────────────────────────── -->
+  <section id="learned" class="section">
+    <div class="tabs reveal" id="learnTabs">
+      <button class="tab active" data-tab="classes">Classes</button>
+      <button class="tab" data-tab="cases">Case Studies</button>
+      <button class="tab" data-tab="reading">Reading</button>
+    </div>
+
+    <div class="tab-content" id="learnContent">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- ─── DEAL CARDS & THESIS ────────────────────────────── -->
+  <section id="deals" class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">Sectors & Thesis</p>
+      <h2>Sectors I <em>Love</em></h2>
+      <p class="section-desc">
+        The problems that keep me up at night — and the solutions I'm backing to solve them.
+        Click a sector for the full thesis and deal cards.
+      </p>
+    </div>
+    <div class="sectors-grid reveal" id="sectorsGrid">
+      <!-- filled by JS -->
+    </div>
+  </section>
+
+  <!-- Sector modal -->
+  <div id="sectorModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">&#10005;</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <span class="compass-icon">✦</span>
+      <p>Built with curiosity · &copy; 2025 Roopal</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

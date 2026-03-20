@@ -4,95 +4,116 @@
 ───────────────────────────────────────────────────────── */
 
 // ── MAP PINS ─────────────────────────────────────────────
-// type: 'invest' | 'support' | 'network'
 const MAP_PINS = [
   {
-    country: "Kenya",
-    code: "ke",
-    lat: -1.286, lng: 36.817,
-    type: "invest",
-    company: "Dot Glasses",
-    role: "Investor",
+    country: "Kenya", code: "ke", lat: -1.286, lng: 36.817,
+    type: "invest", company: "Dot Glasses", role: "Investor",
     description: "Backed Dot Glasses, bringing affordable, foldable reading glasses to underserved communities across Africa.",
-    sectors: ["Healthcare", "Impact"],
-    tagClass: "tag-coral",
+    sectors: ["Healthcare", "Impact"], tagClass: "tag-coral",
   },
   {
-    country: "India",
-    code: "in",
-    lat: 20.593, lng: 78.963,
-    type: "invest",
-    company: "Financial Inclusion & Media Tech",
-    role: "Investor / Advisor",
+    country: "India", code: "in", lat: 20.593, lng: 78.963,
+    type: "invest", company: "Financial Inclusion & Media Tech", role: "Investor / Advisor",
     description: "Invested in financial inclusion in rural India. Also facilitated Google News Initiative investment in Indian media technology.",
-    sectors: ["Fintech", "Media Tech"],
-    tagClass: "tag-sky",
+    sectors: ["Fintech", "Media Tech"], tagClass: "tag-sky",
   },
   {
-    country: "United States",
-    code: "us",
-    lat: 37.090, lng: -95.712,
-    type: "invest",
-    company: "Insurtech & Google News",
-    role: "Investor / Connector",
+    country: "United States", code: "us", lat: 37.090, lng: -95.712,
+    type: "invest", company: "Insurtech & Google News", role: "Investor / Connector",
     description: "Backed an insurtech startup reimagining coverage for the gig economy. Worked with Google News to channel capital into global media startups.",
-    sectors: ["Insurtech", "Media"],
-    tagClass: "tag-purple",
+    sectors: ["Insurtech", "Media"], tagClass: "tag-purple",
   },
   {
-    country: "Vietnam",
-    code: "vn",
-    lat: 14.058, lng: 108.277,
-    type: "support",
-    company: "Healthcare Enterprise",
-    role: "Cross-border Deal Facilitator",
+    country: "Vietnam", code: "vn", lat: 14.058, lng: 108.277,
+    type: "support", company: "Healthcare Enterprise", role: "Cross-border Deal Facilitator",
     description: "Facilitated an Australian fund's investment into a high-growth Vietnamese healthcare enterprise — bridging due diligence, culture, and capital.",
-    sectors: ["Healthcare", "Cross-border"],
-    tagClass: "tag-coral",
+    sectors: ["Healthcare", "Cross-border"], tagClass: "tag-coral",
   },
   {
-    country: "Australia",
-    code: "au",
-    lat: -25.274, lng: 133.775,
-    type: "support",
-    company: "Australian VC Fund",
-    role: "LP & Deal Sourcing Partner",
+    country: "Australia", code: "au", lat: -25.274, lng: 133.775,
+    type: "support", company: "Australian VC Fund", role: "LP & Deal Sourcing Partner",
     description: "Worked alongside an Australian fund to source and structure deals across Southeast Asia, with a focus on healthcare and consumer.",
-    sectors: ["VC", "Healthcare"],
-    tagClass: "tag",
+    sectors: ["VC", "Healthcare"], tagClass: "tag",
   },
   {
-    country: "Canada",
-    code: "ca",
-    lat: 56.130, lng: -106.346,
-    type: "network",
-    company: "CDL — Creative Destruction Lab",
-    role: "Mentor & Affiliate",
+    country: "Canada", code: "ca", lat: 56.130, lng: -106.346,
+    type: "network", company: "CDL — Creative Destruction Lab", role: "Mentor & Affiliate",
     description: "Active affiliate of the Creative Destruction Lab at the University of Toronto — one of the world's top deep-tech startup accelerators.",
-    sectors: ["Deep Tech", "VC"],
-    tagClass: "tag-amber",
+    sectors: ["Deep Tech", "VC"], tagClass: "tag-amber",
   },
   {
-    country: "United Kingdom",
-    code: "gb",
-    lat: 55.378, lng: -3.435,
-    type: "network",
-    company: "Global PE & Finance Network",
-    role: "MBA & CFA Candidate",
+    country: "United Kingdom", code: "gb", lat: 55.378, lng: -3.435,
+    type: "network", company: "Global PE & Finance Network", role: "MBA & CFA Candidate",
     description: "Building deep expertise in private equity and global finance through CFA and MBA programs with strong UK-based networks.",
-    sectors: ["PE", "Finance"],
-    tagClass: "tag-sky",
+    sectors: ["PE", "Finance"], tagClass: "tag-sky",
   },
   {
-    country: "Singapore",
-    code: "sg",
-    lat: 1.352, lng: 103.820,
-    type: "support",
-    company: "Southeast Asia Fintech Ecosystem",
-    role: "Advisor",
+    country: "Singapore", code: "sg", lat: 1.352, lng: 103.820,
+    type: "support", company: "Southeast Asia Fintech Ecosystem", role: "Advisor",
     description: "Connected founders and investors across the SEA fintech ecosystem, focusing on payments, lending, and financial access.",
-    sectors: ["Fintech", "SEA"],
-    tagClass: "tag-sky",
+    sectors: ["Fintech", "SEA"], tagClass: "tag-sky",
+  },
+];
+
+// ── PASSPORT COUNTRIES (flat grid, 6 cards) ──────────────
+const PASSPORT_COUNTRIES = [
+  {
+    region: "United States",
+    code: "us",
+    flag: "https://flagcdn.com/w80/us.png",
+    sectors: [
+      { name: "Insurtech", link: "learning.html#insurance" },
+      { name: "Media Tech", link: "learning.html#media" },
+    ],
+    stamp: "Gig economy insurtech · Google News global media investment",
+  },
+  {
+    region: "Canada",
+    code: "ca",
+    flag: "https://flagcdn.com/w80/ca.png",
+    sectors: [
+      { name: "Cleantech", link: "learning.html#climate" },
+      { name: "Healthtech", link: "learning.html#healthcare" },
+      { name: "Fintech", link: "learning.html#fintech" },
+    ],
+    stamp: "CDL deep-tech mentorship · Cross-border deal sourcing",
+  },
+  {
+    region: "India",
+    code: "in",
+    flag: "https://flagcdn.com/w80/in.png",
+    sectors: [
+      { name: "Media Tech", link: "learning.html#media" },
+      { name: "Fintech", link: "learning.html#fintech" },
+    ],
+    stamp: "Financial inclusion · Google News \u2192 Indian media tech",
+  },
+  {
+    region: "Southeast Asia",
+    code: "vn",
+    flag: "https://flagcdn.com/w80/vn.png",
+    sectors: [
+      { name: "Healthtech", link: "learning.html#healthcare" },
+    ],
+    stamp: "AU fund \u2192 Vietnamese healthcare enterprise · Cross-border deal",
+  },
+  {
+    region: "Africa",
+    code: "ke",
+    flag: "https://flagcdn.com/w80/ke.png",
+    sectors: [
+      { name: "Healthtech", link: "learning.html#healthcare" },
+    ],
+    stamp: "Affordable eyecare for 1B+ people · Dot Glasses",
+  },
+  {
+    region: "Australia",
+    code: "au",
+    flag: "https://flagcdn.com/w80/au.png",
+    sectors: [
+      { name: "Healthcare", link: "learning.html#healthcare" },
+    ],
+    stamp: "VC fund partnership · Deal sourcing across Southeast Asia",
   },
 ];
 
@@ -100,137 +121,89 @@ const MAP_PINS = [
 const LEARNING = {
   classes: [
     {
-      icon: "📊",
-      title: "CFA Level I & II",
-      meta: "CFA Institute · 2024–2025",
-      type: "class",
+      icon: "📊", title: "CFA Level I & II", meta: "CFA Institute · 2024–2025", type: "class",
       takeaway: "<strong>Key insight:</strong> Rigorous financial analysis discipline — DCF, comparables, and portfolio theory have sharpened how I underwrite investments and stress-test assumptions in early-stage deals.",
       tags: ["Valuation", "Equity", "Portfolio Theory"],
     },
     {
-      icon: "🏢",
-      title: "Private Equity Fundamentals",
-      meta: "MBA Elective · 2024",
-      type: "class",
+      icon: "🏢", title: "Private Equity Fundamentals", meta: "MBA Elective · 2024", type: "class",
       takeaway: "<strong>Key insight:</strong> The PE operating model — entry multiples, value creation levers, and exit engineering — has completely changed how I evaluate companies. It's not just capital, it's active ownership.",
       tags: ["LBO", "Value Creation", "PE"],
     },
     {
-      icon: "💼",
-      title: "Corporate Finance & M&A",
-      meta: "MBA Core · 2024",
-      type: "class",
+      icon: "💼", title: "Corporate Finance & M&A", meta: "MBA Core · 2024", type: "class",
       takeaway: "<strong>Key insight:</strong> Understanding the strategic and financial logic behind M&A (synergies, deal structure, post-merger integration) is essential for advising founders on exit paths.",
       tags: ["M&A", "Deal Structuring", "Finance"],
     },
     {
-      icon: "🌍",
-      title: "Emerging Markets Finance",
-      meta: "MBA Elective · 2024",
-      type: "class",
+      icon: "🌍", title: "Emerging Markets Finance", meta: "MBA Elective · 2024", type: "class",
       takeaway: "<strong>Key insight:</strong> Currency risk, political risk, and informal economies are not obstacles — they are the investment thesis. The opportunity is in navigating what others avoid.",
       tags: ["EM", "Risk", "Global Finance"],
     },
     {
-      icon: "🚀",
-      title: "Venture Capital & Startup Strategy",
-      meta: "MBA · 2023",
-      type: "class",
+      icon: "🚀", title: "Venture Capital & Startup Strategy", meta: "MBA · 2023", type: "class",
       takeaway: "<strong>Key insight:</strong> The power law of VC returns means portfolio construction is everything. Conviction in founders is the edge — markets evolve, but great people adapt.",
       tags: ["VC", "Startups", "Power Law"],
     },
   ],
-
   cases: [
     {
-      icon: "👜",
-      title: "LVMH & Tiffany — Luxury M&A",
-      meta: "Case Study · 2024",
-      type: "case",
+      icon: "👜", title: "LVMH & Tiffany — Luxury M&A", meta: "Case Study · 2024", type: "case",
       takeaway: "<strong>Key insight:</strong> The $15.8B acquisition wasn't just about brand — it was about acquiring the American customer relationship and a distribution moat. Brand equity in luxury is its own form of compounding capital.",
       tags: ["Luxury", "M&A", "Brand Strategy"],
     },
     {
-      icon: "💎",
-      title: "Louis Vuitton — Brand as a Moat",
-      meta: "Case Study · 2024",
-      type: "case",
+      icon: "💎", title: "Louis Vuitton — Brand as a Moat", meta: "Case Study · 2024", type: "case",
       takeaway: "<strong>Key insight:</strong> LV's obsession with scarcity, craftsmanship storytelling, and vertical integration is a masterclass in pricing power. The lesson: moats are built over decades, not quarters.",
       tags: ["Brand Equity", "Luxury", "Moats"],
     },
     {
-      icon: "☀️",
-      title: "Renewable Energy Transition — Investor Perspective",
-      meta: "Case Study · 2023",
-      type: "case",
+      icon: "☀️", title: "Renewable Energy Transition — Investor Perspective", meta: "Case Study · 2023", type: "case",
       takeaway: "<strong>Key insight:</strong> The energy transition is the largest capital reallocation event in history. First movers in infrastructure and tech will define the next generation of value creation.",
       tags: ["Energy", "Climate", "Infrastructure"],
     },
     {
-      icon: "🏦",
-      title: "Fintech in Emerging Markets — M-Pesa to Nubank",
-      meta: "Case Study · 2023",
-      type: "case",
+      icon: "🏦", title: "Fintech in Emerging Markets — M-Pesa to Nubank", meta: "Case Study · 2023", type: "case",
       takeaway: "<strong>Key insight:</strong> Mobile-first financial services succeed not by copying incumbents, but by designing for the unbanked from scratch. Distribution via mobile agents is a competitive moat.",
       tags: ["Fintech", "Financial Inclusion", "EM"],
     },
   ],
-
   reading: [
     {
-      icon: "📰",
-      title: "Financial Times — Daily Reading",
-      meta: "FT · Ongoing",
-      type: "read",
+      icon: "📰", title: "Financial Times — Daily Reading", meta: "FT · Ongoing", type: "read",
       takeaway: "<strong>Key insight:</strong> The FT trains you to see macro forces in micro stories. Tracking central bank policy, geopolitics, and sector M&A patterns daily has become the most valuable 30 minutes of my day.",
       tags: ["Macro", "Markets", "Daily Habit"],
     },
     {
-      icon: "📗",
-      title: "The Innovator's Dilemma — Clayton Christensen",
-      meta: "Book · 2023",
-      type: "read",
+      icon: "📗", title: "The Innovator's Dilemma — Clayton Christensen", meta: "Book · 2023", type: "read",
       takeaway: "<strong>Key insight:</strong> Disruption doesn't beat incumbents — incumbents beat themselves by rationally prioritizing their best current customers. The white space is always at the low end.",
       tags: ["Disruption", "Strategy", "Classic"],
     },
     {
-      icon: "🌱",
-      title: "Bill Gates — How to Avoid a Climate Disaster",
-      meta: "Book · 2023",
-      type: "read",
+      icon: "🌱", title: "Bill Gates — How to Avoid a Climate Disaster", meta: "Book · 2023", type: "read",
       takeaway: "<strong>Key insight:</strong> The 'green premium' — the cost difference between clean and dirty options — is the real investment thesis for climate. Wherever we can eliminate or fund-down the green premium, value follows.",
       tags: ["Climate", "Energy", "Impact"],
     },
     {
-      icon: "📈",
-      title: "The Economist — Weekly Deep Reads",
-      meta: "The Economist · Ongoing",
-      type: "read",
+      icon: "📈", title: "The Economist — Weekly Deep Reads", meta: "The Economist · Ongoing", type: "read",
       takeaway: "<strong>Key insight:</strong> Long-form economic analysis forces second-order thinking. Reading about AI's impact on labor markets, deglobalization trends, and the rise of sovereign wealth changed how I frame sector theses.",
       tags: ["Economics", "Global Trends", "Analysis"],
     },
     {
-      icon: "🤝",
-      title: "Zero to One — Peter Thiel",
-      meta: "Book · 2022",
-      type: "read",
+      icon: "🤝", title: "Zero to One — Peter Thiel", meta: "Book · 2022", type: "read",
       takeaway: "<strong>Key insight:</strong> The best companies create monopolies through secrets — things that are true but not widely believed. I now filter investments by asking: what unique truth does this founder know?",
       tags: ["Venture", "Strategy", "Founders"],
     },
   ],
 };
 
-// ── SECTORS ──────────────────────────────────────────────
+// ── SECTORS (used on learning page for deal cards + thesis) ──
 const SECTORS = [
   {
-    id: "climate",
-    icon: "🌱",
-    name: "Climate & Clean Energy",
-    cssClass: "sector-climate",
-    iconBg: "#e8f5ed",
+    id: "climate", icon: "🌱", name: "Climate & Clean Energy",
+    cssClass: "sector-climate", iconBg: "#e8f5ed",
     desc: "The defining challenge and the defining investment opportunity of our generation. I'm drawn to solutions that make clean choices the economical ones.",
-    investments: 2,
-    articles: 3,
+    investments: 2, articles: 3,
     detail: "Climate tech isn't charity — it's the biggest market transition of the century. I focus on companies that collapse the 'green premium' through technology and business model innovation.",
     investmentList: [
       { name: "Solar Microgrids (SE Asia)", desc: "Backed an off-grid solar company bringing reliable, affordable power to rural Southeast Asia — displacing diesel and enabling the next layer of economic activity." },
@@ -243,14 +216,10 @@ const SECTORS = [
     ],
   },
   {
-    id: "fintech",
-    icon: "💳",
-    name: "Fintech & Financial Inclusion",
-    cssClass: "sector-fintech",
-    iconBg: "#ddeef7",
+    id: "fintech", icon: "💳", name: "Fintech & Financial Inclusion",
+    cssClass: "sector-fintech", iconBg: "#ddeef7",
     desc: "1.4 billion adults remain unbanked. Technology is the fastest route to financial dignity — and there's enormous value in solving access.",
-    investments: 2,
-    articles: 2,
+    investments: 2, articles: 2,
     detail: "My thesis: the best fintech companies in emerging markets don't compete with banks — they route around them entirely, leveraging mobile penetration, agent networks, and data.",
     investmentList: [
       { name: "Financial Inclusion Platform — India", desc: "Invested in a last-mile lending product using alternative data scoring to extend credit to India's self-employed rural workforce." },
@@ -262,14 +231,10 @@ const SECTORS = [
     ],
   },
   {
-    id: "energy",
-    icon: "⚡",
-    name: "Energy Transition",
-    cssClass: "sector-energy",
-    iconBg: "#fdf0d9",
+    id: "energy", icon: "⚡", name: "Energy Transition",
+    cssClass: "sector-energy", iconBg: "#fdf0d9",
     desc: "Energy is everything — it powers economies, determines geopolitics, and sets the pace of human development. The transition is where capital meets civilization.",
-    investments: 1,
-    articles: 2,
+    investments: 1, articles: 2,
     detail: "I focus on the infrastructure layer of the energy transition — storage, grid modernization, and distributed energy — where defensible businesses with long asset lives are being built.",
     investmentList: [
       { name: "Energy Storage Startup", desc: "Early-stage investment in a battery technology company developing second-life EV battery systems for stationary grid storage." },
@@ -280,14 +245,10 @@ const SECTORS = [
     ],
   },
   {
-    id: "insurance",
-    icon: "🛡️",
-    name: "Insurtech",
-    cssClass: "sector-insurance",
-    iconBg: "#ede8f8",
-    desc: "Insurance is one of the most data-rich, relationship-driven industries in the world — and one of the least innovated. The gap between what's possible and what exists is a venture-scale opportunity.",
-    investments: 1,
-    articles: 1,
+    id: "insurance", icon: "🛡️", name: "Insurtech",
+    cssClass: "sector-insurance", iconBg: "#ede8f8",
+    desc: "Insurance is one of the most data-rich, relationship-driven industries in the world — and one of the least innovated.",
+    investments: 1, articles: 1,
     detail: "The best insurtech companies are not just distribution plays — they're using behavioral data and parametric triggers to price risk that legacy actuarial tables can't see.",
     investmentList: [
       { name: "Gig Economy Insurtech — US", desc: "Invested in a parametric insurance platform offering real-time, usage-based coverage for freelancers and gig workers — a 50M+ person market chronically underserved by traditional carriers." },
@@ -297,14 +258,10 @@ const SECTORS = [
     ],
   },
   {
-    id: "healthcare",
-    icon: "🏥",
-    name: "Healthcare & Access",
-    cssClass: "sector-healthcare",
-    iconBg: "#fde8e3",
+    id: "healthcare", icon: "🏥", name: "Healthcare & Access",
+    cssClass: "sector-healthcare", iconBg: "#fde8e3",
     desc: "Healthcare is deeply personal. I invest in companies that believe everyone, regardless of where they're born, deserves quality care.",
-    investments: 2,
-    articles: 2,
+    investments: 2, articles: 2,
     detail: "My focus is on access, not luxury healthcare — affordable diagnostics, last-mile distribution of medical products, and telemedicine designed for low-bandwidth environments.",
     investmentList: [
       { name: "Dot Glasses — Kenya", desc: "Foldable, affordable reading glasses for the 1B+ people in the developing world who need corrective lenses but can't access or afford them." },
@@ -316,14 +273,10 @@ const SECTORS = [
     ],
   },
   {
-    id: "media",
-    icon: "📱",
-    name: "Media Tech",
-    cssClass: "sector-media",
-    iconBg: "#daf2f5",
-    desc: "Information shapes markets, politics, and culture. I believe in funding the infrastructure for quality journalism and the platforms that help it reach people who need it most.",
-    investments: 1,
-    articles: 1,
+    id: "media", icon: "📱", name: "Media Tech",
+    cssClass: "sector-media", iconBg: "#daf2f5",
+    desc: "Information shapes markets, politics, and culture. I believe in funding the infrastructure for quality journalism.",
+    investments: 1, articles: 1,
     detail: "Working with the Google News Initiative deepened my conviction: local and regional news media is a critical infrastructure problem — and tech-enabled business models can make quality journalism economically viable.",
     investmentList: [
       { name: "Indian Media Tech Platform", desc: "Facilitated the Google News Initiative's investment into an Indian media technology company building revenue-generation tools for regional language publishers." },
@@ -334,61 +287,46 @@ const SECTORS = [
   },
 ];
 
-// ── NETWORK ──────────────────────────────────────────────
-const NETWORK = [
-  {
-    icon: "🧪",
-    name: "Creative Destruction Lab (CDL)",
-    sub: "University of Toronto · Rotman",
-    desc: "CDL is one of the world's most rigorous deep-tech startup programs. As a mentor and affiliate, I've worked with founders in AI, quantum, and climate tech — refining commercial strategy and fundraising positioning.",
-    highlights: [
-      "Mentored 10+ startups across AI, climate tech, and biotech streams",
-      "Access to a global network of scientists, operators, and co-investors",
-      "Trained in the CDL 'objectives' framework for rapid startup evaluation",
-    ],
+// ── ABOUT PAGE DATA ──────────────────────────────────────
+const ABOUT = {
+  name: "Roopal",
+  tagline: "VC · PE · MBA — Betting on people and ideas across the globe",
+  bio: "I'm a lifelong learner who's curious about everything — from vibe coding to sales strategies, from luxury brand moats to solar microgrids. I work in venture capital and private equity because I love betting on people and creating value in companies. I'm doing my MBA and becoming an expert in finance, which pulls me toward PE. Every day is a chance to learn something new: I read the FT every morning, do case studies monthly, write articles, and take every class I can find. The through-line is curiosity — it's what drives me to invest, to learn, and to connect with people building things that matter.",
+  photo: null, // Add your photo path here: "assets/roopal.jpg"
+  networks: [
+    { name: "CAFIID", desc: "Canadian Association for International Development", url: null },
+    { name: "CDL", desc: "Creative Destruction Lab — U of T Rotman", url: null },
+    { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", url: null },
+  ],
+  companies: [
+    { name: "University of Toronto", logo: null, url: null },
+    { name: "BDC", logo: null, url: null },
+    { name: "Dalberg", logo: null, url: null },
+    { name: "Wysa", logo: null, url: null },
+  ],
+  links: {
+    linkedin: "https://linkedin.com", // Replace with real URL
+    email: "mailto:hello@example.com", // Replace with real email
+    calendly: "https://calendly.com", // Replace with real URL
+    cv: null, // Add CV file path: "assets/Roopal_CV.pdf"
   },
-  {
-    icon: "🎓",
-    name: "MBA — Rotman / Global",
-    sub: "Finance & Strategy Specialization",
-    desc: "My MBA has been a deliberately global experience — connecting me with a cohort of operators, investors, and entrepreneurs from 30+ countries who are building across every major market.",
-    highlights: [
-      "Case competitions and consulting projects across VC, PE, and strategy",
-      "Student Investment Fund — real capital deployed in equity markets",
-      "Co-led finance club with 200+ member network",
-    ],
-  },
-  {
-    icon: "✈️",
-    name: "Global Travel Network",
-    sub: "15+ Countries · 5 Continents",
-    desc: "Every trip is a due diligence trip. I've built relationships with founders, fund managers, and operators across Africa, Asia, North America, Europe, and Oceania by simply showing up.",
-    highlights: [
-      "Sourced two investments through relationships built while traveling",
-      "Deep cultural intelligence across Africa, South Asia, and Southeast Asia",
-      "Strong operator networks in Nairobi, Mumbai, Singapore, and Toronto",
-    ],
-  },
-  {
-    icon: "📊",
-    name: "CFA Institute Network",
-    sub: "CFA Candidate · Global Charter Community",
-    desc: "The CFA program is less a qualification and more an entry card into a global community of investment professionals who share a rigorous analytical foundation.",
-    highlights: [
-      "Access to CFA Institute's global analyst and portfolio manager network",
-      "Investment research discipline applied to private market deal evaluation",
-      "Bridges the gap between VC intuition and institutional finance rigor",
-    ],
-  },
-  {
-    icon: "🌐",
-    name: "VC & PE Deal Network",
-    sub: "Operators · GPs · LPs · Founders",
-    desc: "Years of cross-border dealmaking have built a network of trust I draw on daily — connecting capital to opportunities across geographies and sectors that most investors can't access.",
-    highlights: [
-      "Active relationships with GPs across Canada, US, India, Australia, Kenya",
-      "LP introductions and co-investment facilitation across deals",
-      "Trusted by founders for honest feedback and warm introductions",
-    ],
-  },
-];
+  happyToMeet: [
+    "Founders building in my sectors",
+    "People looking for mentorship",
+    "Anyone who wants to talk startups",
+  ],
+  funQuestions: [
+    {
+      question: "What's your favourite part about VC?",
+      answer: "IC presentations! It's like game day for me — everything leads to that moment. If you've done your work well, it's the most enjoyable part. The push-back on your thinking from people with experience, that interplay of details and perspective... there's nothing like it.",
+    },
+    {
+      question: "What do you read first thing in the morning?",
+      answer: "The Financial Times. Every single day. It trains you to see macro forces hiding in micro stories — and it's the most valuable 30 minutes of my day.",
+    },
+    {
+      question: "What's the best investment lesson you've learned?",
+      answer: "Bet on the jockey, not the horse. Markets shift, products pivot, but exceptional founders adapt. The pattern across every successful deal I've touched: an unstoppable person who simply would not quit.",
+    },
+  ],
+};
