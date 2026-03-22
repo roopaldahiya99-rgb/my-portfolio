@@ -140,7 +140,6 @@ img { max-width: 100%; display: block; }
   border-radius: 2px;
 }
 
-/* Nav CTA buttons */
 .nav-cta {
   padding: 7px 18px !important;
   border-radius: 24px !important;
@@ -256,13 +255,6 @@ img { max-width: 100%; display: block; }
   margin-bottom: 20px;
 }
 
-.hero-sub {
-  font-size: 1.05rem;
-  color: var(--ink-dim);
-  line-height: 1.8;
-  margin-bottom: 40px;
-}
-
 .hero-stats {
   display: flex;
   align-items: center;
@@ -301,31 +293,6 @@ img { max-width: 100%; display: block; }
   width: 1px;
   height: 36px;
   background: var(--cream-dark);
-}
-
-.hero-scroll {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--green);
-  font-weight: 500;
-  transition: gap var(--trans);
-}
-
-.hero-scroll svg {
-  width: 16px;
-  height: 16px;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-.hero-scroll:hover { gap: 16px; }
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
 }
 
 .map-legend {
@@ -587,7 +554,7 @@ img { max-width: 100%; display: block; }
 .deal-card-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 14px;
   margin-bottom: 16px;
 }
 
@@ -596,6 +563,13 @@ img { max-width: 100%; display: block; }
   height: auto;
   border-radius: 4px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.deal-top-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
 }
 
 .deal-stage-tag {
@@ -615,15 +589,7 @@ img { max-width: 100%; display: block; }
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: 6px;
-}
-
-.deal-role {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .deal-desc {
@@ -641,7 +607,6 @@ img { max-width: 100%; display: block; }
   background: var(--green-pale);
   border-radius: 10px;
   border-left: 3px solid var(--green-mid);
-  margin-bottom: 16px;
 }
 
 .deal-insight strong {
@@ -652,91 +617,47 @@ img { max-width: 100%; display: block; }
 .deal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* ═══════════════════════════════════════════════════════════
-   LESSONS LEARNED
+   LESSONS LEARNED — Simple Bullet Points
 ═══════════════════════════════════════════════════════════ */
-.lessons-intro { max-width: 800px; margin: 0 auto 40px; text-align: center; }
-
-.lessons-intro-text {
-  font-size: 1rem;
-  color: var(--ink-dim);
-  line-height: 1.85;
-}
-
 .lessons-list {
   max-width: 800px;
   margin: 0 auto;
+}
+
+.lessons-bullets {
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-}
-
-.lesson-item {
-  background: var(--white);
-  border: 1.5px solid var(--cream-dark);
-  border-radius: var(--radius);
-  padding: 22px 26px;
-  cursor: pointer;
-  transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans);
-}
-
-.lesson-item:hover {
-  border-color: var(--green-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-}
-
-.lesson-header {
-  display: flex;
-  align-items: flex-start;
   gap: 16px;
 }
 
-.lesson-num {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--green);
-  line-height: 1;
-  min-width: 36px;
-  flex-shrink: 0;
+.lesson-bullet {
+  font-size: 1rem;
+  color: var(--ink-mid);
+  line-height: 1.75;
+  padding: 16px 22px 16px 28px;
+  background: var(--white);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: var(--radius);
+  position: relative;
+  transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans);
 }
 
-.lesson-header-text { flex: 1; }
-
-.lesson-title {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 4px;
+.lesson-bullet::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--green);
+  border-radius: 4px 0 0 4px;
 }
 
-.lesson-summary {
-  font-size: 0.88rem;
-  color: var(--ink-dim);
-  line-height: 1.6;
-}
-
-.lesson-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-  opacity: 0;
-}
-
-.lesson-item.expanded .lesson-detail {
-  max-height: 500px;
-  opacity: 1;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--cream-dark);
-}
-
-.lesson-detail p {
-  font-size: 0.9rem;
-  color: var(--ink-dim);
-  line-height: 1.8;
-  margin-left: 52px;
+.lesson-bullet:hover {
+  border-color: var(--green-light);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -774,54 +695,174 @@ img { max-width: 100%; display: block; }
 .tag-teal   { background: var(--teal-pale);   color: var(--teal);   border-color: #9fe0e8; }
 
 /* ═══════════════════════════════════════════════════════════
-   PAGE HERO (Field Notes, About sub-pages)
+   FIELD NOTES — DIARY LAYOUT
 ═══════════════════════════════════════════════════════════ */
-.page-hero {
-  padding: 140px 40px 60px;
-  text-align: center;
-  background: var(--white);
-  border-bottom: 1px solid var(--cream-dark);
+.diary-section {
+  padding: 120px 40px 80px;
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--cream) 0%, var(--white) 40%, var(--green-pale) 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.page-hero-inner {
-  max-width: 700px;
+/* Faint ruled-paper lines */
+.diary-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent,
+    transparent 38px,
+    rgba(168,213,181,0.15) 38px,
+    rgba(168,213,181,0.15) 39px
+  );
+  pointer-events: none;
+}
+
+/* Left margin line (journal feel) */
+.diary-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 340px);
+  width: 2px;
+  background: rgba(232,103,77,0.12);
+  pointer-events: none;
+}
+
+.diary-inner {
+  max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 60px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
 }
 
-.page-hero-title {
+/* Left side — hero text */
+.diary-left {
+  position: sticky;
+  top: 120px;
+}
+
+.diary-hero-content {
+  position: relative;
+}
+
+.diary-hero-content .section-label {
+  justify-content: flex-start;
+}
+
+.diary-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 700;
   color: var(--ink);
   line-height: 1.2;
   margin-bottom: 18px;
 }
 
-.page-hero-sub {
-  font-size: 1.05rem;
+.diary-subtitle {
+  font-size: 0.95rem;
   color: var(--ink-dim);
   line-height: 1.85;
 }
 
-/* Field Notes hero — slightly more colorful */
-.field-notes-hero {
-  background: linear-gradient(160deg, var(--white) 0%, var(--green-pale) 50%, var(--sky-pale) 100%);
-  border-bottom: 2px solid var(--green-light);
+/* Scribble decorations */
+.diary-scribble {
+  position: absolute;
+  font-family: var(--font-mono);
+  color: var(--green-light);
+  opacity: 0.35;
+  font-weight: 700;
+  pointer-events: none;
+  user-select: none;
+}
+
+.diary-scribble-1 {
+  top: -20px;
+  right: -10px;
+  font-size: 3rem;
+  transform: rotate(-12deg);
+}
+
+.diary-scribble-2 {
+  bottom: -30px;
+  left: 40px;
+  font-size: 2.5rem;
+  transform: rotate(8deg);
+}
+
+.diary-scribble-3 {
+  bottom: 40px;
+  right: 20px;
+  font-size: 1.8rem;
+  transform: rotate(-5deg);
+  color: var(--coral);
+  opacity: 0.2;
+}
+
+/* Right side — tabbed content */
+.diary-right {
+  min-width: 0;
+}
+
+.diary-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 28px;
+  border-bottom: 2px solid var(--cream-dark);
+  padding-bottom: 0;
+}
+
+.diary-tab {
+  padding: 10px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--trans), border-color var(--trans);
+  letter-spacing: 0.02em;
+}
+
+.diary-tab:hover {
+  color: var(--green);
+}
+
+.diary-tab.active {
+  color: var(--green);
+  border-bottom-color: var(--green);
+}
+
+.diary-panel {
+  display: none;
+}
+
+.diary-panel.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   FIELD ARTICLES (Learning from the Field)
+   FIELD ARTICLES (Learning from the Field) — inside diary
 ═══════════════════════════════════════════════════════════ */
-.field-articles {
-  max-width: 860px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
 .field-article {
-  background: var(--white);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
   border: 1.5px solid var(--cream-dark);
   border-radius: var(--radius-lg);
   padding: 24px 28px;
@@ -829,6 +870,7 @@ img { max-width: 100%; display: block; }
   transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans);
   position: relative;
   overflow: hidden;
+  margin-bottom: 16px;
 }
 
 .field-article::before {
@@ -910,18 +952,17 @@ img { max-width: 100%; display: block; }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CLASSROOM CARDS (Learning from the Classroom)
+   CLASSROOM CARDS — inside diary tabs
 ═══════════════════════════════════════════════════════════ */
 .classroom-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  max-width: 1000px;
-  margin: 0 auto;
+  grid-template-columns: 1fr;
+  gap: 18px;
 }
 
 .classroom-card {
-  background: var(--cream);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
   border: 1.5px solid var(--cream-dark);
   border-radius: var(--radius-lg);
   padding: 28px 24px 22px;
@@ -991,11 +1032,9 @@ img { max-width: 100%; display: block; }
 .classroom-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* ═══════════════════════════════════════════════════════════
-   PEOPLE & PERSPECTIVES SOURCES
+   PEOPLE & PERSPECTIVES SOURCES — inside diary tabs
 ═══════════════════════════════════════════════════════════ */
 .sources-list {
-  max-width: 700px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -1133,77 +1172,92 @@ img { max-width: 100%; display: block; }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   CAREER TIMELINE
+   ROADMAP TIMELINE (non-expandable, with logos)
 ═══════════════════════════════════════════════════════════ */
-.timeline-wrap {
-  max-width: 700px;
+.roadmap {
+  max-width: 800px;
   margin: 0 auto;
   position: relative;
-  padding-left: 50px;
+  padding-left: 60px;
 }
 
-.timeline-wrap::before {
+/* The connecting line */
+.roadmap::before {
   content: '';
   position: absolute;
-  left: 18px;
+  left: 24px;
   top: 10px;
   bottom: 10px;
-  width: 2px;
-  background: linear-gradient(180deg, var(--green-light), var(--sky-pale), var(--purple-pale));
-  border-radius: 2px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--green), var(--sky), var(--purple), var(--coral));
+  border-radius: 3px;
 }
 
-.timeline-item {
+.roadmap-stop {
   position: relative;
-  padding: 0 0 28px 0;
-  cursor: pointer;
+  padding: 0 0 32px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
 }
 
-.timeline-item:last-child { padding-bottom: 0; }
+.roadmap-stop:last-child { padding-bottom: 0; }
 
-.timeline-dot {
+.roadmap-node {
   position: absolute;
-  left: -43px;
-  top: 4px;
-  width: 28px;
-  height: 28px;
+  left: -52px;
+  top: 6px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--white);
-  border: 2px solid var(--green-light);
+  border: 3px solid var(--green-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
   z-index: 1;
-  transition: border-color var(--trans), background var(--trans);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: border-color var(--trans), box-shadow var(--trans);
 }
 
-.timeline-item:hover .timeline-dot {
+.roadmap-stop:hover .roadmap-node {
   border-color: var(--green);
-  background: var(--green-pale);
+  box-shadow: 0 4px 20px rgba(58,125,86,0.2);
 }
 
-.timeline-content {
+.roadmap-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.roadmap-emoji {
+  font-size: 1.1rem;
+}
+
+.roadmap-content {
   background: var(--white);
   border: 1.5px solid var(--cream-dark);
   border-radius: var(--radius);
   padding: 18px 22px;
+  flex: 1;
   transition: border-color var(--trans), box-shadow var(--trans);
 }
 
-.timeline-item:hover .timeline-content {
+.roadmap-stop:hover .roadmap-content {
   border-color: var(--green-light);
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
 
-.timeline-header {
+.roadmap-header {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 4px;
 }
 
-.timeline-era {
+.roadmap-era {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   color: var(--green);
@@ -1212,47 +1266,43 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
 }
 
-.timeline-years {
+.roadmap-years {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   color: var(--ink-faint);
   letter-spacing: 0.05em;
 }
 
-.timeline-title {
+.roadmap-title {
   font-family: var(--font-serif);
   font-size: 1rem;
   font-weight: 700;
   color: var(--ink);
   line-height: 1.4;
+  margin-bottom: 6px;
 }
 
-.timeline-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-  opacity: 0;
-}
-
-.timeline-item.expanded .timeline-detail {
-  max-height: 400px;
-  opacity: 1;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--cream-dark);
-}
-
-.timeline-detail p {
+.roadmap-detail {
   font-size: 0.88rem;
   color: var(--ink-dim);
-  line-height: 1.8;
+  line-height: 1.7;
+}
+
+.roadmap-detail a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.roadmap-detail a:hover {
+  color: var(--green-mid);
 }
 
 /* ═══════════════════════════════════════════════════════════
-   COMMUNITIES
+   COMMUNITIES — 2+ column grid with logos
 ═══════════════════════════════════════════════════════════ */
 .communities-wrap {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 280px 1fr;
@@ -1286,22 +1336,59 @@ img { max-width: 100%; display: block; }
   font-size: 4rem;
 }
 
-.community-list {
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.community-card {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  align-items: center;
+  gap: 14px;
+  background: var(--white);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans);
 }
 
-.community-bullet {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--cream-dark);
+.community-card:hover {
+  border-color: var(--green-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
 
-.community-bullet:last-child { border-bottom: none; }
+.community-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: var(--cream);
+  padding: 4px;
+}
+
+.community-logo-placeholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--green-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--green);
+}
+
+.community-card-text { flex: 1; min-width: 0; }
 
 .community-name {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--ink);
   margin-bottom: 2px;
@@ -1315,9 +1402,9 @@ img { max-width: 100%; display: block; }
 .community-name a:hover { color: var(--green-mid); }
 
 .community-desc {
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   color: var(--ink-dim);
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1458,18 +1545,30 @@ footer {
   }
 
   .hero-stats   { margin: 0 auto 36px; }
-  .hero-scroll  { margin: 0 auto; }
 
   .map-legend     { bottom: 20px; right: 16px; }
   .section        { padding: var(--section-gap) 20px; }
-  .page-hero      { padding: 120px 20px 40px; }
-  .about-hero     { padding: 120px 20px 60px; }
   .contact-links  { flex-direction: column; align-items: center; }
   .nav-cta        { display: none !important; }
 
   .deal-cards { grid-template-columns: 1fr; }
-  .classroom-grid { grid-template-columns: 1fr; }
 
+  /* Diary layout stacks on mobile */
+  .diary-section { padding: 100px 20px 60px; }
+  .diary-section::after { display: none; }
+  .diary-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .diary-left {
+    position: static;
+    text-align: center;
+  }
+  .diary-hero-content .section-label { justify-content: center; }
+  .diary-tabs { overflow-x: auto; flex-wrap: nowrap; }
+  .diary-tab { white-space: nowrap; font-size: 0.76rem; padding: 8px 14px; }
+
+  .about-hero { padding: 120px 20px 60px; }
   .about-hero-inner {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -1489,16 +1588,18 @@ footer {
     margin: 0 auto;
   }
 
-  .timeline-wrap { padding-left: 42px; }
-  .timeline-dot { left: -35px; width: 24px; height: 24px; font-size: 0.75rem; }
-  .timeline-wrap::before { left: 14px; }
+  .community-grid {
+    grid-template-columns: 1fr;
+  }
 
-  .lesson-detail p { margin-left: 0; }
+  .roadmap { padding-left: 50px; }
+  .roadmap-node { left: -44px; width: 34px; height: 34px; }
+  .roadmap-logo { width: 22px; height: 22px; }
+  .roadmap::before { left: 20px; }
 }
 
 @media (max-width: 480px) {
   .hero-title  { font-size: 2.2rem; }
   .stat-num    { font-size: 1.7rem; }
   .deal-cards  { grid-template-columns: 1fr; }
-  .classroom-grid { grid-template-columns: 1fr; }
 }

@@ -1,8 +1,8 @@
 /* ─────────────────────────────────────────────────────────
-   MAIN.JS — Full Redesign
-   Home: Deal Map + Spotlight + Lessons
-   Field Notes: 3 stacked learning sections
-   Investor/Learner: Bio + Timeline + Communities + Contact
+   MAIN.JS — Full Redesign v2
+   Home: Deal Map + Spotlight + Simple Lessons
+   Field Notes: Diary layout with tabbed right panel
+   Investor/Learner: Bio + Roadmap Timeline + 2-col Communities
 ───────────────────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -107,11 +107,9 @@ function initMap() {
     maxZoom: 19,
   }).addTo(map);
 
-  // Draw connection lines from investors to destinations
   const investorMap = {};
   DEAL_MAP.investors.forEach(inv => { investorMap[inv.id] = inv; });
 
-  // Color palette for connection lines
   const lineColors = ['#5aa674', '#3d8bb5', '#d4932a', '#7c5cbf', '#2e9aa8', '#e8674d'];
 
   DEAL_MAP.destinations.forEach((dest, di) => {
@@ -127,7 +125,6 @@ function initMap() {
     });
   });
 
-  // Investor origin pins (small, muted)
   const renderedInvestors = new Set();
   DEAL_MAP.investors.forEach(inv => {
     const key = `${inv.lat}-${inv.lng}`;
@@ -144,7 +141,6 @@ function initMap() {
     marker.bindTooltip(inv.city, { direction: 'top', offset: [0, -8], className: 'origin-tooltip' });
   });
 
-  // Destination pins (colored, with deal spotlight popup)
   DEAL_MAP.destinations.forEach(dest => {
     const icon = L.divIcon({
       className: '',
@@ -172,11 +168,9 @@ function initMap() {
       </div>
     `, { maxWidth: 280 });
 
-    // Show popup on hover (desktop)
     marker.on('mouseover', function() { this.openPopup(); });
   });
 
-  // Operational star (Bangalore)
   const star = DEAL_MAP.operationalStar;
   const starIcon = L.divIcon({
     className: '',
@@ -199,7 +193,7 @@ function initMap() {
 }
 
 /* ════════════════════════════════════════════════════════
-   DEAL SPOTLIGHT (2 featured deals)
+   DEAL SPOTLIGHT (2 featured deals) — sector+stage on top, no role, "What I Learned"
 ════════════════════════════════════════════════════════ */
 function initDealSpotlight() {
   const container = document.getElementById('dealCards');
@@ -209,16 +203,15 @@ function initDealSpotlight() {
     <div class="deal-card" style="transition-delay:${i * 100}ms">
       <div class="deal-card-top">
         <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="${deal.region} flag" />
-        <span class="deal-stage-tag">${deal.stage}</span>
+        <div class="deal-top-tags">
+          <span class="deal-stage-tag">${deal.stage}</span>
+          ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
+        </div>
       </div>
       <h3 class="deal-title">${deal.title}</h3>
-      <p class="deal-role">${deal.role}</p>
       <p class="deal-desc">${deal.description}</p>
       <div class="deal-insight">
-        <strong>Key Insight:</strong> ${deal.keyInsight}
-      </div>
-      <div class="deal-tags">
-        ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
+        <strong>What I Learned:</strong> ${deal.whatILearned}
       </div>
     </div>
   `).join('');
@@ -227,131 +220,146 @@ function initDealSpotlight() {
 }
 
 /* ════════════════════════════════════════════════════════
-   LESSONS LEARNED (5 expandable lessons)
+   LESSONS LEARNED — Simple bullet points
 ════════════════════════════════════════════════════════ */
 function initLessons() {
-  const introEl = document.getElementById('lessonsIntro');
   const listEl = document.getElementById('lessonsList');
   if (!listEl) return;
 
-  if (introEl) {
-    introEl.innerHTML = `<p class="lessons-intro-text">${LESSONS_LEARNED.intro}</p>`;
-  }
+  listEl.innerHTML = `
+    <ul class="lessons-bullets">
+      ${LESSONS_LEARNED.lessons.map(lesson => `
+        <li class="lesson-bullet">${lesson}</li>
+      `).join('')}
+    </ul>
+  `;
 
-  listEl.innerHTML = LESSONS_LEARNED.lessons.map((lesson, i) => `
-    <div class="lesson-item" style="transition-delay:${i * 80}ms" onclick="this.classList.toggle('expanded')">
-      <div class="lesson-header">
-        <span class="lesson-num">${lesson.num}</span>
-        <div class="lesson-header-text">
-          <h3 class="lesson-title">${lesson.title}</h3>
-          <p class="lesson-summary">${lesson.summary}</p>
-        </div>
-        <div class="expand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-      </div>
-      <div class="lesson-detail">
-        <p>${lesson.detail}</p>
-      </div>
-    </div>
-  `).join('');
-
-  observeCards(listEl.querySelectorAll('.lesson-item'));
+  observeCards(listEl.querySelectorAll('.lesson-bullet'));
 }
 
 /* ════════════════════════════════════════════════════════
-   FIELD NOTES PAGE
+   FIELD NOTES PAGE — Diary layout with left hero + right tabbed content
 ════════════════════════════════════════════════════════ */
 function initFieldNotes() {
-  renderFieldHero();
-  renderFieldArticles();
-  renderClassroomCards();
-  renderPeopleSources();
+  renderDiaryLeft();
+  renderDiaryRight();
 }
 
-function renderFieldHero() {
-  const heroEl = document.getElementById('fieldNotesHero');
-  if (!heroEl) return;
+function renderDiaryLeft() {
+  const container = document.getElementById('diaryLeft');
+  if (!container) return;
 
-  heroEl.innerHTML = `
-    <p class="section-label">${FIELD_NOTES.hero.label}</p>
-    <h1 class="page-hero-title">${FIELD_NOTES.hero.title}</h1>
-    <p class="page-hero-sub">${FIELD_NOTES.hero.subtitle}</p>
+  container.innerHTML = `
+    <div class="diary-hero-content">
+      <p class="section-label">${FIELD_NOTES.hero.label}</p>
+      <h1 class="diary-title">${FIELD_NOTES.hero.title}</h1>
+      <p class="diary-subtitle">${FIELD_NOTES.hero.subtitle}</p>
+      <div class="diary-scribble diary-scribble-1">~</div>
+      <div class="diary-scribble diary-scribble-2">*</div>
+      <div class="diary-scribble diary-scribble-3">//</div>
+    </div>
   `;
 }
 
-function renderFieldArticles() {
-  const container = document.getElementById('fieldArticles');
+function renderDiaryRight() {
+  const container = document.getElementById('diaryRight');
   if (!container) return;
 
-  container.innerHTML = FIELD_NOTES.fromTheField.map((article, i) => `
-    <div class="field-article expandable" style="transition-delay:${i * 100}ms" onclick="this.classList.toggle('expanded')">
-      <div class="field-article-header">
-        <div class="field-article-icon">${article.icon}</div>
-        <div>
-          <h3 class="field-article-title">${article.title}</h3>
-          <p class="field-article-summary">${article.summary}</p>
+  // Build tab bar
+  const tabs = [
+    { id: 'field', label: 'Lessons from Deals' },
+    { id: 'classroom', label: 'Formal Learning' },
+    { id: 'sources', label: 'Sources I Rely On' },
+  ];
+
+  const tabBar = `
+    <div class="diary-tabs">
+      ${tabs.map((t, i) => `
+        <button class="diary-tab ${i === 0 ? 'active' : ''}" data-tab="${t.id}">${t.label}</button>
+      `).join('')}
+    </div>
+  `;
+
+  // Build content panels
+  const fieldPanel = `
+    <div class="diary-panel active" data-panel="field">
+      ${FIELD_NOTES.fromTheField.map((article, i) => `
+        <div class="field-article expandable" style="transition-delay:${i * 100}ms" onclick="this.classList.toggle('expanded')">
+          <div class="field-article-header">
+            <div class="field-article-icon">${article.icon}</div>
+            <div>
+              <h3 class="field-article-title">${article.title}</h3>
+              <p class="field-article-summary">${article.summary}</p>
+            </div>
+            <div class="expand-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div class="field-article-body">
+            <div class="field-article-content">${article.detail}</div>
+            <div class="field-article-tags">
+              ${article.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+          </div>
         </div>
-        <div class="expand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
-        </div>
-      </div>
-      <div class="field-article-body">
-        <div class="field-article-content">${article.detail}</div>
-        <div class="field-article-tags">
-          ${article.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-        </div>
+      `).join('')}
+    </div>
+  `;
+
+  const classroomPanel = `
+    <div class="diary-panel" data-panel="classroom">
+      <div class="classroom-grid">
+        ${FIELD_NOTES.fromTheClassroom.map((item, i) => `
+          <div class="classroom-card" style="transition-delay:${i * 100}ms">
+            <div class="classroom-icon">${item.icon}</div>
+            <h3 class="classroom-title">${item.title}</h3>
+            <div class="classroom-learned">
+              <span class="classroom-learned-label">What I Learned</span>
+              <p>${item.whatILearned}</p>
+            </div>
+            <p class="classroom-details">${item.details}</p>
+            <div class="classroom-tags">
+              ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+          </div>
+        `).join('')}
       </div>
     </div>
-  `).join('');
+  `;
 
-  observeCards(container.querySelectorAll('.field-article'));
-}
-
-function renderClassroomCards() {
-  const container = document.getElementById('classroomCards');
-  if (!container) return;
-
-  container.innerHTML = `<div class="classroom-grid">${
-    FIELD_NOTES.fromTheClassroom.map((item, i) => `
-      <div class="classroom-card" style="transition-delay:${i * 100}ms">
-        <div class="classroom-icon">${item.icon}</div>
-        <h3 class="classroom-title">${item.title}</h3>
-        <div class="classroom-learned">
-          <span class="classroom-learned-label">What I Learned</span>
-          <p>${item.whatILearned}</p>
-        </div>
-        <p class="classroom-details">${item.details}</p>
-        <div class="classroom-tags">
-          ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-        </div>
-      </div>
-    `).join('')
-  }</div>`;
-
-  observeCards(container.querySelectorAll('.classroom-card'));
-}
-
-function renderPeopleSources() {
-  const container = document.getElementById('peopleSources');
-  if (!container) return;
-
-  container.innerHTML = `<div class="sources-list">${
-    FIELD_NOTES.fromPeople.map((src, i) => `
-      <div class="source-item" style="transition-delay:${i * 80}ms">
-        <div class="source-icon">${src.icon}</div>
-        <div class="source-info">
-          <div class="source-top">
-            <span class="source-name">${src.name}</span>
-            <span class="source-type">${src.type}</span>
+  const sourcesPanel = `
+    <div class="diary-panel" data-panel="sources">
+      <div class="sources-list">
+        ${FIELD_NOTES.fromPeople.map((src, i) => `
+          <div class="source-item" style="transition-delay:${i * 80}ms">
+            <div class="source-icon">${src.icon}</div>
+            <div class="source-info">
+              <div class="source-top">
+                <span class="source-name">${src.name}</span>
+                <span class="source-type">${src.type}</span>
+              </div>
+              <p class="source-why">${src.why}</p>
+            </div>
           </div>
-          <p class="source-why">${src.why}</p>
-        </div>
+        `).join('')}
       </div>
-    `).join('')
-  }</div>`;
+    </div>
+  `;
 
-  observeCards(container.querySelectorAll('.source-item'));
+  container.innerHTML = tabBar + fieldPanel + classroomPanel + sourcesPanel;
+
+  // Tab switching logic
+  const tabBtns = container.querySelectorAll('.diary-tab');
+  const panels = container.querySelectorAll('.diary-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      container.querySelector(`[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+    });
+  });
 }
 
 /* ════════════════════════════════════════════════════════
@@ -384,32 +392,38 @@ function renderAboutHero() {
   `;
 }
 
+/* ── ROADMAP TIMELINE (non-expandable, with logos) ── */
 function renderTimeline() {
   const container = document.getElementById('timelineWrap');
   if (!container) return;
 
-  container.innerHTML = INVESTOR_LEARNER.timeline.map((item, i) => `
-    <div class="timeline-item" style="transition-delay:${i * 80}ms" onclick="this.classList.toggle('expanded')">
-      <div class="timeline-dot">${item.icon}</div>
-      <div class="timeline-content">
-        <div class="timeline-header">
-          <span class="timeline-era">${item.era}</span>
-          <span class="timeline-years">${item.years}</span>
-          <div class="expand-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 9l6 6 6-6"/></svg>
+  container.innerHTML = `
+    <div class="roadmap">
+      ${INVESTOR_LEARNER.timeline.map((item, i) => `
+        <div class="roadmap-stop" style="transition-delay:${i * 80}ms">
+          <div class="roadmap-node">
+            ${item.logo
+              ? `<img src="${item.logo}" alt="${item.era}" class="roadmap-logo" />`
+              : `<span class="roadmap-emoji">${item.icon}</span>`
+            }
+          </div>
+          <div class="roadmap-content">
+            <div class="roadmap-header">
+              <span class="roadmap-era">${item.era}</span>
+              <span class="roadmap-years">${item.years}</span>
+            </div>
+            <h3 class="roadmap-title">${item.title}</h3>
+            <p class="roadmap-detail">${item.detail}</p>
           </div>
         </div>
-        <h3 class="timeline-title">${item.title}</h3>
-        <div class="timeline-detail">
-          <p>${item.detail}</p>
-        </div>
-      </div>
+      `).join('')}
     </div>
-  `).join('');
+  `;
 
-  observeCards(container.querySelectorAll('.timeline-item'));
+  observeCards(container.querySelectorAll('.roadmap-stop'));
 }
 
+/* ── COMMUNITIES (2+ columns with logos + photo) ── */
 function renderCommunities() {
   const container = document.getElementById('communitiesWrap');
   if (!container) return;
@@ -418,21 +432,27 @@ function renderCommunities() {
     ? `<img src="${INVESTOR_LEARNER.communities.photo}" alt="Community" />`
     : `<div class="community-photo-placeholder"><span>🤝</span></div>`;
 
-  const bulletsHtml = INVESTOR_LEARNER.communities.list.map(c => {
-    const inner = c.url
+  const cardsHtml = INVESTOR_LEARNER.communities.list.map(c => {
+    const logoHtml = c.logo
+      ? `<img src="${c.logo}" alt="${c.name}" class="community-logo" />`
+      : `<div class="community-logo-placeholder">${c.name.charAt(0)}</div>`;
+    const nameHtml = c.url
       ? `<a href="${c.url}" target="_blank" rel="noopener">${c.name}</a>`
-      : `<span>${c.name}</span>`;
+      : c.name;
     return `
-      <div class="community-bullet">
-        <div class="community-name">${inner}</div>
-        <div class="community-desc">${c.desc}</div>
+      <div class="community-card">
+        ${logoHtml}
+        <div class="community-card-text">
+          <div class="community-name">${nameHtml}</div>
+          <div class="community-desc">${c.desc}</div>
+        </div>
       </div>
     `;
   }).join('');
 
   container.innerHTML = `
     <div class="community-photo">${photoHtml}</div>
-    <div class="community-list">${bulletsHtml}</div>
+    <div class="community-grid">${cardsHtml}</div>
   `;
 }
 

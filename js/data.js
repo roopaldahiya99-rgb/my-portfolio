@@ -107,8 +107,7 @@ const DEAL_SPOTLIGHT = [
     stage: "Early Stage",
     sectors: ["Cleantech", "Climate"],
     description: "Sourced and evaluated an early-stage cleantech company developing next-generation carbon capture technology. Led due diligence across market sizing, unit economics, and regulatory landscape — ultimately presenting an investment recommendation to the committee.",
-    role: "Deal Sourcing & Due Diligence",
-    keyInsight: "The best climate ventures don't just solve an environmental problem — they create a cost advantage that makes the clean option the obvious business decision.",
+    whatILearned: "The best climate ventures don't just solve an environmental problem — they create a cost advantage that makes the clean option the obvious business decision. I now evaluate every climate deal by asking: 'Does this collapse the green premium?' If yes, the market will do the rest.",
   },
   {
     title: "Growth Stage Healthtech — APAC",
@@ -117,45 +116,18 @@ const DEAL_SPOTLIGHT = [
     stage: "Growth Stage",
     sectors: ["Healthtech", "Cross-border"],
     description: "Facilitated a cross-border investment from an Australian fund into a high-growth Vietnamese healthcare enterprise scaling primary care infrastructure. Bridged due diligence, cultural nuance, and capital across two continents.",
-    role: "Cross-Border Deal Facilitation",
-    keyInsight: "In cross-border deals, the hardest asset to underwrite isn't the company — it's the trust between two parties who've never shared a room.",
+    whatILearned: "In cross-border deals, the hardest asset to underwrite isn't the company — it's the trust between two parties who've never shared a room. I now spend the first 30% of any cross-border process just building relational bridges before touching a single spreadsheet.",
   },
 ];
 
 // ── LESSONS LEARNED ──────────────────────────────────────
 const LESSONS_LEARNED = {
-  intro: "Investing in 30+ companies across 8 countries and multiple mandates — from early-stage venture to growth equity — has taught me more than any textbook. These are the convictions I carry into every deal room.",
   lessons: [
-    {
-      num: "01",
-      title: "Bet on the Jockey, Not the Horse",
-      summary: "Markets shift, products pivot, but exceptional founders adapt.",
-      detail: "The pattern across every successful deal I've touched: an unstoppable person who simply would not quit. TAM models and financial projections matter, but the single best predictor of returns is founder resilience. I've seen mediocre markets generate outsized returns because a founder saw something nobody else could — and refused to stop until the world caught up.",
-    },
-    {
-      num: "02",
-      title: "Cross-Border Deals Are Trust Exercises",
-      summary: "Capital is global, but trust is local.",
-      detail: "Deploying capital across borders isn't just about FX risk and regulatory arbitrage. It's about bridging two parties who operate in entirely different cultural, legal, and interpersonal frameworks. The best cross-border investors don't just transfer capital — they translate context. I've learned that 80% of deal friction isn't financial — it's relational.",
-    },
-    {
-      num: "03",
-      title: "The Best Frameworks Are Earned, Not Borrowed",
-      summary: "Generic checklists don't survive first contact with a real deal.",
-      detail: "Early in my career, I relied on borrowed frameworks — Porter's Five Forces, standard IC templates, boilerplate due diligence checklists. They're useful starting points, but the frameworks that actually drive good decisions are the ones you build from pattern recognition across dozens of deals. My own investment framework has been rewritten three times, and it's better for it.",
-    },
-    {
-      num: "04",
-      title: "Sectors Are Chosen by Curiosity, Not Mandate",
-      summary: "The best investors don't pick sectors — they follow problems.",
-      detail: "I didn't set out to invest in climate or healthtech because they were 'hot.' I followed problems that kept me up at night — a billion people without reading glasses, gig workers with zero insurance, rural communities cut off from capital. Every sector thesis I hold started as a question, not a strategy.",
-    },
-    {
-      num: "05",
-      title: "Operating Experience Changes How You Invest",
-      summary: "You underwrite differently once you've built something yourself.",
-      detail: "Working at Wysa — an AI mental health startup — changed how I evaluate founders. I've sat in the chair: building GTM from scratch, training customers, arguing about org design at 11pm. That experience made me a fundamentally better investor because I stopped asking hypothetical questions and started asking operational ones. 'How will you hire your first 10 salespeople?' beats 'What's your go-to-market strategy?' every time.",
-    },
+    "Bet on the jockey, not the horse — markets shift, products pivot, but exceptional founders adapt.",
+    "Cross-border deals are trust exercises — capital is global, but trust is local.",
+    "The best frameworks are earned, not borrowed — generic checklists don't survive first contact with a real deal.",
+    "Sectors are chosen by curiosity, not mandate — I follow problems, not trends.",
+    "Operating experience changes how you invest — you underwrite differently once you've built something yourself.",
   ],
 };
 
@@ -235,31 +207,31 @@ const FIELD_NOTES = {
       name: "Financial Times",
       type: "Daily Newspaper",
       icon: "📰",
-      why: "Trains you to see macro forces hiding in micro stories — the most valuable 30 minutes of my day.",
+      why: "I read the FT every morning before market open. It trains me to see macro forces hiding in micro stories — a currency move in Turkey, a regulatory shift in Brussels. I use it to pattern-match across geographies before any deal meeting.",
     },
     {
       name: "The Economist",
       type: "Weekly Analysis",
       icon: "🌍",
-      why: "Forces second-order thinking on AI, deglobalisation, and sovereign capital flows.",
+      why: "My weekend ritual. The Economist forces second-order thinking on AI, deglobalisation, and sovereign capital flows. I use their framework pieces to stress-test my own investment theses — if my thesis can't survive an Economist counter-argument, it's not ready for IC.",
     },
     {
       name: "Stratechery by Ben Thompson",
       type: "Newsletter",
       icon: "💡",
-      why: "The clearest thinker on tech strategy, aggregation theory, and platform economics.",
+      why: "Ben Thompson is the clearest thinker on tech strategy alive. His aggregation theory framework permanently changed how I evaluate platform businesses. I reference his mental models in almost every tech deal memo I write.",
     },
     {
       name: "The Generalist by Mario Gabriele",
       type: "Substack",
       icon: "📊",
-      why: "Deep-dive company profiles that read like investment memos — exactly how I want to think about businesses.",
+      why: "Mario writes deep-dive company profiles that read like investment memos — exactly the format I want my own thinking to follow. I use his structure as a template when I'm breaking down a new company for the first time.",
     },
     {
       name: "Acquired Podcast",
       type: "Podcast",
       icon: "🎙️",
-      why: "Long-form storytelling about how the world's best companies were built — history as a framework for investing.",
+      why: "Long-form storytelling about how the world's best companies were built. I listen on flights and runs. History is the best framework for investing — if you understand how Costco, LVMH, or TSMC were built, you see patterns everywhere.",
     },
   ],
 };
@@ -267,8 +239,8 @@ const FIELD_NOTES = {
 // ── INVESTOR / LEARNER (About Page) ─────────────────────
 const INVESTOR_LEARNER = {
   hero: {
-    bio: "Investor. Traveller. Perpetual student. I'm currently with <strong>BDC Capital</strong>, deploying capital into Canada's most promising ventures and growth-stage companies. I hold an <strong>MBA from Rotman</strong> specializing in finance, and I've built my career at the intersection of curiosity and capital. I care deeply about climate solutions and women's economic empowerment — not as side interests, but as investment theses.",
-    photo: null, // Add your photo: "assets/roopal.jpg"
+    bio: "Investor. Traveller. Perpetual student. I'm currently with <strong>BDC Capital</strong>, deploying capital into Canada's most promising ventures and growth-stage companies. I hold an <strong>MBA from Rotman</strong> specializing in finance, and I've built my career at the intersection of curiosity and capital. Outside of work, I care deeply about climate justice, women's economic empowerment, and building communities that bridge cultures and continents.",
+    photo: "assets/Roopal.jpeg",
   },
 
   timeline: [
@@ -276,56 +248,62 @@ const INVESTOR_LEARNER = {
       era: "Undergrad",
       years: "2014–2018",
       title: "Editorial Columns & the Power of Writing",
-      detail: "Led editorial columns that sharpened clarity of thought and economy of language. Didn't know it then, but this became a superpower — every investment memo I write today traces back to learning how to make complex ideas simple and persuasive.",
+      detail: "Led editorial columns and co-authored <a href='#' target='_blank' rel='noopener'><em>Startup Compass</em></a> — a book where I interviewed unicorn founders about building from zero. Sharpened clarity of thought and economy of language.",
       icon: "✍️",
+      logo: "assets/logos/uoft.png",
     },
     {
       era: "Dalberg",
       years: "2018–2020",
       title: "Global Consulting & High-Stakes Rooms",
-      detail: "Joined one of the world's leading development consulting firms and traveled the globe. Sat in rooms with Google, the US Embassy, and government ministers. Learned to hold a room together, synthesise competing stakeholder interests, and build networks that span continents. This is where curiosity became global.",
+      detail: "Global development consulting. Sat in rooms with Google, the US Embassy, and government ministers. Built networks that span continents.",
       icon: "🌏",
+      logo: "assets/logos/dalberg.png",
     },
     {
       era: "KOIS",
       years: "2020–2021",
       title: "First Principles of Early Stage Investing",
-      detail: "My first real exposure to venture investing. Learned deal sourcing, due diligence, and the art of backing founders when all you have is conviction and a thesis. Fell in love with the craft of turning capital into catalysts.",
+      detail: "First real exposure to venture investing. Learned deal sourcing, due diligence, and backing founders on conviction alone.",
       icon: "🌱",
+      logo: "assets/logos/kois.png",
     },
     {
       era: "Wysa",
       years: "2021–2022",
       title: "Operating Inside a Global AI Startup",
-      detail: "Joined a Bangalore-based AI mental health startup to get my hands dirty. Built GTM strategy from scratch, ran on-ground customer training, and worked directly with the founder on organisational design. Loved the intensity — but the hunger to evaluate new problems every few months pulled me back toward investing.",
+      detail: "Bangalore-based AI mental health startup. Built GTM from scratch, trained customers, shaped org design alongside the founder.",
       icon: "🚀",
+      logo: "assets/logos/wysa.png",
     },
     {
       era: "Rotman MBA",
       years: "2022–2024",
       title: "CDL, First Principles & Financial Modelling",
-      detail: "Dove into financial modelling, worked with deep-tech startups through the Creative Destruction Lab, and built investment frameworks from first principles. Every class, case study, and IC presentation reinforced one thing: the best investors combine quantitative rigour with qualitative judgement.",
+      detail: "Financial modelling, deep-tech startups at CDL, and investment frameworks from first principles. Quantitative rigour meets qualitative judgement.",
       icon: "🎓",
+      logo: "assets/logos/uoft.png",
     },
     {
       era: "BDC Capital",
       years: "2024–Present",
       title: "Venture Capital & PE Acquisitions",
-      detail: "Currently deploying capital across the Canadian venture and growth equity landscape. Every week brings a new sector, a new founder, a new problem to solve. This is exactly where I want to be — at the frontier of capital and curiosity.",
+      detail: "Deploying capital across Canadian venture and growth equity. New sectors, new founders, new problems — every week.",
       icon: "💼",
+      logo: "assets/logos/bdc.png",
     },
   ],
 
   communities: {
-    photo: null, // Add a community/networking photo: "assets/community.jpg"
+    photo: "assets/Community.jpeg",
     list: [
-      { name: "University of Toronto", desc: "Alumni network — Rotman School of Management", url: null },
-      { name: "Creative Destruction Lab (CDL)", desc: "Deep-tech startup accelerator — mentor & affiliate", url: null },
-      { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", url: null },
-      { name: "CAFIID", desc: "Canadian Association for International Development", url: null },
-      { name: "CWVC", desc: "Canadian Women in Venture Capital", url: null },
-      { name: "CFA Institute", desc: "Charterholder candidate — global finance community", url: null },
-      { name: "Personal Network", desc: "Founders, investors, and operators across 10+ countries", url: null },
+      { name: "University of Toronto", desc: "Alumni network — Rotman School of Management", logo: "assets/logos/uoft.png", url: null },
+      { name: "Creative Destruction Lab (CDL)", desc: "Deep-tech startup accelerator — mentor & affiliate", logo: null, url: null },
+      { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", logo: null, url: null },
+      { name: "CAFIID", desc: "Canadian Association for International Development", logo: null, url: null },
+      { name: "CWVC", desc: "Canadian Women in Venture Capital", logo: null, url: null },
+      { name: "CFA Institute", desc: "Charterholder candidate — global finance community", logo: null, url: null },
+      { name: "Personal Network", desc: "Founders, investors, and operators across 10+ countries", logo: null, url: null },
     ],
   },
 
