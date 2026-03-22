@@ -17,9 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (page === 'learning') {
     initLearning();
-    initSectors();
-    initModal();
-    scrollToHash();
   }
 
   if (page === 'about') {
@@ -186,7 +183,7 @@ function initPassportGrid() {
 /* ════════════════════════════════════════════════════════
    LEARNING TABS
 ════════════════════════════════════════════════════════ */
-let currentTab = 'classes';
+let currentTab = 'thesis';
 
 function initLearning() {
   const tabBtns = document.querySelectorAll('.tab');
@@ -220,16 +217,48 @@ function renderLearnTab(tabKey) {
   const type = typeMap[tabKey];
 
   content.innerHTML = `<div class="learn-grid">${
-    items.map((item, i) => `
-      <div class="learn-card type-${type}" style="transition-delay:${i*70}ms">
-        <div class="learn-icon">${item.icon}</div>
-        <div class="learn-title">${item.title}</div>
-        <div class="learn-meta">${item.meta}</div>
-        <div class="learn-takeaway">${item.takeaway}</div>
-        ${item.work ? `<div class="learn-work"><strong>What I did:</strong> ${item.work}</div>` : ''}
-        <div class="learn-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-      </div>
-    `).join('')
+    items.map((item, i) => {
+      // Thesis cards use keyQ/work/learned and are expandable
+      if (type === 'thesis') {
+        return `
+          <div class="learn-card type-${type} expandable" style="transition-delay:${i*70}ms" onclick="this.classList.toggle('expanded')">
+            <div class="learn-card-header">
+              <div class="learn-icon">${item.icon}</div>
+              <div>
+                <div class="learn-title">${item.title}</div>
+                <div class="learn-meta">${item.meta}</div>
+              </div>
+              <div class="expand-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+            </div>
+            <div class="learn-expandable">
+              <div class="learn-detail-row">
+                <strong>Key Question:</strong> ${item.keyQ}
+              </div>
+              <div class="learn-detail-row">
+                <strong>What I did:</strong> ${item.work}
+              </div>
+              <div class="learn-detail-row">
+                <strong>What I learned:</strong> ${item.learned}
+              </div>
+              <div class="learn-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+            </div>
+          </div>
+        `;
+      }
+      // Other tabs keep the existing layout
+      return `
+        <div class="learn-card type-${type}" style="transition-delay:${i*70}ms">
+          <div class="learn-icon">${item.icon}</div>
+          <div class="learn-title">${item.title}</div>
+          <div class="learn-meta">${item.meta}</div>
+          <div class="learn-takeaway">${item.takeaway}</div>
+          ${item.work ? `<div class="learn-work"><strong>What I did:</strong> ${item.work}</div>` : ''}
+          <div class="learn-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+      `;
+    }).join('')
   }</div>`;
 
   observeCards(content.querySelectorAll('.learn-card'));
