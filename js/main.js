@@ -308,22 +308,26 @@ function renderDiaryRight() {
 
   const classroomPanel = `
     <div class="diary-panel" data-panel="classroom">
-      <div class="classroom-grid">
-        ${FIELD_NOTES.fromTheClassroom.map((item, i) => `
-          <div class="classroom-card" style="transition-delay:${i * 100}ms">
-            <div class="classroom-icon">${item.icon}</div>
-            <h3 class="classroom-title">${item.title}</h3>
-            <div class="classroom-learned">
-              <span class="classroom-learned-label">What I Learned</span>
-              <p>${item.whatILearned}</p>
+      ${FIELD_NOTES.fromTheClassroom.map((item, i) => `
+        <div class="field-article expandable" style="transition-delay:${i * 100}ms" onclick="this.classList.toggle('expanded')">
+          <div class="field-article-header">
+            <div class="field-article-icon">${item.icon}</div>
+            <div>
+              <h3 class="field-article-title">${item.title}</h3>
+              <p class="field-article-summary">${item.whatILearned}</p>
             </div>
-            <p class="classroom-details">${item.details}</p>
-            <div class="classroom-tags">
+            <div class="expand-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div class="field-article-body">
+            <div class="field-article-content"><p>${item.details}</p></div>
+            <div class="field-article-tags">
               ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
             </div>
           </div>
-        `).join('')}
-      </div>
+        </div>
+      `).join('')}
     </div>
   `;
 
@@ -410,7 +414,6 @@ function renderTimeline() {
           <div class="roadmap-content">
             <div class="roadmap-header">
               <span class="roadmap-era">${item.era}</span>
-              <span class="roadmap-years">${item.years}</span>
             </div>
             <h3 class="roadmap-title">${item.title}</h3>
             <p class="roadmap-detail">${item.detail}</p>
