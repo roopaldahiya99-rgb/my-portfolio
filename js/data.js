@@ -1,400 +1,338 @@
 /* ─────────────────────────────────────────────────────────
-   PORTFOLIO DATA
+   PORTFOLIO DATA — Full Redesign
    Update this file to keep your site current.
 ───────────────────────────────────────────────────────── */
 
-// ── MAP PINS ─────────────────────────────────────────────
-const MAP_PINS = [
-  {
-    country: "Kenya", code: "ke", lat: -1.286, lng: 36.817,
-    type: "invest", company: "Dot Glasses", role: "Investor",
-    description: "Backed Dot Glasses, bringing affordable, foldable reading glasses to underserved communities across Africa.",
-    sectors: ["Healthcare", "Impact"], tagClass: "tag-coral",
-  },
-  {
-    country: "India", code: "in", lat: 20.593, lng: 78.963,
-    type: "invest", company: "Financial Inclusion & Media Tech", role: "Investor / Advisor",
-    description: "Invested in financial inclusion in rural India. Also facilitated Google News Initiative investment in Indian media technology.",
-    sectors: ["Fintech", "Media Tech"], tagClass: "tag-sky",
-  },
-  {
-    country: "United States", code: "us", lat: 37.090, lng: -95.712,
-    type: "invest", company: "Insurtech & Google News", role: "Investor / Connector",
-    description: "Backed an insurtech startup reimagining coverage for the gig economy. Worked with Google News to channel capital into global media startups.",
-    sectors: ["Insurtech", "Media"], tagClass: "tag-purple",
-  },
-  {
-    country: "Vietnam", code: "vn", lat: 14.058, lng: 108.277,
-    type: "support", company: "Healthcare Enterprise", role: "Cross-border Deal Facilitator",
-    description: "Facilitated an Australian fund's investment into a high-growth Vietnamese healthcare enterprise — bridging due diligence, culture, and capital.",
-    sectors: ["Healthcare", "Cross-border"], tagClass: "tag-coral",
-  },
-  {
-    country: "Australia", code: "au", lat: -25.274, lng: 133.775,
-    type: "support", company: "Australian VC Fund", role: "LP & Deal Sourcing Partner",
-    description: "Worked alongside an Australian fund to source and structure deals across Southeast Asia, with a focus on healthcare and consumer.",
-    sectors: ["VC", "Healthcare"], tagClass: "tag",
-  },
-  {
-    country: "Canada", code: "ca", lat: 56.130, lng: -106.346,
-    type: "network", company: "CDL — Creative Destruction Lab", role: "Mentor & Affiliate",
-    description: "Active affiliate of the Creative Destruction Lab at the University of Toronto — one of the world's top deep-tech startup accelerators.",
-    sectors: ["Deep Tech", "VC"], tagClass: "tag-amber",
-  },
-  {
-    country: "United Kingdom", code: "gb", lat: 55.378, lng: -3.435,
-    type: "network", company: "Global PE & Finance Network", role: "MBA & CFA Candidate",
-    description: "Building deep expertise in private equity and global finance through CFA and MBA programs with strong UK-based networks.",
-    sectors: ["PE", "Finance"], tagClass: "tag-sky",
-  },
-  {
-    country: "Singapore", code: "sg", lat: 1.352, lng: 103.820,
-    type: "support", company: "Southeast Asia Fintech Ecosystem", role: "Advisor",
-    description: "Connected founders and investors across the SEA fintech ecosystem, focusing on payments, lending, and financial access.",
-    sectors: ["Fintech", "SEA"], tagClass: "tag-sky",
-  },
-];
+// ── DEAL MAP ─────────────────────────────────────────────
+// Investor origins → deal destinations with connection lines
+const DEAL_MAP = {
+  investors: [
+    { id: "us-kc",    label: "Kimberly Clark",      city: "Dallas",     lat: 32.78,  lng: -96.80,  code: "us" },
+    { id: "us-shell", label: "Shell",               city: "Houston",    lat: 29.76,  lng: -95.37,  code: "us" },
+    { id: "sg",       label: "Singapore Investor",   city: "Singapore",  lat: 1.352,  lng: 103.82,  code: "sg" },
+    { id: "us-gen",   label: "US Investor",          city: "New York",   lat: 40.71,  lng: -74.00,  code: "us" },
+    { id: "us-dc",    label: "US Investor (DC)",     city: "Washington", lat: 38.91,  lng: -77.04,  code: "us" },
+    { id: "au",       label: "Australian Fund",      city: "Sydney",     lat: -33.87, lng: 151.21,  code: "au" },
+    { id: "uk",       label: "UK Investor",          city: "London",     lat: 51.51,  lng: -0.13,   code: "gb" },
+    { id: "to",       label: "Toronto Investor",     city: "Toronto",    lat: 43.65,  lng: -79.38,  code: "ca" },
+  ],
 
-// ── PASSPORT COUNTRIES (flat grid, 6 cards) ──────────────
-const PASSPORT_COUNTRIES = [
-  {
-    region: "United States",
-    code: "us",
-    flag: "https://flagcdn.com/w80/us.png",
-    sectors: [
-      { name: "Insurtech", link: "learning.html#insurance" },
-      { name: "Media Tech", link: "learning.html#media" },
-    ],
-    stamp: "Gig economy insurtech · Google News global media investment",
+  destinations: [
+    {
+      country: "India", code: "in", lat: 20.59, lng: 78.96,
+      spotlight: "Multi-Sector Growth & Early Stage Portfolio",
+      stages: ["Growth Stage", "Early Stage"],
+      sectors: ["Fintech", "Healthtech", "Media"],
+      fromInvestors: ["us-kc", "sg", "us-gen", "uk"],
+    },
+    {
+      country: "Indonesia", code: "id", lat: -0.79, lng: 113.92,
+      spotlight: "Growth Stage Consumer Enterprise",
+      stages: ["Growth Stage"],
+      sectors: ["Consumer", "Manufacturing"],
+      fromInvestors: ["us-kc"],
+    },
+    {
+      country: "MENA", code: "sa", lat: 23.88, lng: 45.08,
+      spotlight: "Energy Transition Infrastructure",
+      stages: ["Growth Stage"],
+      sectors: ["Energy", "Infrastructure"],
+      fromInvestors: ["us-shell"],
+    },
+    {
+      country: "Cambodia", code: "kh", lat: 12.57, lng: 104.99,
+      spotlight: "Early Stage Impact Venture",
+      stages: ["Early Stage"],
+      sectors: ["Impact", "Social Enterprise"],
+      fromInvestors: ["us-dc"],
+    },
+    {
+      country: "Vietnam", code: "vn", lat: 14.06, lng: 108.28,
+      spotlight: "Growth Stage Eyecare Enterprise",
+      stages: ["Growth Stage"],
+      sectors: ["Healthtech"],
+      fromInvestors: ["au"],
+    },
+    {
+      country: "Kenya", code: "ke", lat: -1.29, lng: 36.82,
+      spotlight: "Early Stage Healthtech Venture",
+      stages: ["Early Stage"],
+      sectors: ["Healthtech", "Impact"],
+      fromInvestors: ["uk"],
+    },
+    {
+      country: "Canada — Nova Scotia", code: "ca", lat: 44.65, lng: -63.57,
+      spotlight: "Early Stage Cleantech Venture",
+      stages: ["Early Stage"],
+      sectors: ["Cleantech"],
+      fromInvestors: ["to"],
+    },
+    {
+      country: "Canada — Calgary", code: "ca", lat: 51.05, lng: -114.07,
+      spotlight: "Growth Stage Fintech Platform",
+      stages: ["Growth Stage"],
+      sectors: ["Fintech"],
+      fromInvestors: ["to"],
+    },
+    {
+      country: "Canada — Vancouver", code: "ca", lat: 49.28, lng: -123.12,
+      spotlight: "Early Stage Healthtech",
+      stages: ["Early Stage"],
+      sectors: ["Healthtech"],
+      fromInvestors: ["to"],
+    },
+    {
+      country: "United States", code: "us", lat: 39.83, lng: -98.58,
+      spotlight: "Growth Stage SaaS Platform",
+      stages: ["Growth Stage"],
+      sectors: ["SaaS", "Enterprise"],
+      fromInvestors: ["to"],
+    },
+  ],
+
+  operationalStar: {
+    city: "Bangalore", country: "India", code: "in", lat: 12.97, lng: 77.59,
+    label: "Operational Experience",
+    detail: "Worked on the ground with Wysa — a global AI mental health startup. Built GTM strategy, trained customers, and shaped organizational design alongside the founder.",
   },
+};
+
+// ── DEAL SPOTLIGHT ───────────────────────────────────────
+// Featured deals for the Investment Passport page
+const DEAL_SPOTLIGHT = [
   {
-    region: "Canada",
+    title: "Early Stage Cleantech — Canada",
+    region: "Nova Scotia",
     code: "ca",
-    flag: "https://flagcdn.com/w80/ca.png",
-    sectors: [
-      { name: "Cleantech", link: "learning.html#climate" },
-      { name: "Healthtech", link: "learning.html#healthcare" },
-      { name: "Fintech", link: "learning.html#fintech" },
-    ],
-    stamp: "CDL deep-tech mentorship · Cross-border deal sourcing",
+    stage: "Early Stage",
+    sectors: ["Cleantech", "Climate"],
+    description: "Sourced and evaluated an early-stage cleantech company developing next-generation carbon capture technology. Led due diligence across market sizing, unit economics, and regulatory landscape — ultimately presenting an investment recommendation to the committee.",
+    role: "Deal Sourcing & Due Diligence",
+    keyInsight: "The best climate ventures don't just solve an environmental problem — they create a cost advantage that makes the clean option the obvious business decision.",
   },
   {
-    region: "India",
-    code: "in",
-    flag: "https://flagcdn.com/w80/in.png",
-    sectors: [
-      { name: "Media Tech", link: "learning.html#media" },
-      { name: "Fintech", link: "learning.html#fintech" },
-    ],
-    stamp: "Financial inclusion · Google News \u2192 Indian media tech",
-  },
-  {
-    region: "Southeast Asia",
+    title: "Growth Stage Healthtech — APAC",
+    region: "Vietnam",
     code: "vn",
-    flag: "https://flagcdn.com/w80/vn.png",
-    sectors: [
-      { name: "Healthtech", link: "learning.html#healthcare" },
-    ],
-    stamp: "AU fund \u2192 Vietnamese healthcare enterprise · Cross-border deal",
-  },
-  {
-    region: "Africa",
-    code: "ke",
-    flag: "https://flagcdn.com/w80/ke.png",
-    sectors: [
-      { name: "Healthtech", link: "learning.html#healthcare" },
-    ],
-    stamp: "Affordable eyecare for 1B+ people · Dot Glasses",
-  },
-  {
-    region: "Australia",
-    code: "au",
-    flag: "https://flagcdn.com/w80/au.png",
-    sectors: [
-      { name: "Healthcare", link: "learning.html#healthcare" },
-    ],
-    stamp: "VC fund partnership · Deal sourcing across Southeast Asia",
+    stage: "Growth Stage",
+    sectors: ["Healthtech", "Cross-border"],
+    description: "Facilitated a cross-border investment from an Australian fund into a high-growth Vietnamese healthcare enterprise scaling primary care infrastructure. Bridged due diligence, cultural nuance, and capital across two continents.",
+    role: "Cross-Border Deal Facilitation",
+    keyInsight: "In cross-border deals, the hardest asset to underwrite isn't the company — it's the trust between two parties who've never shared a room.",
   },
 ];
 
-// ── LEARNING ─────────────────────────────────────────────
-const LEARNING = {
-  classes: [
+// ── LESSONS LEARNED ──────────────────────────────────────
+const LESSONS_LEARNED = {
+  intro: "Investing in 30+ companies across 8 countries and multiple mandates — from early-stage venture to growth equity — has taught me more than any textbook. These are the convictions I carry into every deal room.",
+  lessons: [
     {
-      icon: "📊", title: "CFA Level I & II", meta: "CFA Institute · 2024–2025", type: "class",
-      takeaway: "<strong>Key insight:</strong> Rigorous financial analysis discipline — DCF, comparables, and portfolio theory have sharpened how I underwrite investments and stress-test assumptions in early-stage deals.",
-      work: "Built a full DCF model and comparable company analysis for a mid-cap consumer goods company. Completed equity valuation under multiple scenarios for CFA exam prep.",
-      tags: ["Valuation", "Equity", "Portfolio Theory"],
+      num: "01",
+      title: "Bet on the Jockey, Not the Horse",
+      summary: "Markets shift, products pivot, but exceptional founders adapt.",
+      detail: "The pattern across every successful deal I've touched: an unstoppable person who simply would not quit. TAM models and financial projections matter, but the single best predictor of returns is founder resilience. I've seen mediocre markets generate outsized returns because a founder saw something nobody else could — and refused to stop until the world caught up.",
     },
     {
-      icon: "🏢", title: "Private Equity Fundamentals", meta: "MBA Elective · 2024", type: "class",
-      takeaway: "<strong>Key insight:</strong> The PE operating model — entry multiples, value creation levers, and exit engineering — has completely changed how I evaluate companies. It's not just capital, it's active ownership.",
-      work: "Built an LBO model for a mid-market SaaS acquisition — modelled entry multiples, debt schedules, and a 5-year value creation plan with three exit scenarios.",
-      tags: ["LBO", "Value Creation", "PE"],
+      num: "02",
+      title: "Cross-Border Deals Are Trust Exercises",
+      summary: "Capital is global, but trust is local.",
+      detail: "Deploying capital across borders isn't just about FX risk and regulatory arbitrage. It's about bridging two parties who operate in entirely different cultural, legal, and interpersonal frameworks. The best cross-border investors don't just transfer capital — they translate context. I've learned that 80% of deal friction isn't financial — it's relational.",
     },
     {
-      icon: "💼", title: "Corporate Finance & M&A", meta: "MBA Core · 2024", type: "class",
-      takeaway: "<strong>Key insight:</strong> Understanding the strategic and financial logic behind M&A (synergies, deal structure, post-merger integration) is essential for advising founders on exit paths.",
-      work: "Structured a mock acquisition proposal for a cross-border deal, including synergy analysis, deal financing, and post-merger integration roadmap.",
-      tags: ["M&A", "Deal Structuring", "Finance"],
+      num: "03",
+      title: "The Best Frameworks Are Earned, Not Borrowed",
+      summary: "Generic checklists don't survive first contact with a real deal.",
+      detail: "Early in my career, I relied on borrowed frameworks — Porter's Five Forces, standard IC templates, boilerplate due diligence checklists. They're useful starting points, but the frameworks that actually drive good decisions are the ones you build from pattern recognition across dozens of deals. My own investment framework has been rewritten three times, and it's better for it.",
     },
     {
-      icon: "🌍", title: "Emerging Markets Finance", meta: "MBA Elective · 2024", type: "class",
-      takeaway: "<strong>Key insight:</strong> Currency risk, political risk, and informal economies are not obstacles — they are the investment thesis. The opportunity is in navigating what others avoid.",
-      work: "Analysed FX hedging strategies for an India-based fintech expansion and built a country risk scorecard for six frontier markets.",
-      tags: ["EM", "Risk", "Global Finance"],
+      num: "04",
+      title: "Sectors Are Chosen by Curiosity, Not Mandate",
+      summary: "The best investors don't pick sectors — they follow problems.",
+      detail: "I didn't set out to invest in climate or healthtech because they were 'hot.' I followed problems that kept me up at night — a billion people without reading glasses, gig workers with zero insurance, rural communities cut off from capital. Every sector thesis I hold started as a question, not a strategy.",
     },
     {
-      icon: "🚀", title: "Venture Capital & Startup Strategy", meta: "MBA · 2023", type: "class",
-      takeaway: "<strong>Key insight:</strong> The power law of VC returns means portfolio construction is everything. Conviction in founders is the edge — markets evolve, but great people adapt.",
-      work: "Evaluated a Series A healthtech pitch — built a TAM/SAM/SOM analysis, scored the founding team, and presented an investment recommendation to a mock IC.",
-      tags: ["VC", "Startups", "Power Law"],
-    },
-    {
-      icon: "🎯", title: "Entrepreneurial Strategy", meta: "MBA Elective · 2024", type: "class",
-      takeaway: "<strong>Key insight:</strong> Strategy for startups isn't about grand plans — it's about choosing the right competitive position and iterating faster than incumbents. The 'test two, choose one' framework changed how I evaluate founder decisions.",
-      work: "Assessed the Canada Goose investment opportunity — analysed the brand's competitive moat, DTC strategy, and international expansion risks.",
-      tags: ["Strategy", "Competitive Analysis", "DTC"],
-    },
-  ],
-  cases: [
-    {
-      icon: "👜", title: "LVMH & Tiffany — Luxury M&A", meta: "Case Study · 2024", type: "case",
-      takeaway: "<strong>Key insight:</strong> The $15.8B acquisition wasn't just about brand — it was about acquiring the American customer relationship and a distribution moat. Brand equity in luxury is its own form of compounding capital.",
-      work: "Analysed the $15.8B deal: modelled the acquisition premium, mapped LVMH's strategic rationale, and assessed post-deal integration risks for the US market.",
-      tags: ["Luxury", "M&A", "Brand Strategy"],
-    },
-    {
-      icon: "💎", title: "Louis Vuitton — Brand as a Moat", meta: "Case Study · 2024", type: "case",
-      takeaway: "<strong>Key insight:</strong> LV's obsession with scarcity, craftsmanship storytelling, and vertical integration is a masterclass in pricing power. The lesson: moats are built over decades, not quarters.",
-      work: "Mapped LV's vertical integration strategy and quantified its pricing power versus peers — built a brand equity framework comparing luxury house valuations.",
-      tags: ["Brand Equity", "Luxury", "Moats"],
-    },
-    {
-      icon: "☀️", title: "Renewable Energy Transition — Investor Perspective", meta: "Case Study · 2023", type: "case",
-      takeaway: "<strong>Key insight:</strong> The energy transition is the largest capital reallocation event in history. First movers in infrastructure and tech will define the next generation of value creation.",
-      work: "Built an investment thesis for solar microgrids in SE Asia — modelled unit economics, compared with diesel alternatives, and presented to class as a mock LP pitch.",
-      tags: ["Energy", "Climate", "Infrastructure"],
-    },
-    {
-      icon: "🏦", title: "Fintech in Emerging Markets — M-Pesa to Nubank", meta: "Case Study · 2023", type: "case",
-      takeaway: "<strong>Key insight:</strong> Mobile-first financial services succeed not by copying incumbents, but by designing for the unbanked from scratch. Distribution via mobile agents is a competitive moat.",
-      work: "Compared M-Pesa's agent network model with Nubank's digital-only approach — mapped their market entry strategies and identified the key success factors for financial inclusion.",
-      tags: ["Fintech", "Financial Inclusion", "EM"],
-    },
-  ],
-  reading: [
-    {
-      icon: "📰", title: "Financial Times — Daily Reading", meta: "FT · Ongoing", type: "read",
-      takeaway: "<strong>Key insight:</strong> The FT trains you to see macro forces in micro stories. Tracking central bank policy, geopolitics, and sector M&A patterns daily has become the most valuable 30 minutes of my day.",
-      work: "Track central bank policy shifts and M&A activity daily — used FT analysis to inform my thesis on energy transition investment timing.",
-      tags: ["Macro", "Markets", "Daily Habit"],
-    },
-    {
-      icon: "📗", title: "The Innovator's Dilemma — Clayton Christensen", meta: "Book · 2023", type: "read",
-      takeaway: "<strong>Key insight:</strong> Disruption doesn't beat incumbents — incumbents beat themselves by rationally prioritizing their best current customers. The white space is always at the low end.",
-      work: "Applied Christensen's disruption framework to evaluate a fintech startup targeting underbanked populations — used it to structure my investment memo.",
-      tags: ["Disruption", "Strategy", "Classic"],
-    },
-    {
-      icon: "🌱", title: "Bill Gates — How to Avoid a Climate Disaster", meta: "Book · 2023", type: "read",
-      takeaway: "<strong>Key insight:</strong> The 'green premium' — the cost difference between clean and dirty options — is the real investment thesis for climate. Wherever we can eliminate or fund-down the green premium, value follows.",
-      work: "Used the 'green premium' framework to build a sector scoring model for climate tech investments — ranked 12 sub-sectors by premium gap and investability.",
-      tags: ["Climate", "Energy", "Impact"],
-    },
-    {
-      icon: "📈", title: "The Economist — Weekly Deep Reads", meta: "The Economist · Ongoing", type: "read",
-      takeaway: "<strong>Key insight:</strong> Long-form economic analysis forces second-order thinking. Reading about AI's impact on labor markets, deglobalization trends, and the rise of sovereign wealth changed how I frame sector theses.",
-      work: "Synthesised Economist coverage on deglobalisation to write a memo on supply chain resilience as an investment theme for emerging market funds.",
-      tags: ["Economics", "Global Trends", "Analysis"],
-    },
-    {
-      icon: "🤝", title: "Zero to One — Peter Thiel", meta: "Book · 2022", type: "read",
-      takeaway: "<strong>Key insight:</strong> The best companies create monopolies through secrets — things that are true but not widely believed. I now filter investments by asking: what unique truth does this founder know?",
-      work: "Adopted Thiel's 'secret' test as part of my founder evaluation framework — now use it in every IC presentation to assess founder-market fit.",
-      tags: ["Venture", "Strategy", "Founders"],
-    },
-  ],
-  thesis: [
-    {
-      icon: "🌱", title: "Climate & Clean Energy", meta: "Active Thesis · 2023–Present", type: "thesis",
-      keyQ: "How do you collapse the 'green premium' through technology and business model innovation?",
-      work: "Backed solar microgrids in SE Asia and advised on carbon markets infrastructure. Built a 12-sub-sector scoring model ranking climate investments by green premium gap.",
-      learned: "Climate tech isn't charity — it's the biggest market transition of the century. The winners are companies that make the clean option the cheap option.",
-      tags: ["Climate", "Energy", "Impact Investing"],
-    },
-    {
-      icon: "💳", title: "Fintech & Financial Inclusion", meta: "Active Thesis · 2022–Present", type: "thesis",
-      keyQ: "Can you build financial services for the 1.4B unbanked without competing with banks at all?",
-      work: "Invested in a last-mile lending platform in India and supported B2B payments infrastructure in Singapore solving cross-border FX friction for SMEs.",
-      learned: "The best fintech companies in emerging markets don't compete with banks — they route around them entirely, leveraging mobile penetration, agent networks, and data.",
-      tags: ["Fintech", "Inclusion", "Emerging Markets"],
-    },
-    {
-      icon: "🏥", title: "Healthcare & Access", meta: "Active Thesis · 2023–Present", type: "thesis",
-      keyQ: "How do you deliver quality healthcare to people who can't access or afford it?",
-      work: "Invested in Dot Glasses (affordable eyecare for 1B+ people in Kenya) and facilitated cross-border investment into a Vietnamese healthcare platform.",
-      learned: "Focus on access, not luxury healthcare. Affordable diagnostics, last-mile distribution, and telemedicine designed for low-bandwidth environments are where the impact and returns converge.",
-      tags: ["Healthcare", "Access", "Frontier Markets"],
-    },
-    {
-      icon: "🛡️", title: "Insurtech", meta: "Active Thesis · 2023–Present", type: "thesis",
-      keyQ: "Can behavioural data and parametric triggers price risk that legacy actuarial tables can't see?",
-      work: "Invested in a parametric insurance platform offering real-time, usage-based coverage for 50M+ freelancers and gig workers chronically underserved by traditional carriers.",
-      learned: "The best insurtech companies aren't distribution plays — they're fundamentally re-underwriting risk using real-time data, especially for the gig economy.",
-      tags: ["Insurtech", "Parametric", "Gig Economy"],
-    },
-    {
-      icon: "📱", title: "Media Tech", meta: "Active Thesis · 2022–Present", type: "thesis",
-      keyQ: "Can technology make quality local journalism economically viable again?",
-      work: "Facilitated Google News Initiative's investment into Indian media tech — helped build revenue tools for regional language publishers.",
-      learned: "Local and regional news media is critical infrastructure. Tech-enabled business models can save journalism — but only if you solve distribution and monetisation together.",
-      tags: ["Media", "Journalism", "Google News"],
-    },
-    {
-      icon: "⚡", title: "Energy Transition", meta: "Active Thesis · 2023–Present", type: "thesis",
-      keyQ: "Where are the defensible, long-lived businesses in the energy transition infrastructure layer?",
-      work: "Early-stage investment in battery tech developing second-life EV battery systems for stationary grid storage. Wrote investment memo on energy storage as the grid bottleneck.",
-      learned: "The infrastructure layer — storage, grid modernisation, and distributed energy — is where the most defensible businesses with long asset lives are being built.",
-      tags: ["Energy", "Storage", "Infrastructure"],
+      num: "05",
+      title: "Operating Experience Changes How You Invest",
+      summary: "You underwrite differently once you've built something yourself.",
+      detail: "Working at Wysa — an AI mental health startup — changed how I evaluate founders. I've sat in the chair: building GTM from scratch, training customers, arguing about org design at 11pm. That experience made me a fundamentally better investor because I stopped asking hypothetical questions and started asking operational ones. 'How will you hire your first 10 salespeople?' beats 'What's your go-to-market strategy?' every time.",
     },
   ],
 };
 
-// ── SECTORS (used on learning page for deal cards + thesis) ──
-const SECTORS = [
-  {
-    id: "climate", icon: "🌱", name: "Climate & Clean Energy",
-    cssClass: "sector-climate", iconBg: "#e8f5ed",
-    desc: "The defining challenge and the defining investment opportunity of our generation. I'm drawn to solutions that make clean choices the economical ones.",
-    investments: 2, articles: 3,
-    detail: "Climate tech isn't charity — it's the biggest market transition of the century. I focus on companies that collapse the 'green premium' through technology and business model innovation.",
-    investmentList: [
-      { name: "Solar Microgrids (SE Asia)", desc: "Backed an off-grid solar company bringing reliable, affordable power to rural Southeast Asia — displacing diesel and enabling the next layer of economic activity." },
-      { name: "Carbon Markets Infrastructure", desc: "Advised on a tech platform standardizing voluntary carbon credit verification, addressing the trust deficit in climate finance." },
-    ],
-    articleList: [
-      "Why Climate Tech is the New Software Opportunity",
-      "The Green Premium Playbook for Investors",
-      "Carbon Markets: From Controversy to Credibility",
-    ],
+// ── FIELD NOTES ──────────────────────────────────────────
+// Replaces the old LEARNING tabbed structure
+const FIELD_NOTES = {
+  hero: {
+    label: "Field Notes",
+    title: "Every Deal Is a <em>Lesson</em>. Every Lesson Is a <em>Compass</em>.",
+    subtitle: "I carry a growth mindset into every room I enter. I ask myself daily: <em>what did I learn today, and how do I learn more tomorrow?</em> Articles, podcasts, classrooms — they all feed the fire. But the deepest learning happens in the field: in deal rooms, founder conversations, and the messy, humbling work of deploying capital where it matters.",
   },
-  {
-    id: "fintech", icon: "💳", name: "Fintech & Financial Inclusion",
-    cssClass: "sector-fintech", iconBg: "#ddeef7",
-    desc: "1.4 billion adults remain unbanked. Technology is the fastest route to financial dignity — and there's enormous value in solving access.",
-    investments: 2, articles: 2,
-    detail: "My thesis: the best fintech companies in emerging markets don't compete with banks — they route around them entirely, leveraging mobile penetration, agent networks, and data.",
-    investmentList: [
-      { name: "Financial Inclusion Platform — India", desc: "Invested in a last-mile lending product using alternative data scoring to extend credit to India's self-employed rural workforce." },
-      { name: "Singapore Payments Infra", desc: "Supported a B2B payments infrastructure company solving FX friction for SMEs operating cross-border in Southeast Asia." },
-    ],
-    articleList: [
-      "How Mobile-First Finance Is Rewiring Emerging Markets",
-      "Beyond Microfinance: The Next Wave of Inclusion Tech",
-    ],
-  },
-  {
-    id: "energy", icon: "⚡", name: "Energy Transition",
-    cssClass: "sector-energy", iconBg: "#fdf0d9",
-    desc: "Energy is everything — it powers economies, determines geopolitics, and sets the pace of human development. The transition is where capital meets civilization.",
-    investments: 1, articles: 2,
-    detail: "I focus on the infrastructure layer of the energy transition — storage, grid modernization, and distributed energy — where defensible businesses with long asset lives are being built.",
-    investmentList: [
-      { name: "Energy Storage Startup", desc: "Early-stage investment in a battery technology company developing second-life EV battery systems for stationary grid storage." },
-    ],
-    articleList: [
-      "Why Energy Storage Is the Bottleneck of the Green Grid",
-      "The Geopolitics of Clean Energy Minerals",
-    ],
-  },
-  {
-    id: "insurance", icon: "🛡️", name: "Insurtech",
-    cssClass: "sector-insurance", iconBg: "#ede8f8",
-    desc: "Insurance is one of the most data-rich, relationship-driven industries in the world — and one of the least innovated.",
-    investments: 1, articles: 1,
-    detail: "The best insurtech companies are not just distribution plays — they're using behavioral data and parametric triggers to price risk that legacy actuarial tables can't see.",
-    investmentList: [
-      { name: "Gig Economy Insurtech — US", desc: "Invested in a parametric insurance platform offering real-time, usage-based coverage for freelancers and gig workers — a 50M+ person market chronically underserved by traditional carriers." },
-    ],
-    articleList: [
-      "Parametric Insurance: Why the Future of Coverage is Event-Triggered",
-    ],
-  },
-  {
-    id: "healthcare", icon: "🏥", name: "Healthcare & Access",
-    cssClass: "sector-healthcare", iconBg: "#fde8e3",
-    desc: "Healthcare is deeply personal. I invest in companies that believe everyone, regardless of where they're born, deserves quality care.",
-    investments: 2, articles: 2,
-    detail: "My focus is on access, not luxury healthcare — affordable diagnostics, last-mile distribution of medical products, and telemedicine designed for low-bandwidth environments.",
-    investmentList: [
-      { name: "Dot Glasses — Kenya", desc: "Foldable, affordable reading glasses for the 1B+ people in the developing world who need corrective lenses but can't access or afford them." },
-      { name: "Vietnam Healthcare Enterprise", desc: "Facilitated cross-border investment into a Vietnamese healthcare platform scaling primary care infrastructure outside major cities." },
-    ],
-    articleList: [
-      "Affordable Eyecare: A Billion-Person Problem Worth Solving",
-      "Healthcare Investment in Frontier Markets: Lessons from SE Asia",
-    ],
-  },
-  {
-    id: "media", icon: "📱", name: "Media Tech",
-    cssClass: "sector-media", iconBg: "#daf2f5",
-    desc: "Information shapes markets, politics, and culture. I believe in funding the infrastructure for quality journalism.",
-    investments: 1, articles: 1,
-    detail: "Working with the Google News Initiative deepened my conviction: local and regional news media is a critical infrastructure problem — and tech-enabled business models can make quality journalism economically viable.",
-    investmentList: [
-      { name: "Indian Media Tech Platform", desc: "Facilitated the Google News Initiative's investment into an Indian media technology company building revenue-generation tools for regional language publishers." },
-    ],
-    articleList: [
-      "Can Technology Save Local Journalism?",
-    ],
-  },
-];
 
-// ── ABOUT PAGE DATA ──────────────────────────────────────
-const ABOUT = {
-  name: "Roopal",
-  tagline: "VC · PE · MBA — Betting on people and ideas across the globe",
-  bio: "I'm a lifelong learner who's curious about everything — from vibe coding to sales strategies, from luxury brand moats to solar microgrids. I work in venture capital and private equity because I love betting on people and creating value in companies. I'm doing my MBA and becoming an expert in finance, which pulls me toward PE. Every day is a chance to learn something new: I read the FT every morning, do case studies monthly, write articles, and take every class I can find. The through-line is curiosity — it's what drives me to invest, to learn, and to connect with people building things that matter.",
-  photo: null, // Add your photo path here: "assets/roopal.jpg"
-  networks: [
-    { name: "CAFIID", desc: "Canadian Association for International Development", photo: null, url: null },
-    { name: "CDL", desc: "Creative Destruction Lab — U of T Rotman", photo: null, url: null },
-    { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", photo: null, url: null },
+  fromTheField: [
+    {
+      icon: "🧭",
+      title: "Sectors I Love — And Why",
+      summary: "From climate to fintech to healthcare access — the problems that keep me up at night and the investment theses I've built around them.",
+      detail: `<p>I don't pick sectors because they're trendy. I follow problems that matter — and build conviction through first-hand deal work.</p>
+<p><strong>Climate & Clean Energy:</strong> The biggest market transition of the century. I focus on companies that collapse the 'green premium' — making the clean option the cheap option. I've backed solar microgrids in SE Asia, advised on carbon markets infrastructure, and built a 12-sub-sector scoring model ranking climate investments by green premium gap.</p>
+<p><strong>Fintech & Financial Inclusion:</strong> 1.4 billion adults remain unbanked. The best fintech companies in emerging markets don't compete with banks — they route around them entirely. I've invested in last-mile lending in India and supported cross-border payments infrastructure in Singapore.</p>
+<p><strong>Healthcare & Access:</strong> I invest in access, not luxury healthcare. Affordable diagnostics, last-mile distribution, and telemedicine designed for low-bandwidth environments. From Dot Glasses in Kenya (affordable eyecare for 1B+ people) to scaling primary care in Vietnam.</p>
+<p><strong>Insurtech:</strong> Real-time data and parametric triggers are re-underwriting risk that legacy actuarial tables can't see — especially for the 50M+ underserved gig economy workers.</p>
+<p><strong>Media Tech:</strong> Local journalism is critical infrastructure. I worked with Google News Initiative to channel capital into media tech companies building sustainable revenue models for regional publishers.</p>`,
+      tags: ["Climate", "Fintech", "Healthcare", "Insurtech", "Media Tech"],
+    },
+    {
+      icon: "📐",
+      title: "My Company Investment Framework",
+      summary: "How I evaluate companies — the lens I've built from pattern recognition across 30+ deals and multiple mandates.",
+      detail: `<p>Every investor has a framework. Mine has been rewritten three times — each version forged by mistakes, surprises, and hard-won conviction. Here's what I look for:</p>
+<p><strong>1. Founder-Market Fit:</strong> Not just 'does this person understand the market?' but 'is this person <em>unreasonably</em> well-positioned to win here?' The best founders have an unfair insight — something that's true but not yet widely believed.</p>
+<p><strong>2. Problem Severity:</strong> I rank problems by urgency and willingness to pay. A nice-to-have in a large market loses to a must-have in a niche one. I look for markets where the pain is so acute that customers are already building workarounds.</p>
+<p><strong>3. Business Model Durability:</strong> Revenue is table stakes. I want to understand unit economics trajectory, switching costs, and whether the company gets structurally better as it scales. Does data compound? Do network effects kick in?</p>
+<p><strong>4. Capital Efficiency:</strong> Especially in emerging markets, the ability to do more with less is the real competitive moat. I look for companies that have found creative ways to reduce burn without sacrificing growth velocity.</p>
+<p><strong>5. Exit Pathway Clarity:</strong> I underwrite to exit. Who are the natural acquirers? What does the IPO path look like? Is there a clear value inflection point within the fund timeline?</p>`,
+      tags: ["Framework", "Due Diligence", "Valuation", "Pattern Recognition"],
+    },
+    {
+      icon: "🏗️",
+      title: "First Principles in VC & PE",
+      summary: "The foundational beliefs that guide how I think about deploying capital — from power law dynamics to value creation levers.",
+      detail: `<p>Venture capital and private equity are different games with different rules — but they share first principles that I carry across both.</p>
+<p><strong>In VC — The Power Law Is Everything:</strong> Portfolio construction matters more than individual deal selection. One investment will return the fund; the rest provide optionality and learning. This means conviction sizing is critical, and the cost of missing a great deal always exceeds the cost of backing a bad one.</p>
+<p><strong>In PE — Value Creation Is the Product:</strong> Entry multiples are the price of admission. The real returns come from operational improvement, revenue acceleration, and strategic repositioning. I've modelled LBOs where the difference between a 2x and 4x return came entirely from post-acquisition execution.</p>
+<p><strong>Across Both — Information Asymmetry Is the Edge:</strong> The investors who consistently outperform are the ones with proprietary deal flow, deeper sector expertise, or founder relationships that generate differentiated access. I build this edge through networks, sector specialization, and being the kind of investor founders want in the room.</p>
+<p><strong>Across Both — Timing Is Underrated:</strong> Market cycles, technology adoption curves, and regulatory windows create asymmetric entry points. I've learned to layer macro timing into every deal thesis — not as a prediction, but as a scenario.</p>`,
+      tags: ["VC", "PE", "Power Law", "Value Creation", "First Principles"],
+    },
   ],
-  companies: [
-    { name: "University of Toronto", logo: "assets/logos/uoft.png", url: null },
-    { name: "Dalberg", logo: "assets/logos/dalberg.png", url: null },
-    { name: "Wysa", logo: "assets/logos/wysa.png", url: null },
-    { name: "KOIS", logo: "assets/logos/kois.png", url: null },
-    { name: "BDC Capital", logo: "assets/logos/bdc.png", url: null },
+
+  fromTheClassroom: [
+    {
+      icon: "📜",
+      title: "CFA & PE Certification",
+      whatILearned: "First principles of valuation, active ownership, and financial rigour",
+      details: "Completed CFA Level I & II and PE certification, building deep fluency in DCF modelling, comparable analysis, LBO structuring, and portfolio theory. These aren't just credentials — they're the analytical foundation I bring to every deal memo and IC presentation.",
+      tags: ["CFA", "PE", "Valuation", "Financial Analysis"],
+    },
+    {
+      icon: "📚",
+      title: "MBA Case Studies — Favourite Picks",
+      whatILearned: "Value creation levers, brand moats, and market entry strategy",
+      details: "LVMH × Tiffany taught me that luxury M&A is about acquiring customer relationships, not just brands. Louis Vuitton's vertical integration showed me how moats are built over decades. M-Pesa vs. Nubank revealed that the best fintech companies design for the unbanked from scratch. Renewable energy transition cases convinced me that climate is the largest capital reallocation event in history.",
+      tags: ["LVMH", "Fintech", "Energy Transition", "Strategy"],
+    },
+    {
+      icon: "🎓",
+      title: "MBA Classes — Rotman School of Management",
+      whatILearned: "Financial modelling, strategic thinking, and emerging market dynamics",
+      details: "Corporate Finance & M&A gave me the toolkit for structuring deals and advising founders on exit paths. Emerging Markets Finance taught me that currency risk and political risk aren't obstacles — they are the investment thesis. Entrepreneurial Strategy taught me the 'test two, choose one' framework that changed how I evaluate founder decisions. Every class reinforced one thing: the best investors combine quantitative rigour with qualitative judgement.",
+      tags: ["Corporate Finance", "M&A", "Emerging Markets", "Strategy"],
+    },
   ],
-  links: {
-    linkedin: "https://linkedin.com", // Replace with real URL
+
+  fromPeople: [
+    {
+      name: "Financial Times",
+      type: "Daily Newspaper",
+      icon: "📰",
+      why: "Trains you to see macro forces hiding in micro stories — the most valuable 30 minutes of my day.",
+    },
+    {
+      name: "The Economist",
+      type: "Weekly Analysis",
+      icon: "🌍",
+      why: "Forces second-order thinking on AI, deglobalisation, and sovereign capital flows.",
+    },
+    {
+      name: "Stratechery by Ben Thompson",
+      type: "Newsletter",
+      icon: "💡",
+      why: "The clearest thinker on tech strategy, aggregation theory, and platform economics.",
+    },
+    {
+      name: "The Generalist by Mario Gabriele",
+      type: "Substack",
+      icon: "📊",
+      why: "Deep-dive company profiles that read like investment memos — exactly how I want to think about businesses.",
+    },
+    {
+      name: "Acquired Podcast",
+      type: "Podcast",
+      icon: "🎙️",
+      why: "Long-form storytelling about how the world's best companies were built — history as a framework for investing.",
+    },
+  ],
+};
+
+// ── INVESTOR / LEARNER (About Page) ─────────────────────
+const INVESTOR_LEARNER = {
+  hero: {
+    bio: "Investor. Traveller. Perpetual student. I'm currently with <strong>BDC Capital</strong>, deploying capital into Canada's most promising ventures and growth-stage companies. I hold an <strong>MBA from Rotman</strong> specializing in finance, and I've built my career at the intersection of curiosity and capital. I care deeply about climate solutions and women's economic empowerment — not as side interests, but as investment theses.",
+    photo: null, // Add your photo: "assets/roopal.jpg"
+  },
+
+  timeline: [
+    {
+      era: "Undergrad",
+      years: "2014–2018",
+      title: "Editorial Columns & the Power of Writing",
+      detail: "Led editorial columns that sharpened clarity of thought and economy of language. Didn't know it then, but this became a superpower — every investment memo I write today traces back to learning how to make complex ideas simple and persuasive.",
+      icon: "✍️",
+    },
+    {
+      era: "Dalberg",
+      years: "2018–2020",
+      title: "Global Consulting & High-Stakes Rooms",
+      detail: "Joined one of the world's leading development consulting firms and traveled the globe. Sat in rooms with Google, the US Embassy, and government ministers. Learned to hold a room together, synthesise competing stakeholder interests, and build networks that span continents. This is where curiosity became global.",
+      icon: "🌏",
+    },
+    {
+      era: "KOIS",
+      years: "2020–2021",
+      title: "First Principles of Early Stage Investing",
+      detail: "My first real exposure to venture investing. Learned deal sourcing, due diligence, and the art of backing founders when all you have is conviction and a thesis. Fell in love with the craft of turning capital into catalysts.",
+      icon: "🌱",
+    },
+    {
+      era: "Wysa",
+      years: "2021–2022",
+      title: "Operating Inside a Global AI Startup",
+      detail: "Joined a Bangalore-based AI mental health startup to get my hands dirty. Built GTM strategy from scratch, ran on-ground customer training, and worked directly with the founder on organisational design. Loved the intensity — but the hunger to evaluate new problems every few months pulled me back toward investing.",
+      icon: "🚀",
+    },
+    {
+      era: "Rotman MBA",
+      years: "2022–2024",
+      title: "CDL, First Principles & Financial Modelling",
+      detail: "Dove into financial modelling, worked with deep-tech startups through the Creative Destruction Lab, and built investment frameworks from first principles. Every class, case study, and IC presentation reinforced one thing: the best investors combine quantitative rigour with qualitative judgement.",
+      icon: "🎓",
+    },
+    {
+      era: "BDC Capital",
+      years: "2024–Present",
+      title: "Venture Capital & PE Acquisitions",
+      detail: "Currently deploying capital across the Canadian venture and growth equity landscape. Every week brings a new sector, a new founder, a new problem to solve. This is exactly where I want to be — at the frontier of capital and curiosity.",
+      icon: "💼",
+    },
+  ],
+
+  communities: {
+    photo: null, // Add a community/networking photo: "assets/community.jpg"
+    list: [
+      { name: "University of Toronto", desc: "Alumni network — Rotman School of Management", url: null },
+      { name: "Creative Destruction Lab (CDL)", desc: "Deep-tech startup accelerator — mentor & affiliate", url: null },
+      { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", url: null },
+      { name: "CAFIID", desc: "Canadian Association for International Development", url: null },
+      { name: "CWVC", desc: "Canadian Women in Venture Capital", url: null },
+      { name: "CFA Institute", desc: "Charterholder candidate — global finance community", url: null },
+      { name: "Personal Network", desc: "Founders, investors, and operators across 10+ countries", url: null },
+    ],
+  },
+
+  contact: {
+    message: "I love connecting with people who are building, investing, or simply curious. If anything on this site resonated — or if you just want to talk startups over coffee — I'd love to hear from you.",
     email: "mailto:roopaldahiya5@gmail.com",
     calendly: "https://calendly.com", // Replace with real URL
-    cv: null, // Add CV file path: "assets/Roopal_CV.pdf"
+    linkedin: "https://linkedin.com",  // Replace with real URL
   },
-  happyToMeet: [
-    "Founders building in my sectors",
-    "People looking for mentorship",
-    "Anyone who wants to talk startups",
-  ],
-  funQuestions: [
-    {
-      question: "What's your favourite part about VC?",
-      answer: "IC presentations! It's like game day for me — everything leads to that moment. If you've done your work well, it's the most enjoyable part. The push-back on your thinking from people with experience, that interplay of details and perspective... there's nothing like it.",
-      image: null, // Add photo: "assets/faq-vc.jpg"
-    },
-    {
-      question: "What do you read first thing in the morning?",
-      answer: "The Financial Times. Every single day. It trains you to see macro forces hiding in micro stories — and it's the most valuable 30 minutes of my day.",
-      image: null, // Add photo: "assets/faq-reading.jpg"
-    },
-    {
-      question: "What's the best investment lesson you've learned?",
-      answer: "Bet on the jockey, not the horse. Markets shift, products pivot, but exceptional founders adapt. The pattern across every successful deal I've touched: an unstoppable person who simply would not quit.",
-      image: null, // Add photo: "assets/faq-lesson.jpg"
-    },
-  ],
 };

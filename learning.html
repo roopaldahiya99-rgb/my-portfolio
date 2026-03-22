@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Learning | Roopal</title>
+  <title>Field Notes | Roopal</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body data-page="learning">
+<body data-page="fieldnotes">
 
   <!-- ─── NAV ─────────────────────────────────────────────── -->
   <nav id="navbar" class="scrolled">
@@ -24,9 +24,9 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">World</a></li>
-        <li><a href="learning.html" class="active">Learning</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="index.html">Investment Passport</a></li>
+        <li><a href="learning.html" class="active">Field Notes</a></li>
+        <li><a href="about.html">Investor / Learner</a></li>
         <li><a href="mailto:roopaldahiya5@gmail.com" class="nav-cta nav-cta-email">Email Me</a></li>
         <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="nav-cta nav-cta-linkedin">LinkedIn</a></li>
       </ul>
@@ -34,28 +34,51 @@
   </nav>
 
   <!-- ─── PAGE HERO ──────────────────────────────────────── -->
-  <section class="page-hero">
-    <div class="page-hero-inner">
-      <p class="section-label">Intellectual Curiosity</p>
-      <h1 class="page-hero-title">I Love <em>Learning</em> — Best by <em>Doing</em></h1>
-      <p class="page-hero-sub">
-        Articles, podcasts, classes — I devour them all. But I learn best when I'm in the arena:
-        writing memos, building models, backing founders, and testing theses with real capital.
-      </p>
+  <section class="page-hero field-notes-hero">
+    <div class="page-hero-inner" id="fieldNotesHero">
+      <!-- filled by JS with rich growth-mindset language -->
     </div>
   </section>
 
-  <!-- ─── LEARNING TABS ──────────────────────────────────── -->
-  <section id="learned" class="section">
-    <div class="tabs reveal" id="learnTabs">
-      <button class="tab active" data-tab="thesis">Sector Thesis</button>
-      <button class="tab" data-tab="classes">Courses</button>
-      <button class="tab" data-tab="cases">Fav Case Studies</button>
-      <button class="tab" data-tab="reading">Reading / Podcast</button>
+  <!-- ─── LEARNING FROM THE FIELD ────────────────────────── -->
+  <section id="from-field" class="section">
+    <div class="section-header reveal">
+      <p class="section-label">Learning from the Field</p>
+      <h2>Lessons from <em>Real Deals</em></h2>
+      <p class="section-desc">
+        The convictions I've built from pattern recognition across 30+ investments — not theory, but lived experience.
+      </p>
     </div>
+    <div class="field-articles reveal" id="fieldArticles">
+      <!-- filled by JS: 3 expandable articles -->
+    </div>
+  </section>
 
-    <div class="tab-content" id="learnContent">
-      <!-- filled by JS -->
+  <!-- ─── LEARNING FROM THE CLASSROOM ────────────────────── -->
+  <section id="from-classroom" class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">Learning from the Classroom</p>
+      <h2>Formal <em>Learning</em></h2>
+      <p class="section-desc">
+        Certifications, case studies, and MBA coursework — the structured foundation underneath the field experience.
+      </p>
+    </div>
+    <div class="classroom-cards reveal" id="classroomCards">
+      <!-- filled by JS: 3 cards -->
+    </div>
+  </section>
+
+  <!-- ─── LEARNING FROM PEOPLE & PERSPECTIVES ────────────── -->
+  <section id="from-people" class="section">
+    <div class="section-header reveal">
+      <p class="section-label">Learning from People &amp; Perspectives</p>
+      <h2>Sources I <em>Trust</em></h2>
+      <p class="section-desc">
+        The writers, thinkers, and publications that shape how I see markets, companies, and the world.
+      </p>
+    </div>
+    <div class="people-sources reveal" id="peopleSources">
+      <!-- filled by JS: 5 source items -->
     </div>
   </section>
 

@@ -1,6 +1,8 @@
 /* ─────────────────────────────────────────────────────────
-   MAIN.JS — Multi-page Portfolio
-   Home: Map + Passport | Learning: Tabs + Sectors | About
+   MAIN.JS — Full Redesign
+   Home: Deal Map + Spotlight + Lessons
+   Field Notes: 3 stacked learning sections
+   Investor/Learner: Bio + Timeline + Communities + Contact
 ───────────────────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,15 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (page === 'home') {
     initMap();
     initStatCounters();
-    initPassportGrid();
+    initDealSpotlight();
+    initLessons();
   }
 
-  if (page === 'learning') {
-    initLearning();
+  if (page === 'fieldnotes') {
+    initFieldNotes();
   }
 
-  if (page === 'about') {
-    initAbout();
+  if (page === 'investor-learner') {
+    initInvestorLearner();
   }
 });
 
@@ -86,7 +89,7 @@ function initReveal() {
 }
 
 /* ════════════════════════════════════════════════════════
-   MAP
+   MAP — Deal Map with investor→destination connections
 ════════════════════════════════════════════════════════ */
 function initMap() {
   const map = L.map('map', {
@@ -104,404 +107,359 @@ function initMap() {
     maxZoom: 19,
   }).addTo(map);
 
-  drawConnections(map);
-  MAP_PINS.forEach(pin => addPin(map, pin));
-}
+  // Draw connection lines from investors to destinations
+  const investorMap = {};
+  DEAL_MAP.investors.forEach(inv => { investorMap[inv.id] = inv; });
 
-function addPin(map, pin) {
-  const colorClass = { invest: 'pin-invest', support: 'pin-support', network: 'pin-network' }[pin.type] || 'pin-invest';
+  // Color palette for connection lines
+  const lineColors = ['#5aa674', '#3d8bb5', '#d4932a', '#7c5cbf', '#2e9aa8', '#e8674d'];
 
-  const icon = L.divIcon({
+  DEAL_MAP.destinations.forEach((dest, di) => {
+    dest.fromInvestors.forEach(invId => {
+      const inv = investorMap[invId];
+      if (!inv) return;
+      L.polyline([[inv.lat, inv.lng], [dest.lat, dest.lng]], {
+        color: lineColors[di % lineColors.length],
+        weight: 1.5,
+        opacity: 0.3,
+        dashArray: '6 6',
+      }).addTo(map);
+    });
+  });
+
+  // Investor origin pins (small, muted)
+  const renderedInvestors = new Set();
+  DEAL_MAP.investors.forEach(inv => {
+    const key = `${inv.lat}-${inv.lng}`;
+    if (renderedInvestors.has(key)) return;
+    renderedInvestors.add(key);
+
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="pin-marker pin-origin" title="${inv.city}"></div>`,
+      iconSize: [10, 10],
+      iconAnchor: [5, 5],
+    });
+    const marker = L.marker([inv.lat, inv.lng], { icon }).addTo(map);
+    marker.bindTooltip(inv.city, { direction: 'top', offset: [0, -8], className: 'origin-tooltip' });
+  });
+
+  // Destination pins (colored, with deal spotlight popup)
+  DEAL_MAP.destinations.forEach(dest => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="pin-marker pin-invest" title="${dest.country}"></div>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      popupAnchor: [0, -14],
+    });
+
+    const marker = L.marker([dest.lat, dest.lng], { icon }).addTo(map);
+
+    const stagesHtml = dest.stages.map(s => `<span class="popup-stage">${s}</span>`).join(' ');
+    const sectorsHtml = dest.sectors.map(s => `<span class="popup-sector">${s}</span>`).join(' ');
+
+    marker.bindPopup(`
+      <div class="pin-popup deal-popup">
+        <img class="popup-flag-img" src="https://flagcdn.com/w40/${dest.code}.png" alt="${dest.country} flag" />
+        <div class="popup-deal-label">Deal Spotlight</div>
+        <h4>${dest.country}</h4>
+        <p class="popup-spotlight">${dest.spotlight}</p>
+        <div class="popup-tags">
+          ${stagesHtml}
+          ${sectorsHtml}
+        </div>
+      </div>
+    `, { maxWidth: 280 });
+
+    // Show popup on hover (desktop)
+    marker.on('mouseover', function() { this.openPopup(); });
+  });
+
+  // Operational star (Bangalore)
+  const star = DEAL_MAP.operationalStar;
+  const starIcon = L.divIcon({
     className: '',
-    html: `<div class="pin-marker ${colorClass}" title="${pin.country}"></div>`,
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
+    html: `<div class="pin-marker pin-star" title="${star.city}">★</div>`,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
     popupAnchor: [0, -14],
   });
 
-  const marker = L.marker([pin.lat, pin.lng], { icon }).addTo(map);
-  const tagsHtml = pin.sectors.map(s => `<span class="popup-sector">${s}</span>`).join(' ');
-
-  marker.bindPopup(`
+  const starMarker = L.marker([star.lat, star.lng], { icon: starIcon }).addTo(map);
+  starMarker.bindPopup(`
     <div class="pin-popup">
-      <img class="popup-flag-img" src="https://flagcdn.com/w40/${pin.code}.png" alt="${pin.country} flag" />
-      <h4>${pin.country} — ${pin.company}</h4>
-      <p class="popup-role">${pin.role}</p>
-      <p style="font-size:0.82rem;color:#4a4a60;line-height:1.6;margin-bottom:10px;">${pin.description}</p>
-      ${tagsHtml}
+      <img class="popup-flag-img" src="https://flagcdn.com/w40/${star.code}.png" alt="India flag" />
+      <div class="popup-deal-label">Operational Experience</div>
+      <h4>${star.city}, ${star.country}</h4>
+      <p style="font-size:0.82rem;color:#4a4a60;line-height:1.6;">${star.detail}</p>
     </div>
-  `, { maxWidth: 260 });
+  `, { maxWidth: 280 });
+  starMarker.on('mouseover', function() { this.openPopup(); });
 }
 
-function drawConnections(map) {
-  const auPin = MAP_PINS.find(p => p.country === 'Australia');
-  const vnPin = MAP_PINS.find(p => p.country === 'Vietnam');
-  if (auPin && vnPin) {
-    L.polyline([[auPin.lat, auPin.lng], [vnPin.lat, vnPin.lng]], {
-      color: '#5aa674', weight: 1.5, opacity: 0.45, dashArray: '6 6',
-    }).addTo(map);
+/* ════════════════════════════════════════════════════════
+   DEAL SPOTLIGHT (2 featured deals)
+════════════════════════════════════════════════════════ */
+function initDealSpotlight() {
+  const container = document.getElementById('dealCards');
+  if (!container) return;
+
+  container.innerHTML = DEAL_SPOTLIGHT.map((deal, i) => `
+    <div class="deal-card" style="transition-delay:${i * 100}ms">
+      <div class="deal-card-top">
+        <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="${deal.region} flag" />
+        <span class="deal-stage-tag">${deal.stage}</span>
+      </div>
+      <h3 class="deal-title">${deal.title}</h3>
+      <p class="deal-role">${deal.role}</p>
+      <p class="deal-desc">${deal.description}</p>
+      <div class="deal-insight">
+        <strong>Key Insight:</strong> ${deal.keyInsight}
+      </div>
+      <div class="deal-tags">
+        ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  observeCards(container.querySelectorAll('.deal-card'));
+}
+
+/* ════════════════════════════════════════════════════════
+   LESSONS LEARNED (5 expandable lessons)
+════════════════════════════════════════════════════════ */
+function initLessons() {
+  const introEl = document.getElementById('lessonsIntro');
+  const listEl = document.getElementById('lessonsList');
+  if (!listEl) return;
+
+  if (introEl) {
+    introEl.innerHTML = `<p class="lessons-intro-text">${LESSONS_LEARNED.intro}</p>`;
   }
 
-  const usPin = MAP_PINS.find(p => p.country === 'United States');
-  const inPin = MAP_PINS.find(p => p.country === 'India');
-  if (usPin && inPin) {
-    L.polyline([[usPin.lat, usPin.lng], [inPin.lat, inPin.lng]], {
-      color: '#3d8bb5', weight: 1.5, opacity: 0.35, dashArray: '6 6',
-    }).addTo(map);
-  }
-}
-
-/* ════════════════════════════════════════════════════════
-   PASSPORT GRID (flat 2-row layout)
-════════════════════════════════════════════════════════ */
-function initPassportGrid() {
-  const grid = document.getElementById('passportGrid');
-  if (!grid) return;
-
-  PASSPORT_COUNTRIES.forEach((c, i) => {
-    const card = document.createElement('div');
-    card.className = 'passport-card';
-    card.style.transitionDelay = `${i * 80}ms`;
-
-    const sectorsHtml = c.sectors.map(s =>
-      `<a href="${s.link}" class="passport-sector-link">${s.name}</a>`
-    ).join('');
-
-    card.innerHTML = `
-      <img class="passport-flag" src="${c.flag}" alt="${c.region} flag" />
-      <div class="passport-region">${c.region}</div>
-      <div class="passport-stamp">${c.stamp}</div>
-      <div class="passport-sector-links">${sectorsHtml}</div>
-    `;
-
-    grid.appendChild(card);
-  });
-
-  observeCards(grid.querySelectorAll('.passport-card'));
-}
-
-/* ════════════════════════════════════════════════════════
-   LEARNING TABS
-════════════════════════════════════════════════════════ */
-let currentTab = 'thesis';
-
-function initLearning() {
-  const tabBtns = document.querySelectorAll('.tab');
-  const content = document.getElementById('learnContent');
-  if (!content) return;
-
-  renderLearnTab(currentTab);
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentTab = btn.dataset.tab;
-      content.style.opacity = '0';
-      content.style.transform = 'translateY(12px)';
-      setTimeout(() => {
-        renderLearnTab(currentTab);
-        content.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-        content.style.opacity = '1';
-        content.style.transform = 'translateY(0)';
-      }, 180);
-    });
-  });
-}
-
-function renderLearnTab(tabKey) {
-  const content = document.getElementById('learnContent');
-  const dataMap = { classes: LEARNING.classes, cases: LEARNING.cases, reading: LEARNING.reading, thesis: LEARNING.thesis };
-  const items = dataMap[tabKey] || [];
-  const typeMap = { classes: 'class', cases: 'case', reading: 'read', thesis: 'thesis' };
-  const type = typeMap[tabKey];
-
-  content.innerHTML = `<div class="learn-grid">${
-    items.map((item, i) => {
-      // Thesis cards use keyQ/work/learned and are expandable
-      if (type === 'thesis') {
-        return `
-          <div class="learn-card type-${type} expandable" style="transition-delay:${i*70}ms" onclick="this.classList.toggle('expanded')">
-            <div class="learn-card-header">
-              <div class="learn-icon">${item.icon}</div>
-              <div>
-                <div class="learn-title">${item.title}</div>
-                <div class="learn-meta">${item.meta}</div>
-              </div>
-              <div class="expand-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
-              </div>
-            </div>
-            <div class="learn-expandable">
-              <div class="learn-detail-row">
-                <strong>Key Question:</strong> ${item.keyQ}
-              </div>
-              <div class="learn-detail-row">
-                <strong>What I did:</strong> ${item.work}
-              </div>
-              <div class="learn-detail-row">
-                <strong>What I learned:</strong> ${item.learned}
-              </div>
-              <div class="learn-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-            </div>
-          </div>
-        `;
-      }
-      // Other tabs keep the existing layout
-      return `
-        <div class="learn-card type-${type}" style="transition-delay:${i*70}ms">
-          <div class="learn-icon">${item.icon}</div>
-          <div class="learn-title">${item.title}</div>
-          <div class="learn-meta">${item.meta}</div>
-          <div class="learn-takeaway">${item.takeaway}</div>
-          ${item.work ? `<div class="learn-work"><strong>What I did:</strong> ${item.work}</div>` : ''}
-          <div class="learn-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+  listEl.innerHTML = LESSONS_LEARNED.lessons.map((lesson, i) => `
+    <div class="lesson-item" style="transition-delay:${i * 80}ms" onclick="this.classList.toggle('expanded')">
+      <div class="lesson-header">
+        <span class="lesson-num">${lesson.num}</span>
+        <div class="lesson-header-text">
+          <h3 class="lesson-title">${lesson.title}</h3>
+          <p class="lesson-summary">${lesson.summary}</p>
         </div>
-      `;
-    }).join('')
-  }</div>`;
-
-  observeCards(content.querySelectorAll('.learn-card'));
-}
-
-/* ════════════════════════════════════════════════════════
-   SECTORS
-════════════════════════════════════════════════════════ */
-function initSectors() {
-  const grid = document.getElementById('sectorsGrid');
-  if (!grid) return;
-
-  SECTORS.forEach((s, i) => {
-    const card = document.createElement('div');
-    card.className = `sector-card ${s.cssClass}`;
-    card.dataset.sectorId = s.id;
-    card.id = s.id;
-    card.style.transitionDelay = `${i * 70}ms`;
-
-    card.innerHTML = `
-      <div class="sector-icon" style="background:${s.iconBg}">${s.icon}</div>
-      <div class="sector-name">${s.name}</div>
-      <p class="sector-desc">${s.desc}</p>
-      <div class="sector-meta">
-        <div class="sector-meta-item">
-          <span class="sector-meta-num">${s.investments}</span>
-          <span class="sector-meta-label">Investments</span>
-        </div>
-        <div class="sector-meta-item">
-          <span class="sector-meta-num">${s.articles}</span>
-          <span class="sector-meta-label">Articles</span>
+        <div class="expand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
         </div>
       </div>
-    `;
-
-    card.addEventListener('click', () => openSectorModal(s));
-    grid.appendChild(card);
-  });
-
-  observeCards(grid.querySelectorAll('.sector-card'));
-}
-
-/* ════════════════════════════════════════════════════════
-   SECTOR MODAL
-════════════════════════════════════════════════════════ */
-function initModal() {
-  const modal    = document.getElementById('sectorModal');
-  const backdrop = document.getElementById('modalBackdrop');
-  const closeBtn = document.getElementById('modalClose');
-  if (!modal) return;
-
-  backdrop.addEventListener('click', closeModal);
-  closeBtn.addEventListener('click', closeModal);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-}
-
-function openSectorModal(sector) {
-  const modal   = document.getElementById('sectorModal');
-  const content = document.getElementById('modalContent');
-
-  const investmentsHtml = sector.investmentList.map(inv => `
-    <div class="modal-investment">
-      <div class="modal-inv-name">${inv.name}</div>
-      <div class="modal-inv-desc">${inv.desc}</div>
+      <div class="lesson-detail">
+        <p>${lesson.detail}</p>
+      </div>
     </div>
   `).join('');
 
-  const articlesHtml = sector.articleList.map(a => `
-    <div class="modal-article">${a}</div>
+  observeCards(listEl.querySelectorAll('.lesson-item'));
+}
+
+/* ════════════════════════════════════════════════════════
+   FIELD NOTES PAGE
+════════════════════════════════════════════════════════ */
+function initFieldNotes() {
+  renderFieldHero();
+  renderFieldArticles();
+  renderClassroomCards();
+  renderPeopleSources();
+}
+
+function renderFieldHero() {
+  const heroEl = document.getElementById('fieldNotesHero');
+  if (!heroEl) return;
+
+  heroEl.innerHTML = `
+    <p class="section-label">${FIELD_NOTES.hero.label}</p>
+    <h1 class="page-hero-title">${FIELD_NOTES.hero.title}</h1>
+    <p class="page-hero-sub">${FIELD_NOTES.hero.subtitle}</p>
+  `;
+}
+
+function renderFieldArticles() {
+  const container = document.getElementById('fieldArticles');
+  if (!container) return;
+
+  container.innerHTML = FIELD_NOTES.fromTheField.map((article, i) => `
+    <div class="field-article expandable" style="transition-delay:${i * 100}ms" onclick="this.classList.toggle('expanded')">
+      <div class="field-article-header">
+        <div class="field-article-icon">${article.icon}</div>
+        <div>
+          <h3 class="field-article-title">${article.title}</h3>
+          <p class="field-article-summary">${article.summary}</p>
+        </div>
+        <div class="expand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="field-article-body">
+        <div class="field-article-content">${article.detail}</div>
+        <div class="field-article-tags">
+          ${article.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>
   `).join('');
 
-  content.innerHTML = `
-    <div class="modal-sector-icon">${sector.icon}</div>
-    <div class="modal-sector-title">${sector.name}</div>
-    <div class="modal-sector-desc">${sector.detail}</div>
-    <div class="modal-subtitle">Investments & Deals</div>
-    <div class="modal-investments">${investmentsHtml}</div>
-    <div class="modal-subtitle">Articles & Writing</div>
-    <div class="modal-articles">${articlesHtml}</div>
+  observeCards(container.querySelectorAll('.field-article'));
+}
+
+function renderClassroomCards() {
+  const container = document.getElementById('classroomCards');
+  if (!container) return;
+
+  container.innerHTML = `<div class="classroom-grid">${
+    FIELD_NOTES.fromTheClassroom.map((item, i) => `
+      <div class="classroom-card" style="transition-delay:${i * 100}ms">
+        <div class="classroom-icon">${item.icon}</div>
+        <h3 class="classroom-title">${item.title}</h3>
+        <div class="classroom-learned">
+          <span class="classroom-learned-label">What I Learned</span>
+          <p>${item.whatILearned}</p>
+        </div>
+        <p class="classroom-details">${item.details}</p>
+        <div class="classroom-tags">
+          ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    `).join('')
+  }</div>`;
+
+  observeCards(container.querySelectorAll('.classroom-card'));
+}
+
+function renderPeopleSources() {
+  const container = document.getElementById('peopleSources');
+  if (!container) return;
+
+  container.innerHTML = `<div class="sources-list">${
+    FIELD_NOTES.fromPeople.map((src, i) => `
+      <div class="source-item" style="transition-delay:${i * 80}ms">
+        <div class="source-icon">${src.icon}</div>
+        <div class="source-info">
+          <div class="source-top">
+            <span class="source-name">${src.name}</span>
+            <span class="source-type">${src.type}</span>
+          </div>
+          <p class="source-why">${src.why}</p>
+        </div>
+      </div>
+    `).join('')
+  }</div>`;
+
+  observeCards(container.querySelectorAll('.source-item'));
+}
+
+/* ════════════════════════════════════════════════════════
+   INVESTOR / LEARNER PAGE (About)
+════════════════════════════════════════════════════════ */
+function initInvestorLearner() {
+  renderAboutHero();
+  renderTimeline();
+  renderCommunities();
+  renderContactCta();
+}
+
+function renderAboutHero() {
+  const container = document.getElementById('aboutHero');
+  if (!container) return;
+
+  const photoHtml = INVESTOR_LEARNER.hero.photo
+    ? `<img src="${INVESTOR_LEARNER.hero.photo}" alt="Roopal" />`
+    : `<div class="about-photo-placeholder"><span>R</span></div>`;
+
+  container.innerHTML = `
+    <div class="about-photo-wrap">
+      <div class="about-photo">${photoHtml}</div>
+    </div>
+    <div class="about-intro">
+      <h1 class="about-name"><em>Roopal</em></h1>
+      <p class="about-tagline">Investor · Traveller · Perpetual Student</p>
+      <p class="about-bio">${INVESTOR_LEARNER.hero.bio}</p>
+    </div>
   `;
-
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
-  const modal = document.getElementById('sectorModal');
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
+function renderTimeline() {
+  const container = document.getElementById('timelineWrap');
+  if (!container) return;
+
+  container.innerHTML = INVESTOR_LEARNER.timeline.map((item, i) => `
+    <div class="timeline-item" style="transition-delay:${i * 80}ms" onclick="this.classList.toggle('expanded')">
+      <div class="timeline-dot">${item.icon}</div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <span class="timeline-era">${item.era}</span>
+          <span class="timeline-years">${item.years}</span>
+          <div class="expand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <h3 class="timeline-title">${item.title}</h3>
+        <div class="timeline-detail">
+          <p>${item.detail}</p>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  observeCards(container.querySelectorAll('.timeline-item'));
 }
 
-/* ════════════════════════════════════════════════════════
-   ABOUT PAGE
-════════════════════════════════════════════════════════ */
-function initAbout() {
-  // Bio
-  const bioEl = document.getElementById('aboutBio');
-  if (bioEl && typeof ABOUT !== 'undefined') {
-    bioEl.textContent = ABOUT.bio;
-  }
+function renderCommunities() {
+  const container = document.getElementById('communitiesWrap');
+  if (!container) return;
 
-  // Photo
-  const photoEl = document.getElementById('aboutPhoto');
-  if (photoEl && ABOUT.photo) {
-    photoEl.innerHTML = `<img src="${ABOUT.photo}" alt="Roopal" />`;
-  }
+  const photoHtml = INVESTOR_LEARNER.communities.photo
+    ? `<img src="${INVESTOR_LEARNER.communities.photo}" alt="Community" />`
+    : `<div class="community-photo-placeholder"><span>🤝</span></div>`;
 
-  // Happy to meet — bullet list + CTA buttons
-  const meetList = document.getElementById('meetList');
-  if (meetList) {
-    meetList.innerHTML = ABOUT.happyToMeet.map(item =>
-      `<li class="meet-bullet">${item}</li>`
-    ).join('');
-  }
-
-  const meetCta = document.getElementById('meetCta');
-  if (meetCta) {
-    meetCta.innerHTML = `
-      <a href="${ABOUT.links.calendly}" target="_blank" rel="noopener" class="meet-btn meet-btn-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Book a call
-      </a>
-      <a href="${ABOUT.links.email}" class="meet-btn meet-btn-outline">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Email me
-      </a>
+  const bulletsHtml = INVESTOR_LEARNER.communities.list.map(c => {
+    const inner = c.url
+      ? `<a href="${c.url}" target="_blank" rel="noopener">${c.name}</a>`
+      : `<span>${c.name}</span>`;
+    return `
+      <div class="community-bullet">
+        <div class="community-name">${inner}</div>
+        <div class="community-desc">${c.desc}</div>
+      </div>
     `;
-  }
+  }).join('');
 
-  // Fun questions — swipeable carousel with photo
-  const faqCarousel = document.getElementById('faqCarousel');
-  const faqDotsEl = document.getElementById('faqDots');
-  if (faqCarousel) {
-    ABOUT.funQuestions.forEach((faq, i) => {
-      const slide = document.createElement('div');
-      slide.className = 'faq-slide' + (i === 0 ? ' active' : '');
-      slide.dataset.idx = i;
-      slide.innerHTML = `
-        <div class="faq-question">${faq.question}</div>
-        <div class="faq-answer">${faq.answer}</div>
-      `;
-      faqCarousel.appendChild(slide);
-    });
-
-    // Update photo on slide change
-    updateFaqPhoto(0);
-
-    // Dots
-    if (faqDotsEl) {
-      ABOUT.funQuestions.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'faq-dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', () => showFaqSlide(i));
-        faqDotsEl.appendChild(dot);
-      });
-    }
-
-    // Arrows
-    const prevBtn = document.getElementById('faqPrev');
-    const nextBtn = document.getElementById('faqNext');
-    if (prevBtn) prevBtn.addEventListener('click', () => {
-      const cur = parseInt(faqCarousel.querySelector('.faq-slide.active').dataset.idx);
-      showFaqSlide(cur > 0 ? cur - 1 : ABOUT.funQuestions.length - 1);
-    });
-    if (nextBtn) nextBtn.addEventListener('click', () => {
-      const cur = parseInt(faqCarousel.querySelector('.faq-slide.active').dataset.idx);
-      showFaqSlide(cur < ABOUT.funQuestions.length - 1 ? cur + 1 : 0);
-    });
-  }
-
-  // Companies — logos with name
-  const logosRow = document.getElementById('logosRow');
-  if (logosRow) {
-    ABOUT.companies.forEach(c => {
-      const el = document.createElement(c.url ? 'a' : 'div');
-      el.className = 'logo-item';
-      if (c.url) { el.href = c.url; el.target = '_blank'; el.rel = 'noopener'; }
-      el.innerHTML = c.logo
-        ? `<img src="${c.logo}" alt="${c.name}" /><span class="logo-name">${c.name}</span>`
-        : `<span class="logo-text">${c.name}</span>`;
-      logosRow.appendChild(el);
-    });
-  }
-
-  // Networks — enlarged photo cards with overlay
-  const networksList = document.getElementById('networksList');
-  if (networksList) {
-    ABOUT.networks.forEach(n => {
-      const card = document.createElement('div');
-      card.className = 'network-card';
-      const bgStyle = n.photo ? `background-image:url('${n.photo}')` : '';
-      card.innerHTML = `
-        <div class="network-card-bg" style="${bgStyle}">
-          ${!n.photo ? `<div class="network-card-placeholder">${n.name.charAt(0)}</div>` : ''}
-        </div>
-        <div class="network-card-overlay">
-          <div class="network-card-name">${n.name}</div>
-          <div class="network-card-desc">${n.desc}</div>
-        </div>
-      `;
-      networksList.appendChild(card);
-    });
-  }
+  container.innerHTML = `
+    <div class="community-photo">${photoHtml}</div>
+    <div class="community-list">${bulletsHtml}</div>
+  `;
 }
 
-/* ════════════════════════════════════════════════════════
-   FAQ SLIDE
-════════════════════════════════════════════════════════ */
-function showFaqSlide(idx) {
-  const slides = document.querySelectorAll('.faq-slide');
-  const dots = document.querySelectorAll('.faq-dot');
-  slides.forEach((s, i) => s.classList.toggle('active', i === idx));
-  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-  updateFaqPhoto(idx);
-}
+function renderContactCta() {
+  const container = document.getElementById('contactCta');
+  if (!container) return;
 
-function updateFaqPhoto(idx) {
-  const photoEl = document.getElementById('faqPhoto');
-  if (!photoEl || typeof ABOUT === 'undefined') return;
-  const faq = ABOUT.funQuestions[idx];
-  if (faq && faq.image) {
-    photoEl.innerHTML = `<img src="${faq.image}" alt="" />`;
-  } else {
-    const icons = ['💼', '📰', '🏇'];
-    photoEl.innerHTML = `<div class="faq-photo-placeholder"><span>${icons[idx] || '?'}</span></div>`;
-  }
-}
-
-/* ════════════════════════════════════════════════════════
-   SCROLL TO HASH (learning page sector anchors)
-════════════════════════════════════════════════════════ */
-function scrollToHash() {
-  if (window.location.hash) {
-    setTimeout(() => {
-      const target = document.querySelector(window.location.hash);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        target.style.transition = 'box-shadow 0.3s ease';
-        target.style.boxShadow = '0 0 0 4px rgba(58,125,86,0.3)';
-        setTimeout(() => { target.style.boxShadow = ''; }, 2000);
-      }
-    }, 600);
-  }
+  const c = INVESTOR_LEARNER.contact;
+  container.innerHTML = `
+    <p class="section-label" style="color:var(--green-light)">Let's Connect</p>
+    <h2 style="color:var(--white);font-family:var(--font-serif);font-size:clamp(1.8rem,3vw,2.6rem);margin:12px 0 18px;line-height:1.3;">I'd Love to <em style="color:var(--green-light)">Hear From You</em></h2>
+    <p class="contact-sub">${c.message}</p>
+    <div class="contact-links">
+      <a href="${c.email}" class="contact-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Me
+      </a>
+      <a href="${c.calendly}" target="_blank" rel="noopener" class="contact-btn contact-btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book a Call
+      </a>
+      <a href="${c.linkedin}" target="_blank" rel="noopener" class="contact-btn contact-btn-outline">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  `;
 }
 
 /* ════════════════════════════════════════════════════════

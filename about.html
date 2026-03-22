@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About | Roopal</title>
+  <title>Investor / Learner | Roopal</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body data-page="about">
+<body data-page="investor-learner">
 
   <!-- ─── NAV ─────────────────────────────────────────────── -->
   <nav id="navbar" class="scrolled">
@@ -24,90 +24,55 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">World</a></li>
-        <li><a href="learning.html">Learning</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="index.html">Investment Passport</a></li>
+        <li><a href="learning.html">Field Notes</a></li>
+        <li><a href="about.html" class="active">Investor / Learner</a></li>
         <li><a href="mailto:roopaldahiya5@gmail.com" class="nav-cta nav-cta-email">Email Me</a></li>
         <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="nav-cta nav-cta-linkedin">LinkedIn</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ─── ABOUT HERO ─────────────────────────────────────── -->
+  <!-- ─── HERO: Photo + Bio ──────────────────────────────── -->
   <section class="about-hero">
-    <div class="about-hero-inner">
-      <div class="about-intro">
-        <h1 class="about-name"><em>About Me</em></h1>
-        <p class="about-tagline">VC · PE · MBA — Betting on people and ideas across the globe</p>
-        <p class="about-bio" id="aboutBio"></p>
-      </div>
-      <div class="about-photo-wrap">
-        <div class="about-photo" id="aboutPhoto">
-          <div class="about-photo-placeholder"><span>R</span></div>
-        </div>
-      </div>
+    <div class="about-hero-inner" id="aboutHero">
+      <!-- filled by JS: photo + bio side by side -->
     </div>
   </section>
 
-  <!-- ─── HAPPY TO MEET (bullet points + contact) ──────────── -->
-  <section class="section">
+  <!-- ─── CAREER TIMELINE ────────────────────────────────── -->
+  <section id="timeline" class="section">
     <div class="section-header reveal">
-      <p class="section-label">Open Door Policy</p>
-      <h2>I'm happy to <em>meet</em></h2>
+      <p class="section-label">My Journey</p>
+      <h2>From <em>Curiosity</em> to <em>Capital</em></h2>
+      <p class="section-desc">
+        A non-linear path through consulting, startups, and investing — each chapter sharpening the next.
+      </p>
     </div>
-    <div class="meet-wrap reveal">
-      <ul class="meet-list" id="meetList">
-        <!-- filled by JS -->
-      </ul>
-      <div class="meet-cta" id="meetCta">
-        <!-- filled by JS: calendly + email buttons -->
-      </div>
+    <div class="timeline-wrap reveal" id="timelineWrap">
+      <!-- filled by JS: expandable timeline items -->
     </div>
   </section>
 
-  <!-- ─── FUN QUESTIONS (swipe carousel with photo) ─────────── -->
-  <section class="section section-alt">
-    <div class="section-header reveal">
-      <p class="section-label">Get to Know Me</p>
-      <h2>Questions I <em>Love</em> Answering</h2>
-    </div>
-    <div class="faq-layout reveal">
-      <div class="faq-carousel-wrap">
-        <button class="faq-arrow faq-prev" id="faqPrev" aria-label="Previous">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="faq-carousel" id="faqCarousel">
-          <!-- filled by JS -->
-        </div>
-        <button class="faq-arrow faq-next" id="faqNext" aria-label="Next">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-      <div class="faq-photo" id="faqPhoto">
-        <div class="faq-photo-placeholder"><span>?</span></div>
-      </div>
-    </div>
-    <div class="faq-dots" id="faqDots"></div>
-  </section>
-
-  <!-- ─── COMPANIES (logos only) ─────────────────────────── -->
-  <section class="section">
-    <div class="logos-row reveal" id="logosRow">
-      <!-- filled by JS -->
-    </div>
-  </section>
-
-  <!-- ─── NETWORKS (photo cards in one row) ──────────────── -->
-  <section class="section section-alt">
+  <!-- ─── COMMUNITIES ────────────────────────────────────── -->
+  <section id="communities" class="section section-alt">
     <div class="section-header reveal">
       <p class="section-label">Communities</p>
-      <h2>My Sourcing and <em>Support Networks</em></h2>
+      <h2>People I <em>Learn With</em></h2>
     </div>
-    <div class="networks-row reveal" id="networksList">
-      <!-- filled by JS -->
+    <div class="communities-wrap reveal" id="communitiesWrap">
+      <!-- filled by JS: photo + bullet list -->
     </div>
   </section>
 
+  <!-- ─── CONTACT CTA ────────────────────────────────────── -->
+  <section id="contact-cta" class="section contact-section">
+    <div class="contact-inner reveal" id="contactCta">
+      <!-- filled by JS: message + buttons -->
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
   <footer>
     <div class="footer-inner">
       <span class="compass-icon">✦</span>
