@@ -411,34 +411,67 @@ function renderAboutHero() {
   });
 }
 
-/* ── ROADMAP TIMELINE (non-expandable, with logos) ── */
+/* ── HORIZONTAL SQUIGGLY ROADMAP (with logos) ── */
 function renderTimeline() {
   const container = document.getElementById('timelineWrap');
   if (!container) return;
 
+  const items = INVESTOR_LEARNER.timeline;
+
+  // Build SVG squiggly path
+  const stopWidth = 160;
+  const totalW = items.length * stopWidth;
+  const midY = 50;
+  const amplitude = 22;
+
+  // Generate squiggly path points
+  let pathD = `M 0 ${midY}`;
+  items.forEach((_, i) => {
+    const x = i * stopWidth + stopWidth / 2;
+    const dir = i % 2 === 0 ? -1 : 1;
+    const cp1x = (i * stopWidth + stopWidth * 0.25);
+    const cp1y = midY + dir * amplitude;
+    const cp2x = (i * stopWidth + stopWidth * 0.75);
+    const cp2y = midY + dir * amplitude;
+    pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x} ${midY}`;
+  });
+  // Extend to end
+  const lastX = (items.length - 1) * stopWidth + stopWidth / 2;
+  pathD += ` L ${totalW} ${midY}`;
+
   container.innerHTML = `
-    <div class="roadmap">
-      ${INVESTOR_LEARNER.timeline.map((item, i) => `
-        <div class="roadmap-stop" style="transition-delay:${i * 80}ms">
-          <div class="roadmap-node">
-            ${item.logo
-              ? `<img src="${item.logo}" alt="${item.era}" class="roadmap-logo" />`
-              : `<span class="roadmap-emoji">${item.icon}</span>`
-            }
-          </div>
-          <div class="roadmap-content">
-            <div class="roadmap-header">
-              <span class="roadmap-era">${item.era}</span>
-            </div>
-            <h3 class="roadmap-title">${item.title}</h3>
-            <p class="roadmap-detail">${item.detail}</p>
-          </div>
+    <div class="roadmap-h">
+      <div class="roadmap-h-track">
+        <svg class="roadmap-svg" viewBox="0 0 ${totalW} 100" preserveAspectRatio="none">
+          <path d="${pathD}" class="roadmap-path-bg" />
+          <path d="${pathD}" class="roadmap-path-solid" style="stroke-dasharray: ${lastX}; stroke-dashoffset: 0;" />
+          <line x1="${lastX}" y1="${midY}" x2="${totalW}" y2="${midY}" class="roadmap-path-dotted" />
+        </svg>
+        <div class="roadmap-h-stops">
+          ${items.map((item, i) => {
+            const isFuture = item.isFuture;
+            return `
+              <div class="roadmap-h-stop ${isFuture ? 'future-stop' : ''}" style="transition-delay:${i * 80}ms">
+                <div class="roadmap-h-node ${isFuture ? 'future-node' : ''}">
+                  ${item.logo
+                    ? `<img src="${item.logo}" alt="${item.era}" class="roadmap-logo" />`
+                    : `<span class="roadmap-emoji">${item.icon}</span>`
+                  }
+                </div>
+                <div class="roadmap-h-content ${isFuture ? 'future-content' : ''}">
+                  <span class="roadmap-era">${item.era}</span>
+                  <h3 class="roadmap-h-title">${item.title}</h3>
+                  <p class="roadmap-h-detail">${item.detail}</p>
+                </div>
+              </div>
+            `;
+          }).join('')}
         </div>
-      `).join('')}
+      </div>
     </div>
   `;
 
-  observeCards(container.querySelectorAll('.roadmap-stop'));
+  observeCards(container.querySelectorAll('.roadmap-h-stop'));
 }
 
 /* ── COMMUNITIES (2+ columns with logos + photo) ── */
