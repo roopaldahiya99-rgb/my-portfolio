@@ -7,93 +7,77 @@
 // Investor origins → deal destinations with connection lines
 const DEAL_MAP = {
   investors: [
-    { id: "us-kc",    label: "Kimberly Clark",      city: "Dallas",     lat: 32.78,  lng: -96.80,  code: "us" },
-    { id: "us-shell", label: "Shell",               city: "Houston",    lat: 29.76,  lng: -95.37,  code: "us" },
-    { id: "sg",       label: "Singapore Investor",   city: "Singapore",  lat: 1.352,  lng: 103.82,  code: "sg" },
-    { id: "us-gen",   label: "US Investor",          city: "New York",   lat: 40.71,  lng: -74.00,  code: "us" },
-    { id: "us-dc",    label: "US Investor (DC)",     city: "Washington", lat: 38.91,  lng: -77.04,  code: "us" },
-    { id: "au",       label: "Australian Fund",      city: "Sydney",     lat: -33.87, lng: 151.21,  code: "au" },
-    { id: "uk",       label: "UK Investor",          city: "London",     lat: 51.51,  lng: -0.13,   code: "gb" },
-    { id: "to",       label: "Toronto Investor",     city: "Toronto",    lat: 43.65,  lng: -79.38,  code: "ca" },
+    { id: "bdc",      label: "BDC Capital",          city: "Toronto",     lat: 43.65,  lng: -79.38,  code: "ca" },
+    { id: "usaid",    label: "USAID",                 city: "Washington",  lat: 38.91,  lng: -77.04,  code: "us" },
+    { id: "shell",    label: "Shell",                 city: "Houston",     lat: 29.76,  lng: -95.37,  code: "us" },
+    { id: "google",   label: "Google News Initiative", city: "Mountain View", lat: 37.39, lng: -122.08, code: "us" },
+    { id: "kois",     label: "KOIS Invest",           city: "Brussels",    lat: 50.85,  lng: 4.35,    code: "be" },
+    { id: "dalberg",  label: "Dalberg Advisors",      city: "New Delhi",   lat: 28.61,  lng: 77.21,   code: "in" },
   ],
 
   destinations: [
     {
+      country: "Canada", code: "ca", lat: 49.28, lng: -106.35,
+      spotlight: "Early-Stage B2B, Fintech & EdTech — $500MM Thrive Fund",
+      stages: ["Early Stage", "Growth Stage"],
+      sectors: ["Fintech", "B2B SaaS", "EdTech"],
+      fromInvestors: ["bdc"],
+    },
+    {
       country: "India", code: "in", lat: 20.59, lng: 78.96,
-      spotlight: "Multi-Sector Growth & Early Stage Portfolio",
-      stages: ["Growth Stage", "Early Stage"],
-      sectors: ["Fintech", "Healthtech", "Media"],
-      fromInvestors: ["us-kc", "sg", "us-gen", "uk"],
+      spotlight: "Assistive Tech, Healthcare & Media Investments",
+      stages: ["Early Stage", "Growth Stage"],
+      sectors: ["Healthcare", "Assistive Tech", "Media Tech"],
+      fromInvestors: ["kois", "google"],
     },
     {
       country: "Indonesia", code: "id", lat: -0.79, lng: 113.92,
-      spotlight: "Growth Stage Consumer Enterprise",
+      spotlight: "Assistive Technology Investment Thesis",
       stages: ["Growth Stage"],
-      sectors: ["Consumer", "Manufacturing"],
-      fromInvestors: ["us-kc"],
-    },
-    {
-      country: "MENA", code: "sa", lat: 23.88, lng: 45.08,
-      spotlight: "Energy Transition Infrastructure",
-      stages: ["Growth Stage"],
-      sectors: ["Energy", "Infrastructure"],
-      fromInvestors: ["us-shell"],
+      sectors: ["Assistive Tech", "Healthcare"],
+      fromInvestors: ["kois"],
     },
     {
       country: "Cambodia", code: "kh", lat: 12.57, lng: 104.99,
-      spotlight: "Early Stage Impact Venture",
+      spotlight: "Climate-Tech — $30M Capital Deployment",
       stages: ["Early Stage"],
-      sectors: ["Impact", "Social Enterprise"],
-      fromInvestors: ["us-dc"],
+      sectors: ["Climate-Tech", "Impact"],
+      fromInvestors: ["usaid"],
     },
     {
       country: "Vietnam", code: "vn", lat: 14.06, lng: 108.28,
-      spotlight: "Growth Stage Eyecare Enterprise",
+      spotlight: "Social Eyecare Enterprise — $400M Expansion",
       stages: ["Growth Stage"],
-      sectors: ["Healthtech"],
-      fromInvestors: ["au"],
+      sectors: ["Healthtech", "Social Enterprise"],
+      fromInvestors: ["dalberg"],
+    },
+    {
+      country: "MENA", code: "sa", lat: 23.88, lng: 45.08,
+      spotlight: "Clean Energy for Refugee Settlements — 500K+ Beneficiaries",
+      stages: ["Growth Stage"],
+      sectors: ["Clean Energy", "Impact"],
+      fromInvestors: ["shell"],
     },
     {
       country: "Kenya", code: "ke", lat: -1.29, lng: 36.82,
-      spotlight: "Early Stage Healthtech Venture",
+      spotlight: "Assistive Tech & Healthcare Ventures",
       stages: ["Early Stage"],
-      sectors: ["Healthtech", "Impact"],
-      fromInvestors: ["uk"],
+      sectors: ["Healthcare", "Assistive Tech"],
+      fromInvestors: ["kois"],
     },
     {
-      country: "Canada — Nova Scotia", code: "ca", lat: 44.65, lng: -63.57,
-      spotlight: "Early Stage Cleantech Venture",
-      stages: ["Early Stage"],
-      sectors: ["Cleantech"],
-      fromInvestors: ["to"],
-    },
-    {
-      country: "Canada — Calgary", code: "ca", lat: 51.05, lng: -114.07,
-      spotlight: "Growth Stage Fintech Platform",
+      country: "Southeast Asia", code: "sg", lat: 1.35, lng: 103.82,
+      spotlight: "Cross-Border Acquisition — $15MM Revenue Unlock",
       stages: ["Growth Stage"],
-      sectors: ["Fintech"],
-      fromInvestors: ["to"],
-    },
-    {
-      country: "Canada — Vancouver", code: "ca", lat: 49.28, lng: -123.12,
-      spotlight: "Early Stage Healthtech",
-      stages: ["Early Stage"],
-      sectors: ["Healthtech"],
-      fromInvestors: ["to"],
-    },
-    {
-      country: "United States", code: "us", lat: 39.83, lng: -98.58,
-      spotlight: "Growth Stage SaaS Platform",
-      stages: ["Growth Stage"],
-      sectors: ["SaaS", "Enterprise"],
-      fromInvestors: ["to"],
+      sectors: ["M&A", "Cross-border"],
+      fromInvestors: ["dalberg"],
     },
   ],
 
   operationalStar: {
     city: "Bangalore", country: "India", code: "in", lat: 12.97, lng: 77.59,
     label: "Operational Experience",
-    detail: "Worked on the ground with Wysa — a global AI mental health startup. Built GTM strategy, trained customers, and shaped organizational design alongside the founder.",
+    detail: "Worked on the ground with Wysa — a global AI mental health startup. Built GTM strategy from scratch, ran customer training, and shaped organisational design alongside the founder.",
   },
 };
 
@@ -101,49 +85,31 @@ const DEAL_MAP = {
 // Featured deals for the Investment Passport page
 const DEAL_SPOTLIGHT = [
   {
-    title: "Early Stage Cleantech — Canada",
-    region: "Nova Scotia",
+    title: "Early-Stage B2B & Fintech — Canada",
+    region: "Toronto",
     code: "ca",
     stage: "Early Stage",
-    sectors: ["Cleantech", "Climate"],
-    description: "Sourced and evaluated an early-stage cleantech company developing next-generation carbon capture technology. Led due diligence across market sizing, unit economics, and regulatory landscape.",
-    whatILearned: "The best climate ventures collapse the green premium — making the clean option the cheap option. I now ask every climate deal: 'Does this make green the obvious business decision?'",
+    sectors: ["Fintech", "B2B SaaS"],
+    description: "Led end-to-end due diligence on 7 early-stage B2B and fintech ventures at BDC Capital's $500MM Thrive Fund. Assessed market sizing, product defensibility, and unit economics — authored 4 investment memos with 100% IC approval rate.",
+    whatILearned: "Rigorous due diligence isn't about finding reasons to say no — it's about building conviction to say yes. The best memos don't just analyse a company; they tell the story of why this team wins in this market at this moment.",
   },
   {
-    title: "Growth Stage Healthtech — APAC",
+    title: "Climate-Tech Capital Deployment — Cambodia",
+    region: "Cambodia",
+    code: "kh",
+    stage: "Early Stage",
+    sectors: ["Climate-Tech", "Impact"],
+    description: "Evaluated 20 climate-tech investment opportunities for USAID Cambodia at Dalberg Advisors. Conducted market sizing, business model analysis, and investment thesis development across 7 partner organisations to guide $30M in capital deployment.",
+    whatILearned: "Impact investing isn't charity with a term sheet — it demands the same rigour as commercial deals. The best climate ventures collapse the green premium, making the clean option the obvious business decision.",
+  },
+  {
+    title: "Cross-Border Healthcare — Vietnam",
     region: "Vietnam",
     code: "vn",
     stage: "Growth Stage",
     sectors: ["Healthtech", "Cross-border"],
-    description: "Facilitated a cross-border investment from an Australian fund into a high-growth Vietnamese healthcare enterprise scaling primary care infrastructure.",
-    whatILearned: "In cross-border deals, the hardest asset to underwrite isn't the company — it's the trust. I now spend the first 30% of any cross-border process building relational bridges.",
-  },
-  {
-    title: "Multi-Sector Portfolio — India",
-    region: "India",
-    code: "in",
-    stage: "Growth Stage",
-    sectors: ["Fintech", "Healthtech", "Media"],
-    description: "Managed a multi-sector portfolio spanning fintech, healthtech, and media across India — coordinating with investors from the US, Singapore, and UK.",
-    whatILearned: "Portfolio management across sectors teaches you pattern recognition faster than any single deal. The frameworks that work in fintech often break in healthtech — and that's where the real learning happens.",
-  },
-  {
-    title: "Early Stage Impact — Cambodia",
-    region: "Cambodia",
-    code: "kh",
-    stage: "Early Stage",
-    sectors: ["Impact", "Social Enterprise"],
-    description: "Supported an early-stage impact venture in Cambodia focused on social enterprise models that create sustainable livelihoods in underserved communities.",
-    whatILearned: "Impact investing isn't charity with a term sheet — it demands the same rigour as commercial deals. The best impact companies build business models where doing good is the competitive advantage, not a side effect.",
-  },
-  {
-    title: "Growth Stage Fintech — Canada",
-    region: "Calgary",
-    code: "ca",
-    stage: "Growth Stage",
-    sectors: ["Fintech", "SaaS"],
-    description: "Evaluated a growth-stage fintech platform in Calgary building B2B payment infrastructure for the Canadian energy sector.",
-    whatILearned: "Vertical fintech wins by understanding industry-specific workflows better than horizontal players ever will. The moat isn't the tech — it's the domain expertise embedded in every product decision.",
+    description: "Stress-tested the business and operating model of a social eyecare enterprise in Vietnam. Evaluated and refined an expansion strategy to capture a $400M opportunity in neighbouring Asian markets.",
+    whatILearned: "In cross-border deals, the hardest asset to underwrite isn't the company — it's the trust. Spending the first 30% of any cross-border process building relational bridges is what makes the other 70% possible.",
   },
 ];
 
@@ -171,47 +137,47 @@ const FIELD_NOTES = {
     {
       icon: "🧭",
       title: "Sectors I Love — And Why",
-      summary: "From climate to fintech to healthcare access — the problems that keep me up at night and the investment theses I've built around them.",
-      detail: `<p>I don't pick sectors because they're trendy. I follow problems that matter — and build conviction through first-hand deal work.</p>
-<p><strong>Climate & Clean Energy:</strong> The biggest market transition of the century. I focus on companies that collapse the 'green premium' — making the clean option the cheap option. I've backed solar microgrids in SE Asia, advised on carbon markets infrastructure, and built a 12-sub-sector scoring model ranking climate investments by green premium gap.</p>
-<p><strong>Fintech & Financial Inclusion:</strong> 1.4 billion adults remain unbanked. The best fintech companies in emerging markets don't compete with banks — they route around them entirely. I've invested in last-mile lending in India and supported cross-border payments infrastructure in Singapore.</p>
-<p><strong>Healthcare & Access:</strong> I invest in access, not luxury healthcare. Affordable diagnostics, last-mile distribution, and telemedicine designed for low-bandwidth environments. From Dot Glasses in Kenya (affordable eyecare for 1B+ people) to scaling primary care in Vietnam.</p>
-<p><strong>Insurtech:</strong> Real-time data and parametric triggers are re-underwriting risk that legacy actuarial tables can't see — especially for the 50M+ underserved gig economy workers.</p>
-<p><strong>Media Tech:</strong> Local journalism is critical infrastructure. I worked with Google News Initiative to channel capital into media tech companies building sustainable revenue models for regional publishers.</p>`,
-      tags: ["Climate", "Fintech", "Healthcare", "Insurtech", "Media Tech"],
+      summary: "From fintech to climate to healthcare access — the problems that keep me up at night and the investment theses I've built around them.",
+      detail: `<p>I don't pick sectors because they're trendy. I follow problems that matter — and build conviction through first-hand deal work across 30+ companies.</p>
+<p><strong>Fintech & Vertical Software:</strong> At BDC Capital, I led due diligence on 7 early-stage B2B and fintech ventures. The best fintech companies don't compete with banks — they route around them. I focus on product defensibility, unit economics, and CAC/LTV dynamics that separate winners from noise.</p>
+<p><strong>Climate & Clean Energy:</strong> At Dalberg, I evaluated 20 climate-tech investment opportunities for USAID Cambodia, guiding $30M in capital deployment. I also structured a Shell-backed blended finance fund for clean energy in refugee settlements across MENA, unlocking energy access for 500,000+ people.</p>
+<p><strong>Healthcare & Access:</strong> At KOIS, I assessed 20+ early and growth stage healthcare ventures across India, Indonesia, and Kenya. I invest in access, not luxury healthcare — from assistive technology to social eyecare enterprises with $400M expansion opportunities.</p>
+<p><strong>Enterprise EdTech:</strong> At BDC, I co-led commercial due diligence on two $10-15M enterprise ed-tech acquisitions, conducting 25+ customer calls to validate retention, NPS, and product stickiness.</p>
+<p><strong>Media Tech:</strong> At Dalberg, I identified emerging innovations across India's news publishing ecosystem for Google News Initiative, generating a proprietary investment pipeline that guided $20MM in investments.</p>`,
+      tags: ["Fintech", "Climate", "Healthcare", "EdTech", "Media Tech"],
     },
     {
       icon: "📐",
-      title: "My Company Investment Framework",
-      summary: "How I evaluate companies — the lens I've built from pattern recognition across 30+ deals and multiple mandates.",
-      detail: `<p>Every investor has a framework. Mine has been rewritten three times — each version forged by mistakes, surprises, and hard-won conviction. Here's what I look for:</p>
-<p><strong>1. Founder-Market Fit:</strong> Not just 'does this person understand the market?' but 'is this person <em>unreasonably</em> well-positioned to win here?' The best founders have an unfair insight — something that's true but not yet widely believed.</p>
-<p><strong>2. Problem Severity:</strong> I rank problems by urgency and willingness to pay. A nice-to-have in a large market loses to a must-have in a niche one. I look for markets where the pain is so acute that customers are already building workarounds.</p>
-<p><strong>3. Business Model Durability:</strong> Revenue is table stakes. I want to understand unit economics trajectory, switching costs, and whether the company gets structurally better as it scales. Does data compound? Do network effects kick in?</p>
-<p><strong>4. Capital Efficiency:</strong> Especially in emerging markets, the ability to do more with less is the real competitive moat. I look for companies that have found creative ways to reduce burn without sacrificing growth velocity.</p>
-<p><strong>5. Exit Pathway Clarity:</strong> I underwrite to exit. Who are the natural acquirers? What does the IPO path look like? Is there a clear value inflection point within the fund timeline?</p>`,
-      tags: ["Framework", "Due Diligence", "Valuation", "Pattern Recognition"],
+      title: "My Investment Framework",
+      summary: "How I evaluate companies — the lens I've built from due diligence across 30+ deals with a 100% IC memo approval rate.",
+      detail: `<p>Every investor has a framework. Mine has been rewritten across three mandates — BDC Capital, KOIS, and Dalberg — each version forged by real deals, real mistakes, and hard-won conviction.</p>
+<p><strong>1. Founder-Market Fit:</strong> Not just 'does this person understand the market?' but 'is this person <em>unreasonably</em> well-positioned to win here?' At BDC, I screened out opportunities citing co-founder risk and weak moats — team strength is always the first filter.</p>
+<p><strong>2. Product Defensibility & Unit Economics:</strong> Revenue is table stakes. I assess market sizing, switching costs, and whether the company gets structurally better as it scales. At BDC, I built scenario-based financial models to stress-test every thesis.</p>
+<p><strong>3. Capital Efficiency:</strong> Especially in emerging markets, the ability to do more with less is the real competitive moat. At KOIS, I provided strategic assistance that drove a 35% improvement in portfolio company margins.</p>
+<p><strong>4. Customer Validation:</strong> I don't rely on founder narratives alone. For the BDC ed-tech acquisitions, I conducted 25+ customer calls to validate retention and product stickiness before making recommendations.</p>
+<p><strong>5. Exit Pathway Clarity:</strong> I underwrite to exit. Who are the natural acquirers? Is there a clear value inflection point? I've drafted CIMs and built models that map every path to liquidity.</p>`,
+      tags: ["Framework", "Due Diligence", "Unit Economics", "Pattern Recognition"],
     },
     {
       icon: "🏗️",
       title: "First Principles in VC & PE",
-      summary: "The foundational beliefs that guide how I think about deploying capital — from power law dynamics to value creation levers.",
-      detail: `<p>Venture capital and private equity are different games with different rules — but they share first principles that I carry across both.</p>
-<p><strong>In VC — The Power Law Is Everything:</strong> Portfolio construction matters more than individual deal selection. One investment will return the fund; the rest provide optionality and learning. This means conviction sizing is critical, and the cost of missing a great deal always exceeds the cost of backing a bad one.</p>
-<p><strong>In PE — Value Creation Is the Product:</strong> Entry multiples are the price of admission. The real returns come from operational improvement, revenue acceleration, and strategic repositioning. I've modelled LBOs where the difference between a 2x and 4x return came entirely from post-acquisition execution.</p>
-<p><strong>Across Both — Information Asymmetry Is the Edge:</strong> The investors who consistently outperform are the ones with proprietary deal flow, deeper sector expertise, or founder relationships that generate differentiated access. I build this edge through networks, sector specialization, and being the kind of investor founders want in the room.</p>
-<p><strong>Across Both — Timing Is Underrated:</strong> Market cycles, technology adoption curves, and regulatory windows create asymmetric entry points. I've learned to layer macro timing into every deal thesis — not as a prediction, but as a scenario.</p>`,
+      summary: "The foundational beliefs that guide how I deploy capital — from power law dynamics to value creation through acquisitions.",
+      detail: `<p>Venture capital and private equity are different games with different rules — but they share first principles that I carry across both at BDC Capital.</p>
+<p><strong>In VC — The Power Law Is Everything:</strong> At BDC's Thrive Fund, I originated and screened 25+ early-stage Canadian tech opportunities. Portfolio construction matters more than individual deal selection. Conviction sizing is critical, and the cost of missing a great deal always exceeds the cost of backing a bad one.</p>
+<p><strong>In PE — Value Creation Is the Product:</strong> Entry multiples are the price of admission. The real returns come from operational improvement and revenue acceleration. I've evaluated search funds and ETA opportunities, analysing fund economics and past performance to identify where post-acquisition execution creates the 2x-to-4x difference.</p>
+<p><strong>Across Both — Proprietary Deal Flow Is the Edge:</strong> The investors who consistently outperform have differentiated access. I build this edge through CDL, Women in VC networks, and being the kind of investor founders want in the room.</p>
+<p><strong>Operating Experience Changes Everything:</strong> At Wysa, I built GTM strategy from scratch. Operating inside a startup fundamentally changed how I invest — I stopped asking hypothetical questions and started asking operational ones.</p>`,
       tags: ["VC", "PE", "Power Law", "Value Creation", "First Principles"],
     },
   ],
 
   fromTheClassroom: [
     {
-      icon: "📜",
-      title: "CFA & PE Certification",
-      whatILearned: "First principles of valuation, active ownership, and financial rigour",
-      details: "Completed CFA Level I & II and PE certification, building deep fluency in DCF modelling, comparable analysis, LBO structuring, and portfolio theory. These aren't just credentials — they're the analytical foundation I bring to every deal memo and IC presentation.",
-      tags: ["CFA", "PE", "Valuation", "Financial Analysis"],
+      icon: "🎓",
+      title: "MBA at Rotman — Finance Specialisation",
+      whatILearned: "DCF, LBO modelling, VC strategy, M&A, and financial statement analysis",
+      details: "Dean's List (3.75 GPA) with coursework in Fintech, VC Strategy, Private Equity, M&A, and Financial Statement Analysis. At the Creative Destruction Lab, I operationalised GTM strategy for a deep-tech AI venture — bridging the gap between technical milestones and commercial viability. As President of Women in Management Association, leading a team of 12 in supporting women in business. Received $60,000 in merit-based awards including the TorQuest and CDL Awards.",
+      tags: ["Fintech", "VC Strategy", "Private Equity", "M&A", "CDL"],
     },
     {
       icon: "📚",
@@ -221,11 +187,11 @@ const FIELD_NOTES = {
       tags: ["LVMH", "Fintech", "Energy Transition", "Strategy"],
     },
     {
-      icon: "🎓",
-      title: "MBA Classes — Rotman School of Management",
-      whatILearned: "Financial modelling, strategic thinking, and emerging market dynamics",
-      details: "Corporate Finance & M&A gave me the toolkit for structuring deals and advising founders on exit paths. Emerging Markets Finance taught me that currency risk and political risk aren't obstacles — they are the investment thesis. Entrepreneurial Strategy taught me the 'test two, choose one' framework that changed how I evaluate founder decisions. Every class reinforced one thing: the best investors combine quantitative rigour with qualitative judgement.",
-      tags: ["Corporate Finance", "M&A", "Emerging Markets", "Strategy"],
+      icon: "📜",
+      title: "Technical Skills & Certifications",
+      whatILearned: "Analytical toolkit: DCF, LBO, cap table, and exit modelling",
+      details: "Built deep fluency in DCF modelling, LBO structuring, cap table modelling, and exit modelling. Proficient in CapIQ, FactSet, PitchBook, and advanced Excel. These tools are the analytical foundation I bring to every deal memo, financial model, and IC presentation — turning qualitative conviction into quantitative rigour.",
+      tags: ["DCF", "LBO", "CapIQ", "FactSet", "PitchBook"],
     },
   ],
 
@@ -266,7 +232,7 @@ const FIELD_NOTES = {
 // ── INVESTOR / LEARNER (About Page) ─────────────────────
 const INVESTOR_LEARNER = {
   hero: {
-    bio: "Investor. Traveller. Perpetual learner. I'm currently with <strong>BDC Capital</strong>, deploying capital into Canada's most promising ventures and growth-stage companies. I hold an <strong>MBA from Rotman</strong> specializing in finance, and I've built my career at the intersection of curiosity and capital. Outside of work, I love to solo travel, build communities that bridge cultures and continents, and champion climate justice and women's economic empowerment.",
+    bio: "Investor. Traveller. Perpetual learner. I'm currently with <strong>BDC Capital's $500MM Thrive Fund</strong>, deploying capital into Canada's most promising early-stage fintech, vertical software, and enterprise B2B ventures. I hold an <strong>MBA from Rotman</strong> specializing in finance (Dean's List, 3.75 GPA), and I've built my career across venture investing, global advisory, and startup operations. Outside of work, I love to solo travel — 26+ cities across South and Southeast Asia in one year — build communities that bridge cultures and continents, and champion financial literacy for women.",
     photo: "assets/Roopal.jpeg",
   },
 
@@ -330,6 +296,6 @@ const INVESTOR_LEARNER = {
     message: "I love connecting with people who are building, investing, or simply curious. If anything on this site resonated — or if you just want to talk startups over coffee — I'd love to hear from you.",
     email: "mailto:roopaldahiya5@gmail.com",
     calendly: "https://calendly.com", // Replace with real URL
-    linkedin: "https://linkedin.com",  // Replace with real URL
+    linkedin: "https://www.linkedin.com/in/roopaldahiya",
   },
 };

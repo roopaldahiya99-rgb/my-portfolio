@@ -31,7 +31,7 @@
         <li><a href="learning.html">Field Notes</a></li>
         <li><a href="about.html">About Me</a></li>
         <li><a href="mailto:roopaldahiya5@gmail.com" class="nav-cta nav-cta-email">Email Me</a></li>
-        <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="nav-cta nav-cta-linkedin">LinkedIn</a></li>
+        <li><a href="https://www.linkedin.com/in/roopaldahiya" target="_blank" rel="noopener" class="nav-cta nav-cta-linkedin">LinkedIn</a></li>
       </ul>
     </div>
   </nav>
@@ -56,7 +56,7 @@
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-num" data-count="8">0</span>
+            <span class="stat-num" data-count="10">0</span>
             <span class="stat-label">Countries</span>
           </div>
           <div class="stat-divider"></div>
@@ -69,29 +69,25 @@
     </div>
   </section>
 
-  <!-- ─── LESSONS + DEAL SPOTLIGHT (side by side) ──────────── -->
-  <section id="insights" class="section">
-    <div class="insights-grid reveal">
-      <!-- LEFT: Lessons -->
-      <div class="insights-left">
-        <div class="section-header" style="text-align:left;margin-bottom:28px;">
-          <p class="section-label" style="justify-content:flex-start;">Reflections</p>
-          <h2>What I Learned from <em>30+ Deals</em></h2>
-        </div>
-        <div id="lessonsList">
-          <!-- filled by JS -->
-        </div>
-      </div>
-      <!-- RIGHT: Deal Carousel -->
-      <div class="insights-right">
-        <div class="section-header" style="text-align:left;margin-bottom:28px;">
-          <p class="section-label" style="justify-content:flex-start;">Deal Spotlight</p>
-          <h2>Deals That <em>Shaped</em> Me</h2>
-        </div>
-        <div id="dealCarousel">
-          <!-- filled by JS: single deal card + nav -->
-        </div>
-      </div>
+  <!-- ─── DEAL SPOTLIGHT ──────────────────────────────────── -->
+  <section id="deal-spotlight" class="section">
+    <div class="section-header reveal">
+      <p class="section-label">Deal Spotlight</p>
+      <h2>Deals That <em>Shaped</em> Me</h2>
+    </div>
+    <div class="deal-cards reveal" id="dealCards">
+      <!-- filled by JS: 3 deal cards -->
+    </div>
+  </section>
+
+  <!-- ─── LESSONS LEARNED ────────────────────────────────── -->
+  <section id="lessons" class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">Reflections</p>
+      <h2>What I Learned from <em>30+ Deals</em></h2>
+    </div>
+    <div class="lessons-wrap reveal" id="lessonsList">
+      <!-- filled by JS: simple bullet list -->
     </div>
   </section>
 

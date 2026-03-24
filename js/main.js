@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (page === 'home') {
     initMap();
     initStatCounters();
+    initDealSpotlight();
     initLessons();
-    initDealCarousel();
   }
 
   if (page === 'fieldnotes') {
@@ -193,72 +193,46 @@ function initMap() {
 }
 
 /* ════════════════════════════════════════════════════════
-   LESSONS — Simple bullet points (left side)
+   DEAL SPOTLIGHT — 3 cards in a grid
+════════════════════════════════════════════════════════ */
+function initDealSpotlight() {
+  const container = document.getElementById('dealCards');
+  if (!container) return;
+
+  container.innerHTML = DEAL_SPOTLIGHT.map((deal, i) => `
+    <div class="deal-card" style="transition-delay:${i * 100}ms">
+      <div class="deal-card-top">
+        <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="${deal.region} flag" />
+        <div class="deal-top-tags">
+          <span class="deal-stage-tag">${deal.stage}</span>
+          ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
+        </div>
+      </div>
+      <h3 class="deal-title">${deal.title}</h3>
+      <p class="deal-desc">${deal.description}</p>
+      <div class="deal-insight">
+        <strong>What I Learned:</strong> ${deal.whatILearned}
+      </div>
+    </div>
+  `).join('');
+
+  observeCards(container.querySelectorAll('.deal-card'));
+}
+
+/* ════════════════════════════════════════════════════════
+   LESSONS — Plain simple bullet points
 ════════════════════════════════════════════════════════ */
 function initLessons() {
   const listEl = document.getElementById('lessonsList');
   if (!listEl) return;
 
   listEl.innerHTML = `
-    <ul class="lessons-bullets">
+    <ul class="lessons-plain">
       ${LESSONS_LEARNED.lessons.map(lesson => `
-        <li class="lesson-bullet">${lesson}</li>
+        <li>${lesson}</li>
       `).join('')}
     </ul>
   `;
-
-  observeCards(listEl.querySelectorAll('.lesson-bullet'));
-}
-
-/* ════════════════════════════════════════════════════════
-   DEAL CAROUSEL — Browse deals with prev/next (right side)
-════════════════════════════════════════════════════════ */
-function initDealCarousel() {
-  const container = document.getElementById('dealCarousel');
-  if (!container) return;
-
-  let currentDeal = 0;
-  const total = DEAL_SPOTLIGHT.length;
-
-  function renderDeal(index) {
-    const deal = DEAL_SPOTLIGHT[index];
-    container.innerHTML = `
-      <div class="deal-card carousel-card">
-        <div class="deal-card-top">
-          <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="${deal.region} flag" />
-          <div class="deal-top-tags">
-            <span class="deal-stage-tag">${deal.stage}</span>
-            ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
-          </div>
-        </div>
-        <h3 class="deal-title">${deal.title}</h3>
-        <p class="deal-desc">${deal.description}</p>
-        <div class="deal-insight">
-          <strong>What I Learned:</strong> ${deal.whatILearned}
-        </div>
-      </div>
-      <div class="carousel-nav">
-        <button class="carousel-btn" id="prevDeal" aria-label="Previous deal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <span class="carousel-counter">${index + 1} / ${total}</span>
-        <button class="carousel-btn" id="nextDeal" aria-label="Next deal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-    `;
-
-    document.getElementById('prevDeal').addEventListener('click', () => {
-      currentDeal = (currentDeal - 1 + total) % total;
-      renderDeal(currentDeal);
-    });
-    document.getElementById('nextDeal').addEventListener('click', () => {
-      currentDeal = (currentDeal + 1) % total;
-      renderDeal(currentDeal);
-    });
-  }
-
-  renderDeal(0);
 }
 
 /* ════════════════════════════════════════════════════════
