@@ -29,7 +29,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="active">Investment Passport</a></li>
         <li><a href="learning.html">Field Notes</a></li>
-        <li><a href="about.html">Investor / Learner</a></li>
+        <li><a href="about.html">About Me</a></li>
         <li><a href="mailto:roopaldahiya5@gmail.com" class="nav-cta nav-cta-email">Email Me</a></li>
         <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="nav-cta nav-cta-linkedin">LinkedIn</a></li>
       </ul>
@@ -69,25 +69,29 @@
     </div>
   </section>
 
-  <!-- ─── DEAL SPOTLIGHT ─────────────────────────────────── -->
-  <section id="deal-spotlight" class="section">
-    <div class="section-header reveal">
-      <p class="section-label">Deal Spotlight</p>
-      <h2>Deals That <em>Shaped</em> My Thinking</h2>
-    </div>
-    <div class="deal-cards reveal" id="dealCards">
-      <!-- filled by JS -->
-    </div>
-  </section>
-
-  <!-- ─── WHAT I LEARNED ─────────────────────────────────── -->
-  <section id="lessons" class="section section-alt">
-    <div class="section-header reveal">
-      <p class="section-label">Reflections</p>
-      <h2>What I Learned from <em>30+ Companies</em></h2>
-    </div>
-    <div class="lessons-list reveal" id="lessonsList">
-      <!-- filled by JS -->
+  <!-- ─── LESSONS + DEAL SPOTLIGHT (side by side) ──────────── -->
+  <section id="insights" class="section">
+    <div class="insights-grid reveal">
+      <!-- LEFT: Lessons -->
+      <div class="insights-left">
+        <div class="section-header" style="text-align:left;margin-bottom:28px;">
+          <p class="section-label" style="justify-content:flex-start;">Reflections</p>
+          <h2>What I Learned from <em>30+ Deals</em></h2>
+        </div>
+        <div id="lessonsList">
+          <!-- filled by JS -->
+        </div>
+      </div>
+      <!-- RIGHT: Deal Carousel -->
+      <div class="insights-right">
+        <div class="section-header" style="text-align:left;margin-bottom:28px;">
+          <p class="section-label" style="justify-content:flex-start;">Deal Spotlight</p>
+          <h2>Deals That <em>Shaped</em> Me</h2>
+        </div>
+        <div id="dealCarousel">
+          <!-- filled by JS: single deal card + nav -->
+        </div>
+      </div>
     </div>
   </section>
 

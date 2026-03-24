@@ -106,8 +106,8 @@ const DEAL_SPOTLIGHT = [
     code: "ca",
     stage: "Early Stage",
     sectors: ["Cleantech", "Climate"],
-    description: "Sourced and evaluated an early-stage cleantech company developing next-generation carbon capture technology. Led due diligence across market sizing, unit economics, and regulatory landscape — ultimately presenting an investment recommendation to the committee.",
-    whatILearned: "The best climate ventures don't just solve an environmental problem — they create a cost advantage that makes the clean option the obvious business decision. I now evaluate every climate deal by asking: 'Does this collapse the green premium?' If yes, the market will do the rest.",
+    description: "Sourced and evaluated an early-stage cleantech company developing next-generation carbon capture technology. Led due diligence across market sizing, unit economics, and regulatory landscape.",
+    whatILearned: "The best climate ventures collapse the green premium — making the clean option the cheap option. I now ask every climate deal: 'Does this make green the obvious business decision?'",
   },
   {
     title: "Growth Stage Healthtech — APAC",
@@ -115,8 +115,35 @@ const DEAL_SPOTLIGHT = [
     code: "vn",
     stage: "Growth Stage",
     sectors: ["Healthtech", "Cross-border"],
-    description: "Facilitated a cross-border investment from an Australian fund into a high-growth Vietnamese healthcare enterprise scaling primary care infrastructure. Bridged due diligence, cultural nuance, and capital across two continents.",
-    whatILearned: "In cross-border deals, the hardest asset to underwrite isn't the company — it's the trust between two parties who've never shared a room. I now spend the first 30% of any cross-border process just building relational bridges before touching a single spreadsheet.",
+    description: "Facilitated a cross-border investment from an Australian fund into a high-growth Vietnamese healthcare enterprise scaling primary care infrastructure.",
+    whatILearned: "In cross-border deals, the hardest asset to underwrite isn't the company — it's the trust. I now spend the first 30% of any cross-border process building relational bridges.",
+  },
+  {
+    title: "Multi-Sector Portfolio — India",
+    region: "India",
+    code: "in",
+    stage: "Growth Stage",
+    sectors: ["Fintech", "Healthtech", "Media"],
+    description: "Managed a multi-sector portfolio spanning fintech, healthtech, and media across India — coordinating with investors from the US, Singapore, and UK.",
+    whatILearned: "Portfolio management across sectors teaches you pattern recognition faster than any single deal. The frameworks that work in fintech often break in healthtech — and that's where the real learning happens.",
+  },
+  {
+    title: "Early Stage Impact — Cambodia",
+    region: "Cambodia",
+    code: "kh",
+    stage: "Early Stage",
+    sectors: ["Impact", "Social Enterprise"],
+    description: "Supported an early-stage impact venture in Cambodia focused on social enterprise models that create sustainable livelihoods in underserved communities.",
+    whatILearned: "Impact investing isn't charity with a term sheet — it demands the same rigour as commercial deals. The best impact companies build business models where doing good is the competitive advantage, not a side effect.",
+  },
+  {
+    title: "Growth Stage Fintech — Canada",
+    region: "Calgary",
+    code: "ca",
+    stage: "Growth Stage",
+    sectors: ["Fintech", "SaaS"],
+    description: "Evaluated a growth-stage fintech platform in Calgary building B2B payment infrastructure for the Canadian energy sector.",
+    whatILearned: "Vertical fintech wins by understanding industry-specific workflows better than horizontal players ever will. The moat isn't the tech — it's the domain expertise embedded in every product decision.",
   },
 ];
 
@@ -137,7 +164,7 @@ const FIELD_NOTES = {
   hero: {
     label: "Field Notes",
     title: "Every Lesson Is a <em>Compass</em>.",
-    subtitle: "I carry a growth mindset into every room I enter. I ask myself daily: <em>what did I learn today, and how do I learn more tomorrow?</em> Articles, podcasts, classrooms — they all feed the fire. But the deepest learning happens in the field: in deal rooms, founder conversations, and the messy, humbling work of deploying capital where it matters.",
+    subtitle: "I carry a growth mindset into every room I enter. I ask myself daily: <em>what did I learn today, and how can I apply this to my work and life?</em> Articles, podcasts, classrooms — they all feed the fire. But the deepest learning happens in the field: in deal rooms, founder conversations, and the messy, humbling work of deploying capital where it matters.",
   },
 
   fromTheField: [
@@ -239,7 +266,7 @@ const FIELD_NOTES = {
 // ── INVESTOR / LEARNER (About Page) ─────────────────────
 const INVESTOR_LEARNER = {
   hero: {
-    bio: "Investor. Traveller. Perpetual student. I'm currently with <strong>BDC Capital</strong>, deploying capital into Canada's most promising ventures and growth-stage companies. I hold an <strong>MBA from Rotman</strong> specializing in finance, and I've built my career at the intersection of curiosity and capital. Outside of work, I care deeply about climate justice, women's economic empowerment, and building communities that bridge cultures and continents.",
+    bio: "Investor. Traveller. Perpetual learner. I'm currently with <strong>BDC Capital</strong>, deploying capital into Canada's most promising ventures and growth-stage companies. I hold an <strong>MBA from Rotman</strong> specializing in finance, and I've built my career at the intersection of curiosity and capital. Outside of work, I love to solo travel, build communities that bridge cultures and continents, and champion climate justice and women's economic empowerment.",
     photo: "assets/Roopal.jpeg",
   },
 

@@ -31,6 +31,7 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans:  'Inter', system-ui, sans-serif;
   --font-mono:  'Space Mono', monospace;
+  --font-hand:  'Caveat', cursive;
 
   --section-gap: 110px;
   --radius:      12px;
@@ -617,6 +618,68 @@ img { max-width: 100%; display: block; }
 .deal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
 /* ═══════════════════════════════════════════════════════════
+   INSIGHTS GRID — Side-by-side Lessons + Deal Carousel
+═══════════════════════════════════════════════════════════ */
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 1140px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.insights-left,
+.insights-right {
+  min-width: 0;
+}
+
+/* Carousel navigation */
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.carousel-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1.5px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink-dim);
+  transition: border-color var(--trans), background var(--trans), color var(--trans);
+}
+
+.carousel-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-pale);
+}
+
+.carousel-counter {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+}
+
+.carousel-card {
+  animation: fadeSlide 0.3s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ═══════════════════════════════════════════════════════════
    LESSONS LEARNED — Simple Bullet Points
 ═══════════════════════════════════════════════════════════ */
 .lessons-list {
@@ -757,25 +820,34 @@ img { max-width: 100%; display: block; }
   justify-content: flex-start;
 }
 
+.diary-date {
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  color: var(--ink-faint);
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
 .diary-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-family: var(--font-hand);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   font-weight: 700;
   color: var(--ink);
-  line-height: 1.2;
+  line-height: 1.15;
   margin-bottom: 18px;
 }
 
 .diary-subtitle {
-  font-size: 0.95rem;
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
   color: var(--ink-dim);
-  line-height: 1.85;
+  line-height: 1.7;
 }
 
 /* Scribble decorations */
 .diary-scribble {
   position: absolute;
-  font-family: var(--font-mono);
+  font-family: var(--font-hand);
   color: var(--green-light);
   opacity: 0.35;
   font-weight: 700;
@@ -813,34 +885,42 @@ img { max-width: 100%; display: block; }
 
 .diary-tabs {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   margin-bottom: 28px;
-  border-bottom: 2px solid var(--cream-dark);
   padding-bottom: 0;
 }
 
 .diary-tab {
-  padding: 10px 20px;
+  padding: 10px 18px;
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--ink-dim);
-  background: none;
-  border: none;
+  background: var(--cream-mid);
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 24px;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
-  margin-bottom: -2px;
-  transition: color var(--trans), border-color var(--trans);
+  transition: all var(--trans);
   letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.diary-tab-icon {
+  font-size: 0.9rem;
 }
 
 .diary-tab:hover {
   color: var(--green);
+  border-color: var(--green-light);
+  background: var(--green-pale);
 }
 
 .diary-tab.active {
-  color: var(--green);
-  border-bottom-color: var(--green);
+  color: var(--white);
+  background: var(--green);
+  border-color: var(--green);
 }
 
 .diary-panel {
@@ -1169,6 +1249,46 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   color: var(--green);
   opacity: 0.4;
+}
+
+/* Explore my path button */
+.explore-path-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 12px 28px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--green-pale);
+  border: 1.5px solid var(--green-light);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all var(--trans);
+}
+
+.explore-path-btn:hover {
+  background: var(--green);
+  color: var(--white);
+  border-color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(58,125,86,0.2);
+}
+
+.explore-path-btn svg {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Timeline hidden by default */
+.timeline-hidden {
+  display: none;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1552,6 +1672,7 @@ footer {
   .nav-cta        { display: none !important; }
 
   .deal-cards { grid-template-columns: 1fr; }
+  .insights-grid { grid-template-columns: 1fr; gap: 32px; }
 
   /* Diary layout stacks on mobile */
   .diary-section { padding: 100px 20px 60px; }

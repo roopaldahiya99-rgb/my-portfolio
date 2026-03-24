@@ -1,8 +1,8 @@
 /* ─────────────────────────────────────────────────────────
-   MAIN.JS — Full Redesign v2
-   Home: Deal Map + Spotlight + Simple Lessons
-   Field Notes: Diary layout with tabbed right panel
-   Investor/Learner: Bio + Roadmap Timeline + 2-col Communities
+   MAIN.JS — Full Redesign v3
+   Home: Map + Side-by-side Lessons & Deal Carousel
+   Field Notes: Diary with handwritten style, live date, icon tabs
+   About: Bio + Explore Path + Roadmap + Communities
 ───────────────────────────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (page === 'home') {
     initMap();
     initStatCounters();
-    initDealSpotlight();
     initLessons();
+    initDealCarousel();
   }
 
   if (page === 'fieldnotes') {
@@ -89,7 +89,7 @@ function initReveal() {
 }
 
 /* ════════════════════════════════════════════════════════
-   MAP — Deal Map with investor→destination connections
+   MAP
 ════════════════════════════════════════════════════════ */
 function initMap() {
   const map = L.map('map', {
@@ -193,34 +193,7 @@ function initMap() {
 }
 
 /* ════════════════════════════════════════════════════════
-   DEAL SPOTLIGHT (2 featured deals) — sector+stage on top, no role, "What I Learned"
-════════════════════════════════════════════════════════ */
-function initDealSpotlight() {
-  const container = document.getElementById('dealCards');
-  if (!container) return;
-
-  container.innerHTML = DEAL_SPOTLIGHT.map((deal, i) => `
-    <div class="deal-card" style="transition-delay:${i * 100}ms">
-      <div class="deal-card-top">
-        <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="${deal.region} flag" />
-        <div class="deal-top-tags">
-          <span class="deal-stage-tag">${deal.stage}</span>
-          ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
-        </div>
-      </div>
-      <h3 class="deal-title">${deal.title}</h3>
-      <p class="deal-desc">${deal.description}</p>
-      <div class="deal-insight">
-        <strong>What I Learned:</strong> ${deal.whatILearned}
-      </div>
-    </div>
-  `).join('');
-
-  observeCards(container.querySelectorAll('.deal-card'));
-}
-
-/* ════════════════════════════════════════════════════════
-   LESSONS LEARNED — Simple bullet points
+   LESSONS — Simple bullet points (left side)
 ════════════════════════════════════════════════════════ */
 function initLessons() {
   const listEl = document.getElementById('lessonsList');
@@ -238,7 +211,58 @@ function initLessons() {
 }
 
 /* ════════════════════════════════════════════════════════
-   FIELD NOTES PAGE — Diary layout with left hero + right tabbed content
+   DEAL CAROUSEL — Browse deals with prev/next (right side)
+════════════════════════════════════════════════════════ */
+function initDealCarousel() {
+  const container = document.getElementById('dealCarousel');
+  if (!container) return;
+
+  let currentDeal = 0;
+  const total = DEAL_SPOTLIGHT.length;
+
+  function renderDeal(index) {
+    const deal = DEAL_SPOTLIGHT[index];
+    container.innerHTML = `
+      <div class="deal-card carousel-card">
+        <div class="deal-card-top">
+          <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="${deal.region} flag" />
+          <div class="deal-top-tags">
+            <span class="deal-stage-tag">${deal.stage}</span>
+            ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
+          </div>
+        </div>
+        <h3 class="deal-title">${deal.title}</h3>
+        <p class="deal-desc">${deal.description}</p>
+        <div class="deal-insight">
+          <strong>What I Learned:</strong> ${deal.whatILearned}
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="prevDeal" aria-label="Previous deal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <span class="carousel-counter">${index + 1} / ${total}</span>
+        <button class="carousel-btn" id="nextDeal" aria-label="Next deal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    `;
+
+    document.getElementById('prevDeal').addEventListener('click', () => {
+      currentDeal = (currentDeal - 1 + total) % total;
+      renderDeal(currentDeal);
+    });
+    document.getElementById('nextDeal').addEventListener('click', () => {
+      currentDeal = (currentDeal + 1) % total;
+      renderDeal(currentDeal);
+    });
+  }
+
+  renderDeal(0);
+}
+
+/* ════════════════════════════════════════════════════════
+   FIELD NOTES PAGE — Diary with live date, handwritten style, icon tabs
 ════════════════════════════════════════════════════════ */
 function initFieldNotes() {
   renderDiaryLeft();
@@ -249,8 +273,13 @@ function renderDiaryLeft() {
   const container = document.getElementById('diaryLeft');
   if (!container) return;
 
+  // Live date
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
   container.innerHTML = `
     <div class="diary-hero-content">
+      <div class="diary-date">${dateStr}</div>
       <p class="section-label">${FIELD_NOTES.hero.label}</p>
       <h1 class="diary-title">${FIELD_NOTES.hero.title}</h1>
       <p class="diary-subtitle">${FIELD_NOTES.hero.subtitle}</p>
@@ -265,17 +294,19 @@ function renderDiaryRight() {
   const container = document.getElementById('diaryRight');
   if (!container) return;
 
-  // Build tab bar
+  // Build tab bar with icons and new names
   const tabs = [
-    { id: 'field', label: 'Lessons from Deals' },
-    { id: 'classroom', label: 'Formal Learning' },
-    { id: 'sources', label: 'Sources I Rely On' },
+    { id: 'field', label: 'Deal-work', icon: '🧭' },
+    { id: 'classroom', label: 'Classes & Cases', icon: '📚' },
+    { id: 'sources', label: 'People & Perspectives', icon: '🎙️' },
   ];
 
   const tabBar = `
     <div class="diary-tabs">
       ${tabs.map((t, i) => `
-        <button class="diary-tab ${i === 0 ? 'active' : ''}" data-tab="${t.id}">${t.label}</button>
+        <button class="diary-tab ${i === 0 ? 'active' : ''}" data-tab="${t.id}">
+          <span class="diary-tab-icon">${t.icon}</span> ${t.label}
+        </button>
       `).join('')}
     </div>
   `;
@@ -390,10 +421,20 @@ function renderAboutHero() {
     </div>
     <div class="about-intro">
       <h1 class="about-name"><em>Roopal</em></h1>
-      <p class="about-tagline">Investor · Traveller · Perpetual Student</p>
       <p class="about-bio">${INVESTOR_LEARNER.hero.bio}</p>
+      <button class="explore-path-btn" id="explorePathBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        Explore my path
+      </button>
     </div>
   `;
+
+  // Explore my path button — reveal timeline
+  document.getElementById('explorePathBtn').addEventListener('click', () => {
+    const timeline = document.getElementById('timeline');
+    timeline.classList.remove('timeline-hidden');
+    timeline.scrollIntoView({ behavior: 'smooth' });
+  });
 }
 
 /* ── ROADMAP TIMELINE (non-expandable, with logos) ── */
