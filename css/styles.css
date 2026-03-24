@@ -142,13 +142,17 @@ img { max-width: 100%; display: block; }
 }
 
 .nav-cta {
-  padding: 7px 18px !important;
-  border-radius: 24px !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.03em !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 38px !important;
+  height: 38px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
   transition: background var(--trans), color var(--trans), transform var(--trans) !important;
 }
+
+.nav-cta svg { display: block; }
 
 .nav-cta-email {
   background: var(--green-pale);
@@ -520,14 +524,21 @@ img { max-width: 100%; display: block; }
    DEAL SPOTLIGHT CARDS
 ═══════════════════════════════════════════════════════════ */
 .deal-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 28px;
-  max-width: 1140px;
-  margin: 0 auto;
+  flex: 1;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
+.deal-cards::-webkit-scrollbar { display: none; }
+
 .deal-card {
+  flex: 1 0 calc(33.33% - 19px);
+  min-width: 280px;
+  scroll-snap-align: start;
   background: var(--white);
   border: 1.5px solid var(--cream-dark);
   border-radius: var(--radius-lg);
@@ -1214,73 +1225,46 @@ img { max-width: 100%; display: block; }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   HORIZONTAL SQUIGGLY ROADMAP
+   SQUIGGLY ROADMAP — alternating up/down, no scroll
 ═══════════════════════════════════════════════════════════ */
-.roadmap-h {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: 20px 0 30px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.roadmap-h::-webkit-scrollbar { height: 4px; }
-.roadmap-h::-webkit-scrollbar-track { background: var(--cream-mid); border-radius: 2px; }
-.roadmap-h::-webkit-scrollbar-thumb { background: var(--green-light); border-radius: 2px; }
-
-.roadmap-h-track {
-  position: relative;
-  min-width: max-content;
-  padding: 0 40px;
-}
-
-.roadmap-svg {
-  position: absolute;
-  top: 22px;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  pointer-events: none;
-}
-
-.roadmap-path-bg {
-  fill: none;
-  stroke: var(--cream-dark);
-  stroke-width: 3;
-}
-
-.roadmap-path-solid {
-  fill: none;
-  stroke: url(#roadmap-gradient);
-  stroke-width: 3;
-  stroke: var(--green-mid);
-}
-
-.roadmap-path-dotted {
-  stroke: var(--ink-faint);
-  stroke-width: 2;
-  stroke-dasharray: 6 8;
-  opacity: 0.5;
-}
-
-.roadmap-h-stops {
+.rm-track {
   display: flex;
-  gap: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1140px;
+  margin: 0 auto;
   position: relative;
-  z-index: 2;
 }
 
-.roadmap-h-stop {
-  width: 160px;
-  flex-shrink: 0;
+.rm-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.rm-item {
+  width: calc(100% / 6);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: 0;
+  position: relative;
+  z-index: 1;
 }
 
-.roadmap-h-node {
+.rm-area {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.rm-area-top { align-items: flex-end; padding-bottom: 14px; }
+.rm-area-bottom { align-items: flex-start; padding-top: 14px; }
+
+.rm-dot {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -1292,82 +1276,103 @@ img { max-width: 100%; display: block; }
   z-index: 3;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   overflow: hidden;
+  flex-shrink: 0;
   transition: border-color var(--trans), box-shadow var(--trans), transform var(--trans);
-  position: relative;
-  top: 28px;
-  margin-bottom: 0;
 }
 
-.roadmap-h-stop:hover .roadmap-h-node {
+.rm-item:hover .rm-dot {
   border-color: var(--green);
   box-shadow: 0 4px 20px rgba(58,125,86,0.25);
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
-.future-node {
+.rm-future-dot {
   border-color: var(--amber);
   border-style: dashed;
   background: var(--amber-pale);
 }
 
-.roadmap-logo {
+.rm-logo {
   width: 26px;
   height: 26px;
   object-fit: contain;
 }
 
-.roadmap-emoji {
-  font-size: 1.1rem;
-}
+.rm-emoji { font-size: 1.1rem; }
 
-.roadmap-h-content {
-  margin-top: 44px;
-  padding: 12px 8px 0;
-  transition: transform var(--trans);
-}
+.rm-card { max-width: 155px; }
 
-.roadmap-h-stop:hover .roadmap-h-content {
-  transform: translateY(-4px);
-}
-
-.roadmap-era {
+.rm-parent {
+  display: block;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.56rem;
+  color: var(--coral);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1px;
+  font-weight: 600;
+}
+
+.rm-era {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
   color: var(--green);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   font-weight: 600;
-  display: block;
   margin-bottom: 2px;
 }
 
-.roadmap-h-title {
+.rm-title {
   font-family: var(--font-serif);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--ink);
   line-height: 1.3;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-.roadmap-h-detail {
-  font-size: 0.78rem;
+.rm-why {
+  font-size: 0.7rem;
   color: var(--ink-dim);
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
-.future-stop .roadmap-era {
-  color: var(--amber);
+.rm-future .rm-era { color: var(--amber); }
+.rm-future .rm-title { color: var(--amber); font-style: italic; }
+.rm-future .rm-why { color: var(--ink-faint); font-style: italic; }
+
+/* ═══════════════════════════════════════════════════════════
+   DEAL SPOTLIGHT — Arrow Navigation
+═══════════════════════════════════════════════════════════ */
+.deal-scroll-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.future-content .roadmap-h-title {
-  color: var(--amber);
-  font-style: italic;
+.deal-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1.5px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink-dim);
+  flex-shrink: 0;
+  transition: border-color var(--trans), background var(--trans), color var(--trans);
 }
 
-.future-content .roadmap-h-detail {
-  color: var(--ink-faint);
-  font-style: italic;
+.deal-arrow:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-pale);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1665,10 +1670,14 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .roadmap-h-stop { width: 140px; }
-  .roadmap-h-node { width: 38px; height: 38px; }
-  .roadmap-logo { width: 22px; height: 22px; }
-  .roadmap-h-detail { font-size: 0.72rem; }
+  .rm-item { width: calc(100% / 4); }
+  .rm-area { height: 120px; }
+  .rm-dot { width: 38px; height: 38px; }
+  .rm-logo { width: 22px; height: 22px; }
+  .rm-why { font-size: 0.66rem; }
+  .rm-card { max-width: 130px; }
+  .deal-arrow { display: none; }
+  .deal-cards { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {

@@ -193,7 +193,7 @@ function initMap() {
 }
 
 /* ════════════════════════════════════════════════════════
-   DEAL SPOTLIGHT — 3 cards in a grid
+   DEAL SPOTLIGHT — 3 cards with arrow navigation
 ════════════════════════════════════════════════════════ */
 function initDealSpotlight() {
   const container = document.getElementById('dealCards');
@@ -215,6 +215,15 @@ function initDealSpotlight() {
       </div>
     </div>
   `).join('');
+
+  // Arrow scroll navigation
+  const leftBtn = document.getElementById('dealLeft');
+  const rightBtn = document.getElementById('dealRight');
+  if (leftBtn && rightBtn) {
+    const scrollAmt = 360;
+    leftBtn.addEventListener('click', () => container.scrollBy({ left: -scrollAmt, behavior: 'smooth' }));
+    rightBtn.addEventListener('click', () => container.scrollBy({ left: scrollAmt, behavior: 'smooth' }));
+  }
 
   observeCards(container.querySelectorAll('.deal-card'));
 }
@@ -403,75 +412,157 @@ function renderAboutHero() {
     </div>
   `;
 
-  // Explore my path button — reveal timeline
+  // Explore my path button — reveal timeline and redraw SVG
   document.getElementById('explorePathBtn').addEventListener('click', () => {
     const timeline = document.getElementById('timeline');
     timeline.classList.remove('timeline-hidden');
     timeline.scrollIntoView({ behavior: 'smooth' });
+
+    // Redraw SVG path now that timeline is visible
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const track = document.querySelector('.rm-track');
+        if (track) {
+          const old = track.querySelector('.rm-svg');
+          if (old) old.remove();
+          drawRoadmapPath(track);
+        }
+      });
+    });
   });
 }
 
-/* ── HORIZONTAL SQUIGGLY ROADMAP (with logos) ── */
+/* ── SQUIGGLY ROADMAP — alternating up/down, no scroll ── */
 function renderTimeline() {
   const container = document.getElementById('timelineWrap');
   if (!container) return;
 
   const items = INVESTOR_LEARNER.timeline;
 
-  // Build SVG squiggly path
-  const stopWidth = 160;
-  const totalW = items.length * stopWidth;
-  const midY = 50;
-  const amplitude = 22;
-
-  // Generate squiggly path points
-  let pathD = `M 0 ${midY}`;
-  items.forEach((_, i) => {
-    const x = i * stopWidth + stopWidth / 2;
-    const dir = i % 2 === 0 ? -1 : 1;
-    const cp1x = (i * stopWidth + stopWidth * 0.25);
-    const cp1y = midY + dir * amplitude;
-    const cp2x = (i * stopWidth + stopWidth * 0.75);
-    const cp2y = midY + dir * amplitude;
-    pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x} ${midY}`;
-  });
-  // Extend to end
-  const lastX = (items.length - 1) * stopWidth + stopWidth / 2;
-  pathD += ` L ${totalW} ${midY}`;
-
   container.innerHTML = `
-    <div class="roadmap-h">
-      <div class="roadmap-h-track">
-        <svg class="roadmap-svg" viewBox="0 0 ${totalW} 100" preserveAspectRatio="none">
-          <path d="${pathD}" class="roadmap-path-bg" />
-          <path d="${pathD}" class="roadmap-path-solid" style="stroke-dasharray: ${lastX}; stroke-dashoffset: 0;" />
-          <line x1="${lastX}" y1="${midY}" x2="${totalW}" y2="${midY}" class="roadmap-path-dotted" />
-        </svg>
-        <div class="roadmap-h-stops">
-          ${items.map((item, i) => {
-            const isFuture = item.isFuture;
-            return `
-              <div class="roadmap-h-stop ${isFuture ? 'future-stop' : ''}" style="transition-delay:${i * 80}ms">
-                <div class="roadmap-h-node ${isFuture ? 'future-node' : ''}">
-                  ${item.logo
-                    ? `<img src="${item.logo}" alt="${item.era}" class="roadmap-logo" />`
-                    : `<span class="roadmap-emoji">${item.icon}</span>`
-                  }
-                </div>
-                <div class="roadmap-h-content ${isFuture ? 'future-content' : ''}">
-                  <span class="roadmap-era">${item.era}</span>
-                  <h3 class="roadmap-h-title">${item.title}</h3>
-                  <p class="roadmap-h-detail">${item.detail}</p>
-                </div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      </div>
+    <div class="rm-track">
+      ${items.map((item, i) => {
+        const isUp = i % 2 === 0;
+        const isFuture = item.isFuture;
+        const parentTag = item.parent ? `<span class="rm-parent">@ ${item.parent}</span>` : '';
+
+        const cardHtml = `
+          <div class="rm-card ${isFuture ? 'rm-future-card' : ''}">
+            ${parentTag}
+            <span class="rm-era">${item.era}</span>
+            <h4 class="rm-title">${item.title}</h4>
+            <p class="rm-why">${item.why}</p>
+          </div>
+        `;
+
+        const dotHtml = `
+          <div class="rm-dot ${isFuture ? 'rm-future-dot' : ''}">
+            ${item.logo
+              ? `<img src="${item.logo}" alt="${item.era}" class="rm-logo" />`
+              : `<span class="rm-emoji">${item.icon}</span>`
+            }
+          </div>
+        `;
+
+        return `
+          <div class="rm-item ${isUp ? 'rm-up' : 'rm-down'} ${isFuture ? 'rm-future' : ''}" style="transition-delay:${i * 60}ms">
+            <div class="rm-area rm-area-top">${isUp ? cardHtml : ''}</div>
+            ${dotHtml}
+            <div class="rm-area rm-area-bottom">${isUp ? '' : cardHtml}</div>
+          </div>
+        `;
+      }).join('')}
     </div>
   `;
 
-  observeCards(container.querySelectorAll('.roadmap-h-stop'));
+  // Draw SVG path after layout
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const track = container.querySelector('.rm-track');
+      drawRoadmapPath(track);
+
+      // Redraw on resize
+      let timer;
+      window.addEventListener('resize', () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          const old = track.querySelector('.rm-svg');
+          if (old) old.remove();
+          drawRoadmapPath(track);
+        }, 200);
+      });
+    });
+  });
+
+  observeCards(container.querySelectorAll('.rm-item'));
+}
+
+function drawRoadmapPath(track) {
+  if (!track) return;
+  const dots = [...track.querySelectorAll('.rm-dot')];
+  const trackRect = track.getBoundingClientRect();
+
+  const points = dots.map(dot => {
+    const rect = dot.getBoundingClientRect();
+    return {
+      x: rect.left + rect.width / 2 - trackRect.left,
+      y: rect.top + rect.height / 2 - trackRect.top,
+    };
+  });
+
+  if (points.length < 2) return;
+
+  const futureIdx = dots.findIndex(d => d.classList.contains('rm-future-dot'));
+  const solidEnd = futureIdx > 0 ? futureIdx : points.length;
+
+  // Build solid wavy path
+  let solidD = `M ${points[0].x} ${points[0].y}`;
+  for (let i = 1; i < solidEnd; i++) {
+    const prev = points[i - 1];
+    const curr = points[i];
+    const midX = (prev.x + curr.x) / 2;
+    const wave = 30 * (i % 2 === 0 ? 1 : -1);
+    solidD += ` C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
+  }
+
+  // Build dashed path to future
+  let dashedD = '';
+  if (futureIdx > 0 && futureIdx < points.length) {
+    const prev = points[futureIdx - 1];
+    const curr = points[futureIdx];
+    const midX = (prev.x + curr.x) / 2;
+    const wave = 30 * (futureIdx % 2 === 0 ? 1 : -1);
+    dashedD = `M ${prev.x} ${prev.y} C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
+  }
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.classList.add('rm-svg');
+  svg.setAttribute('width', trackRect.width);
+  svg.setAttribute('height', trackRect.height);
+
+  if (solidD) {
+    const path = document.createElementNS(svgNS, 'path');
+    path.setAttribute('d', solidD);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', '#5aa674');
+    path.setAttribute('stroke-width', '3');
+    path.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(path);
+  }
+
+  if (dashedD) {
+    const path = document.createElementNS(svgNS, 'path');
+    path.setAttribute('d', dashedD);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', '#a0a0b0');
+    path.setAttribute('stroke-width', '2');
+    path.setAttribute('stroke-dasharray', '8 6');
+    path.setAttribute('opacity', '0.5');
+    svg.appendChild(path);
+  }
+
+  track.prepend(svg);
 }
 
 /* ── COMMUNITIES (2+ columns with logos + photo) ── */
