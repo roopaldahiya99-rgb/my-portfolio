@@ -156,6 +156,10 @@ function initMap() {
       ? `<img src="${pin.logo}" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:4px;" />`
       : '';
 
+    const tagsHtml = (pin.stages || pin.sectors)
+      ? `<div class="popup-tags">${(pin.stages || []).map(s => `<span class="popup-stage">${s}</span>`).join('')}${(pin.sectors || []).map(s => `<span class="popup-sector">${s}</span>`).join('')}</div>`
+      : '';
+
     marker.bindPopup(`
       <div class="pin-popup deal-popup">
         <div class="popup-header">
@@ -163,6 +167,7 @@ function initMap() {
           <h4>${pin.country}</h4>
         </div>
         <p class="popup-spotlight">${logoHtml}${pin.desc}</p>
+        ${tagsHtml}
       </div>
     `, { maxWidth: 280 });
 
@@ -179,14 +184,17 @@ function initDealSpotlight() {
 
   container.innerHTML = DEAL_SPOTLIGHT.map((deal, i) => `
     <div class="deal-card" style="transition-delay:${i * 100}ms">
-      <div class="deal-card-top">
-        <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="${deal.region} flag" />
-        <div class="deal-top-tags">
-          <span class="deal-stage-tag">${deal.stage}</span>
-          ${deal.sectors.map(s => `<span class="tag">${s}</span>`).join('')}
-        </div>
+      <div class="deal-card-header">
+        <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="flag" />
+        <h3 class="deal-title">${deal.title}</h3>
       </div>
-      <h3 class="deal-title">${deal.title}</h3>
+      <div class="deal-tags">
+        <span class="deal-stage-tag">${deal.stage}</span>
+        <span class="tag">${deal.sector}</span>
+      </div>
+      <div class="deal-facts">
+        ${deal.facts.map(f => `<span class="deal-fact">${f}</span>`).join('')}
+      </div>
       <p class="deal-desc">${deal.description}</p>
       <div class="deal-insight">
         <strong>What I Learned:</strong> ${deal.whatILearned}
@@ -326,20 +334,11 @@ function renderDiaryRight() {
 
   const sourcesPanel = `
     <div class="diary-panel" data-panel="sources">
-      <div class="sources-list">
-        ${FIELD_NOTES.fromPeople.map((src, i) => `
-          <div class="source-item" style="transition-delay:${i * 80}ms">
-            <div class="source-icon">${src.icon}</div>
-            <div class="source-info">
-              <div class="source-top">
-                <span class="source-name">${src.name}</span>
-                <span class="source-type">${src.type}</span>
-              </div>
-              <p class="source-why">${src.why}</p>
-            </div>
-          </div>
+      <ul class="sources-plain">
+        ${FIELD_NOTES.fromPeople.map(src => `
+          <li><a href="${src.url}" target="_blank" rel="noopener"><strong>${src.name}</strong></a> — ${src.why}</li>
         `).join('')}
-      </div>
+      </ul>
     </div>
   `;
 
