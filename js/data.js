@@ -1,84 +1,72 @@
 /* ─────────────────────────────────────────────────────────
-   PORTFOLIO DATA — Full Redesign
+   PORTFOLIO DATA — Full Redesign v4
    Update this file to keep your site current.
 ───────────────────────────────────────────────────────── */
 
 // ── DEAL MAP ─────────────────────────────────────────────
-// Investor origins → deal destinations with connection lines
+// Flat pin array + explicit connections
 const DEAL_MAP = {
-  investors: [
-    { id: "bdc",      label: "BDC Capital",          city: "Toronto",     lat: 43.65,  lng: -79.38,  code: "ca" },
-    { id: "usaid",    label: "USAID",                 city: "Washington",  lat: 38.91,  lng: -77.04,  code: "us" },
-    { id: "shell",    label: "Shell",                 city: "Houston",     lat: 29.76,  lng: -95.37,  code: "us" },
-    { id: "google",   label: "Google News Initiative", city: "Mountain View", lat: 37.39, lng: -122.08, code: "us" },
-    { id: "kois",     label: "KOIS Invest",           city: "Brussels",    lat: 50.85,  lng: 4.35,    code: "be" },
-    { id: "dalberg",  label: "Dalberg Advisors",      city: "New Delhi",   lat: 28.61,  lng: 77.21,   code: "in" },
+  pins: [
+    { id: "australia", country: "Australia", lat: -25, lng: 134, code: "au",
+      desc: "Backed institutional healthcare ventures across Southeast Asia",
+      type: "deal" },
+    { id: "vietnam", country: "Vietnam", lat: 14.06, lng: 108.28, code: "vn",
+      desc: "Healthcare enterprise scaling — unlocked $400M+ revenue opportunity",
+      type: "deal" },
+    { id: "indonesia", country: "Indonesia", lat: -0.79, lng: 113.92, code: "id",
+      desc: "Kimberly Clark CVC — menstrual health for underserved populations",
+      type: "deal" },
+    { id: "newdelhi", country: "India — New Delhi", lat: 28.61, lng: 77.21, code: "in",
+      desc: "Drove investments into consumertech, healthtech, femtech startups",
+      type: "deal" },
+    { id: "mumbai", country: "India — Mumbai", lat: 19.08, lng: 72.88, code: "in",
+      desc: "Fintech innovation — optimized outcomes for 5M underserved people",
+      type: "deal" },
+    { id: "bangalore", country: "India — Bangalore", lat: 12.97, lng: 77.59, code: "in",
+      desc: "Wysa — Series C AI mental health operating exposure",
+      type: "ops",
+      logo: "assets/logos/wysa.png" },
+    { id: "useast", country: "United States — East Coast", lat: 38.91, lng: -77.04, code: "us",
+      desc: "Kimberly Clark — strategic investments in South & Southeast Asia",
+      type: "investor" },
+    { id: "uswest", country: "United States — West Coast", lat: 37.39, lng: -122.08, code: "us",
+      desc: "USAID — capital deployment into Southeast Asia",
+      type: "investor" },
+    { id: "cambodia", country: "Cambodia", lat: 12.57, lng: 104.99, code: "kh",
+      desc: "USAID — $30M climate-smart tech capital deployed",
+      type: "deal" },
+    { id: "singapore", country: "Singapore", lat: 1.35, lng: 103.82, code: "sg",
+      desc: "Google News Initiative — $20M Indian media-tech pipeline",
+      type: "investor" },
+    { id: "alberta", country: "Canada — Alberta", lat: 51.05, lng: -114.07, code: "ca",
+      desc: "Flora — first-of-its-kind portable fertility insurance",
+      type: "deal" },
+    { id: "mena", country: "MENA", lat: 23.88, lng: 45.08, code: "sa",
+      desc: "Shell — structured finance facility for clean energy access",
+      type: "deal" },
+    { id: "novascotia", country: "Canada — Nova Scotia", lat: 44.65, lng: -63.57, code: "ca",
+      desc: "pHathom — ocean carbon sequestration and credit generation",
+      type: "deal" },
+    { id: "toronto", country: "Canada — Toronto", lat: 43.65, lng: -79.38, code: "ca",
+      desc: "BDC & Meissner — operational and advisory exposure",
+      type: "deal",
+      logo: "assets/logos/bdc.png" },
+    { id: "africa", country: "Africa — Kenya", lat: -1.29, lng: 36.82, code: "ke",
+      desc: "Affordable healthtech ventures serving underserved populations",
+      type: "deal" },
+    { id: "europe", country: "Europe — Brussels", lat: 50.85, lng: 4.35, code: "eu",
+      desc: "KOIS — early-stage healthcare investments across the continent",
+      type: "deal",
+      logo: "assets/logos/kois.png" },
   ],
-
-  destinations: [
-    {
-      country: "Canada", code: "ca", lat: 49.28, lng: -106.35,
-      spotlight: "Early-Stage B2B, Fintech & EdTech — $500MM Thrive Fund",
-      stages: ["Early Stage", "Growth Stage"],
-      sectors: ["Fintech", "B2B SaaS", "EdTech"],
-      fromInvestors: ["bdc"],
-    },
-    {
-      country: "India", code: "in", lat: 20.59, lng: 78.96,
-      spotlight: "Assistive Tech, Healthcare & Media Investments",
-      stages: ["Early Stage", "Growth Stage"],
-      sectors: ["Healthcare", "Assistive Tech", "Media Tech"],
-      fromInvestors: ["kois", "google"],
-    },
-    {
-      country: "Indonesia", code: "id", lat: -0.79, lng: 113.92,
-      spotlight: "Assistive Technology Investment Thesis",
-      stages: ["Growth Stage"],
-      sectors: ["Assistive Tech", "Healthcare"],
-      fromInvestors: ["kois"],
-    },
-    {
-      country: "Cambodia", code: "kh", lat: 12.57, lng: 104.99,
-      spotlight: "Climate-Tech — $30M Capital Deployment",
-      stages: ["Early Stage"],
-      sectors: ["Climate-Tech", "Impact"],
-      fromInvestors: ["usaid"],
-    },
-    {
-      country: "Vietnam", code: "vn", lat: 14.06, lng: 108.28,
-      spotlight: "Social Eyecare Enterprise — $400M Expansion",
-      stages: ["Growth Stage"],
-      sectors: ["Healthtech", "Social Enterprise"],
-      fromInvestors: ["dalberg"],
-    },
-    {
-      country: "MENA", code: "sa", lat: 23.88, lng: 45.08,
-      spotlight: "Clean Energy for Refugee Settlements — 500K+ Beneficiaries",
-      stages: ["Growth Stage"],
-      sectors: ["Clean Energy", "Impact"],
-      fromInvestors: ["shell"],
-    },
-    {
-      country: "Kenya", code: "ke", lat: -1.29, lng: 36.82,
-      spotlight: "Assistive Tech & Healthcare Ventures",
-      stages: ["Early Stage"],
-      sectors: ["Healthcare", "Assistive Tech"],
-      fromInvestors: ["kois"],
-    },
-    {
-      country: "Southeast Asia", code: "sg", lat: 1.35, lng: 103.82,
-      spotlight: "Cross-Border Acquisition — $15MM Revenue Unlock",
-      stages: ["Growth Stage"],
-      sectors: ["M&A", "Cross-border"],
-      fromInvestors: ["dalberg"],
-    },
+  connections: [
+    { from: "australia", to: "vietnam", color: "#5aa674" },
+    { from: "australia", to: "indonesia", color: "#5aa674" },
+    { from: "singapore", to: "newdelhi", color: "#d4932a" },
+    { from: "useast", to: "newdelhi", color: "#3d8bb5" },
+    { from: "useast", to: "indonesia", color: "#3d8bb5" },
+    { from: "uswest", to: "cambodia", color: "#7c5cbf" },
   ],
-
-  operationalStar: {
-    city: "Bangalore", country: "India", code: "in", lat: 12.97, lng: 77.59,
-    label: "Operational Experience",
-    detail: "Worked on the ground with Wysa — a global AI mental health startup. Built GTM strategy from scratch, ran customer training, and shaped organisational design alongside the founder.",
-  },
 };
 
 // ── DEAL SPOTLIGHT ───────────────────────────────────────
@@ -116,16 +104,15 @@ const DEAL_SPOTLIGHT = [
 // ── LESSONS LEARNED ──────────────────────────────────────
 const LESSONS_LEARNED = {
   lessons: [
-    "Bet on the jockey, not the horse — markets shift, products pivot, but exceptional founders adapt.",
-    "Cross-border deals are trust exercises — capital is global, but trust is local.",
-    "The best frameworks are earned, not borrowed — generic checklists don't survive first contact with a real deal.",
-    "Sectors are chosen by curiosity, not mandate — I follow problems, not trends.",
-    "Operating experience changes how you invest — you underwrite differently once you've built something yourself.",
+    "Market depth beats market sizing — knowing TAM isn't enough. You need to understand value chains, user journeys, regulations, and ecosystems well enough to build in them yourself.",
+    "Founder-market fit is overrated — I've seen founders with raw grit and uncanny passion outperform seasoned industry veterans. Experience helps, but obsession wins.",
+    "Capital alone doesn't drive returns — the right syndicate, strategic support, and investor relationships are what compound value. This isn't just about follow-on; it's about how you show up post-close.",
+    "Real deals are messy — co-founders exit, metrics slip, timelines break. Navigating chaos through strong structuring and term sheet discipline is the real job.",
+    "The best investments change the world — I've seen it firsthand on the ground. Ventures unlocking healthcare access, clean energy, financial inclusion. This is what drives me to work every single day.",
   ],
 };
 
 // ── FIELD NOTES ──────────────────────────────────────────
-// Replaces the old LEARNING tabbed structure
 const FIELD_NOTES = {
   hero: {
     label: "Field Notes",
@@ -173,6 +160,13 @@ const FIELD_NOTES = {
 
   fromTheClassroom: [
     {
+      icon: "📜",
+      title: "CFA & PE Certification",
+      whatILearned: "DCF, LBO, cap table modelling, and financial analysis foundations",
+      details: "Built deep fluency in DCF modelling, LBO structuring, cap table modelling, and exit modelling. Proficient in CapIQ, FactSet, PitchBook, and advanced Excel. These tools are the analytical foundation I bring to every deal memo, financial model, and IC presentation — turning qualitative conviction into quantitative rigour.",
+      tags: ["DCF", "LBO", "CapIQ", "FactSet", "PitchBook"],
+    },
+    {
       icon: "🎓",
       title: "MBA at Rotman — Finance Specialisation",
       whatILearned: "DCF, LBO modelling, VC strategy, M&A, and financial statement analysis",
@@ -181,17 +175,10 @@ const FIELD_NOTES = {
     },
     {
       icon: "📚",
-      title: "MBA Case Studies — Favourite Picks",
+      title: "Favourite PE & VC Case Studies",
       whatILearned: "Value creation levers, brand moats, and market entry strategy",
       details: "LVMH × Tiffany taught me that luxury M&A is about acquiring customer relationships, not just brands. Louis Vuitton's vertical integration showed me how moats are built over decades. M-Pesa vs. Nubank revealed that the best fintech companies design for the unbanked from scratch. Renewable energy transition cases convinced me that climate is the largest capital reallocation event in history.",
       tags: ["LVMH", "Fintech", "Energy Transition", "Strategy"],
-    },
-    {
-      icon: "📜",
-      title: "Technical Skills & Certifications",
-      whatILearned: "Analytical toolkit: DCF, LBO, cap table, and exit modelling",
-      details: "Built deep fluency in DCF modelling, LBO structuring, cap table modelling, and exit modelling. Proficient in CapIQ, FactSet, PitchBook, and advanced Excel. These tools are the analytical foundation I bring to every deal memo, financial model, and IC presentation — turning qualitative conviction into quantitative rigour.",
-      tags: ["DCF", "LBO", "CapIQ", "FactSet", "PitchBook"],
     },
   ],
 
@@ -226,94 +213,88 @@ const FIELD_NOTES = {
       icon: "🎙️",
       why: "Long-form storytelling about how the world's best companies were built. I listen on flights and runs. History is the best framework for investing — if you understand how Costco, LVMH, or TSMC were built, you see patterns everywhere.",
     },
+    {
+      name: "Two Small Fish",
+      type: "Blog",
+      icon: "✍️",
+      why: "A personal blog exploring travel, culture, and the intersections of life and work. Writing forces clarity — it sharpens how I see markets, people, and the stories behind every investment.",
+    },
   ],
 };
 
 // ── INVESTOR / LEARNER (About Page) ─────────────────────
 const INVESTOR_LEARNER = {
   hero: {
-    bio: "Investor. Traveller. Perpetual learner. I'm currently with <strong>BDC Capital's $500MM Thrive Fund</strong>, deploying capital into Canada's most promising early-stage fintech, vertical software, and enterprise B2B ventures. I hold an <strong>MBA from Rotman</strong> specializing in finance (Dean's List, 3.75 GPA), and I've built my career across venture investing, global advisory, and startup operations. Outside of work, I love to solo travel — 26+ cities across South and Southeast Asia in one year — build communities that bridge cultures and continents, and champion financial literacy for women.",
+    tagline: "Investor. Traveller. Perpetual learner.",
+    bio: "I'm currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across fintech, healthtech, climate, and enterprise software. I hold an <strong>MBA from Rotman</strong> specializing in finance — where I went from finance 101 to 501, sharpened my modelling and valuation toolkit, and led the Women in Management Association. Before that, I built my lens across global advisory at Dalberg, early-stage investing at KOIS, and startup operations at Wysa. Outside of work, I love to solo travel, build communities that bridge cultures and continents, and champion women's empowerment and climate action.",
     photo: "assets/Roopal.jpeg",
   },
 
   timeline: [
     {
       era: "University of Delhi",
-      title: "Editor & Writer",
-      why: "This is where I learned to write clearly. I was Editor in Chief and reviewed 50+ writing pieces.",
+      title: "Taught me to write with clarity",
+      why: "Editor in Chief — reviewed and edited 50+ articles, sharpening every word into conviction.",
       icon: "✍️",
     },
     {
       era: "Startup Compass",
-      title: "Co-Author",
-      why: "Interviewed unicorn founders — fell in love with startups and building from zero.",
+      title: "Sparked my love for entrepreneurship",
+      why: "Co-authored a startup playbook, interviewed unicorn founders — fell in love with building from zero.",
       icon: "📖",
     },
     {
       era: "Dalberg Advisors",
-      title: "Global Advisory",
-      why: "This gave me my global map. I worked with Kimberly Clark, Shell, Google. I learned to walk into a room full of high-stakes stakeholders and drive decisions.",
-      icon: "🌏",
+      title: "Taught me to command a room",
+      why: "Presented to USAID, Google, Kimberly Clark, Shell, World Bank — high-stakes, high-conviction advisory.",
       logo: "assets/logos/dalberg.png",
     },
     {
-      era: "Google News Initiative",
-      title: "Media & Innovation",
-      why: "Built a proprietary pipeline guiding $20MM in investments across India's news ecosystem.",
-      icon: "🔍",
-      parent: "Dalberg",
-    },
-    {
       era: "USAID Cambodia",
-      title: "Climate-Tech",
-      why: "Guided $30M in climate-tech capital deployment — where I fell in love with impact investing.",
+      title: "Taught me to learn markets fast",
+      why: "Guided $30M in climate-tech capital across a new geography in under 6 months.",
       icon: "🌱",
-      parent: "Dalberg",
     },
     {
       era: "Solo Travel",
-      title: "26+ Cities",
-      why: "This is where I learned to build communities and develop networks across cultures and continents.",
+      title: "Built my global community",
+      why: "26+ cities across South and Southeast Asia — the networks and perspectives that shape how I invest.",
       icon: "✈️",
     },
     {
       era: "KOIS Invest",
-      title: "Early-Stage Investing",
-      why: "My first real exposure to venture — fell in love with turning capital into catalysts.",
-      icon: "💡",
+      title: "Taught me to source and invest",
+      why: "First venture exposure — built pipeline, screened 20+ deals, developed conviction from scratch.",
       logo: "assets/logos/kois.png",
     },
     {
       era: "Wysa",
-      title: "AI Startup Ops",
-      why: "Operating inside a startup changed how I invest forever. I stopped asking hypothetical questions.",
-      icon: "🚀",
+      title: "Gave me the operator's lens",
+      why: "Built GTM from scratch at a Series C AI mental health startup — stopped asking hypothetical questions.",
       logo: "assets/logos/wysa.png",
     },
     {
       era: "Rotman MBA",
-      title: "Finance & CDL",
-      why: "This is where I developed my financial skills — modelling, valuation, and investment frameworks.",
-      icon: "🎓",
+      title: "Sharpened my financial toolkit",
+      why: "Finance 101 to 501, modelling, valuation frameworks — and leading Women in Management.",
       logo: "assets/logos/uoft.png",
     },
     {
       era: "CFA & PE Cert",
-      title: "Certification",
-      why: "Built fluency in DCF, LBO, and financial analysis — the analytical backbone of every deal.",
+      title: "First principles in private equity",
+      why: "DCF, LBO, cap tables — the analytical backbone behind every deal memo and IC presentation.",
       icon: "📜",
     },
     {
       era: "BDC Capital",
-      title: "$500MM Thrive Fund",
-      why: "Currently deploying capital into Canada's most promising ventures. 100% IC approval on authored memos.",
-      icon: "💼",
+      title: "Dealwork and investment discipline",
+      why: "Deploying into Canada's top ventures — 100% IC approval on every authored memo.",
       logo: "assets/logos/bdc.png",
     },
     {
       era: "The Future",
       title: "My Own Fund",
-      why: "I see myself investing in world-changing, category-defining companies — and one day, leading my own fund.",
+      why: "Investing in world-changing, category-defining companies — and one day, leading my own fund.",
       icon: "🌟",
       isFuture: true,
     },
@@ -321,20 +302,21 @@ const INVESTOR_LEARNER = {
 
   communities: {
     photo: "assets/Community.jpeg",
+    intro: "These communities are my unfair advantage — they shape how I source deals, understand markets, and stay sharp. Every conversation is a data point; every relationship compounds.",
     list: [
-      { name: "University of Toronto", desc: "Alumni network — Rotman School of Management", logo: "assets/logos/uoft.png", url: null },
-      { name: "Creative Destruction Lab (CDL)", desc: "Deep-tech startup accelerator — mentor & affiliate", logo: null, url: null },
-      { name: "UNLEASH", desc: "Global Innovation Lab for the SDGs", logo: null, url: null },
-      { name: "CAFIID", desc: "Canadian Association for International Development", logo: null, url: null },
-      { name: "CWVC", desc: "Canadian Women in Venture Capital", logo: null, url: null },
-      { name: "Personal Network", desc: "Founders, investors, and operators across 10+ countries", logo: null, url: null },
+      { name: "University of Toronto", desc: "Canada's largest alumni network — behind 500+ startups and a globally top-ranked research university", logo: "assets/logos/uoft.png", url: null },
+      { name: "Creative Destruction Lab (CDL)", desc: "World's leading deep-tech accelerator — where science meets venture and breakthroughs become companies", logo: null, url: null },
+      { name: "UNLEASH", desc: "A truly global network of 7,000+ innovators from 190+ countries solving the world's biggest challenges", logo: null, url: null },
+      { name: "CAFIID", desc: "Canada's development finance community — bridging capital, policy, and impact at scale", logo: null, url: null },
+      { name: "CWVC", desc: "Canadian Women in VC — building the next generation of women fund managers and investors", logo: null, url: null },
+      { name: "Personal Network", desc: "Founders, investors, and operators across 10+ countries — built through travel, deals, and genuine curiosity", logo: null, url: null },
     ],
   },
 
   contact: {
     message: "I love connecting with people who are building, investing, or simply curious. If anything on this site resonated — or if you just want to talk startups over coffee — I'd love to hear from you.",
     email: "mailto:roopaldahiya5@gmail.com",
-    calendly: "https://calendly.com", // Replace with real URL
+    calendly: "https://calendly.com",
     linkedin: "https://www.linkedin.com/in/roopaldahiya",
   },
 };

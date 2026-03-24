@@ -331,6 +331,22 @@ img { max-width: 100%; display: block; }
 .dot-support { background: var(--ink-faint); box-shadow: 0 0 6px rgba(160,160,176,0.5); }
 .dot-star    { background: var(--amber); box-shadow: 0 0 6px rgba(212,147,42,0.5); }
 
+.legend-note {
+  font-size: 0.6rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* Showcase note — subtle disclaimer */
+.showcase-note {
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  font-family: var(--font-sans);
+  margin-top: 6px;
+}
+
 /* Map pin markers */
 .pin-marker {
   width: 16px;
@@ -400,19 +416,24 @@ img { max-width: 100%; display: block; }
 
 /* Map popup — deal spotlight */
 .pin-popup { min-width: 200px; }
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
 .popup-flag-img {
-  width: 32px;
+  width: 28px;
   height: auto;
   border-radius: 3px;
-  margin-bottom: 8px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.12);
-  display: block;
+  flex-shrink: 0;
 }
 .pin-popup h4 {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: var(--ink);
-  margin-bottom: 4px;
+  margin: 0;
 }
 .popup-deal-label {
   font-family: var(--font-mono);
@@ -1128,11 +1149,12 @@ img { max-width: 100%; display: block; }
 }
 
 .about-tagline {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  color: var(--ink-dim);
-  margin-bottom: 20px;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--green);
+  margin-bottom: 16px;
 }
 
 .about-bio {
@@ -1422,6 +1444,14 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   background: linear-gradient(145deg, var(--teal-pale), var(--purple-pale));
   font-size: 4rem;
+}
+
+.community-intro {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
 }
 
 .community-grid {

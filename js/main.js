@@ -107,89 +107,67 @@ function initMap() {
     maxZoom: 19,
   }).addTo(map);
 
-  const investorMap = {};
-  DEAL_MAP.investors.forEach(inv => { investorMap[inv.id] = inv; });
+  // Build pin lookup for connections
+  const pinMap = {};
+  DEAL_MAP.pins.forEach(p => { pinMap[p.id] = p; });
 
-  const lineColors = ['#5aa674', '#3d8bb5', '#d4932a', '#7c5cbf', '#2e9aa8', '#e8674d'];
-
-  DEAL_MAP.destinations.forEach((dest, di) => {
-    dest.fromInvestors.forEach(invId => {
-      const inv = investorMap[invId];
-      if (!inv) return;
-      L.polyline([[inv.lat, inv.lng], [dest.lat, dest.lng]], {
-        color: lineColors[di % lineColors.length],
-        weight: 1.5,
-        opacity: 0.3,
-        dashArray: '6 6',
-      }).addTo(map);
-    });
+  // Draw connection lines
+  DEAL_MAP.connections.forEach(conn => {
+    const from = pinMap[conn.from];
+    const to = pinMap[conn.to];
+    if (!from || !to) return;
+    L.polyline([[from.lat, from.lng], [to.lat, to.lng]], {
+      color: conn.color || '#5aa674',
+      weight: 1.5,
+      opacity: 0.3,
+      dashArray: '6 6',
+    }).addTo(map);
   });
 
-  const renderedInvestors = new Set();
-  DEAL_MAP.investors.forEach(inv => {
-    const key = `${inv.lat}-${inv.lng}`;
-    if (renderedInvestors.has(key)) return;
-    renderedInvestors.add(key);
+  // Render all pins
+  DEAL_MAP.pins.forEach(pin => {
+    let markerHtml, iconSize, iconAnchor;
+
+    if (pin.type === 'ops') {
+      markerHtml = `<div class="pin-marker pin-star" title="${pin.country}">★</div>`;
+      iconSize = [20, 20];
+      iconAnchor = [10, 10];
+    } else if (pin.type === 'investor') {
+      markerHtml = `<div class="pin-marker pin-origin" title="${pin.country}"></div>`;
+      iconSize = [10, 10];
+      iconAnchor = [5, 5];
+    } else {
+      markerHtml = `<div class="pin-marker pin-invest" title="${pin.country}"></div>`;
+      iconSize = [16, 16];
+      iconAnchor = [8, 8];
+    }
 
     const icon = L.divIcon({
       className: '',
-      html: `<div class="pin-marker pin-origin" title="${inv.city}"></div>`,
-      iconSize: [10, 10],
-      iconAnchor: [5, 5],
-    });
-    const marker = L.marker([inv.lat, inv.lng], { icon }).addTo(map);
-    marker.bindTooltip(inv.city, { direction: 'top', offset: [0, -8], className: 'origin-tooltip' });
-  });
-
-  DEAL_MAP.destinations.forEach(dest => {
-    const icon = L.divIcon({
-      className: '',
-      html: `<div class="pin-marker pin-invest" title="${dest.country}"></div>`,
-      iconSize: [16, 16],
-      iconAnchor: [8, 8],
+      html: markerHtml,
+      iconSize: iconSize,
+      iconAnchor: iconAnchor,
       popupAnchor: [0, -14],
     });
 
-    const marker = L.marker([dest.lat, dest.lng], { icon }).addTo(map);
+    const marker = L.marker([pin.lat, pin.lng], { icon }).addTo(map);
 
-    const stagesHtml = dest.stages.map(s => `<span class="popup-stage">${s}</span>`).join(' ');
-    const sectorsHtml = dest.sectors.map(s => `<span class="popup-sector">${s}</span>`).join(' ');
+    const logoHtml = pin.logo
+      ? `<img src="${pin.logo}" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:4px;" />`
+      : '';
 
     marker.bindPopup(`
       <div class="pin-popup deal-popup">
-        <img class="popup-flag-img" src="https://flagcdn.com/w40/${dest.code}.png" alt="${dest.country} flag" />
-        <div class="popup-deal-label">Deal Spotlight</div>
-        <h4>${dest.country}</h4>
-        <p class="popup-spotlight">${dest.spotlight}</p>
-        <div class="popup-tags">
-          ${stagesHtml}
-          ${sectorsHtml}
+        <div class="popup-header">
+          <img class="popup-flag-img" src="https://flagcdn.com/w40/${pin.code}.png" alt="${pin.country} flag" />
+          <h4>${pin.country}</h4>
         </div>
+        <p class="popup-spotlight">${logoHtml}${pin.desc}</p>
       </div>
     `, { maxWidth: 280 });
 
     marker.on('mouseover', function() { this.openPopup(); });
   });
-
-  const star = DEAL_MAP.operationalStar;
-  const starIcon = L.divIcon({
-    className: '',
-    html: `<div class="pin-marker pin-star" title="${star.city}">★</div>`,
-    iconSize: [20, 20],
-    iconAnchor: [10, 10],
-    popupAnchor: [0, -14],
-  });
-
-  const starMarker = L.marker([star.lat, star.lng], { icon: starIcon }).addTo(map);
-  starMarker.bindPopup(`
-    <div class="pin-popup">
-      <img class="popup-flag-img" src="https://flagcdn.com/w40/${star.code}.png" alt="India flag" />
-      <div class="popup-deal-label">Operational Experience</div>
-      <h4>${star.city}, ${star.country}</h4>
-      <p style="font-size:0.82rem;color:#4a4a60;line-height:1.6;">${star.detail}</p>
-    </div>
-  `, { maxWidth: 280 });
-  starMarker.on('mouseover', function() { this.openPopup(); });
 }
 
 /* ════════════════════════════════════════════════════════
@@ -266,6 +244,7 @@ function renderDiaryLeft() {
       <p class="section-label">${FIELD_NOTES.hero.label}</p>
       <h1 class="diary-title">${FIELD_NOTES.hero.title}</h1>
       <p class="diary-subtitle">${FIELD_NOTES.hero.subtitle}</p>
+      <p class="showcase-note" style="margin-top:18px;">A select collection — not exhaustive</p>
       <div class="diary-scribble diary-scribble-1">~</div>
       <div class="diary-scribble diary-scribble-2">*</div>
       <div class="diary-scribble diary-scribble-3">//</div>
@@ -279,7 +258,7 @@ function renderDiaryRight() {
 
   // Build tab bar with icons and new names
   const tabs = [
-    { id: 'field', label: 'Deal-work', icon: '🧭' },
+    { id: 'field', label: 'Deals — Go and No-Go', icon: '🧭' },
     { id: 'classroom', label: 'Classes & Cases', icon: '📚' },
     { id: 'sources', label: 'People & Perspectives', icon: '🎙️' },
   ];
@@ -404,6 +383,7 @@ function renderAboutHero() {
     </div>
     <div class="about-intro">
       <h1 class="about-name"><em>Roopal</em></h1>
+      <p class="about-tagline">${INVESTOR_LEARNER.hero.tagline}</p>
       <p class="about-bio">${INVESTOR_LEARNER.hero.bio}</p>
       <button class="explore-path-btn" id="explorePathBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
@@ -444,11 +424,9 @@ function renderTimeline() {
       ${items.map((item, i) => {
         const isUp = i % 2 === 0;
         const isFuture = item.isFuture;
-        const parentTag = item.parent ? `<span class="rm-parent">@ ${item.parent}</span>` : '';
 
         const cardHtml = `
           <div class="rm-card ${isFuture ? 'rm-future-card' : ''}">
-            ${parentTag}
             <span class="rm-era">${item.era}</span>
             <h4 class="rm-title">${item.title}</h4>
             <p class="rm-why">${item.why}</p>
@@ -628,9 +606,16 @@ function renderCommunities() {
     `;
   }).join('');
 
+  const introHtml = INVESTOR_LEARNER.communities.intro
+    ? `<p class="community-intro">${INVESTOR_LEARNER.communities.intro}</p>`
+    : '';
+
   container.innerHTML = `
     <div class="community-photo">${photoHtml}</div>
-    <div class="community-grid">${cardsHtml}</div>
+    <div class="community-content">
+      ${introHtml}
+      <div class="community-grid">${cardsHtml}</div>
+    </div>
   `;
 }
 
