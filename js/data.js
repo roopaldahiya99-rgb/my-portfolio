@@ -121,7 +121,7 @@ const FIELD_NOTES = {
   hero: {
     label: "Field Notes",
     title: "Every Lesson Is a <em>Compass</em>.",
-    subtitle: "I carry a growth mindset into every room I enter. I ask myself daily: <em>what did I learn today, and how can I apply this to my work and life?</em> Articles, podcasts, classrooms — they all feed the fire. But the deepest learning happens in the field: in deal rooms, founder conversations, and the messy, humbling work of deploying capital where it matters.",
+    subtitle: "I carry a growth mindset into every room I enter. I ask myself: <em>what did I learn today, and how can I apply this to my work and life?</em>",
   },
 
   fromTheField: [

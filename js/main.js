@@ -492,23 +492,23 @@ function drawRoadmapPath(track) {
   const futureIdx = dots.findIndex(d => d.classList.contains('rm-future-dot'));
   const solidEnd = futureIdx > 0 ? futureIdx : points.length;
 
-  // Build curvy road path with big sweeping curves
+  // Build curvy flight path with sweeping curves
   let solidD = `M ${points[0].x} ${points[0].y}`;
   for (let i = 1; i < solidEnd; i++) {
     const prev = points[i - 1];
     const curr = points[i];
     const midX = (prev.x + curr.x) / 2;
-    const wave = 75 * (i % 2 === 0 ? 1 : -1);
+    const wave = 60 * (i % 2 === 0 ? 1 : -1);
     solidD += ` C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
   }
 
-  // Future dashed road
+  // Future dashed segment
   let dashedD = '';
   if (futureIdx > 0 && futureIdx < points.length) {
     const prev = points[futureIdx - 1];
     const curr = points[futureIdx];
     const midX = (prev.x + curr.x) / 2;
-    const wave = 75 * (futureIdx % 2 === 0 ? 1 : -1);
+    const wave = 60 * (futureIdx % 2 === 0 ? 1 : -1);
     dashedD = `M ${prev.x} ${prev.y} C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
   }
 
@@ -518,61 +518,93 @@ function drawRoadmapPath(track) {
   svg.setAttribute('width', trackRect.width);
   svg.setAttribute('height', trackRect.height);
 
-  // Road shadow (outer edge)
+  // Arrow marker definition
+  const defs = document.createElementNS(svgNS, 'defs');
+  const marker = document.createElementNS(svgNS, 'marker');
+  marker.setAttribute('id', 'flight-arrow');
+  marker.setAttribute('markerWidth', '8');
+  marker.setAttribute('markerHeight', '6');
+  marker.setAttribute('refX', '8');
+  marker.setAttribute('refY', '3');
+  marker.setAttribute('orient', 'auto');
+  const arrowPath = document.createElementNS(svgNS, 'path');
+  arrowPath.setAttribute('d', 'M0,0 L8,3 L0,6 L2,3 Z');
+  arrowPath.setAttribute('fill', '#5aa674');
+  marker.appendChild(arrowPath);
+  defs.appendChild(marker);
+  svg.appendChild(defs);
+
+  // Flight path — soft shadow
   if (solidD) {
     const shadow = document.createElementNS(svgNS, 'path');
     shadow.setAttribute('d', solidD);
     shadow.setAttribute('fill', 'none');
-    shadow.setAttribute('stroke', '#e0d8cc');
-    shadow.setAttribute('stroke-width', '18');
+    shadow.setAttribute('stroke', 'rgba(58,125,86,0.08)');
+    shadow.setAttribute('stroke-width', '12');
     shadow.setAttribute('stroke-linecap', 'round');
     svg.appendChild(shadow);
   }
 
-  // Road surface (thick green)
+  // Flight path — main dashed line
   if (solidD) {
-    const road = document.createElementNS(svgNS, 'path');
-    road.setAttribute('d', solidD);
-    road.setAttribute('fill', 'none');
-    road.setAttribute('stroke', '#3a7d56');
-    road.setAttribute('stroke-width', '12');
-    road.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(road);
+    const flight = document.createElementNS(svgNS, 'path');
+    flight.setAttribute('d', solidD);
+    flight.setAttribute('fill', 'none');
+    flight.setAttribute('stroke', '#5aa674');
+    flight.setAttribute('stroke-width', '2.5');
+    flight.setAttribute('stroke-dasharray', '8 6');
+    flight.setAttribute('stroke-linecap', 'round');
+    flight.setAttribute('marker-end', 'url(#flight-arrow)');
+    svg.appendChild(flight);
   }
 
-  // Center dashed line (white road markings)
-  if (solidD) {
-    const center = document.createElementNS(svgNS, 'path');
-    center.setAttribute('d', solidD);
-    center.setAttribute('fill', 'none');
-    center.setAttribute('stroke', 'rgba(255,255,255,0.55)');
-    center.setAttribute('stroke-width', '2.5');
-    center.setAttribute('stroke-dasharray', '12 10');
-    center.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(center);
+  // Small arrow chevrons along the solid path for directionality
+  if (solidD && solidEnd > 2) {
+    for (let i = 1; i < solidEnd - 1; i += 2) {
+      const prev = points[i - 1];
+      const curr = points[i];
+      const mx = (prev.x + curr.x) / 2;
+      const my = (prev.y + curr.y) / 2;
+      const angle = Math.atan2(curr.y - prev.y, curr.x - prev.x) * (180 / Math.PI);
+      const chevron = document.createElementNS(svgNS, 'text');
+      chevron.setAttribute('x', mx);
+      chevron.setAttribute('y', my);
+      chevron.setAttribute('text-anchor', 'middle');
+      chevron.setAttribute('dominant-baseline', 'central');
+      chevron.setAttribute('font-size', '10');
+      chevron.setAttribute('fill', '#5aa674');
+      chevron.setAttribute('opacity', '0.5');
+      chevron.setAttribute('transform', `rotate(${angle}, ${mx}, ${my})`);
+      chevron.textContent = '›';
+      svg.appendChild(chevron);
+    }
   }
 
-  // Future dashed road
+  // Future segment — lighter dashed
   if (dashedD) {
-    const futShadow = document.createElementNS(svgNS, 'path');
-    futShadow.setAttribute('d', dashedD);
-    futShadow.setAttribute('fill', 'none');
-    futShadow.setAttribute('stroke', '#e0d8cc');
-    futShadow.setAttribute('stroke-width', '16');
-    futShadow.setAttribute('stroke-dasharray', '14 10');
-    futShadow.setAttribute('stroke-linecap', 'round');
-    futShadow.setAttribute('opacity', '0.4');
-    svg.appendChild(futShadow);
+    const futPath = document.createElementNS(svgNS, 'path');
+    futPath.setAttribute('d', dashedD);
+    futPath.setAttribute('fill', 'none');
+    futPath.setAttribute('stroke', '#d4932a');
+    futPath.setAttribute('stroke-width', '2');
+    futPath.setAttribute('stroke-dasharray', '4 8');
+    futPath.setAttribute('stroke-linecap', 'round');
+    futPath.setAttribute('opacity', '0.5');
+    svg.appendChild(futPath);
+  }
 
-    const futRoad = document.createElementNS(svgNS, 'path');
-    futRoad.setAttribute('d', dashedD);
-    futRoad.setAttribute('fill', 'none');
-    futRoad.setAttribute('stroke', '#a0a0b0');
-    futRoad.setAttribute('stroke-width', '10');
-    futRoad.setAttribute('stroke-dasharray', '14 10');
-    futRoad.setAttribute('stroke-linecap', 'round');
-    futRoad.setAttribute('opacity', '0.35');
-    svg.appendChild(futRoad);
+  // Plane icon at the last solid point
+  if (solidEnd > 0) {
+    const lastPt = points[solidEnd - 1];
+    const prevPt = solidEnd > 1 ? points[solidEnd - 2] : points[0];
+    const angle = Math.atan2(lastPt.y - prevPt.y, lastPt.x - prevPt.x) * (180 / Math.PI);
+    const plane = document.createElementNS(svgNS, 'text');
+    plane.setAttribute('x', lastPt.x + 18);
+    plane.setAttribute('y', lastPt.y - 18);
+    plane.setAttribute('font-size', '16');
+    plane.setAttribute('transform', `rotate(${angle - 45}, ${lastPt.x + 18}, ${lastPt.y - 18})`);
+    plane.textContent = '✈';
+    svg.appendChild(plane);
   }
 
   track.prepend(svg);

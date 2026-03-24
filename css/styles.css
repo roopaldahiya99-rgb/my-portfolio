@@ -1335,26 +1335,36 @@ img { max-width: 100%; display: block; }
 .rm-area-top { align-items: flex-end; padding-bottom: 16px; }
 .rm-area-bottom { align-items: flex-start; padding-top: 16px; }
 
+/* ── Passport stamp dots ── */
 .rm-dot {
-  width: 42px;
-  height: 42px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: var(--white);
-  border: 3px solid var(--green);
+  border: 2.5px solid var(--green);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  overflow: hidden;
   flex-shrink: 0;
-  transition: border-color var(--trans), box-shadow var(--trans), transform var(--trans);
+  position: relative;
+  transition: transform var(--trans), box-shadow var(--trans);
+}
+
+/* Outer postmark ring */
+.rm-dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--green-light);
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .rm-item:hover .rm-dot {
-  border-color: var(--green);
-  box-shadow: 0 6px 24px rgba(58,125,86,0.3);
-  transform: scale(1.2);
+  transform: scale(1.15) rotate(-3deg);
+  box-shadow: 0 6px 20px rgba(58,125,86,0.25);
 }
 
 .rm-future-dot {
@@ -1363,25 +1373,36 @@ img { max-width: 100%; display: block; }
   background: var(--amber-pale);
 }
 
+.rm-future-dot::after {
+  border-color: var(--amber);
+  opacity: 0.4;
+}
+
 .rm-logo {
   width: 26px;
   height: 26px;
   object-fit: contain;
 }
 
-.rm-emoji { font-size: 1.1rem; }
+.rm-emoji { font-size: 1.15rem; }
 
-.rm-card { max-width: 120px; }
+/* ── Stamp-style cards ── */
+.rm-card {
+  max-width: 120px;
+  padding: 6px 8px;
+  border: 1.5px dashed transparent;
+  border-radius: 6px;
+  transition: border-color var(--trans), background var(--trans), transform var(--trans);
+}
 
-.rm-parent {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  color: var(--coral);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 1px;
-  font-weight: 600;
+/* Alternating tilts like stamps in a passport */
+.rm-up .rm-card { transform: rotate(-1.5deg); }
+.rm-down .rm-card { transform: rotate(1.5deg); }
+
+.rm-item:hover .rm-card {
+  border-color: var(--green-light);
+  background: var(--green-pale);
+  transform: rotate(0deg);
 }
 
 .rm-era {
@@ -1405,7 +1426,7 @@ img { max-width: 100%; display: block; }
 }
 
 .rm-why {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: var(--ink-dim);
   line-height: 1.4;
   max-height: 0;
@@ -1759,9 +1780,10 @@ footer {
   }
 
   .rm-area { height: 80px; }
-  .rm-dot { width: 34px; height: 34px; }
+  .rm-dot { width: 40px; height: 40px; }
+  .rm-dot::after { inset: -4px; }
   .rm-logo { width: 20px; height: 20px; }
-  .rm-card { max-width: 100px; }
+  .rm-card { max-width: 100px; padding: 4px 6px; }
   .rm-era { font-size: 0.44rem; }
   .rm-title { font-size: 0.62rem; }
   .deal-arrow { display: none; }
