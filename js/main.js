@@ -515,23 +515,23 @@ function drawRoadmapPath(track) {
   const futureIdx = dots.findIndex(d => d.classList.contains('rm-future-dot'));
   const solidEnd = futureIdx > 0 ? futureIdx : points.length;
 
-  // Build solid wavy path
+  // Build curvy road path with big sweeping curves
   let solidD = `M ${points[0].x} ${points[0].y}`;
   for (let i = 1; i < solidEnd; i++) {
     const prev = points[i - 1];
     const curr = points[i];
     const midX = (prev.x + curr.x) / 2;
-    const wave = 30 * (i % 2 === 0 ? 1 : -1);
+    const wave = 55 * (i % 2 === 0 ? 1 : -1);
     solidD += ` C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
   }
 
-  // Build dashed path to future
+  // Future dashed road
   let dashedD = '';
   if (futureIdx > 0 && futureIdx < points.length) {
     const prev = points[futureIdx - 1];
     const curr = points[futureIdx];
     const midX = (prev.x + curr.x) / 2;
-    const wave = 30 * (futureIdx % 2 === 0 ? 1 : -1);
+    const wave = 55 * (futureIdx % 2 === 0 ? 1 : -1);
     dashedD = `M ${prev.x} ${prev.y} C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
   }
 
@@ -541,25 +541,61 @@ function drawRoadmapPath(track) {
   svg.setAttribute('width', trackRect.width);
   svg.setAttribute('height', trackRect.height);
 
+  // Road shadow (outer edge)
   if (solidD) {
-    const path = document.createElementNS(svgNS, 'path');
-    path.setAttribute('d', solidD);
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', '#5aa674');
-    path.setAttribute('stroke-width', '3');
-    path.setAttribute('stroke-linecap', 'round');
-    svg.appendChild(path);
+    const shadow = document.createElementNS(svgNS, 'path');
+    shadow.setAttribute('d', solidD);
+    shadow.setAttribute('fill', 'none');
+    shadow.setAttribute('stroke', '#e0d8cc');
+    shadow.setAttribute('stroke-width', '18');
+    shadow.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(shadow);
   }
 
+  // Road surface (thick green)
+  if (solidD) {
+    const road = document.createElementNS(svgNS, 'path');
+    road.setAttribute('d', solidD);
+    road.setAttribute('fill', 'none');
+    road.setAttribute('stroke', '#3a7d56');
+    road.setAttribute('stroke-width', '12');
+    road.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(road);
+  }
+
+  // Center dashed line (white road markings)
+  if (solidD) {
+    const center = document.createElementNS(svgNS, 'path');
+    center.setAttribute('d', solidD);
+    center.setAttribute('fill', 'none');
+    center.setAttribute('stroke', 'rgba(255,255,255,0.55)');
+    center.setAttribute('stroke-width', '2.5');
+    center.setAttribute('stroke-dasharray', '12 10');
+    center.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(center);
+  }
+
+  // Future dashed road
   if (dashedD) {
-    const path = document.createElementNS(svgNS, 'path');
-    path.setAttribute('d', dashedD);
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', '#a0a0b0');
-    path.setAttribute('stroke-width', '2');
-    path.setAttribute('stroke-dasharray', '8 6');
-    path.setAttribute('opacity', '0.5');
-    svg.appendChild(path);
+    const futShadow = document.createElementNS(svgNS, 'path');
+    futShadow.setAttribute('d', dashedD);
+    futShadow.setAttribute('fill', 'none');
+    futShadow.setAttribute('stroke', '#e0d8cc');
+    futShadow.setAttribute('stroke-width', '16');
+    futShadow.setAttribute('stroke-dasharray', '14 10');
+    futShadow.setAttribute('stroke-linecap', 'round');
+    futShadow.setAttribute('opacity', '0.4');
+    svg.appendChild(futShadow);
+
+    const futRoad = document.createElementNS(svgNS, 'path');
+    futRoad.setAttribute('d', dashedD);
+    futRoad.setAttribute('fill', 'none');
+    futRoad.setAttribute('stroke', '#a0a0b0');
+    futRoad.setAttribute('stroke-width', '10');
+    futRoad.setAttribute('stroke-dasharray', '14 10');
+    futRoad.setAttribute('stroke-linecap', 'round');
+    futRoad.setAttribute('opacity', '0.35');
+    svg.appendChild(futRoad);
   }
 
   track.prepend(svg);
