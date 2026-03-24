@@ -521,7 +521,7 @@ function drawRoadmapPath(track) {
     const prev = points[i - 1];
     const curr = points[i];
     const midX = (prev.x + curr.x) / 2;
-    const wave = 55 * (i % 2 === 0 ? 1 : -1);
+    const wave = 75 * (i % 2 === 0 ? 1 : -1);
     solidD += ` C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
   }
 
@@ -531,7 +531,7 @@ function drawRoadmapPath(track) {
     const prev = points[futureIdx - 1];
     const curr = points[futureIdx];
     const midX = (prev.x + curr.x) / 2;
-    const wave = 55 * (futureIdx % 2 === 0 ? 1 : -1);
+    const wave = 75 * (futureIdx % 2 === 0 ? 1 : -1);
     dashedD = `M ${prev.x} ${prev.y} C ${midX} ${prev.y + wave}, ${midX} ${curr.y - wave}, ${curr.x} ${curr.y}`;
   }
 

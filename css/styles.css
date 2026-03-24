@@ -1229,11 +1229,12 @@ img { max-width: 100%; display: block; }
 ═══════════════════════════════════════════════════════════ */
 .rm-track {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
-  max-width: 1140px;
+  max-width: 100%;
   margin: 0 auto;
   position: relative;
+  padding: 0 20px;
 }
 
 .rm-svg {
@@ -1245,7 +1246,8 @@ img { max-width: 100%; display: block; }
 }
 
 .rm-item {
-  width: calc(100% / 6);
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1255,21 +1257,21 @@ img { max-width: 100%; display: block; }
 }
 
 .rm-area {
-  height: 150px;
+  height: 100px;
   display: flex;
   justify-content: center;
-  padding: 0 4px;
+  padding: 0 2px;
 }
 
 .rm-area-top { align-items: flex-end; padding-bottom: 16px; }
 .rm-area-bottom { align-items: flex-start; padding-top: 16px; }
 
 .rm-dot {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background: var(--white);
-  border: 3.5px solid var(--green);
+  border: 3px solid var(--green);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1300,7 +1302,7 @@ img { max-width: 100%; display: block; }
 
 .rm-emoji { font-size: 1.1rem; }
 
-.rm-card { max-width: 155px; }
+.rm-card { max-width: 120px; }
 
 .rm-parent {
   display: block;
@@ -1316,27 +1318,36 @@ img { max-width: 100%; display: block; }
 .rm-era {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.5rem;
   color: var(--green);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .rm-title {
   font-family: var(--font-serif);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--ink);
-  line-height: 1.3;
-  margin-bottom: 4px;
+  line-height: 1.25;
+  margin-bottom: 2px;
 }
 
 .rm-why {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--ink-dim);
-  line-height: 1.5;
+  line-height: 1.4;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.rm-item:hover .rm-why {
+  max-height: 200px;
+  opacity: 1;
 }
 
 .rm-future .rm-era { color: var(--amber); }
@@ -1670,12 +1681,12 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .rm-item { width: calc(100% / 4); }
-  .rm-area { height: 120px; }
-  .rm-dot { width: 38px; height: 38px; }
-  .rm-logo { width: 22px; height: 22px; }
-  .rm-why { font-size: 0.66rem; }
-  .rm-card { max-width: 130px; }
+  .rm-area { height: 80px; }
+  .rm-dot { width: 34px; height: 34px; }
+  .rm-logo { width: 20px; height: 20px; }
+  .rm-card { max-width: 100px; }
+  .rm-era { font-size: 0.44rem; }
+  .rm-title { font-size: 0.62rem; }
   .deal-arrow { display: none; }
   .deal-cards { grid-template-columns: 1fr; }
 }
