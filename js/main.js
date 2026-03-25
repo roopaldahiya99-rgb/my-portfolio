@@ -180,38 +180,49 @@ function initMap() {
 ════════════════════════════════════════════════════════ */
 function initDealSpotlight() {
   const container = document.getElementById('dealCards');
+  const counter = document.getElementById('dealCounter');
   if (!container) return;
 
-  container.innerHTML = DEAL_SPOTLIGHT.map((deal, i) => `
-    <div class="deal-card" style="transition-delay:${i * 100}ms">
-      <div class="deal-card-header">
-        <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="flag" />
-        <h3 class="deal-title">${deal.title}</h3>
-      </div>
-      <div class="deal-tags">
-        <span class="deal-stage-tag">${deal.stage}</span>
-        <span class="tag">${deal.sector}</span>
-      </div>
-      <div class="deal-facts">
-        ${deal.facts.map(f => `<span class="deal-fact">${f}</span>`).join('')}
-      </div>
-      <p class="deal-desc">${deal.description}</p>
-      <div class="deal-insight">
-        <strong>What I Learned:</strong> ${deal.whatILearned}
-      </div>
-    </div>
-  `).join('');
+  let currentDeal = 0;
 
-  // Arrow scroll navigation
+  function renderDeal(index) {
+    const deal = DEAL_SPOTLIGHT[index];
+    container.innerHTML = `
+      <div class="deal-card">
+        <div class="deal-card-header">
+          <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="flag" />
+          <h3 class="deal-title">${deal.title}</h3>
+        </div>
+        <div class="deal-tags">
+          <span class="deal-stage-tag">${deal.stage}</span>
+          <span class="tag">${deal.sector}</span>
+        </div>
+        <div class="deal-facts">
+          ${deal.facts.map(f => `<span class="deal-fact">${f}</span>`).join('')}
+        </div>
+        <p class="deal-desc">${deal.description}</p>
+        <div class="deal-insight">
+          <strong>What I Learned:</strong> ${deal.whatILearned}
+        </div>
+      </div>
+    `;
+    if (counter) counter.textContent = `${index + 1} / ${DEAL_SPOTLIGHT.length}`;
+  }
+
+  renderDeal(0);
+
   const leftBtn = document.getElementById('dealLeft');
   const rightBtn = document.getElementById('dealRight');
   if (leftBtn && rightBtn) {
-    const scrollAmt = 360;
-    leftBtn.addEventListener('click', () => container.scrollBy({ left: -scrollAmt, behavior: 'smooth' }));
-    rightBtn.addEventListener('click', () => container.scrollBy({ left: scrollAmt, behavior: 'smooth' }));
+    leftBtn.addEventListener('click', () => {
+      currentDeal = (currentDeal - 1 + DEAL_SPOTLIGHT.length) % DEAL_SPOTLIGHT.length;
+      renderDeal(currentDeal);
+    });
+    rightBtn.addEventListener('click', () => {
+      currentDeal = (currentDeal + 1) % DEAL_SPOTLIGHT.length;
+      renderDeal(currentDeal);
+    });
   }
-
-  observeCards(container.querySelectorAll('.deal-card'));
 }
 
 /* ════════════════════════════════════════════════════════
