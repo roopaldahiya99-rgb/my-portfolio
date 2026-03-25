@@ -93,8 +93,8 @@ function initReveal() {
 ════════════════════════════════════════════════════════ */
 function initMap() {
   const map = L.map('map', {
-    center: [35, -60],
-    zoom: 2.5,
+    center: [30, -40],
+    zoom: 2.4,
     zoomControl: false,
     scrollWheelZoom: false,
     attributionControl: true,
