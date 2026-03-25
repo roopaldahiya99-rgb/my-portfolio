@@ -1326,7 +1326,7 @@ img { max-width: 100%; display: block; }
 }
 
 .rm-area {
-  height: 100px;
+  height: 105px;
   display: flex;
   justify-content: center;
   padding: 0 2px;
@@ -1335,80 +1335,76 @@ img { max-width: 100%; display: block; }
 .rm-area-top { align-items: flex-end; padding-bottom: 16px; }
 .rm-area-bottom { align-items: flex-start; padding-top: 16px; }
 
-/* ── Passport stamp dots ── */
+/* ── Postage stamp dots ── */
 .rm-dot {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--green-pale);
-  border: 2.5px solid var(--green);
+  --s: 8px; /* scallop size */
+  width: 62px;
+  height: 72px;
+  border-radius: 0;
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 3;
   flex-shrink: 0;
   position: relative;
-  transition: transform var(--trans), box-shadow var(--trans), filter var(--trans);
-  /* Stamp ink effect */
-  filter: saturate(0.85) contrast(1.05);
+  transition: transform var(--trans), filter var(--trans);
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.14));
+
+  /* Perforated stamp edges */
+  -webkit-mask:
+    conic-gradient(from 135deg at top,    #0000, #000 1deg 89deg, #0000 90deg) 50%    0   / var(--s) calc(var(--s)/2) repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%    100%/ var(--s) calc(var(--s)/2) repeat-x,
+    conic-gradient(from  45deg at left,   #0000, #000 1deg 89deg, #0000 90deg) 0      50% / calc(var(--s)/2) var(--s) repeat-y,
+    conic-gradient(from -135deg at right, #0000, #000 1deg 89deg, #0000 90deg) 100%   50% / calc(var(--s)/2) var(--s) repeat-y,
+    linear-gradient(#000 0 0) calc(var(--s)/2) calc(var(--s)/2) / calc(100% - var(--s)) calc(100% - var(--s));
+  mask:
+    conic-gradient(from 135deg at top,    #0000, #000 1deg 89deg, #0000 90deg) 50%    0   / var(--s) calc(var(--s)/2) repeat-x,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50%    100%/ var(--s) calc(var(--s)/2) repeat-x,
+    conic-gradient(from  45deg at left,   #0000, #000 1deg 89deg, #0000 90deg) 0      50% / calc(var(--s)/2) var(--s) repeat-y,
+    conic-gradient(from -135deg at right, #0000, #000 1deg 89deg, #0000 90deg) 100%   50% / calc(var(--s)/2) var(--s) repeat-y,
+    linear-gradient(#000 0 0) calc(var(--s)/2) calc(var(--s)/2) / calc(100% - var(--s)) calc(100% - var(--s));
 }
 
-/* Outer postmark ring */
+/* Inner coloured frame like a real stamp */
 .rm-dot::before {
   content: '';
   position: absolute;
-  inset: -7px;
-  border-radius: 50%;
-  border: 2px dashed var(--green);
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-/* Inner stamp ring */
-.rm-dot::after {
-  content: '';
-  position: absolute;
-  inset: 1px;
-  border-radius: 50%;
-  border: 1px solid var(--green-light);
-  opacity: 0.5;
+  inset: 6px;
+  border: 1.5px solid var(--green);
+  background: var(--green-pale);
+  z-index: -1;
   pointer-events: none;
 }
 
 .rm-item:hover .rm-dot {
-  transform: scale(1.18) rotate(-4deg);
-  box-shadow: 0 6px 20px rgba(58,125,86,0.3);
-  filter: saturate(1) contrast(1.1);
+  transform: scale(1.15) rotate(-3deg);
+  filter: drop-shadow(0 6px 16px rgba(58,125,86,0.3));
 }
 
 .rm-future-dot {
-  border-color: var(--amber);
-  border-style: dashed;
-  background: var(--amber-pale);
-  filter: saturate(0.7);
+  background: var(--white);
 }
 
 .rm-future-dot::before {
   border-color: var(--amber);
-  opacity: 0.25;
-}
-
-.rm-future-dot::after {
-  border-color: var(--amber);
-  opacity: 0.3;
+  border-style: dashed;
+  background: var(--amber-pale);
 }
 
 .rm-logo {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  border-radius: 50%;
-  /* Stamp ink look for logos */
-  mix-blend-mode: multiply;
-  filter: contrast(1.2);
+  position: relative;
+  z-index: 1;
 }
 
-.rm-emoji { font-size: 1.35rem; }
+.rm-emoji {
+  font-size: 1.3rem;
+  position: relative;
+  z-index: 1;
+}
 
 /* ── Stamp-style cards ── */
 .rm-card {
@@ -1804,8 +1800,8 @@ footer {
   }
 
   .rm-area { height: 80px; }
-  .rm-dot { width: 44px; height: 44px; }
-  .rm-dot::before { inset: -5px; }
+  .rm-dot { width: 48px; height: 56px; --s: 6px; }
+  .rm-dot::before { inset: 4px; }
   .rm-logo { width: 22px; height: 22px; }
   .rm-card { max-width: 100px; padding: 4px 6px; }
   .rm-era { font-size: 0.44rem; }
