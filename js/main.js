@@ -408,6 +408,10 @@ function renderTimeline() {
         const isUp = i % 2 === 0;
         const isFuture = item.isFuture;
 
+        const colorClass = item.color ? `rm-color-${item.color}` : '';
+        const coordsHtml = item.coords ? `<span class="rm-coords">${item.coords}</span>` : '';
+        const noteHtml = item.note ? `<div class="rm-note rm-note-${item.notePos || 'right'}">${item.note}</div>` : '';
+
         const cardHtml = `
           <div class="rm-card ${isFuture ? 'rm-future-card' : ''}">
             <span class="rm-era">${item.era}</span>
@@ -417,12 +421,14 @@ function renderTimeline() {
         `;
 
         const dotHtml = `
-          <div class="rm-dot ${isFuture ? 'rm-future-dot' : ''}">
+          <div class="rm-dot ${isFuture ? 'rm-future-dot' : ''} ${colorClass}">
             ${item.logo
               ? `<img src="${item.logo}" alt="${item.era}" class="rm-logo" />`
               : `<span class="rm-emoji">${item.icon}</span>`
             }
+            ${coordsHtml}
           </div>
+          ${noteHtml}
         `;
 
         return `
@@ -646,7 +652,6 @@ function renderContactCta() {
     <p class="contact-sub">${c.byline}</p>
     <div class="contact-links">
       <a href="${c.email}" class="contact-btn">Email Me</a>
-      <a href="${c.calendly}" target="_blank" rel="noopener" class="contact-btn contact-btn-outline">Book a Call</a>
       <a href="${c.linkedin}" target="_blank" rel="noopener" class="contact-btn contact-btn-outline">LinkedIn</a>
     </div>
   `;

@@ -1595,6 +1595,108 @@ img { max-width: 100%; display: block; }
 .rm-future .rm-title { color: var(--amber); font-style: italic; }
 .rm-future .rm-why { color: var(--ink-faint); font-style: italic; }
 
+/* ── Stamp color variants ── */
+.rm-color-sky::before {
+  border-color: var(--sky);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(61,139,181,0.06), transparent 70%),
+    linear-gradient(180deg, var(--sky-pale) 0%, rgba(221,238,247,0.5) 100%);
+}
+.rm-color-sky ~ .rm-note,
+.rm-item:has(.rm-color-sky):hover .rm-card { border-color: var(--sky-pale); background: var(--sky-pale); }
+.rm-item:has(.rm-color-sky) .rm-era { color: var(--sky); }
+
+.rm-color-coral::before {
+  border-color: var(--coral);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(232,103,77,0.06), transparent 70%),
+    linear-gradient(180deg, var(--coral-pale) 0%, rgba(253,232,227,0.5) 100%);
+}
+.rm-item:has(.rm-color-coral):hover .rm-card { border-color: var(--coral-pale); background: var(--coral-pale); }
+.rm-item:has(.rm-color-coral) .rm-era { color: var(--coral); }
+
+.rm-color-amber::before {
+  border-color: var(--amber);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(212,147,42,0.06), transparent 70%),
+    linear-gradient(180deg, var(--amber-pale) 0%, rgba(253,240,217,0.5) 100%);
+}
+.rm-item:has(.rm-color-amber):hover .rm-card { border-color: var(--amber-pale); background: var(--amber-pale); }
+.rm-item:has(.rm-color-amber) .rm-era { color: var(--amber); }
+
+.rm-color-purple::before {
+  border-color: var(--purple);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(124,92,191,0.06), transparent 70%),
+    linear-gradient(180deg, var(--purple-pale) 0%, rgba(237,232,248,0.5) 100%);
+}
+.rm-item:has(.rm-color-purple):hover .rm-card { border-color: var(--purple-pale); background: var(--purple-pale); }
+.rm-item:has(.rm-color-purple) .rm-era { color: var(--purple); }
+
+.rm-color-green::before {
+  border-color: var(--green);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(58,125,86,0.06), transparent 70%),
+    linear-gradient(180deg, var(--green-pale) 0%, rgba(232,245,237,0.5) 100%);
+}
+
+/* ── Coordinates label (travel flair) ── */
+.rm-coords {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.38rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  z-index: 2;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+/* ── Handwritten annotation notes ── */
+.rm-note {
+  position: absolute;
+  font-family: var(--font-hand), cursive;
+  font-size: 0.72rem;
+  color: var(--green);
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  line-height: 1.2;
+}
+
+.rm-item:hover .rm-note {
+  opacity: 1;
+}
+
+.rm-note-left {
+  right: 85%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-4deg);
+  text-align: right;
+}
+
+.rm-note-right {
+  left: 85%;
+  top: 50%;
+  transform: translateY(-50%) rotate(3deg);
+  text-align: left;
+}
+
+.rm-note::before {
+  content: '~ ';
+  opacity: 0.5;
+}
+
+.rm-note::after {
+  content: ' ~';
+  opacity: 0.5;
+}
+
 /* (old deal-scroll-wrap removed — deals now in hero overlay) */
 
 /* ═══════════════════════════════════════════════════════════
