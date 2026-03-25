@@ -318,6 +318,23 @@ img { max-width: 100%; display: block; }
   max-width: 400px;
 }
 
+/* Map-level deal spotlight (below stats, overlaid on map) */
+.map-deal-spotlight {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 800;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: var(--radius-lg);
+  padding: 14px 18px 12px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
 .hero-deal-header {
   display: flex;
   align-items: center;
@@ -807,6 +824,11 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
 }
 
+.lesson-key {
+  color: var(--green);
+  font-weight: 700;
+}
+
 .lessons-plain li::marker {
   color: var(--green);
 }
@@ -1059,7 +1081,7 @@ img { max-width: 100%; display: block; }
    FIELD ARTICLES (Learning from the Field) — inside diary
 ═══════════════════════════════════════════════════════════ */
 .field-article {
-  background: var(--white);
+  background: linear-gradient(180deg, #faf8f2 0%, #f8f5ec 100%);
   border: none;
   border-left: 3px solid var(--green-light);
   border-radius: 0 var(--radius) var(--radius) 0;
@@ -1433,7 +1455,7 @@ img { max-width: 100%; display: block; }
 }
 
 .rm-area {
-  height: 115px;
+  height: 125px;
   display: flex;
   justify-content: center;
   padding: 0 2px;
@@ -1656,47 +1678,30 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── Handwritten pencil-margin annotations ── */
-.rm-note {
-  font-family: var(--font-hand), cursive;
-  font-size: 0.72rem;
-  color: #6b6b7a;
-  z-index: 10;
+.rm-annotation-layer {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
-  line-height: 1.15;
-  opacity: 0.65;
+  z-index: 12;
+}
+
+.rm-annotation {
+  position: absolute;
+  font-family: var(--font-hand), cursive;
+  color: #5a5a6a;
+  pointer-events: none;
+  line-height: 1.2;
+  opacity: 0.7;
   text-shadow: 0 0 0.5px rgba(60,60,80,0.2);
-  max-width: 120px;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
+  white-space: nowrap;
 }
 
-.rm-note-down {
-  transform: rotate(1.5deg);
-  align-self: center;
-  margin-top: auto;
+.rm-annotation svg {
+  position: absolute;
+  opacity: 0.45;
 }
 
-.rm-note-up {
-  transform: rotate(-1.5deg);
-  align-self: center;
-  margin-top: auto;
-}
-
-/* Squiggly arrow drawn with SVG in the note */
-.rm-note-arrow {
-  display: block;
-  margin: 2px auto 0;
-  opacity: 0.55;
-}
-
-.rm-note-arrow-up {
-  display: block;
-  margin: 0 auto 2px;
-  opacity: 0.55;
-  transform: rotate(180deg);
-}
+/* (squiggly arrows now drawn dynamically in annotation layer) */
 
 /* (old deal-scroll-wrap removed — deals now in hero overlay) */
 
@@ -1956,6 +1961,7 @@ footer {
 
   .hero-stats   { margin: 0 auto 16px; }
   .hero-deal-spotlight { max-width: 100%; margin: 0 auto; }
+  .map-deal-spotlight { max-width: 100%; width: 95%; bottom: 12px; padding: 10px 14px 8px; }
   .hero-deal-header h3 { font-size: 0.9rem; }
 
   .map-legend     { bottom: 20px; right: 16px; }

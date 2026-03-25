@@ -74,30 +74,21 @@ const DEAL_MAP = {
 // Featured deals for the Investment Passport page
 const DEAL_SPOTLIGHT = [
   {
-    title: "Flora — Portable Fertility Insurance",
+    title: "Flora — Fintech, Early Stage",
     code: "ca",
-    stage: "Early Stage",
-    sector: "Fintech",
-    facts: ["BDC Capital", "First-of-its-kind product", "100% IC approval"],
-    description: "Led due diligence on Flora, a first-of-its-kind portable fertility insurance venture. Assessed market sizing, product defensibility, and regulatory landscape — then built conviction around why this team wins in an untapped category.",
+    description: "Led due diligence on Flora at BDC Capital — a first-of-its-kind portable fertility insurance venture. Assessed market sizing, product defensibility, and regulatory landscape to build conviction in an untapped category.",
     whatILearned: "The best early-stage bets aren't about market size — they're about whether the founder sees a future nobody else does yet.",
   },
   {
-    title: "Dot Glasses — Assistive Tech for Africa",
+    title: "Dot Glasses — Assistive Tech, Kenya",
     code: "ke",
-    stage: "Early Stage",
-    sector: "Healthtech",
-    facts: ["KOIS Invest", "Affordable eyecare", "Underserved populations"],
-    description: "Evaluated Dot Glasses, an assistive technology venture making affordable corrective eyewear for underserved populations across Kenya. Assessed scalability, unit economics, and distribution models for last-mile healthcare delivery.",
+    description: "Evaluated Dot Glasses at KOIS — making corrective eyewear 100x more affordable for underserved populations in Kenya. Assessed scalability, unit economics, and last-mile distribution models.",
     whatILearned: "The most impactful ventures solve problems so fundamental that the market barely recognises them as markets yet.",
   },
   {
-    title: "Cross-Border Eyecare Expansion",
+    title: "Eyecare Enterprise — Vietnam, Growth Stage",
     code: "vn",
-    stage: "Growth Stage",
-    sector: "Healthtech",
-    facts: ["$400M opportunity", "Vietnam to Southeast Asia", "Expansion strategy"],
-    description: "Stress-tested the business and operating model of an eyecare enterprise in Vietnam raising capital to expand across Southeast Asia. Evaluated operational readiness, regulatory landscape, and cross-border trust to unlock a $400M opportunity.",
+    description: "Stress-tested the business model of a Vietnamese eyecare enterprise raising capital to expand across Southeast Asia. Evaluated operational readiness, regulatory landscape, and cross-border trust for a $400M opportunity.",
     whatILearned: "In cross-border deals, the first 30% is building relational bridges — that's what makes the other 70% possible.",
   },
 ];
@@ -105,11 +96,11 @@ const DEAL_SPOTLIGHT = [
 // ── LESSONS LEARNED ──────────────────────────────────────
 const LESSONS_LEARNED = {
   lessons: [
-    "<em>Market depth beats market sizing</em> — knowing TAM isn't enough. You need to understand value chains, user journeys, regulations, and ecosystems well enough to build in them yourself.",
-    "<em>Founder-market fit can be overrated</em> — I've seen founders with raw grit and uncanny passion outperform seasoned industry veterans. Experience helps, but obsession wins.",
-    "<em>Capital alone is never enough</em> — active support, whether hands-on or through the right syndicate, is what separates deals that survive from deals that win. Pay attention to who's around the table.",
-    "<em>Real deals are messy</em> — co-founders exit, metrics slip, timelines break. Deal structuring helps, but so does founder support, creativity, and problem solving. The best investors roll up their sleeves.",
-    "<em>Investing is truly changing the world</em> — not just impact ventures. Consumer tech, fintech, healthtech — these shift lives at scale. Seeing a new innovation serve the underserved is what drives me every single day.",
+    "<strong class='lesson-key'>Market depth beats market sizing</strong> — knowing TAM isn't enough. You need to understand value chains, user journeys, regulations, and ecosystems well enough to build in them yourself.",
+    "<strong class='lesson-key'>Founder-market fit can be overrated</strong> — I've seen founders with raw grit and uncanny passion outperform seasoned industry veterans. Experience helps, but obsession wins.",
+    "<strong class='lesson-key'>Capital alone is never enough</strong> — active support, whether hands-on or through the right syndicate, is what separates deals that survive from deals that win. Pay attention to who's around the table.",
+    "<strong class='lesson-key'>Real deals are messy</strong> — co-founders exit, metrics slip, timelines break. Deal structuring helps, but so does founder support, creativity, and problem solving. The best investors roll up their sleeves.",
+    "<strong class='lesson-key'>Investing is truly changing the world</strong> — not just impact ventures. Consumer tech, fintech, healthtech — these shift lives at scale. Seeing a new innovation serve the underserved is what drives me every single day.",
   ],
 };
 
@@ -197,7 +188,7 @@ const FIELD_NOTES = {
 const INVESTOR_LEARNER = {
   hero: {
     tagline: "Investor. Traveller. Perpetual learner.",
-    bio: "I'm currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across sectors including fintech, healthtech, climatetech, and deeptech. I hold an <strong>MBA from Rotman</strong> specializing in finance — where I worked with Creative Destruction Lab (CDL) and led the Women in Management Association. Before that, I built my lens across early-stage VC, investment advisory, and an operations role with a startup. When I'm not wearing my investor hat, I love traveling solo, listening to live jazz, and championing women's empowerment and climate action.",
+    bio: "Currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across fintech, healthtech, climatetech, and deeptech. <strong>MBA from Rotman</strong> (finance) — CDL, Women in Management Association. Before that: early-stage VC, investment advisory, and startup operations. Outside work: solo travel, live jazz, women's empowerment, and climate action.",
     photo: "assets/Roopal.jpeg",
   },
 
