@@ -77,42 +77,42 @@ const DEAL_MAP = {
 // Featured deals for the Investment Passport page
 const DEAL_SPOTLIGHT = [
   {
-    title: "Early-Stage B2B & Fintech",
+    title: "Flora — Portable Fertility Insurance",
     code: "ca",
     stage: "Early Stage",
     sector: "Fintech",
-    facts: ["BDC Capital's $500MM Thrive Fund", "7 ventures evaluated", "100% IC approval"],
-    description: "Led end-to-end due diligence on early-stage B2B and fintech ventures — assessing market sizing, product defensibility, and unit economics. BDC invested because of the venture's strong moats and capital-efficient growth trajectory. Authored 4 investment memos from scratch, each earning IC approval by building conviction around why this team wins in this market at this moment.",
-    whatILearned: "Rigorous due diligence isn't about finding reasons to say no — it's about building conviction to say yes. The best memos tell the story of why this team wins here, now.",
+    facts: ["BDC Capital", "First-of-its-kind product", "100% IC approval"],
+    description: "Led due diligence on Flora, a first-of-its-kind portable fertility insurance venture. Assessed market sizing, product defensibility, and regulatory landscape — then built conviction around why this team wins in an untapped category.",
+    whatILearned: "The best early-stage bets aren't about market size — they're about whether the founder sees a future nobody else does yet.",
   },
   {
-    title: "Climate-Tech Capital Deployment",
-    code: "kh",
+    title: "Dot Glasses — Assistive Tech for Africa",
+    code: "ke",
     stage: "Early Stage",
-    sector: "Climate-Tech",
-    facts: ["USAID × Dalberg Advisors", "$30M capital guided", "20 opportunities screened"],
-    description: "Evaluated 20 climate-tech investment opportunities for USAID Cambodia. The thesis: clean technology ventures that collapse the green premium, making the sustainable option the obvious business decision. Conducted market sizing, business model analysis, and investment thesis development across 7 partner organisations to guide $30M in capital deployment.",
-    whatILearned: "Impact investing demands the same rigour as commercial deals — the best climate ventures don't rely on subsidies; they build unit economics that work without them.",
+    sector: "Healthtech",
+    facts: ["KOIS Invest", "Affordable eyecare", "Underserved populations"],
+    description: "Evaluated Dot Glasses, an assistive technology venture making affordable corrective eyewear for underserved populations across Kenya. Assessed scalability, unit economics, and distribution models for last-mile healthcare delivery.",
+    whatILearned: "The most impactful ventures solve problems so fundamental that the market barely recognises them as markets yet.",
   },
   {
-    title: "Cross-Border Healthcare Expansion",
+    title: "Cross-Border Eyecare Expansion",
     code: "vn",
     stage: "Growth Stage",
     sector: "Healthtech",
-    facts: ["Social eyecare enterprise", "$400M market opportunity", "Southeast Asian expansion"],
-    description: "Stress-tested the business and operating model of a social eyecare enterprise in Vietnam. The company was raising capital to expand into neighbouring markets — we evaluated the expansion strategy, operational readiness, and regulatory landscape to capture a $400M opportunity. The hardest asset to underwrite wasn't the company — it was the cross-border trust.",
-    whatILearned: "In cross-border deals, spending the first 30% building relational bridges is what makes the other 70% possible. Trust is the real currency.",
+    facts: ["$400M opportunity", "Vietnam to Southeast Asia", "Expansion strategy"],
+    description: "Stress-tested the business and operating model of an eyecare enterprise in Vietnam raising capital to expand across Southeast Asia. Evaluated operational readiness, regulatory landscape, and cross-border trust to unlock a $400M opportunity.",
+    whatILearned: "In cross-border deals, the first 30% is building relational bridges — that's what makes the other 70% possible.",
   },
 ];
 
 // ── LESSONS LEARNED ──────────────────────────────────────
 const LESSONS_LEARNED = {
   lessons: [
-    "Market depth beats market sizing — knowing TAM isn't enough. You need to understand value chains, user journeys, regulations, and ecosystems well enough to build in them yourself.",
-    "Founder-market fit is overrated — I've seen founders with raw grit and uncanny passion outperform seasoned industry veterans. Experience helps, but obsession wins.",
-    "Capital alone is never enough — active support and management, whether hands-on or through the right syndicate, is what separates deals that survive from deals that win. Pay attention to who's around the table — not as signalling for which deal to invest in, but as a predictor of which companies will compound.",
-    "Real deals are messy — co-founders exit, metrics slip, timelines break. Deal structuring helps, but so does founder support, creativity, and problem solving. The best investors roll up their sleeves.",
-    "Investing is truly changing the world — not just impact ventures. Consumer tech, fintech, healthtech — these shift lives at scale. Seeing a new innovation unlock a market, serve the underserved, or create a pathway for others is what drives me to work every single day.",
+    "<em>Market depth beats market sizing</em> — knowing TAM isn't enough. You need to understand value chains, user journeys, regulations, and ecosystems well enough to build in them yourself.",
+    "<em>Founder-market fit can be overrated</em> — I've seen founders with raw grit and uncanny passion outperform seasoned industry veterans. Experience helps, but obsession wins.",
+    "<em>Capital alone is never enough</em> — active support, whether hands-on or through the right syndicate, is what separates deals that survive from deals that win. Pay attention to who's around the table.",
+    "<em>Real deals are messy</em> — co-founders exit, metrics slip, timelines break. Deal structuring helps, but so does founder support, creativity, and problem solving. The best investors roll up their sleeves.",
+    "<em>Investing is truly changing the world</em> — not just impact ventures. Consumer tech, fintech, healthtech — these shift lives at scale. Seeing a new innovation serve the underserved is what drives me every single day.",
   ],
 };
 
@@ -288,7 +288,7 @@ const INVESTOR_LEARNER = {
   },
 
   contact: {
-    message: "I love connecting with people who are building, investing, or simply curious. If anything on this site resonated — or if you just want to talk startups over coffee — I'd love to hear from you.",
+    message: "Building, investing, or just curious? Let's chat.",
     email: "mailto:roopaldahiya5@gmail.com",
     calendly: "https://calendly.com",
     linkedin: "https://www.linkedin.com/in/roopaldahiya",

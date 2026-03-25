@@ -801,6 +801,12 @@ img { max-width: 100%; display: block; }
   line-height: 1.65;
 }
 
+.lessons-plain li em {
+  font-style: normal;
+  color: var(--green);
+  font-weight: 600;
+}
+
 .lessons-plain li::marker {
   color: var(--green);
 }
@@ -1053,31 +1059,28 @@ img { max-width: 100%; display: block; }
    FIELD ARTICLES (Learning from the Field) — inside diary
 ═══════════════════════════════════════════════════════════ */
 .field-article {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(4px);
-  border: 1.5px solid var(--cream-dark);
-  border-radius: var(--radius-lg);
-  padding: 24px 28px;
+  background: var(--white);
+  border: none;
+  border-left: 3px solid var(--green-light);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 22px 26px 22px 28px;
   cursor: pointer;
-  transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans);
+  transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans), background var(--trans);
   position: relative;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
 }
 
 .field-article::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--green), var(--teal));
-  border-radius: 4px 4px 0 0;
+  display: none;
 }
 
 .field-article:hover {
-  border-color: var(--green-light);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 32px rgba(0,0,0,0.08);
+  border-left-color: var(--green);
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  background: rgba(232,245,237,0.15);
 }
 
 .field-article-header {
@@ -1726,6 +1729,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
   position: relative;
   overflow: hidden;
+  padding: 50px 40px;
 }
 
 .contact-section em { color: var(--green-light); }
@@ -1763,10 +1767,10 @@ img { max-width: 100%; display: block; }
 .contact-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 30px;
+  gap: 8px;
+  padding: 10px 24px;
   border-radius: 40px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   background: var(--white);
   color: var(--green);
