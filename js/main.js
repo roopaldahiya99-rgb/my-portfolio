@@ -391,31 +391,8 @@ function renderAboutHero() {
       <h1 class="about-name"><em>Roopal</em></h1>
       <p class="about-tagline">${INVESTOR_LEARNER.hero.tagline}</p>
       <p class="about-bio">${INVESTOR_LEARNER.hero.bio}</p>
-      <button class="explore-path-btn" id="explorePathBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-        Explore my path
-      </button>
     </div>
   `;
-
-  // Explore my path button — reveal timeline and redraw SVG
-  document.getElementById('explorePathBtn').addEventListener('click', () => {
-    const timeline = document.getElementById('timeline');
-    timeline.classList.remove('timeline-hidden');
-    timeline.scrollIntoView({ behavior: 'smooth' });
-
-    // Redraw SVG path now that timeline is visible
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const track = document.querySelector('.rm-track');
-        if (track) {
-          const old = track.querySelector('.rm-svg');
-          if (old) old.remove();
-          drawRoadmapPath(track);
-        }
-      });
-    });
-  });
 }
 
 /* ── SQUIGGLY ROADMAP — alternating up/down, no scroll ── */
