@@ -252,7 +252,6 @@ function renderDiaryLeft() {
       <p class="section-label">${FIELD_NOTES.hero.label}</p>
       <h1 class="diary-title">${FIELD_NOTES.hero.title}</h1>
       <p class="diary-subtitle">${FIELD_NOTES.hero.subtitle}</p>
-      <p class="showcase-note" style="margin-top:18px;">A select collection — not exhaustive</p>
       <div class="diary-scribble diary-scribble-1">~</div>
       <div class="diary-scribble diary-scribble-2">*</div>
       <div class="diary-scribble diary-scribble-3">//</div>

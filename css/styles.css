@@ -1337,10 +1337,10 @@ img { max-width: 100%; display: block; }
 
 /* ── Passport stamp dots ── */
 .rm-dot {
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: var(--white);
+  background: var(--green-pale);
   border: 2.5px solid var(--green);
   display: flex;
   align-items: center;
@@ -1348,43 +1348,67 @@ img { max-width: 100%; display: block; }
   z-index: 3;
   flex-shrink: 0;
   position: relative;
-  transition: transform var(--trans), box-shadow var(--trans);
+  transition: transform var(--trans), box-shadow var(--trans), filter var(--trans);
+  /* Stamp ink effect */
+  filter: saturate(0.85) contrast(1.05);
 }
 
 /* Outer postmark ring */
+.rm-dot::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 2px dashed var(--green);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Inner stamp ring */
 .rm-dot::after {
   content: '';
   position: absolute;
-  inset: -6px;
+  inset: 1px;
   border-radius: 50%;
-  border: 1.5px dashed var(--green-light);
-  opacity: 0.6;
+  border: 1px solid var(--green-light);
+  opacity: 0.5;
   pointer-events: none;
 }
 
 .rm-item:hover .rm-dot {
-  transform: scale(1.15) rotate(-3deg);
-  box-shadow: 0 6px 20px rgba(58,125,86,0.25);
+  transform: scale(1.18) rotate(-4deg);
+  box-shadow: 0 6px 20px rgba(58,125,86,0.3);
+  filter: saturate(1) contrast(1.1);
 }
 
 .rm-future-dot {
   border-color: var(--amber);
   border-style: dashed;
   background: var(--amber-pale);
+  filter: saturate(0.7);
+}
+
+.rm-future-dot::before {
+  border-color: var(--amber);
+  opacity: 0.25;
 }
 
 .rm-future-dot::after {
   border-color: var(--amber);
-  opacity: 0.4;
+  opacity: 0.3;
 }
 
 .rm-logo {
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
+  border-radius: 50%;
+  /* Stamp ink look for logos */
+  mix-blend-mode: multiply;
+  filter: contrast(1.2);
 }
 
-.rm-emoji { font-size: 1.15rem; }
+.rm-emoji { font-size: 1.35rem; }
 
 /* ── Stamp-style cards ── */
 .rm-card {
@@ -1780,9 +1804,9 @@ footer {
   }
 
   .rm-area { height: 80px; }
-  .rm-dot { width: 40px; height: 40px; }
-  .rm-dot::after { inset: -4px; }
-  .rm-logo { width: 20px; height: 20px; }
+  .rm-dot { width: 44px; height: 44px; }
+  .rm-dot::before { inset: -5px; }
+  .rm-logo { width: 22px; height: 22px; }
   .rm-card { max-width: 100px; padding: 4px 6px; }
   .rm-era { font-size: 0.44rem; }
   .rm-title { font-size: 0.62rem; }
