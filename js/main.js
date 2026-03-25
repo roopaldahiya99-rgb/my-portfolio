@@ -406,7 +406,10 @@ function renderTimeline() {
 
         const colorClass = item.color ? `rm-color-${item.color}` : '';
         const coordsHtml = item.coords ? `<span class="rm-coords">${item.coords}</span>` : '';
-        const noteHtml = ''; // annotations now rendered separately in overlay layer
+        // Notes positioned opposite to card — if card is up, note goes below; if card is down, note goes above
+        const notePos = i % 2 === 0 ? 'down' : 'up';
+        const squigglyArrow = `<svg class="rm-note-arrow${notePos === 'up' ? '-up' : ''}" width="20" height="18" viewBox="0 0 20 18"><path d="M10 0 Q6 4 12 6 Q6 8 13 11 Q8 13 10 18" fill="none" stroke="#5a5a6a" stroke-width="1" opacity="0.5"/><path d="M7 14 L10 18 L11 13" fill="none" stroke="#5a5a6a" stroke-width="1" opacity="0.5"/></svg>`;
+        const noteHtml = item.note ? `<div class="rm-note rm-note-${notePos}">${notePos === 'up' ? item.note + squigglyArrow : squigglyArrow + item.note}</div>` : '';
 
         const cardHtml = `
           <div class="rm-card ${isFuture ? 'rm-future-card' : ''}">
@@ -442,7 +445,6 @@ function renderTimeline() {
     requestAnimationFrame(() => {
       const track = container.querySelector('.rm-track');
       drawRoadmapPath(track);
-      drawAnnotations(track, items);
 
       // Redraw on resize
       let timer;
@@ -451,10 +453,7 @@ function renderTimeline() {
         timer = setTimeout(() => {
           const old = track.querySelector('.rm-svg');
           if (old) old.remove();
-          const oldAnnot = track.querySelector('.rm-annotation-layer');
-          if (oldAnnot) oldAnnot.remove();
           drawRoadmapPath(track);
-          drawAnnotations(track, items);
         }, 200);
       });
     });
@@ -597,102 +596,6 @@ function drawRoadmapPath(track) {
   }
 
   track.prepend(svg);
-}
-
-/* ── FREE-FLOWING HANDWRITTEN ANNOTATIONS ── */
-function drawAnnotations(track, items) {
-  if (!track) return;
-  const dots = [...track.querySelectorAll('.rm-dot')];
-  const trackRect = track.getBoundingClientRect();
-
-  const layer = document.createElement('div');
-  layer.className = 'rm-annotation-layer';
-
-  // Each annotation has a bespoke position config for organic scattered feel
-  const noteConfigs = {
-    0: { dx: -70, dy: -160, rot: -7, arrowDir: 'down-right', size: '1rem' },    // Bachelor's — top-left, tilted
-    2: { dx: 20, dy: 145, rot: 5, arrowDir: 'up-left', size: '0.95rem' },        // Dalberg — bottom-right
-    4: { dx: -90, dy: -165, rot: -4, arrowDir: 'down-right', size: '0.95rem' },  // Solo Travel — top far left
-    6: { dx: 30, dy: 140, rot: 6, arrowDir: 'up-left', size: '0.92rem' },        // Wysa — bottom-right, tilted
-    7: { dx: -40, dy: -160, rot: -5, arrowDir: 'long-to-travel', size: '0.9rem' }, // Rotman — long arrow to Solo Travel
-  };
-
-  items.forEach((item, i) => {
-    if (!item.note || !noteConfigs[i]) return;
-    const dot = dots[i];
-    if (!dot) return;
-    const dotRect = dot.getBoundingClientRect();
-    const dotCx = dotRect.left + dotRect.width / 2 - trackRect.left;
-    const dotCy = dotRect.top + dotRect.height / 2 - trackRect.top;
-    const cfg = noteConfigs[i];
-
-    const ann = document.createElement('div');
-    ann.className = 'rm-annotation';
-    const textX = dotCx + cfg.dx;
-    const textY = dotCy + cfg.dy;
-
-    // For Rotman: draw a long curved arrow all the way to Solo Travel stamp
-    if (cfg.arrowDir === 'long-to-travel') {
-      const travelIdx = items.findIndex(it => it.era === 'Solo Travel');
-      const travelDot = dots[travelIdx];
-      if (travelDot) {
-        const travelRect = travelDot.getBoundingClientRect();
-        const travelCx = travelRect.left + travelRect.width / 2 - trackRect.left;
-        const travelCy = travelRect.top - trackRect.top;
-        // SVG that spans from text to travel dot
-        const svgW = Math.abs(textX - travelCx) + 100;
-        const svgH = Math.abs(textY - travelCy) + 60;
-        const svgLeft = Math.min(textX, travelCx) - 30;
-        const svgTop = Math.min(textY, travelCy) - 20;
-        const startX = textX - svgLeft + 40;
-        const startY = textY - svgTop + 16;
-        const endX = travelCx - svgLeft;
-        const endY = travelCy - svgTop - 5;
-        const cpX1 = startX - 60;
-        const cpY1 = (startY + endY) / 2 - 20;
-        const cpX2 = endX + 40;
-        const cpY2 = (startY + endY) / 2 + 15;
-
-        ann.innerHTML = `
-          <span style="font-size:${cfg.size};display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>
-          <svg width="${svgW}" height="${svgH}" style="position:absolute;left:${svgLeft - textX}px;top:${svgTop - textY}px;" viewBox="0 0 ${svgW} ${svgH}">
-            <path d="M${startX} ${startY} C${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${endX} ${endY}" fill="none" stroke="#5a5a6a" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
-            <circle cx="${endX}" cy="${endY}" r="3.5" fill="#5a5a6a" opacity="0.4"/>
-          </svg>
-        `;
-      } else {
-        ann.innerHTML = `<span style="font-size:${cfg.size};display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>`;
-      }
-    } else {
-      // Standard note with curved arrow pointing to stamp
-      const arrowW = 70;
-      const arrowH = Math.abs(cfg.dy) - 20;
-      const goingDown = cfg.arrowDir.startsWith('down');
-      const goingRight = cfg.arrowDir.endsWith('right');
-
-      // Arrow from text to dot
-      const aStartX = goingRight ? 50 : 10;
-      const aStartY = goingDown ? 0 : arrowH;
-      const aEndX = goingRight ? arrowW - 5 : 5;
-      const aEndY = goingDown ? arrowH : 0;
-      const aCpX = (aStartX + aEndX) / 2 + (goingRight ? 15 : -15);
-      const aCpY = (aStartY + aEndY) / 2;
-
-      ann.innerHTML = `
-        <span style="font-size:${cfg.size};display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>
-        <svg width="${arrowW}" height="${arrowH}" style="position:absolute;${goingDown ? 'bottom' : 'top'}:-${arrowH - 5}px;left:${goingRight ? '30' : '-20'}px;" viewBox="0 0 ${arrowW} ${arrowH}">
-          <path d="M${aStartX} ${aStartY} Q${aCpX} ${aCpY} ${aEndX} ${aEndY}" fill="none" stroke="#5a5a6a" stroke-width="1.5" opacity="0.45"/>
-          <circle cx="${aEndX}" cy="${aEndY}" r="3" fill="#5a5a6a" opacity="0.45"/>
-        </svg>
-      `;
-    }
-
-    ann.style.left = textX + 'px';
-    ann.style.top = textY + 'px';
-    layer.appendChild(ann);
-  });
-
-  track.appendChild(layer);
 }
 
 /* ── COMMUNITIES (2+ columns with logos + photo) ── */
