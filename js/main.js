@@ -93,7 +93,7 @@ function initReveal() {
 ════════════════════════════════════════════════════════ */
 function initMap() {
   const map = L.map('map', {
-    center: [25, -20],
+    center: [30, -40],
     zoom: 2.4,
     zoomControl: false,
     scrollWheelZoom: false,
@@ -196,9 +196,6 @@ function initDealSpotlight() {
         <div class="deal-tags">
           <span class="deal-stage-tag">${deal.stage}</span>
           <span class="tag">${deal.sector}</span>
-        </div>
-        <div class="deal-facts">
-          ${deal.facts.map(f => `<span class="deal-fact">${f}</span>`).join('')}
         </div>
         <p class="deal-desc">${deal.description}</p>
         <div class="deal-insight">
@@ -632,7 +629,9 @@ function renderCommunities() {
   const cardsHtml = INVESTOR_LEARNER.communities.list.map(c => {
     const logoHtml = c.logo
       ? `<img src="${c.logo}" alt="${c.name}" class="community-logo" />`
-      : `<div class="community-logo-placeholder">${c.name.charAt(0)}</div>`;
+      : c.icon
+        ? `<div class="community-logo-placeholder">${c.icon}</div>`
+        : `<div class="community-logo-placeholder">${c.name.charAt(0)}</div>`;
     const nameHtml = c.url
       ? `<a href="${c.url}" target="_blank" rel="noopener">${c.name}</a>`
       : c.name;
@@ -666,7 +665,8 @@ function renderContactCta() {
 
   const c = INVESTOR_LEARNER.contact;
   container.innerHTML = `
-    <h2 style="color:var(--white);font-family:var(--font-serif);font-size:clamp(1.4rem,2.5vw,1.8rem);margin:0 0 10px;line-height:1.3;">${c.message}</h2>
+    <h2 style="color:var(--white);font-family:var(--font-serif);font-size:clamp(1.6rem,2.8vw,2.2rem);margin:0 0 12px;line-height:1.3;">${c.message}</h2>
+    <p class="contact-sub">${c.byline}</p>
     <div class="contact-links">
       <a href="${c.email}" class="contact-btn">Email Me</a>
       <a href="${c.calendly}" target="_blank" rel="noopener" class="contact-btn contact-btn-outline">Book a Call</a>
