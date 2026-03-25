@@ -410,7 +410,10 @@ function renderTimeline() {
 
         const colorClass = item.color ? `rm-color-${item.color}` : '';
         const coordsHtml = item.coords ? `<span class="rm-coords">${item.coords}</span>` : '';
-        const noteHtml = item.note ? `<div class="rm-note rm-note-${item.notePos || 'right'}">${item.note}</div>` : '';
+        // Notes positioned opposite to card — if card is up, note goes below; if card is down, note goes above
+        const notePos = i % 2 === 0 ? 'down' : 'up';
+        const squigglyArrow = `<svg class="rm-note-arrow${notePos === 'up' ? '-up' : ''}" width="20" height="18" viewBox="0 0 20 18"><path d="M10 0 Q6 4 12 6 Q6 8 13 11 Q8 13 10 18" fill="none" stroke="#5a5a6a" stroke-width="1" opacity="0.5"/><path d="M7 14 L10 18 L11 13" fill="none" stroke="#5a5a6a" stroke-width="1" opacity="0.5"/></svg>`;
+        const noteHtml = item.note ? `<div class="rm-note rm-note-${notePos}">${notePos === 'up' ? item.note + squigglyArrow : squigglyArrow + item.note}</div>` : '';
 
         const cardHtml = `
           <div class="rm-card ${isFuture ? 'rm-future-card' : ''}">
@@ -428,14 +431,13 @@ function renderTimeline() {
             }
             ${coordsHtml}
           </div>
-          ${noteHtml}
         `;
 
         return `
           <div class="rm-item ${isUp ? 'rm-up' : 'rm-down'} ${isFuture ? 'rm-future' : ''}" style="transition-delay:${i * 60}ms">
-            <div class="rm-area rm-area-top">${isUp ? cardHtml : ''}</div>
+            <div class="rm-area rm-area-top">${isUp ? cardHtml : (noteHtml || '')}</div>
             ${dotHtml}
-            <div class="rm-area rm-area-bottom">${isUp ? '' : cardHtml}</div>
+            <div class="rm-area rm-area-bottom">${isUp ? (noteHtml || '') : cardHtml}</div>
           </div>
         `;
       }).join('')}

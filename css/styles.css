@@ -1433,7 +1433,7 @@ img { max-width: 100%; display: block; }
 }
 
 .rm-area {
-  height: 105px;
+  height: 115px;
   display: flex;
   justify-content: center;
   padding: 0 2px;
@@ -1655,46 +1655,47 @@ img { max-width: 100%; display: block; }
   opacity: 0.7;
 }
 
-/* ── Handwritten annotation notes ── */
+/* ── Handwritten pencil-margin annotations ── */
 .rm-note {
-  position: absolute;
   font-family: var(--font-hand), cursive;
   font-size: 0.72rem;
-  color: var(--green);
-  white-space: nowrap;
+  color: #6b6b7a;
   z-index: 10;
-  opacity: 0;
-  transition: opacity 0.3s ease;
   pointer-events: none;
-  line-height: 1.2;
+  line-height: 1.15;
+  opacity: 0.65;
+  text-shadow: 0 0 0.5px rgba(60,60,80,0.2);
+  max-width: 120px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
-.rm-item:hover .rm-note {
-  opacity: 1;
+.rm-note-down {
+  transform: rotate(1.5deg);
+  align-self: center;
+  margin-top: auto;
 }
 
-.rm-note-left {
-  right: 85%;
-  top: 50%;
-  transform: translateY(-50%) rotate(-4deg);
-  text-align: right;
+.rm-note-up {
+  transform: rotate(-1.5deg);
+  align-self: center;
+  margin-top: auto;
 }
 
-.rm-note-right {
-  left: 85%;
-  top: 50%;
-  transform: translateY(-50%) rotate(3deg);
-  text-align: left;
+/* Squiggly arrow drawn with SVG in the note */
+.rm-note-arrow {
+  display: block;
+  margin: 2px auto 0;
+  opacity: 0.55;
 }
 
-.rm-note::before {
-  content: '~ ';
-  opacity: 0.5;
-}
-
-.rm-note::after {
-  content: ' ~';
-  opacity: 0.5;
+.rm-note-arrow-up {
+  display: block;
+  margin: 0 auto 2px;
+  opacity: 0.55;
+  transform: rotate(180deg);
 }
 
 /* (old deal-scroll-wrap removed — deals now in hero overlay) */
