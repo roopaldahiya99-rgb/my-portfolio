@@ -257,8 +257,7 @@ const INVESTOR_LEARNER = {
       logo: "assets/logos/uoft.png",
       color: "sky",
       coords: "43.66°N, 79.40°W",
-      note: "↖ See Solo Travel",
-      notePos: "left",
+      note: "↖ Solo Travel taught me this too",
     },
     {
       era: "BDC Capital",

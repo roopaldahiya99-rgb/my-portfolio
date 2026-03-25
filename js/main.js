@@ -610,11 +610,11 @@ function drawAnnotations(track, items) {
 
   // Each annotation has a bespoke position config for organic scattered feel
   const noteConfigs = {
-    0: { dx: -50, dy: -155, rot: -5, arrowDir: 'down-right' },    // Bachelor's — well above
-    2: { dx: 30, dy: 135, rot: 4, arrowDir: 'up-left' },           // Dalberg — well below
-    4: { dx: -70, dy: -155, rot: -3, arrowDir: 'down-right' },     // Solo Travel — well above
-    6: { dx: 40, dy: 135, rot: 3, arrowDir: 'up-left' },           // Wysa — well below
-    7: { dx: -20, dy: -155, rot: -4, arrowDir: 'long-to-travel' }, // Rotman — arrow to Solo Travel
+    0: { dx: -70, dy: -160, rot: -7, arrowDir: 'down-right', size: '1rem' },    // Bachelor's — top-left, tilted
+    2: { dx: 20, dy: 145, rot: 5, arrowDir: 'up-left', size: '0.95rem' },        // Dalberg — bottom-right
+    4: { dx: -90, dy: -165, rot: -4, arrowDir: 'down-right', size: '0.95rem' },  // Solo Travel — top far left
+    6: { dx: 30, dy: 140, rot: 6, arrowDir: 'up-left', size: '0.92rem' },        // Wysa — bottom-right, tilted
+    7: { dx: -40, dy: -160, rot: -5, arrowDir: 'long-to-travel', size: '0.9rem' }, // Rotman — long arrow to Solo Travel
   };
 
   items.forEach((item, i) => {
@@ -654,14 +654,14 @@ function drawAnnotations(track, items) {
         const cpY2 = (startY + endY) / 2 + 15;
 
         ann.innerHTML = `
-          <span style="font-size:0.95rem;display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>
+          <span style="font-size:${cfg.size};display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>
           <svg width="${svgW}" height="${svgH}" style="position:absolute;left:${svgLeft - textX}px;top:${svgTop - textY}px;" viewBox="0 0 ${svgW} ${svgH}">
-            <path d="M${startX} ${startY} C${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${endX} ${endY}" fill="none" stroke="#5a5a6a" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.35"/>
-            <circle cx="${endX}" cy="${endY}" r="3" fill="#5a5a6a" opacity="0.35"/>
+            <path d="M${startX} ${startY} C${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${endX} ${endY}" fill="none" stroke="#5a5a6a" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
+            <circle cx="${endX}" cy="${endY}" r="3.5" fill="#5a5a6a" opacity="0.4"/>
           </svg>
         `;
       } else {
-        ann.innerHTML = `<span style="font-size:0.95rem;display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>`;
+        ann.innerHTML = `<span style="font-size:${cfg.size};display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>`;
       }
     } else {
       // Standard note with curved arrow pointing to stamp
@@ -679,10 +679,10 @@ function drawAnnotations(track, items) {
       const aCpY = (aStartY + aEndY) / 2;
 
       ann.innerHTML = `
-        <span style="font-size:0.92rem;display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>
+        <span style="font-size:${cfg.size};display:inline-block;transform:rotate(${cfg.rot}deg)">${item.note}</span>
         <svg width="${arrowW}" height="${arrowH}" style="position:absolute;${goingDown ? 'bottom' : 'top'}:-${arrowH - 5}px;left:${goingRight ? '30' : '-20'}px;" viewBox="0 0 ${arrowW} ${arrowH}">
-          <path d="M${aStartX} ${aStartY} Q${aCpX} ${aCpY} ${aEndX} ${aEndY}" fill="none" stroke="#5a5a6a" stroke-width="1.2" opacity="0.4"/>
-          <circle cx="${aEndX}" cy="${aEndY}" r="2.5" fill="#5a5a6a" opacity="0.4"/>
+          <path d="M${aStartX} ${aStartY} Q${aCpX} ${aCpY} ${aEndX} ${aEndY}" fill="none" stroke="#5a5a6a" stroke-width="1.5" opacity="0.45"/>
+          <circle cx="${aEndX}" cy="${aEndY}" r="3" fill="#5a5a6a" opacity="0.45"/>
         </svg>
       `;
     }
