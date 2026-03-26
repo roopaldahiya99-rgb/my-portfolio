@@ -188,7 +188,7 @@ const FIELD_NOTES = {
 const INVESTOR_LEARNER = {
   hero: {
     tagline: "Investor. Traveller. Perpetual learner.",
-    bio: "Currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across fintech, healthtech, climatetech, and deeptech. <strong>MBA from Rotman</strong> (finance) — CDL, Women in Management Association. Before that: early-stage VC, investment advisory, and startup operations. Outside work: solo travel, live jazz, women's empowerment, and climate action.",
+    bio: "I'm currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across sectors including fintech, healthtech, climatetech, and deeptech. I hold an <strong>MBA from Rotman</strong> specializing in finance — where I worked with Creative Destruction Lab (CDL) and led the Women in Management Association. Before that, I built my lens across early-stage VC, investment advisory, and an operations role with a startup. When I'm not wearing my investor hat, I love traveling solo, listening to live jazz, and championing women's empowerment and climate action.",
     photo: "assets/Roopal.jpeg",
   },
 
