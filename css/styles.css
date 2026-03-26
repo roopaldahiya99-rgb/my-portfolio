@@ -318,22 +318,7 @@ img { max-width: 100%; display: block; }
   max-width: 400px;
 }
 
-/* Map-level deal spotlight (below stats, overlaid on map) */
-.map-deal-spotlight {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 800;
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(0,0,0,0.07);
-  border-radius: var(--radius-lg);
-  padding: 14px 18px 12px;
-  max-width: 420px;
-  width: 90%;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
+/* (map-deal-spotlight removed — deals back inside hero-content) */
 
 .hero-deal-header {
   display: flex;
@@ -1978,7 +1963,6 @@ footer {
 
   .hero-stats   { margin: 0 auto 16px; }
   .hero-deal-spotlight { max-width: 100%; margin: 0 auto; }
-  .map-deal-spotlight { max-width: 100%; width: 95%; bottom: 12px; padding: 10px 14px 8px; }
   .hero-deal-header h3 { font-size: 0.9rem; }
 
   .map-legend     { bottom: 20px; right: 16px; }
