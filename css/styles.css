@@ -1512,6 +1512,26 @@ img { max-width: 100%; display: block; }
   filter: drop-shadow(0 6px 16px rgba(58,125,86,0.3));
 }
 
+/* Clickable stamp dots */
+a.rm-dot-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+a.rm-dot-link:hover {
+  transform: scale(1.2) rotate(-4deg);
+  filter: drop-shadow(0 8px 20px rgba(58,125,86,0.4));
+}
+a.rm-dot-link::after {
+  content: '↗';
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-size: 0.55rem;
+  opacity: 0.6;
+  color: var(--ink-dim);
+}
+
 .rm-future-dot {
   background:
     repeating-linear-gradient(

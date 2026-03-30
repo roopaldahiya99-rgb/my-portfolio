@@ -99,12 +99,16 @@ function initMap() {
     scrollWheelZoom: false,
     attributionControl: true,
     dragging: window.innerWidth > 768,
+    worldCopyJump: false,
+    maxBounds: [[-85, -210], [85, 210]],
+    maxBoundsViscosity: 0.85,
   });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19,
+    noWrap: true,
   }).addTo(map);
 
   // Build pin lookup for connections
@@ -419,15 +423,13 @@ function renderTimeline() {
           </div>
         `;
 
-        const dotHtml = `
-          <div class="rm-dot ${isFuture ? 'rm-future-dot' : ''} ${colorClass}">
-            ${item.logo
+        const dotInner = `${item.logo
               ? `<img src="${item.logo}" alt="${item.era}" class="rm-logo" />`
               : `<span class="rm-emoji">${item.icon}</span>`
-            }
-            ${coordsHtml}
-          </div>
-        `;
+            }${coordsHtml}`;
+        const dotHtml = item.url
+          ? `<a href="${item.url}" target="_blank" rel="noopener" class="rm-dot ${isFuture ? 'rm-future-dot' : ''} ${colorClass} rm-dot-link" title="Visit ${item.era}">${dotInner}</a>`
+          : `<div class="rm-dot ${isFuture ? 'rm-future-dot' : ''} ${colorClass}">${dotInner}</div>`;
 
         return `
           <div class="rm-item ${isUp ? 'rm-up' : 'rm-down'} ${isFuture ? 'rm-future' : ''}" style="transition-delay:${i * 60}ms">

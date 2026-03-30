@@ -217,6 +217,7 @@ const INVESTOR_LEARNER = {
       color: "green",
       note: "This is why I love IC presentations",
       notePos: "right",
+      url: "https://dalberg.com",
     },
     {
       era: "USAID Cambodia",
@@ -240,6 +241,7 @@ const INVESTOR_LEARNER = {
       why: "First buy-side experience — built pipeline, screened 20+ deals, and developed conviction from scratch.",
       logo: "assets/logos/kois.png",
       color: "green",
+      url: "https://koisinvest.com",
     },
     {
       era: "Wysa",
@@ -249,6 +251,7 @@ const INVESTOR_LEARNER = {
       color: "purple",
       note: "Helps me understand founders' challenges and mindset",
       notePos: "right",
+      url: "https://www.wysa.com",
     },
     {
       era: "U of T MBA",
@@ -257,7 +260,7 @@ const INVESTOR_LEARNER = {
       logo: "assets/logos/uoft.png",
       color: "sky",
       coords: "43.66°N, 79.40°W",
-      note: "↖ Solo Travel taught me this too",
+      note: "Gave me the most valuable networks of advisors and peers",
     },
     {
       era: "BDC Capital",
@@ -265,6 +268,7 @@ const INVESTOR_LEARNER = {
       why: "Deploying into Canada's top ventures — 100% IC approval on every authored memo.",
       logo: "assets/logos/bdc.png",
       color: "green",
+      url: "https://www.bdc.ca/en/bdc-capital/thrive-venture-fund",
     },
     {
       era: "CFA & PE Cert",
@@ -287,11 +291,11 @@ const INVESTOR_LEARNER = {
     photo: "assets/Community.jpeg",
     intro: "This is how I source deals, understand markets, and stay sharp.",
     list: [
-      { name: "University of Toronto", desc: "Canada's largest alumni network — behind 500+ startups and a globally top-ranked research university", logo: "assets/logos/uoft.png", url: null },
-      { name: "Creative Destruction Lab (CDL)", desc: "World's leading deep-tech accelerator — where science meets venture and breakthroughs become companies", logo: "assets/logos/cdl.png", url: null },
-      { name: "UNLEASH", desc: "A truly global network of 7,000+ innovators from 190+ countries solving the world's biggest challenges", logo: "assets/logos/unleash.png", url: null },
-      { name: "CAFIID", desc: "Canada's development finance community — bridging capital, policy, and impact at scale", logo: "assets/logos/cafiid.png", url: null },
-      { name: "CWVC", desc: "Canadian Women in VC — building the next generation of women fund managers and investors", logo: "assets/logos/cwvc.png", url: null },
+      { name: "University of Toronto", desc: "Canada's largest alumni network — behind 500+ startups and a globally top-ranked research university", logo: "assets/logos/uoft.png", url: "https://www.utoronto.ca" },
+      { name: "Creative Destruction Lab (CDL)", desc: "World's leading deep-tech accelerator — where science meets venture and breakthroughs become companies", logo: "assets/logos/cdl.png", url: "https://creativedestructionlab.com" },
+      { name: "UNLEASH", desc: "A truly global network of 7,000+ innovators from 190+ countries solving the world's biggest challenges", logo: "assets/logos/unleash.png", url: "https://unleash.org" },
+      { name: "CAFIID", desc: "Canada's development finance community — bridging capital, policy, and impact at scale", logo: "assets/logos/cafiid.png", url: "https://www.cafiid.ca" },
+      { name: "CWVC", desc: "Canadian Women in VC — building the next generation of women fund managers and investors", logo: "assets/logos/cwvc.png", url: "https://www.cwvc.ca" },
       { name: "Personal Network", desc: "Founders, investors, and operators across 10+ countries — built through travel, deals, and genuine curiosity", icon: "🌍", url: null },
     ],
   },
