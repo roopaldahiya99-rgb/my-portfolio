@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatCounters();
     initDealSpotlight();
     initLessons();
-    initHeroToggle();
   }
 
   if (page === 'fieldnotes') {
@@ -277,7 +276,6 @@ function renderDiaryLeft() {
   container.innerHTML = `
     <div class="diary-hero-content">
       <div class="diary-date">${dateStr}</div>
-      <p class="section-label">${FIELD_NOTES.hero.label}</p>
       <h1 class="diary-title">${FIELD_NOTES.hero.title}</h1>
       <p class="diary-subtitle">${FIELD_NOTES.hero.subtitle}</p>
       <div class="diary-scribble diary-scribble-1">~</div>
@@ -293,7 +291,7 @@ function renderDiaryRight() {
 
   // Build tab bar with icons and new names
   const tabs = [
-    { id: 'field', label: 'Deals — Go and No-Go', icon: '🧭' },
+    { id: 'field', label: 'Dealwork', icon: '🧭' },
     { id: 'classroom', label: 'Classes & Cases', icon: '📚' },
     { id: 'sources', label: 'People & Perspectives', icon: '🎙️' },
   ];
@@ -361,11 +359,20 @@ function renderDiaryRight() {
 
   const sourcesPanel = `
     <div class="diary-panel" data-panel="sources">
-      <ul class="sources-plain">
-        ${FIELD_NOTES.fromPeople.map(src => `
-          <li><a href="${src.url}" target="_blank" rel="noopener"><strong>${src.name}</strong></a> — ${src.why}</li>
-        `).join('')}
-      </ul>
+      <p class="sources-intro">${FIELD_NOTES.fromPeople.intro}</p>
+      ${FIELD_NOTES.fromPeople.categories.map(cat => `
+        <div class="sources-category">
+          <h4 class="sources-category-label">${cat.label}</h4>
+          <ul class="sources-plain">
+            ${cat.sources.map(src => `
+              <li>
+                <a href="${src.url}" target="_blank" rel="noopener"><strong>${src.name}</strong></a> — ${src.why}
+                ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav">Favourite read &rarr;</a>` : ''}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+      `).join('')}
     </div>
   `;
 
@@ -393,6 +400,38 @@ function initInvestorLearner() {
   renderTimeline();
   renderCommunities();
   renderContactCta();
+  initAboutToggle();
+}
+
+function initAboutToggle() {
+  const tabs = document.querySelectorAll('.about-toggle-tab');
+  const panels = document.querySelectorAll('.about-toggle-panel');
+  if (!tabs.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const activePanel = document.querySelector(`.about-toggle-panel[data-panel="${target}"]`);
+      if (activePanel) activePanel.classList.add('active');
+
+      // Redraw timeline SVG path when switching to journey
+      if (target === 'journey') {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            const track = document.querySelector('.rm-track');
+            if (track) {
+              const old = track.querySelector('.rm-svg');
+              if (old) old.remove();
+              drawRoadmapPath(track);
+            }
+          });
+        });
+      }
+    });
+  });
 }
 
 function renderAboutHero() {
@@ -407,11 +446,9 @@ function renderAboutHero() {
     <div class="about-photo-wrap">
       <div class="about-photo">${photoHtml}</div>
     </div>
-    <div class="about-intro">
-      <h1 class="about-name"><em>Roopal</em></h1>
-      <p class="about-tagline">${INVESTOR_LEARNER.hero.tagline}</p>
-      <p class="about-bio">${INVESTOR_LEARNER.hero.bio}</p>
-    </div>
+    <h1 class="about-name"><em>Roopal</em></h1>
+    <p class="about-tagline">${INVESTOR_LEARNER.hero.tagline}</p>
+    <p class="about-bio">${INVESTOR_LEARNER.hero.bio}</p>
   `;
 }
 

@@ -68,35 +68,34 @@
             <span class="stat-label">Sectors</span>
           </div>
         </div>
-        <!-- Toggle between Deal Spotlight and Lessons -->
-        <div class="hero-toggle-section">
-          <div class="hero-toggle-tabs">
-            <button class="hero-toggle-tab active" data-target="deals">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-              Deal Spotlight
-            </button>
-            <button class="hero-toggle-tab" data-target="lessons">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2zM22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-              Lessons Learned
-            </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BELOW MAP: Deal Spotlight + Lessons Side by Side ─── -->
+  <section id="below-map" class="section">
+    <div class="below-map-grid">
+      <!-- Deal Spotlight (left) -->
+      <div class="below-map-card">
+        <div class="below-map-card-header">
+          <h3 class="below-map-card-title">Deal Spotlight</h3>
+          <div class="hero-deal-nav">
+            <button class="hero-deal-btn" id="dealLeft" aria-label="Previous deal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <span class="hero-deal-counter" id="dealCounter">1 / 3</span>
+            <button class="hero-deal-btn" id="dealRight" aria-label="Next deal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg></button>
           </div>
-          <div class="hero-toggle-panel active" data-panel="deals">
-            <div class="hero-deal-header">
-              <div class="hero-deal-nav">
-                <button class="hero-deal-btn" id="dealLeft" aria-label="Previous deal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg></button>
-                <span class="hero-deal-counter" id="dealCounter">1 / 3</span>
-                <button class="hero-deal-btn" id="dealRight" aria-label="Next deal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg></button>
-              </div>
-            </div>
-            <div class="hero-deal-card" id="dealCards">
-              <!-- filled by JS: 1 visible deal card at a time -->
-            </div>
-          </div>
-          <div class="hero-toggle-panel" data-panel="lessons">
-            <div id="lessonsList">
-              <!-- filled by JS: bullet list -->
-            </div>
-          </div>
+        </div>
+        <div class="below-map-card-body below-map-card-scroll" id="dealCards">
+          <!-- filled by JS -->
+        </div>
+      </div>
+      <!-- Lessons Learned (right) -->
+      <div class="below-map-card below-map-card-lessons">
+        <div class="below-map-card-header">
+          <h3 class="below-map-card-title">Lessons Learned</h3>
+        </div>
+        <div class="below-map-card-body below-map-card-scroll" id="lessonsList">
+          <!-- filled by JS -->
         </div>
       </div>
     </div>

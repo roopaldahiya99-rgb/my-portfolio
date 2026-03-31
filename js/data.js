@@ -127,7 +127,6 @@ const LESSONS_LEARNED = {
 // ── FIELD NOTES ──────────────────────────────────────────
 const FIELD_NOTES = {
   hero: {
-    label: "Field Notes",
     title: "Every Lesson Is a <em>Compass</em>.",
     subtitle: "I carry a growth mindset into every room I enter. I ask myself: <em>what did I learn today, and how can I apply this to my work and life?</em>",
   },
@@ -136,37 +135,46 @@ const FIELD_NOTES = {
     {
       icon: "🧭",
       title: "Sectors I Love — And Why",
-      summary: "From fintech to climate to healthcare access — the problems that keep me up at night and the investment theses I've built around them.",
+      summary: "The problems I follow, the theses I've built, and the sectors where I deploy conviction.",
       detail: `<p>I don't pick sectors because they're trendy. I follow problems that matter — and build conviction through first-hand deal work across 30+ companies.</p>
-<p><strong>Fintech & Vertical Software:</strong> At BDC Capital, I led due diligence on 7 early-stage B2B and fintech ventures. The best fintech companies don't compete with banks — they route around them. I focus on product defensibility, unit economics, and CAC/LTV dynamics that separate winners from noise.</p>
-<p><strong>Climate & Clean Energy:</strong> At Dalberg, I evaluated 20 climate-tech investment opportunities for USAID Cambodia, guiding $30M in capital deployment. I also structured a Shell-backed blended finance fund for clean energy in refugee settlements across MENA, unlocking energy access for 500,000+ people.</p>
-<p><strong>Healthcare & Access:</strong> At KOIS, I assessed 20+ early and growth stage healthcare ventures across India, Indonesia, and Kenya. I invest in access, not luxury healthcare — from assistive technology to social eyecare enterprises with $400M expansion opportunities.</p>
-<p><strong>Enterprise EdTech:</strong> At BDC, I co-led commercial due diligence on two $10-15M enterprise ed-tech acquisitions, conducting 25+ customer calls to validate retention, NPS, and product stickiness.</p>
-<p><strong>Media Tech:</strong> At Dalberg, I identified emerging innovations across India's news publishing ecosystem for Google News Initiative, generating a proprietary investment pipeline that guided $20MM in investments.</p>`,
-      tags: ["Fintech", "Climate", "Healthcare", "EdTech", "Media Tech"],
+<p><strong>Fintech:</strong> At BDC Capital, I led due diligence on 7 early-stage B2B and fintech ventures. The best fintech companies don't compete with banks — they route around them. I focus on product defensibility, unit economics, and CAC/LTV dynamics that separate winners from noise.</p>
+<p><strong>Climate Tech:</strong> At Dalberg, I evaluated 20 climate-tech investment opportunities for USAID Cambodia, guiding $30M in capital deployment. I also structured a Shell-backed blended finance fund for clean energy in refugee settlements across MENA, unlocking energy access for 500,000+ people.</p>
+<p><strong>AI:</strong> From AI-enabled mental health (Wysa) to AI mineral discovery (Meissner) to AI-driven menopause care — I invest where AI solves real pain points at scale, not where it's a feature label. I look for proprietary data moats, clear feedback loops, and measurable outcomes.</p>`,
+      tags: ["Fintech", "Climate Tech", "AI"],
     },
     {
       icon: "📐",
-      title: "My Investment Framework",
+      title: "Market Research Framework",
+      summary: "The tools I use to build conviction in data-sparse, early-stage environments where standard frameworks fall short.",
+      detail: `<p>In early-stage investing, there's often no product revenue, no retention data, and limited financial metrics. Conviction has to come from understanding the market deeply — the value chains, the adoption logic, the competitive dynamics, and the expansion pathways. This is where market research becomes the most critical tool in the investor's toolkit.</p>
+<p>My consulting background trained me to approach markets through a MECE lens. I'm well-versed in standard VC frameworks — TAM/SAM/SOM, Porter's Five Forces, competitive mapping — but these are table stakes. The real edge comes from layers that get skipped in rapid market assessments.</p>
+<p><strong>i. Commercialization Pathways & Value Capture</strong><br/>I map the full value chain to understand where value is created and captured. This includes unit economics at a system level — companies rarely operate below industry cost baselines early on. Critical for assessing whether a market structurally supports scalable value creation.</p>
+<p><strong>ii. Adoption Logic Before Market Sizing</strong><br/>Before sizing bottom-up, I prioritize user journeys, personas, and triggers for adoption. This grounds TAM in real behavioral demand and clarifies <em>why now</em> — what's changed in technology, cost, or behavior to unlock adoption.</p>
+<p><strong>iii. Jobs-to-be-Done & Willingness to Pay</strong><br/>I isolate the core problem, the intensity of the pain point, and existing alternatives. This sharpens the gap between "nice-to-have" and mission-critical — and reveals true willingness to pay.</p>
+<p><strong>iv. Competitive Landscape Including Alternatives</strong><br/>I map using 2x2 positioning and pricing benchmarks, but place equal emphasis on alternatives — not just direct competitors. Different solutions serve distinct personas and use cases. This surfaces non-obvious threats and whitespace.</p>
+<p><strong>v. Retention & Engagement Signals</strong><br/>Even pre-revenue, I look for early retention proxies — repeat usage, cohort behavior, NPS, waitlist conversion. Strong retention in a small base is a more reliable signal than a large TAM with no stickiness.</p>
+<p><strong>vi. Market Evolution & Expansion Pathways</strong><br/>I take a forward-looking view — adjacencies, platform potential, ecosystem expansion. Does success in the core market unlock additional value layers or network effects over time?</p>`,
+      tags: ["Market Research", "Due Diligence", "Early-Stage", "Retention"],
+    },
+    {
+      icon: "📊",
+      title: "Investment Framework",
       summary: "How I evaluate companies — the lens I've built from due diligence across 30+ deals with a 100% IC memo approval rate.",
       detail: `<p>Every investor has a framework. Mine has been rewritten across three mandates — BDC Capital, KOIS, and Dalberg — each version forged by real deals, real mistakes, and hard-won conviction.</p>
 <p><strong>1. Founder-Market Fit:</strong> Not just 'does this person understand the market?' but 'is this person <em>unreasonably</em> well-positioned to win here?' At BDC, I screened out opportunities citing co-founder risk and weak moats — team strength is always the first filter.</p>
-<p><strong>2. Product Defensibility & Unit Economics:</strong> Revenue is table stakes. I assess market sizing, switching costs, and whether the company gets structurally better as it scales. At BDC, I built scenario-based financial models to stress-test every thesis.</p>
-<p><strong>3. Capital Efficiency:</strong> Especially in emerging markets, the ability to do more with less is the real competitive moat. At KOIS, I provided strategic assistance that drove a 35% improvement in portfolio company margins.</p>
-<p><strong>4. Customer Validation:</strong> I don't rely on founder narratives alone. For the BDC ed-tech acquisitions, I conducted 25+ customer calls to validate retention and product stickiness before making recommendations.</p>
-<p><strong>5. Exit Pathway Clarity:</strong> I underwrite to exit. Who are the natural acquirers? Is there a clear value inflection point? I've drafted CIMs and built models that map every path to liquidity.</p>`,
+<p><strong>2. Product Defensibility & Unit Economics:</strong> Revenue is table stakes. I assess switching costs, data moats, and whether the company gets structurally better as it scales. I build scenario-based financial models to stress-test every thesis.</p>
+<p><strong>3. Capital Efficiency:</strong> Especially in emerging markets, the ability to do more with less is the real competitive moat. At KOIS, I drove a 35% improvement in portfolio company margins through strategic support.</p>
+<p><strong>4. Customer Validation:</strong> I don't rely on founder narratives alone. I conducted 25+ customer calls to validate retention, NPS, and product stickiness before making recommendations.</p>
+<p><strong>5. Exit Pathway Clarity:</strong> I underwrite to exit. Who are the natural acquirers? Is there a clear value inflection point? I map every path to liquidity.</p>`,
       tags: ["Framework", "Due Diligence", "Unit Economics", "Pattern Recognition"],
     },
     {
-      icon: "🏗️",
-      title: "First Principles in VC & PE",
-      summary: "The foundational beliefs that guide how I deploy capital — from power law dynamics to value creation through acquisitions.",
-      detail: `<p>Venture capital and private equity are different games with different rules — but they share first principles that I carry across both at BDC Capital.</p>
-<p><strong>In VC — The Power Law Is Everything:</strong> At BDC's Thrive Fund, I originated and screened 25+ early-stage Canadian tech opportunities. Portfolio construction matters more than individual deal selection. Conviction sizing is critical, and the cost of missing a great deal always exceeds the cost of backing a bad one.</p>
-<p><strong>In PE — Value Creation Is the Product:</strong> Entry multiples are the price of admission. The real returns come from operational improvement and revenue acceleration. I've evaluated search funds and ETA opportunities, analysing fund economics and past performance to identify where post-acquisition execution creates the 2x-to-4x difference.</p>
-<p><strong>Across Both — Proprietary Deal Flow Is the Edge:</strong> The investors who consistently outperform have differentiated access. I build this edge through CDL, Women in VC networks, and being the kind of investor founders want in the room.</p>
-<p><strong>Operating Experience Changes Everything:</strong> At Wysa, I built GTM strategy from scratch. Operating inside a startup fundamentally changed how I invest — I stopped asking hypothetical questions and started asking operational ones.</p>`,
-      tags: ["VC", "PE", "Power Law", "Value Creation", "First Principles"],
+      icon: "🚀",
+      title: "Fundraising Guide",
+      summary: "Lessons from both sides of the table — as an investor, a startup operator, and an advisor who's helped raise $25M+.",
+      detail: `<p>I've been an investor evaluating pitches, a startup operator building decks, and an advisor helping companies fundraise more than $25M. That range of perspective shapes everything I know about raising capital effectively.</p>
+<p><em>Coming soon — as I graduate, I'll compile the full playbook here: pitch construction, investor material best practices, syndicate dynamics, and finding the right partner for each stage.</em></p>`,
+      tags: ["Fundraising", "Pitching", "Coming Soon"],
     },
   ],
 
@@ -187,28 +195,59 @@ const FIELD_NOTES = {
     },
     {
       icon: "📚",
-      title: "Favourite PE & VC Case Studies",
-      whatILearned: "Value creation, brand moats, endowment strategy, and market entry",
-      details: "Canada Goose (PE) — how operational excellence and brand storytelling create outsized value post-acquisition. Tiffany & LVMH (M&A) — luxury M&A is about acquiring customer relationships, not just brands. Yale Endowment — how David Swensen's alternative-heavy allocation model redefined institutional investing. M-Pesa vs. Nubank — the best fintech companies design for the unbanked from scratch.",
-      tags: ["Canada Goose", "LVMH", "Yale Endowment", "Fintech"],
+      title: "Case Studies",
+      whatILearned: "PE, M&A, and VC lenses on real companies",
+      details: "Canada Goose (PE lens) — how operational excellence and brand storytelling create outsized value post-acquisition. Tiffany & LVMH (M&A lens) — luxury M&A is about acquiring customer relationships, not just brands. Adarra Ventures (VC lens) — emerging manager dynamics and portfolio construction. Currently pursuing CFA in PE with additional cases. <em>Coming soon — as I graduate, I'll add my final reflections here.</em>",
+      tags: ["Canada Goose", "LVMH", "Adarra Ventures", "CFA PE"],
     },
   ],
 
-  fromPeople: [
-    { name: "Financial Times", url: "https://www.ft.com", why: "My daily read — pattern-matching macro forces across geographies before any deal meeting." },
-    { name: "The Economist", url: "https://www.economist.com", why: "Forces second-order thinking on AI, deglobalisation, and capital flows. Stress-tests every thesis." },
-    { name: "Stratechery by Ben Thompson", url: "https://stratechery.com", why: "The clearest thinker on tech strategy — his aggregation theory changed how I evaluate platforms." },
-    { name: "The Generalist by Mario Gabriele", url: "https://www.readthegeneralist.com", why: "Deep-dive company profiles that read like investment memos. My template for breaking down new companies." },
-    { name: "Acquired Podcast", url: "https://www.acquired.fm", why: "History is the best investing framework — Costco, LVMH, TSMC. You see patterns everywhere." },
-    { name: "Two Small Fish", url: "#", why: "My personal blog on travel, culture, and the intersections of life and work." },
-  ],
+  fromPeople: {
+    intro: "I actively build perspective through a structured mix of daily news, long-form analysis, and operator-led insights. I prioritize sources that sharpen my market understanding, surface emerging trends early, and deepen my judgment on what makes enduring companies.",
+    categories: [
+      {
+        label: "Macro & Global",
+        sources: [
+          { name: "Financial Times", url: "https://www.ft.com", why: "My first read every morning. Anchors my thinking in global macro, geopolitics, and capital markets — contextualizing company-level decisions within broader economic shifts.", favourite: "https://www.ft.com/content/c5876c4e-c960-422c-8b2f-b0c5e4018f28" },
+          { name: "The Economist", url: "https://www.economist.com", why: "Structured, long-horizon analysis. Strengthens my ability to think probabilistically about global trends, policy, and second-order effects.", favourite: "https://www.economist.com/leaders/2024/03/28/the-ai-boom" },
+        ],
+      },
+      {
+        label: "Weekly Deep Dives",
+        sources: [
+          { name: "Newcomer", url: "https://www.newcomer.co", why: "One of the most credible insider views into venture capital — fund dynamics, LP sentiment, and how capital is actually deployed behind the scenes.", favourite: null },
+          { name: "Not Boring", url: "https://www.notboring.co", why: "Narrative-driven analysis of emerging industries. Invaluable for rapidly building context in unfamiliar sectors and spotting non-obvious opportunities.", favourite: "https://www.notboring.co/p/the-techno-industrial-revolution" },
+          { name: "Stratechery", url: "https://stratechery.com", why: "Deeply shapes my thinking on business model design and competitive advantage. Aggregation theory and platform economics have been especially influential.", favourite: "https://stratechery.com/2015/aggregation-theory/" },
+        ],
+      },
+      {
+        label: "Operator Lens",
+        sources: [
+          { name: "First Round Review", url: "https://review.firstround.com", why: "Operator-first insights on company building — what works, what doesn't, and what execution excellence looks like from the inside.", favourite: "https://review.firstround.com/the-remarkable-advantage-of-abundant-thinking" },
+        ],
+      },
+      {
+        label: "Podcasts",
+        sources: [
+          { name: "Acquired", url: "https://www.acquired.fm", why: "Deep dives into iconic companies — builds pattern recognition on how great businesses are built, scaled, and monetized over time.", favourite: null },
+        ],
+      },
+      {
+        label: "Specialized / Edge",
+        sources: [
+          { name: "The Information", url: "https://www.theinformation.com", why: "High-signal reporting on private tech companies — staying ahead of market narratives and competitive dynamics.", favourite: null },
+          { name: "ImpactAlpha", url: "https://impactalpha.com", why: "Keeps me close to developments in impact investing — a passion area for me.", favourite: null },
+        ],
+      },
+    ],
+  },
 };
 
 // ── INVESTOR / LEARNER (About Page) ─────────────────────
 const INVESTOR_LEARNER = {
   hero: {
     tagline: "Investor. Traveller. Perpetual learner.",
-    bio: "I'm currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across sectors including fintech, healthtech, climatetech, and deeptech. I hold an <strong>MBA from Rotman</strong> specializing in finance — where I worked with Creative Destruction Lab (CDL) and led the Women in Management Association. Before that, I built my lens across early-stage VC, investment advisory, and an operations role with a startup. When I'm not wearing my investor hat, I love traveling solo, listening to live jazz, and championing women's empowerment and climate action.",
+    bio: "I'm currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across sectors including fintech, healthtech, climatetech, and deeptech. I hold an <strong>MBA in Finance from University of Toronto</strong> — where I also worked with Creative Destruction Lab (CDL) and led the Women in Management Association. Before that, I built my lens across early-stage VC, investment advisory, and an operations role with a startup. When I'm not wearing my investor hat, I love traveling solo, listening to live jazz, and championing women's empowerment and climate action.",
     photo: "assets/Roopal.jpeg",
   },
 
@@ -225,7 +264,7 @@ const INVESTOR_LEARNER = {
     {
       era: "Startup Compass",
       title: "Sparked my love for entrepreneurship",
-      why: "Interviewed 20+ unicorn founders in India and supported the development of the startup playbook.",
+      why: "Interviewed 20+ unicorn founders in India and supported the development of a startup playbook published by India's top business school.",
       icon: "🎙️",
       color: "coral",
     },
@@ -235,25 +274,23 @@ const INVESTOR_LEARNER = {
       why: "Collaborated with and advised USAID, Google, Kimberly Clark, Shell, World Bank across the globe — high-stakes, high-conviction advisory.",
       logo: "assets/logos/dalberg.png",
       color: "green",
-      note: "This is why I love IC presentations",
+      note: "This is why I thrive in IC presentations",
       notePos: "right",
       url: "https://dalberg.com",
     },
     {
       era: "USAID Cambodia",
-      title: "Taught me to learn markets fast",
+      title: "Taught me how to learn new markets, fast",
       why: "Supported a 7-partner investment coalition to drive $30M in climate-smart technology in Cambodia.",
       icon: "🌱",
       color: "green",
     },
     {
       era: "Solo Travel",
-      title: "Built my global community",
+      title: "Built my interpersonal skills",
       why: "Started traveling solo, covering 26+ cities across South and Southeast Asia — the networks and perspectives that shape how I invest.",
       icon: "✈️",
       color: "amber",
-      note: "These are my phone-a-friend calls on anything new",
-      notePos: "left",
     },
     {
       era: "KOIS Invest",
@@ -274,21 +311,21 @@ const INVESTOR_LEARNER = {
       url: "https://www.wysa.com",
     },
     {
-      era: "U of T MBA",
-      title: "Technical and soft skills, 10x speed",
-      why: "Built finance 101 to 501, built a global community, worked with a CDL startup, honed leadership skills.",
+      era: "Rotman MBA",
+      title: "Technical and soft skills at 100x speed",
+      why: "Went from finance 101 to 501, built a strong community and leadership skills, worked with a CDL startup.",
       logo: "assets/logos/uoft.png",
       color: "sky",
       coords: "43.66°N, 79.40°W",
-      note: "Gave me the most valuable networks of advisors and peers",
+      note: "Built me a go-to crew of experts and peers on speed dial",
     },
     {
       era: "BDC Capital",
-      title: "Dealwork and investment discipline",
+      title: "Leading deal work and learning investment discipline",
       why: "Deploying into Canada's top ventures — 100% IC approval on every authored memo.",
       logo: "assets/logos/bdc.png",
       color: "green",
-      url: "https://www.bdc.ca/en/bdc-capital/thrive-venture-fund",
+      url: "https://www.bdc.ca/en/bdc-capital/venture-capital/funds/thrive-platform",
     },
     {
       era: "CFA & PE Cert",
@@ -300,7 +337,7 @@ const INVESTOR_LEARNER = {
     {
       era: "The Future",
       title: "My Own Fund",
-      why: "Investing in world-changing, category-defining global companies — and one day, leading my own fund.",
+      why: "In five years, I aim to launch my own fund, investing in category-defining companies solving critical global problems.",
       icon: "💡",
       isFuture: true,
       color: "amber",
