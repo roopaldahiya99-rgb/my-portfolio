@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatCounters();
     initDealSpotlight();
     initLessons();
+    initHeroToggle();
   }
 
   if (page === 'fieldnotes') {
@@ -93,19 +94,22 @@ function initReveal() {
 ════════════════════════════════════════════════════════ */
 function initMap() {
   const map = L.map('map', {
-    center: [30, -40],
+    center: [25, -20],
     zoom: 2.4,
     zoomControl: false,
     scrollWheelZoom: false,
     attributionControl: true,
     dragging: window.innerWidth > 768,
     worldCopyJump: true,
+    maxBounds: null,
+    maxBoundsViscosity: 0,
   });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19,
+    noWrap: false,
   }).addTo(map);
 
   // Build pin lookup for connections
@@ -125,41 +129,35 @@ function initMap() {
     }).addTo(map);
   });
 
+  // Pin type → marker style
+  const pinStyles = {
+    early:  { cls: 'pin-early',  size: [14, 14], anchor: [7, 7] },
+    growth: { cls: 'pin-growth', size: [14, 14], anchor: [7, 7] },
+    fund:   { cls: 'pin-fund',   size: [14, 14], anchor: [7, 7] },
+    ops:    { cls: 'pin-ops',    size: [20, 20], anchor: [10, 10] },
+  };
+
   // Render all pins
   DEAL_MAP.pins.forEach(pin => {
-    let markerHtml, iconSize, iconAnchor;
-
-    if (pin.type === 'ops') {
-      markerHtml = `<div class="pin-marker pin-star" title="${pin.country}">★</div>`;
-      iconSize = [20, 20];
-      iconAnchor = [10, 10];
-    } else if (pin.type === 'investor') {
-      markerHtml = `<div class="pin-marker pin-origin" title="${pin.country}"></div>`;
-      iconSize = [10, 10];
-      iconAnchor = [5, 5];
-    } else {
-      markerHtml = `<div class="pin-marker pin-invest" title="${pin.country}"></div>`;
-      iconSize = [16, 16];
-      iconAnchor = [8, 8];
-    }
+    const style = pinStyles[pin.type] || pinStyles.early;
+    const isOps = pin.type === 'ops';
+    const markerHtml = isOps
+      ? `<div class="pin-marker ${style.cls}" title="${pin.country}">★</div>`
+      : `<div class="pin-marker ${style.cls}" title="${pin.country}"></div>`;
 
     const icon = L.divIcon({
       className: '',
       html: markerHtml,
-      iconSize: iconSize,
-      iconAnchor: iconAnchor,
+      iconSize: style.size,
+      iconAnchor: style.anchor,
       popupAnchor: [0, -14],
     });
 
     const marker = L.marker([pin.lat, pin.lng], { icon }).addTo(map);
 
-    const logoHtml = pin.logo
-      ? `<img src="${pin.logo}" alt="" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:4px;" />`
-      : '';
-
-    const tagsHtml = (pin.stages || pin.sectors)
-      ? `<div class="popup-tags">${(pin.stages || []).map(s => `<span class="popup-stage">${s}</span>`).join('')}${(pin.sectors || []).map(s => `<span class="popup-sector">${s}</span>`).join('')}</div>`
-      : '';
+    const stagesHtml = (pin.stages || []).map(s => `<span class="popup-stage">${s}</span>`).join('');
+    const sectorsHtml = (pin.sectors || []).filter(Boolean).map(s => `<span class="popup-sector">${s}</span>`).join('');
+    const tagsHtml = (stagesHtml || sectorsHtml) ? `<div class="popup-tags">${stagesHtml}${sectorsHtml}</div>` : '';
 
     marker.bindPopup(`
       <div class="pin-popup deal-popup">
@@ -167,7 +165,7 @@ function initMap() {
           <img class="popup-flag-img" src="https://flagcdn.com/w40/${pin.code}.png" alt="${pin.country} flag" />
           <h4>${pin.country}</h4>
         </div>
-        <p class="popup-spotlight">${logoHtml}${pin.desc}</p>
+        <p class="popup-spotlight">${pin.desc}</p>
         ${tagsHtml}
       </div>
     `, { maxWidth: 280 });
@@ -188,12 +186,17 @@ function initDealSpotlight() {
 
   function renderDeal(index) {
     const deal = DEAL_SPOTLIGHT[index];
+    const stagesHtml = (deal.stages || []).map(s => `<span class="deal-stage-tag">${s}</span>`).join('');
+    const sectorsHtml = (deal.sectors || []).map(s => `<span class="deal-sector-tag">${s}</span>`).join('');
+    const tagsHtml = (stagesHtml || sectorsHtml) ? `<div class="deal-card-tags">${stagesHtml}${sectorsHtml}</div>` : '';
     container.innerHTML = `
       <div class="deal-card">
         <div class="deal-card-header">
+          <span class="deal-card-icon">${deal.icon || ''}</span>
           <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="flag" />
           <h3 class="deal-title">${deal.title}</h3>
         </div>
+        ${tagsHtml}
         <p class="deal-desc">${deal.description}</p>
         <div class="deal-insight">
           <strong>What I Learned:</strong> ${deal.whatILearned}
@@ -233,6 +236,26 @@ function initLessons() {
       `).join('')}
     </ul>
   `;
+}
+
+/* ════════════════════════════════════════════════════════
+   HERO TOGGLE — Switch Deal Spotlight ↔ Lessons
+════════════════════════════════════════════════════════ */
+function initHeroToggle() {
+  const tabs = document.querySelectorAll('.hero-toggle-tab');
+  const panels = document.querySelectorAll('.hero-toggle-panel');
+  if (!tabs.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const activePanel = document.querySelector(`.hero-toggle-panel[data-panel="${target}"]`);
+      if (activePanel) activePanel.classList.add('active');
+    });
+  });
 }
 
 /* ════════════════════════════════════════════════════════

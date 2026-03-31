@@ -81,8 +81,6 @@ img { max-width: 100%; display: block; }
 }
 
 .nav-inner {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -234,9 +232,9 @@ img { max-width: 100%; display: block; }
   inset: 0;
   z-index: 2;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
-  padding: 90px 6% 30px;
+  padding: 68px 6% 0 40px;
   background: linear-gradient(
     90deg,
     rgba(250,247,240,0.92) 0%,
@@ -413,6 +411,98 @@ img { max-width: 100%; display: block; }
   border-radius: 8px;
 }
 
+/* ── Toggle Tabs (Deal Spotlight ↔ Lessons) ── */
+.hero-toggle-section {
+  margin-top: 16px;
+}
+
+.hero-toggle-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+  background: rgba(255,255,255,0.5);
+  border-radius: var(--radius);
+  padding: 3px;
+  width: fit-content;
+}
+
+.hero-toggle-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-dim);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--trans);
+}
+
+.hero-toggle-tab svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.hero-toggle-tab:hover {
+  color: var(--ink);
+  background: rgba(255,255,255,0.6);
+}
+
+.hero-toggle-tab.active {
+  color: var(--green);
+  background: var(--white);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.hero-toggle-panel {
+  display: none;
+}
+
+.hero-toggle-panel.active {
+  display: block;
+}
+
+/* Deal card icon + tags */
+.deal-card-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-right: 8px;
+}
+
+.deal-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.deal-stage-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--green-pale);
+  color: var(--green);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.deal-sector-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--sky-pale);
+  color: var(--sky);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 .map-legend {
   position: absolute;
   bottom: 24px;
@@ -443,6 +533,12 @@ img { max-width: 100%; display: block; }
 .dot-invest  { background: var(--green); box-shadow: 0 0 6px rgba(58,125,86,0.5); }
 .dot-support { background: var(--ink-faint); box-shadow: 0 0 6px rgba(160,160,176,0.5); }
 .dot-star    { background: var(--amber); box-shadow: 0 0 6px rgba(212,147,42,0.5); }
+
+.dot-early   { background: var(--green); box-shadow: 0 0 6px rgba(58,125,86,0.5); }
+.dot-growth  { background: var(--sky); box-shadow: 0 0 6px rgba(61,139,181,0.5); }
+.dot-portfolio { background: var(--teal); box-shadow: 0 0 6px rgba(46,154,168,0.5); }
+.dot-fund    { background: var(--purple); box-shadow: 0 0 6px rgba(124,92,191,0.5); }
+.dot-ops     { background: var(--amber); box-shadow: 0 0 6px rgba(212,147,42,0.5); }
 
 .legend-note {
   font-size: 0.6rem;
@@ -509,6 +605,30 @@ img { max-width: 100%; display: block; }
   border-radius: 50%;
 }
 .pin-star::after { border: 2px solid var(--amber); }
+
+.pin-early  { background: var(--green); }
+.pin-early::after  { border: 2px solid var(--green); }
+
+.pin-growth { background: var(--sky); }
+.pin-growth::after { border: 2px solid var(--sky); }
+
+.pin-fund   { background: var(--purple); }
+.pin-fund::after   { border: 2px solid var(--purple); }
+
+.pin-ops {
+  width: 20px;
+  height: 20px;
+  background: var(--amber);
+  border: 2.5px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+  line-height: 1;
+  border-radius: 50%;
+}
+.pin-ops::after { border: 2px solid var(--amber); }
 
 .origin-tooltip {
   background: rgba(30,32,48,0.85) !important;
