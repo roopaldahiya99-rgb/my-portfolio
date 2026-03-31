@@ -33,42 +33,36 @@
     </div>
   </nav>
 
-  <!-- ─── ABOUT LAYOUT: Bio left + Toggle right ──────────── -->
-  <section class="about-main">
-    <div class="about-main-inner">
-      <!-- LEFT: Photo + Bio -->
-      <div class="about-left" id="aboutHero">
-        <!-- filled by JS: photo + bio -->
-      </div>
-      <!-- RIGHT: Toggle between Journey / Communities -->
-      <div class="about-right">
-        <div class="about-toggle-tabs">
-          <button class="about-toggle-tab active" data-target="journey">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            My Journey
-          </button>
-          <button class="about-toggle-tab" data-target="community">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-            Communities
-          </button>
-        </div>
-        <!-- Journey Panel -->
-        <div class="about-toggle-panel active" data-panel="journey">
-          <p class="about-panel-desc">
-            For me, investing doesn't feel like a job — it feels like what I'm built for. I'm driven by meeting exceptional, ambitious entrepreneurs, working alongside them to create value, building meaningful relationships, exploring new technologies and markets, and applying first-principles thinking to identify real problems and how companies can solve them. These milestones reflect that journey.
-            <span class="hover-hint">Hover over each stamp to learn more <svg class="squiggly-arrow" viewBox="0 0 80 30" width="60" height="22"><path d="M2 18 C12 6, 20 28, 30 14 S48 2, 56 16 S70 8, 76 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M70 10 L77 15 L68 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </p>
-          <div class="timeline-wrap" id="timelineWrap">
-            <!-- filled by JS -->
-          </div>
-        </div>
-        <!-- Communities Panel -->
-        <div class="about-toggle-panel" data-panel="community">
-          <div class="communities-wrap" id="communitiesWrap">
-            <!-- filled by JS -->
-          </div>
-        </div>
-      </div>
+  <!-- ─── HERO: Photo + Bio ──────────────────────────────── -->
+  <section class="about-hero">
+    <div class="about-hero-inner" id="aboutHero">
+      <!-- filled by JS: photo + bio side by side -->
+    </div>
+  </section>
+
+  <!-- ─── CAREER TIMELINE ──────────────────────────────── -->
+  <section id="timeline" class="section">
+    <div class="section-header reveal">
+      <p class="section-label">My Journey</p>
+      <h2>From <em>Curiosity</em> to <em>Capital</em></h2>
+      <p class="section-desc">
+        For me, investing doesn't feel like a job — it feels like what I'm built for. I'm driven by meeting exceptional, ambitious entrepreneurs, working alongside them to create value, building meaningful relationships, exploring new technologies and markets, and applying first-principles thinking to identify real problems and how companies can solve them. These milestones reflect that journey.
+        <span class="hover-hint">Hover over each stamp to learn more <svg class="squiggly-arrow" viewBox="0 0 80 30" width="60" height="22"><path d="M2 18 C12 6, 20 28, 30 14 S48 2, 56 16 S70 8, 76 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M70 10 L77 15 L68 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </p>
+    </div>
+    <div class="timeline-wrap reveal" id="timelineWrap">
+      <!-- filled by JS: roadmap timeline items -->
+    </div>
+  </section>
+
+  <!-- ─── COMMUNITIES ────────────────────────────────────── -->
+  <section id="communities" class="section section-alt">
+    <div class="section-header reveal">
+      <p class="section-label">Communities</p>
+      <h2>People I <em>Learn With</em></h2>
+    </div>
+    <div class="communities-wrap reveal" id="communitiesWrap">
+      <!-- filled by JS: photo + bullet list -->
     </div>
   </section>
 

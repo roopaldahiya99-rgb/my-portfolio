@@ -136,11 +136,11 @@ const FIELD_NOTES = {
       icon: "🧭",
       title: "Sectors I Love — And Why",
       summary: "The problems I follow, the theses I've built, and the sectors where I deploy conviction.",
-      detail: `<p>I don't pick sectors because they're trendy. I follow problems that matter — and build conviction through first-hand deal work across 30+ companies.</p>
-<p><strong>Fintech:</strong> At BDC Capital, I led due diligence on 7 early-stage B2B and fintech ventures. The best fintech companies don't compete with banks — they route around them. I focus on product defensibility, unit economics, and CAC/LTV dynamics that separate winners from noise.</p>
-<p><strong>Climate Tech:</strong> At Dalberg, I evaluated 20 climate-tech investment opportunities for USAID Cambodia, guiding $30M in capital deployment. I also structured a Shell-backed blended finance fund for clean energy in refugee settlements across MENA, unlocking energy access for 500,000+ people.</p>
-<p><strong>AI:</strong> From AI-enabled mental health (Wysa) to AI mineral discovery (Meissner) to AI-driven menopause care — I invest where AI solves real pain points at scale, not where it's a feature label. I look for proprietary data moats, clear feedback loops, and measurable outcomes.</p>`,
-      tags: ["Fintech", "Climate Tech", "AI"],
+      detail: `<p>I don't pick sectors because they're trendy. I follow structural tailwinds — places where technology, regulation, and human behavior are converging to create massive, durable markets.</p>
+<p><strong>Fintech:</strong> Financial infrastructure is being rebuilt from the ground up. Legacy systems are brittle, compliance costs are rising, and consumer expectations have permanently shifted. The next wave isn't about competing with banks — it's about replacing the pipes underneath them. Embedded finance, vertical SaaS with payments, and credit infrastructure for underserved segments are where the real compounding happens. This sector scales because every business eventually becomes a financial services business.</p>
+<p><strong>Climate Tech:</strong> Climate is no longer a niche — it's the largest capital reallocation of our generation. Carbon markets are being formalized, energy transition is accelerating across every geography, and regulatory pressure is creating irreversible demand. The companies that win here aren't selling sustainability — they're building infrastructure that's cheaper, faster, and better than the fossil-fuel alternative. The unit economics are finally working, and the policy tailwinds aren't going away.</p>
+<p><strong>AI:</strong> AI is moving from feature to infrastructure. The real opportunity isn't general-purpose models — it's vertical AI that solves specific, high-stakes problems with proprietary data and measurable outcomes. Healthcare diagnostics, scientific discovery, industrial automation — these are markets where AI creates 10x improvements, not incremental ones. I look for companies with defensible data moats, clear feedback loops, and problems where the cost of being wrong is high enough that customers will pay for accuracy.</p>`,
+      tags: [],
     },
     {
       icon: "📐",
@@ -149,35 +149,31 @@ const FIELD_NOTES = {
       detail: `<p>In early-stage investing, there's often no product revenue, no retention data, and limited financial metrics. Conviction has to come from understanding the market deeply — the value chains, the adoption logic, the competitive dynamics, and the expansion pathways. This is where market research becomes the most critical tool in the investor's toolkit.</p>
 <p>My consulting background trained me to approach markets through a MECE lens. I'm well-versed in standard VC frameworks — TAM/SAM/SOM, Porter's Five Forces, competitive mapping — but these are table stakes. The real edge comes from layers that get skipped in rapid market assessments.</p>
 <p><strong>i. Commercialization Pathways & Value Capture</strong><br/>I map the full value chain to understand where value is created and captured. This includes unit economics at a system level — companies rarely operate below industry cost baselines early on. Critical for assessing whether a market structurally supports scalable value creation.</p>
-<p><strong>ii. Adoption Logic Before Market Sizing</strong><br/>Before sizing bottom-up, I prioritize user journeys, personas, and triggers for adoption. This grounds TAM in real behavioral demand and clarifies <em>why now</em> — what's changed in technology, cost, or behavior to unlock adoption.</p>
-<p><strong>iii. Jobs-to-be-Done & Willingness to Pay</strong><br/>I isolate the core problem, the intensity of the pain point, and existing alternatives. This sharpens the gap between "nice-to-have" and mission-critical — and reveals true willingness to pay.</p>
-<p><strong>iv. Competitive Landscape Including Alternatives</strong><br/>I map using 2x2 positioning and pricing benchmarks, but place equal emphasis on alternatives — not just direct competitors. Different solutions serve distinct personas and use cases. This surfaces non-obvious threats and whitespace.</p>
-<p><strong>v. Retention & Engagement Signals</strong><br/>Even pre-revenue, I look for early retention proxies — repeat usage, cohort behavior, NPS, waitlist conversion. Strong retention in a small base is a more reliable signal than a large TAM with no stickiness.</p>
-<p><strong>vi. Market Evolution & Expansion Pathways</strong><br/>I take a forward-looking view — adjacencies, platform potential, ecosystem expansion. Does success in the core market unlock additional value layers or network effects over time?</p>`,
+<p><strong>ii. Customer Personas, Adoption Logic & Retention</strong><br/>Before sizing bottom-up, I prioritize user journeys, personas, and triggers for adoption. This grounds TAM in real behavioral demand and clarifies <em>why now</em>. Even pre-revenue, I look for early retention proxies — repeat usage, cohort behavior, NPS, waitlist conversion. Strong retention in a small base is a more reliable signal than a large TAM with no stickiness.</p>
+<p><strong>iii. Competitive Landscape Including Alternatives</strong><br/>I map using 2x2 positioning and pricing benchmarks, but place equal emphasis on alternatives — not just direct competitors. Different solutions serve distinct personas and use cases. This surfaces non-obvious threats and whitespace.</p>
+<p><strong>iv. Market Evolution & Expansion Pathways</strong><br/>I take a forward-looking view — adjacencies, platform potential, ecosystem expansion. Does success in the core market unlock additional value layers or network effects over time?</p>`,
       tags: ["Market Research", "Due Diligence", "Early-Stage", "Retention"],
     },
     {
       icon: "📊",
       title: "Investment Framework",
+      comingSoon: true,
       summary: "How I evaluate companies — the lens I've built from due diligence across 30+ deals with a 100% IC memo approval rate.",
-      detail: `<p>Every investor has a framework. Mine has been rewritten across three mandates — BDC Capital, KOIS, and Dalberg — each version forged by real deals, real mistakes, and hard-won conviction.</p>
-<p><strong>1. Founder-Market Fit:</strong> Not just 'does this person understand the market?' but 'is this person <em>unreasonably</em> well-positioned to win here?' At BDC, I screened out opportunities citing co-founder risk and weak moats — team strength is always the first filter.</p>
-<p><strong>2. Product Defensibility & Unit Economics:</strong> Revenue is table stakes. I assess switching costs, data moats, and whether the company gets structurally better as it scales. I build scenario-based financial models to stress-test every thesis.</p>
-<p><strong>3. Capital Efficiency:</strong> Especially in emerging markets, the ability to do more with less is the real competitive moat. At KOIS, I drove a 35% improvement in portfolio company margins through strategic support.</p>
-<p><strong>4. Customer Validation:</strong> I don't rely on founder narratives alone. I conducted 25+ customer calls to validate retention, NPS, and product stickiness before making recommendations.</p>
-<p><strong>5. Exit Pathway Clarity:</strong> I underwrite to exit. Who are the natural acquirers? Is there a clear value inflection point? I map every path to liquidity.</p>`,
-      tags: ["Framework", "Due Diligence", "Unit Economics", "Pattern Recognition"],
+      detail: `<p><em>Coming soon.</em></p>`,
+      tags: [],
     },
     {
       icon: "🚀",
       title: "Fundraising Guide",
+      comingSoon: true,
       summary: "Lessons from both sides of the table — as an investor, a startup operator, and an advisor who's helped raise $25M+.",
       detail: `<p>I've been an investor evaluating pitches, a startup operator building decks, and an advisor helping companies fundraise more than $25M. That range of perspective shapes everything I know about raising capital effectively.</p>
-<p><em>Coming soon — as I graduate, I'll compile the full playbook here: pitch construction, investor material best practices, syndicate dynamics, and finding the right partner for each stage.</em></p>`,
-      tags: ["Fundraising", "Pitching", "Coming Soon"],
+<p><em>Coming soon.</em></p>`,
+      tags: [],
     },
   ],
 
+  classroomComingSoon: "As I graduate in June 2025, I'll be adding deep-dive reflections on each of these — stay tuned.",
   fromTheClassroom: [
     {
       icon: "📜",
@@ -197,7 +193,7 @@ const FIELD_NOTES = {
       icon: "📚",
       title: "Case Studies",
       whatILearned: "PE, M&A, and VC lenses on real companies",
-      details: "Canada Goose (PE lens) — how operational excellence and brand storytelling create outsized value post-acquisition. Tiffany & LVMH (M&A lens) — luxury M&A is about acquiring customer relationships, not just brands. Adarra Ventures (VC lens) — emerging manager dynamics and portfolio construction. Currently pursuing CFA in PE with additional cases. <em>Coming soon — as I graduate, I'll add my final reflections here.</em>",
+      details: "Canada Goose (PE lens) — how operational excellence and brand storytelling create outsized value post-acquisition. Tiffany & LVMH (M&A lens) — luxury M&A is about acquiring customer relationships, not just brands. Adarra Ventures (VC lens) — emerging manager dynamics and portfolio construction. Currently pursuing CFA in PE with additional cases.",
       tags: ["Canada Goose", "LVMH", "Adarra Ventures", "CFA PE"],
     },
   ],
@@ -208,8 +204,8 @@ const FIELD_NOTES = {
       {
         label: "Macro & Global",
         sources: [
-          { name: "Financial Times", url: "https://www.ft.com", why: "My first read every morning. Anchors my thinking in global macro, geopolitics, and capital markets — contextualizing company-level decisions within broader economic shifts.", favourite: "https://www.ft.com/content/c5876c4e-c960-422c-8b2f-b0c5e4018f28" },
-          { name: "The Economist", url: "https://www.economist.com", why: "Structured, long-horizon analysis. Strengthens my ability to think probabilistically about global trends, policy, and second-order effects.", favourite: "https://www.economist.com/leaders/2024/03/28/the-ai-boom" },
+          { name: "Financial Times", url: "https://www.ft.com", why: "My first read every morning. Anchors my thinking in global macro, geopolitics, and capital markets — contextualizing company-level decisions within broader economic shifts.", favourite: null },
+          { name: "The Economist", url: "https://www.economist.com", why: "Structured, long-horizon analysis. Strengthens my ability to think probabilistically about global trends, policy, and second-order effects.", favourite: null },
         ],
       },
       {
@@ -223,7 +219,7 @@ const FIELD_NOTES = {
       {
         label: "Operator Lens",
         sources: [
-          { name: "First Round Review", url: "https://review.firstround.com", why: "Operator-first insights on company building — what works, what doesn't, and what execution excellence looks like from the inside.", favourite: "https://review.firstround.com/the-remarkable-advantage-of-abundant-thinking" },
+          { name: "First Round Review", url: "https://review.firstround.com", why: "Operator-first insights on company building — what works, what doesn't, and what execution excellence looks like from the inside.", favourite: "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/" },
         ],
       },
       {

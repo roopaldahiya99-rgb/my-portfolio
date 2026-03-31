@@ -306,6 +306,18 @@ img { max-width: 100%; display: block; }
   background: var(--cream-dark);
 }
 
+.scroll-hint {
+  margin-top: 16px;
+  color: var(--green);
+  opacity: 0.6;
+  animation: bounce-down 2s ease-in-out infinite;
+}
+
+@keyframes bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
 /* ── Hero Deal Spotlight (on-map carousel) ── */
 .hero-deal-spotlight {
   background: rgba(255,255,255,0.82);
@@ -357,6 +369,18 @@ img { max-width: 100%; display: block; }
   border-color: var(--green);
   color: var(--green);
   background: var(--green-pale);
+}
+
+#dealRight {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+
+#dealRight:hover {
+  background: var(--green-mid);
+  border-color: var(--green-mid);
+  color: var(--white);
 }
 
 .hero-deal-counter {
@@ -943,7 +967,7 @@ img { max-width: 100%; display: block; }
 ═══════════════════════════════════════════════════════════ */
 #below-map {
   padding: 40px 40px 60px;
-  background: var(--cream);
+  background: var(--green-pale);
 }
 
 .below-map-grid {
@@ -952,7 +976,7 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 28px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .below-map-card {
@@ -961,6 +985,8 @@ img { max-width: 100%; display: block; }
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .below-map-card-header {
@@ -986,6 +1012,7 @@ img { max-width: 100%; display: block; }
 
 .below-map-card-body {
   padding: 16px 20px 20px;
+  flex: 1;
 }
 
 .below-map-card-scroll {
@@ -1207,16 +1234,17 @@ img { max-width: 100%; display: block; }
 }
 
 .diary-date {
-  font-family: var(--font-hand);
-  font-size: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   color: var(--ink-faint);
   margin-bottom: 16px;
-  opacity: 0.7;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .diary-title {
-  font-family: var(--font-hand);
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 700;
   color: var(--ink);
   line-height: 1.15;
@@ -1224,8 +1252,8 @@ img { max-width: 100%; display: block; }
 }
 
 .diary-subtitle {
-  font-family: var(--font-hand);
-  font-size: 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
   color: var(--ink-dim);
   line-height: 1.7;
 }
@@ -1414,6 +1442,45 @@ img { max-width: 100%; display: block; }
   margin-top: 18px;
 }
 
+/* Coming soon tag */
+.coming-soon-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--amber-pale);
+  color: var(--amber);
+  font-weight: 700;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.classroom-coming-soon {
+  background: var(--amber-pale);
+  border: 1px solid rgba(212,147,42,0.2);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.classroom-coming-soon .coming-soon-tag {
+  margin-left: 0;
+  flex-shrink: 0;
+}
+
+.classroom-coming-soon p {
+  font-size: 0.82rem;
+  color: var(--ink-dim);
+  line-height: 1.5;
+  margin: 0;
+}
+
 /* ═══════════════════════════════════════════════════════════
    CLASSROOM CARDS — inside diary tabs
 ═══════════════════════════════════════════════════════════ */
@@ -1554,95 +1621,19 @@ img { max-width: 100%; display: block; }
 /* ═══════════════════════════════════════════════════════════
    ABOUT HERO
 ═══════════════════════════════════════════════════════════ */
-/* About page main layout — bio left, toggle right */
-.about-main {
-  padding: 110px 40px 40px;
+.about-hero {
+  padding: 140px 40px 80px;
   background: var(--white);
-  min-height: 100vh;
+  border-bottom: 1px solid var(--cream-dark);
 }
 
-.about-main-inner {
-  max-width: 1200px;
+.about-hero-inner {
+  max-width: 1000px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 48px;
-  align-items: start;
-}
-
-.about-left {
-  position: sticky;
-  top: 100px;
-}
-
-.about-right {
-  min-width: 0;
-}
-
-/* About toggle tabs */
-.about-toggle-tabs {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 20px;
-  background: rgba(0,0,0,0.03);
-  border-radius: var(--radius);
-  padding: 3px;
-  width: fit-content;
-}
-
-.about-toggle-tab {
-  display: flex;
+  grid-template-columns: 300px 1fr;
+  gap: 60px;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--ink-dim);
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all var(--trans);
-}
-
-.about-toggle-tab svg {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-}
-
-.about-toggle-tab:hover {
-  color: var(--ink);
-  background: rgba(255,255,255,0.6);
-}
-
-.about-toggle-tab.active {
-  color: var(--green);
-  background: var(--white);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-}
-
-.about-toggle-panel {
-  display: none;
-}
-
-.about-toggle-panel.active {
-  display: block;
-}
-
-.about-panel-desc {
-  font-size: 0.9rem;
-  color: var(--ink-dim);
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-
-/* Legacy — keep for hero rendering inside about-left */
-.about-hero-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
 .about-name {
@@ -2347,13 +2338,12 @@ footer {
   .diary-tabs { overflow-x: auto; flex-wrap: nowrap; }
   .diary-tab { white-space: nowrap; font-size: 0.76rem; padding: 8px 14px; }
 
-  .about-main { padding: 100px 20px 40px; }
-  .about-main-inner {
+  .about-hero { padding: 120px 20px 60px; }
+  .about-hero-inner {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 40px;
+    text-align: center;
   }
-  .about-left { position: static; }
-  .about-hero-inner { text-align: center; }
 
   .about-name { font-size: 3rem; }
 
