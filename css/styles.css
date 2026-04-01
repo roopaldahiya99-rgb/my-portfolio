@@ -2108,14 +2108,14 @@ a.rm-dot-link::after {
 .communities-wrap {
   max-width: 1100px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 40px;
-  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
 }
 
-.community-photo {
+.community-photo-wide {
   width: 100%;
+  max-height: 340px;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--cream-mid);
@@ -2123,39 +2123,16 @@ a.rm-dot-link::after {
   box-shadow: 0 8px 30px rgba(0,0,0,0.06);
 }
 
-.community-photo img {
+.community-photo-wide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.community-photo-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, var(--teal-pale), var(--purple-pale));
-  font-size: 4rem;
-}
-
-.community-intro {
-  font-size: 0.95rem;
-  color: var(--ink-dim);
-  line-height: 1.7;
-  margin-bottom: 20px;
-  font-style: italic;
-}
-
-.community-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  object-position: center 30%;
 }
 
 .community-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
 
@@ -2399,14 +2376,11 @@ footer {
   .about-name { font-size: 3rem; }
 
   .communities-wrap {
-    grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 24px;
   }
 
-  .community-photo {
-    width: 200px;
-    height: 260px;
-    margin: 0 auto;
+  .community-photo-wide {
+    max-height: 220px;
   }
 
   .community-grid {

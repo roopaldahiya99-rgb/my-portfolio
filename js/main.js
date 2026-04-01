@@ -664,11 +664,8 @@ function renderCommunities() {
   const introHtml = '';
 
   container.innerHTML = `
-    <div class="community-photo">${photoHtml}</div>
-    <div class="community-content">
-      ${introHtml}
-      <div class="community-grid">${cardsHtml}</div>
-    </div>
+    <div class="community-photo-wide">${photoHtml}</div>
+    <div class="community-grid">${cardsHtml}</div>
   `;
 }
 
