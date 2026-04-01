@@ -1679,7 +1679,7 @@ img { max-width: 100%; display: block; }
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: stretch;
 }
 
 .about-name {
@@ -1717,8 +1717,8 @@ img { max-width: 100%; display: block; }
 }
 
 .about-photo {
-  width: 280px;
-  height: 340px;
+  width: 100%;
+  height: 100%;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--cream-mid);
@@ -2115,7 +2115,6 @@ a.rm-dot-link::after {
 
 .community-photo-wide {
   width: 100%;
-  max-height: 340px;
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--cream-mid);
@@ -2125,9 +2124,8 @@ a.rm-dot-link::after {
 
 .community-photo-wide img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
+  height: auto;
+  display: block;
 }
 
 .community-grid {
@@ -2138,7 +2136,7 @@ a.rm-dot-link::after {
 
 .community-card {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   background: var(--white);
   border: 1.5px solid var(--cream-dark);
@@ -2161,6 +2159,7 @@ a.rm-dot-link::after {
   flex-shrink: 0;
   background: var(--cream);
   padding: 4px;
+  margin-top: 2px;
 }
 
 .community-logo-placeholder {
