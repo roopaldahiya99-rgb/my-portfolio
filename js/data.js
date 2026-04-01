@@ -71,6 +71,10 @@ const DEAL_MAP = {
     { id: "europe", country: "Europe", lat: 50.85, lng: 4.35, code: "eu",
       desc: "Built successor assistive technology fund in Europe, growing pipeline and increasing AUM by 2.5x",
       type: "fund", stages: ["Fund Development"], sectors: ["Assistive Tech"] },
+    // 17. Canada — Vancouver PE ed-tech acquisition
+    { id: "vancouver-edtech", country: "Canada — Vancouver", lat: 49.28, lng: -123.12, code: "ca",
+      desc: "Invested in PE acquisition of an ed-tech company serving K-12 teachers in USA",
+      type: "growth", stages: ["Growth-Stage Investment"], sectors: ["Ed-Tech"] },
   ],
   connections: [
     { from: "india-media", to: "cambodia", color: "#d4932a" },
@@ -88,6 +92,7 @@ const DEAL_SPOTLIGHT = [
     title: "Flora Fertility",
     code: "us",
     icon: "💡",
+    url: "https://www.florafertility.com",
     stages: ["Early-Stage Investment"],
     sectors: ["Fintech"],
     description: "Invested C$500K + C$350K follow-on in Flora Fertility — a portable, actuarial-driven fertility insurance product. Conviction was built on rising demand for fertility coverage, a proprietary actuarial engine, and a founding duo with deep complementary skills and a track record of execution. Led due diligence, term sheet negotiation, and fundraising support.",
@@ -97,6 +102,7 @@ const DEAL_SPOTLIGHT = [
     title: "pHathom Technologies",
     code: "ca",
     icon: "🌊",
+    url: "https://www.phathom.ca",
     stages: ["Early-Stage Investment"],
     sectors: ["Climate Tech"],
     description: "Invested C$500K in pHathom — a Nova Scotia startup using Accelerated Weathering of Limestone (AWL) to capture CO₂ at coastal emission sources and safely sequester it as ocean bicarbonate. Backed by novel first-of-its-kind tech, early traction from world's largest carbon purchasers, and a solution that avoids geological storage — a key pain point for coastal facilities.",
@@ -106,6 +112,7 @@ const DEAL_SPOTLIGHT = [
     title: "Wysa",
     code: "in",
     icon: "🧠",
+    url: "https://www.wysa.com",
     stages: ["Operational Experience"],
     sectors: ["AI", "Health Tech"],
     description: "Joined a Series C global AI mental health startup with FDA approval to get my hands dirty on the other side of the table. Worked across organizational structure, incentive design, product orientation, customer feedback synthesis, and GTM strategy for new geographies and use cases.",
@@ -116,7 +123,7 @@ const DEAL_SPOTLIGHT = [
 // ── LESSONS LEARNED ──────────────────────────────────────
 const LESSONS_LEARNED = {
   lessons: [
-    "<strong class='lesson-key'>Market depth beats market sizing</strong> — knowing TAM isn't enough. You need to understand value chains, ecosystem maps, user journeys, substitutes, structural constraints, timing, capital markets, risks, and failure modes.",
+    "<strong class='lesson-key'>Market-sizing is insufficient without in-depth understanding</strong> — knowing TAM isn't enough. You need to understand value chains, ecosystem maps, user journeys, substitutes, structural constraints, timing, capital markets, risks, and failure modes.",
     "<strong class='lesson-key'>Passion beats founder-market fit</strong> — I've seen founders with raw grit and uncanny passion outperform seasoned industry veterans. Experience helps, but obsession wins.",
     "<strong class='lesson-key'>Capital alone is never enough</strong> — active support, whether hands-on or through the right syndicate, is what separates deals that survive from deals that win. Pay attention to who's around the table — not as a signal for financial evaluation, but as a signal for value creation over time.",
     "<strong class='lesson-key'>Real deals are messy</strong> — co-founders exit, metrics slip, timelines break. Deal structuring is crucial, and so is founder support, creativity, and problem solving. The best investors roll up their sleeves long before things start to slip.",
@@ -212,14 +219,14 @@ const FIELD_NOTES = {
         label: "Weekly Deep Dives",
         sources: [
           { name: "Newcomer", url: "https://www.newcomer.co", why: "One of the most credible insider views into venture capital — fund dynamics, LP sentiment, and how capital is actually deployed behind the scenes.", favourite: null },
-          { name: "Not Boring", url: "https://www.notboring.co", why: "Narrative-driven analysis of emerging industries. Invaluable for rapidly building context in unfamiliar sectors and spotting non-obvious opportunities.", favourite: "https://www.notboring.co/p/the-techno-industrial-revolution" },
-          { name: "Stratechery", url: "https://stratechery.com", why: "Deeply shapes my thinking on business model design and competitive advantage. Aggregation theory and platform economics have been especially influential.", favourite: "https://stratechery.com/2015/aggregation-theory/" },
+          { name: "Not Boring", url: "https://www.notboring.co", why: "Narrative-driven analysis of emerging industries. Invaluable for rapidly building context in unfamiliar sectors and spotting non-obvious opportunities.", favourite: "https://www.notboring.co/p/the-techno-industrial-revolution", favouriteName: "The Techno-Industrial Revolution" },
+          { name: "Stratechery", url: "https://stratechery.com", why: "Deeply shapes my thinking on business model design and competitive advantage. Aggregation theory and platform economics have been especially influential.", favourite: "https://stratechery.com/2015/aggregation-theory/", favouriteName: "Aggregation Theory" },
         ],
       },
       {
         label: "Operator Lens",
         sources: [
-          { name: "First Round Review", url: "https://review.firstround.com", why: "Operator-first insights on company building — what works, what doesn't, and what execution excellence looks like from the inside.", favourite: "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/" },
+          { name: "First Round Review", url: "https://review.firstround.com", why: "Operator-first insights on company building — what works, what doesn't, and what execution excellence looks like from the inside.", favourite: "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/", favouriteName: "Build a Customer Advisory Board" },
         ],
       },
       {
@@ -243,7 +250,7 @@ const FIELD_NOTES = {
 const INVESTOR_LEARNER = {
   hero: {
     tagline: "Investor. Traveller. Perpetual learner.",
-    bio: "I'm currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across sectors including fintech, healthtech, climatetech, and deeptech. I hold an <strong>MBA in Finance from University of Toronto</strong> — where I also worked with Creative Destruction Lab (CDL) and led the Women in Management Association. Before that, I built my lens across early-stage VC, investment advisory, and an operations role with a startup. When I'm not wearing my investor hat, I love traveling solo, listening to live jazz, and championing women's empowerment and climate action.",
+    bio: "I'm currently with <strong>BDC Capital's Thrive Fund</strong>, deploying capital into Canadian ventures across sectors including fintech, healthtech, climatetech, and deeptech. I hold an <strong>MBA in Finance from University of Toronto</strong> — where I also worked with Creative Destruction Lab (CDL) and led the Women in Management Association. Before that, I built my lens across early-stage and growth-stage VC, investment advisory, and an operations role with a global startup. When I'm not wearing my investor hat, you can find me knee-deep in substack articles, traveling solo, listening to live jazz, or picking up new hobbies like photography. I also actively work towards advancing women's empowerment and climate action.",
     photo: "assets/Roopal.jpeg",
   },
 
@@ -342,14 +349,16 @@ const INVESTOR_LEARNER = {
 
   communities: {
     photo: "assets/Community.jpeg",
-    intro: "This is how I source deals, understand markets, and stay sharp.",
+    intro: null,
     list: [
       { name: "University of Toronto", desc: "Canada's largest alumni network — behind 500+ startups and a globally top-ranked research university", logo: "assets/logos/uoft.png", url: "https://www.utoronto.ca" },
       { name: "Creative Destruction Lab (CDL)", desc: "World's leading deep-tech accelerator — where science meets venture and breakthroughs become companies", logo: "assets/logos/cdl.png", url: "https://creativedestructionlab.com" },
+      { name: "CWVC", desc: "Canadian Women in VC — building the next generation of women fund managers and investors", logo: "assets/logos/cwvc.png", url: "https://www.cwvc.ca" },
+      { name: "Proprietary Network", desc: "Founders, investors, and operators across 10+ countries — built through travel, deals, and genuine curiosity", icon: "🌍", url: null },
       { name: "UNLEASH", desc: "A truly global network of 7,000+ innovators from 190+ countries solving the world's biggest challenges", logo: "assets/logos/unleash.png", url: "https://unleash.org" },
       { name: "CAFIID", desc: "Canada's development finance community — bridging capital, policy, and impact at scale", logo: "assets/logos/cafiid.png", url: "https://www.cafiid.ca" },
-      { name: "CWVC", desc: "Canadian Women in VC — building the next generation of women fund managers and investors", logo: "assets/logos/cwvc.png", url: "https://www.cwvc.ca" },
-      { name: "Personal Network", desc: "Founders, investors, and operators across 10+ countries — built through travel, deals, and genuine curiosity", icon: "🌍", url: null },
+      { name: "BDC Capital", desc: "Canada's most active and experienced VC investor — providing access to a network of 20+ co-investment partners, seasoned advisors, and deep operational expertise through the Thrive Fund ecosystem", logo: "assets/logos/bdc.png", url: "https://www.bdc.ca/en/bdc-capital" },
+      { name: "LEADS Mentorship", desc: "CVCA's flagship mentorship program pairing emerging professionals with senior VC and PE leaders — providing structured access to industry expertise, career navigation, and a high-calibre peer network across Canadian private capital", icon: "🎓", url: "https://www.cvca.ca/leads" },
     ],
   },
 

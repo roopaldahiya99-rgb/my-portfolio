@@ -93,7 +93,7 @@ function initReveal() {
 ════════════════════════════════════════════════════════ */
 function initMap() {
   const map = L.map('map', {
-    center: [25, -20],
+    center: [38, -95],
     zoom: 2.4,
     zoomControl: false,
     scrollWheelZoom: false,
@@ -188,12 +188,15 @@ function initDealSpotlight() {
     const stagesHtml = (deal.stages || []).map(s => `<span class="deal-stage-tag">${s}</span>`).join('');
     const sectorsHtml = (deal.sectors || []).map(s => `<span class="deal-sector-tag">${s}</span>`).join('');
     const tagsHtml = (stagesHtml || sectorsHtml) ? `<div class="deal-card-tags">${stagesHtml}${sectorsHtml}</div>` : '';
+    const titleHtml = deal.url
+      ? `<a href="${deal.url}" target="_blank" rel="noopener" class="deal-title-link">${deal.title}</a>`
+      : deal.title;
     container.innerHTML = `
       <div class="deal-card">
         <div class="deal-card-header">
           <span class="deal-card-icon">${deal.icon || ''}</span>
           <img class="deal-flag" src="https://flagcdn.com/w40/${deal.code}.png" alt="flag" />
-          <h3 class="deal-title">${deal.title}</h3>
+          <h3 class="deal-title">${titleHtml}</h3>
         </div>
         ${tagsHtml}
         <p class="deal-desc">${deal.description}</p>
@@ -364,12 +367,12 @@ function renderDiaryRight() {
       <p class="sources-intro">${FIELD_NOTES.fromPeople.intro}</p>
       ${FIELD_NOTES.fromPeople.categories.map(cat => `
         <div class="sources-category">
-          <h4 class="sources-category-label">${cat.label}</h4>
+          <span class="sources-category-bubble">${cat.label}</span>
           <ul class="sources-plain">
             ${cat.sources.map(src => `
               <li>
                 <a href="${src.url}" target="_blank" rel="noopener"><strong>${src.name}</strong></a> — ${src.why}
-                ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav">Favourite read &rarr;</a>` : ''}
+                ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav">Favourite Read: ${src.favouriteName || 'Read'} &rarr;</a>` : ''}
               </li>
             `).join('')}
           </ul>
@@ -658,9 +661,7 @@ function renderCommunities() {
     `;
   }).join('');
 
-  const introHtml = INVESTOR_LEARNER.communities.intro
-    ? `<p class="community-intro">${INVESTOR_LEARNER.communities.intro}</p>`
-    : '';
+  const introHtml = '';
 
   container.innerHTML = `
     <div class="community-photo">${photoHtml}</div>
