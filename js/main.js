@@ -365,33 +365,20 @@ function renderDiaryRight() {
   const sourcesPanel = `
     <div class="diary-panel" data-panel="sources">
       <p class="sources-intro">${FIELD_NOTES.fromPeople.intro}</p>
-      ${FIELD_NOTES.fromPeople.categories.map((cat, i) => `
-        <div class="field-article expandable" style="transition-delay:${i * 100}ms" onclick="this.classList.toggle('expanded')">
-          <div class="field-article-header">
-            <div class="field-article-icon">${cat.icon || '📖'}</div>
-            <div>
-              <h3 class="field-article-title">${cat.label}</h3>
-              <p class="field-article-summary">${cat.sources.map(s => s.name).join(' · ')}</p>
-            </div>
-            <div class="expand-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
+      <div class="sources-open-card">
+        ${FIELD_NOTES.fromPeople.categories.map(cat => `
+          <div class="sources-section">
+            <h4 class="sources-section-label"><span class="sources-section-icon">${cat.icon || '📖'}</span> ${cat.label}</h4>
+            ${cat.sources.map(src => `
+              <div class="source-card">
+                <a href="${src.url}" target="_blank" rel="noopener" class="source-card-name">${src.name}</a>
+                <p class="source-card-why">${src.why}</p>
+                ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav"><em>Favourite Read: ${src.favouriteName || 'Read'}</em> &rarr;</a>` : ''}
+              </div>
+            `).join('')}
           </div>
-          <div class="field-article-body">
-            <div class="field-article-content">
-              ${cat.sources.map(src => `
-                <div class="source-card">
-                  <div class="source-card-header">
-                    <a href="${src.url}" target="_blank" rel="noopener" class="source-card-name">${src.name}</a>
-                  </div>
-                  <p class="source-card-why">${src.why}</p>
-                  ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav"><em>Favourite Read: ${src.favouriteName || 'Read'}</em> &rarr;</a>` : ''}
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `).join('')}
+        `).join('')}
+      </div>
     </div>
   `;
 

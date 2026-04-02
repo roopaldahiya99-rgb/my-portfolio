@@ -1161,8 +1161,37 @@ img { max-width: 100%; display: block; }
   text-decoration: underline;
 }
 
+.sources-open-card {
+  background: linear-gradient(180deg, #faf8f2 0%, #f8f5ec 100%);
+  border-left: 3px solid var(--green-light);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 24px 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.sources-section {
+  margin-bottom: 22px;
+}
+
+.sources-section:last-child { margin-bottom: 0; }
+
+.sources-section-label {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sources-section-icon {
+  font-size: 1.1rem;
+}
+
 .source-card {
-  padding: 14px 0;
+  padding: 12px 0;
   border-bottom: 1px solid var(--cream-dark);
 }
 
@@ -1170,7 +1199,7 @@ img { max-width: 100%; display: block; }
 
 .source-card-name {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--green) !important;
   transition: color var(--trans);
