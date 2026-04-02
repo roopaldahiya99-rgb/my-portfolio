@@ -1236,10 +1236,10 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
 }
 
-.sources-fav::after {
+.sources-fav::before {
   content: '★';
   font-size: 0.7rem;
-  color: var(--amber);
+  color: var(--purple);
 }
 
 .sources-fav:hover {
