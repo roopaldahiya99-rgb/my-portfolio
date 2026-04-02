@@ -143,10 +143,13 @@ const FIELD_NOTES = {
       icon: "🧭",
       title: "Sectors I Love — And Why",
       summary: "The problems I follow, the theses I've built, and the sectors where I deploy conviction.",
-      detail: `<p>I don't pick sectors because they're trendy. I follow structural tailwinds — places where technology, regulation, and human behavior are converging to create massive, durable markets.</p>
-<p><strong>Fintech:</strong> Financial infrastructure is being rebuilt from the ground up. Legacy systems are brittle, compliance costs are rising, and consumer expectations have permanently shifted. The next wave isn't about competing with banks — it's about replacing the pipes underneath them. Embedded finance, vertical SaaS with payments, and credit infrastructure for underserved segments are where the real compounding happens. This sector scales because every business eventually becomes a financial services business.</p>
-<p><strong>Climate Tech:</strong> Climate is no longer a niche — it's the largest capital reallocation of our generation. Carbon markets are being formalized, energy transition is accelerating across every geography, and regulatory pressure is creating irreversible demand. The companies that win here aren't selling sustainability — they're building infrastructure that's cheaper, faster, and better than the fossil-fuel alternative. The unit economics are finally working, and the policy tailwinds aren't going away.</p>
-<p><strong>AI:</strong> AI is moving from feature to infrastructure. The real opportunity isn't general-purpose models — it's vertical AI that solves specific, high-stakes problems with proprietary data and measurable outcomes. Healthcare diagnostics, scientific discovery, industrial automation — these are markets where AI creates 10x improvements, not incremental ones. I look for companies with defensible data moats, clear feedback loops, and problems where the cost of being wrong is high enough that customers will pay for accuracy.</p>`,
+      detail: `<p>I don't pick sectors because they're trendy. I follow structural tailwinds — places where technology, regulation, and human behavior are converging to create massive, durable markets. Within each sector, I'm drawn to specific subsectors where conviction is deepest.</p>
+<p><strong>Fintech:</strong> Financial infrastructure is being rebuilt from the ground up. Legacy systems are brittle, compliance costs are rising, and consumer expectations have permanently shifted. The next wave isn't about competing with banks — it's about replacing the pipes underneath them.</p>
+<p>Where I see the strongest signal: <em>Agentic payments</em> — AI agents that autonomously execute financial transactions are creating an entirely new payment rail, with firms like Stripe and Adyen already building infrastructure for machine-to-machine commerce. <em>Embedded finance</em> — every vertical SaaS company is becoming a fintech company; Shopify, Toast, and ServiceTitan have proven that payments + lending embedded in workflow software drive 2-5x revenue per customer. <em>Credit infrastructure for underserved segments</em> — alternative data underwriting is unlocking credit for the 1.4B globally unbanked, and investors like Ribbit Capital and QED have consistently deployed here with conviction. This sector scales because every business eventually becomes a financial services business.</p>
+<p><strong>Climate Tech:</strong> Climate is no longer a niche — it's the largest capital reallocation of our generation. Carbon markets are being formalized, energy transition is accelerating across every geography, and regulatory pressure is creating irreversible demand. The companies that win here aren't selling sustainability — they're building infrastructure that's cheaper, faster, and better than the fossil-fuel alternative.</p>
+<p>Where I see the strongest signal: <em>Carbon capture and removal</em> — compliance carbon markets are projected to reach $250B+ by 2030, and first-movers like Climeworks and CarbonCure are building defensible positions while voluntary markets mature. <em>Grid modernization and energy storage</em> — the IRA has unlocked $370B in clean energy incentives, and storage economics have improved 90% in the last decade; firms like Lowercarbon Capital and Breakthrough Energy are doubling down here. <em>Climate adaptation tech</em> — as climate impacts accelerate, parametric insurance, water tech, and resilience infrastructure are becoming urgent, investable categories. The unit economics are finally working, and the policy tailwinds aren't going away.</p>
+<p><strong>AI:</strong> AI is moving from feature to infrastructure. The real opportunity isn't general-purpose models — it's vertical AI that solves specific, high-stakes problems with proprietary data and measurable outcomes.</p>
+<p>Where I see the strongest signal: <em>Agentic workflows</em> — autonomous AI systems that execute multi-step tasks are the next platform shift; Sequoia, a16z, and Benchmark have all identified this as a generational opportunity, with early winners like Cognition and Sierra emerging. <em>Vertical AI for healthcare and drug discovery</em> — AI is compressing drug development timelines from 10 years to 2-3, and companies like Recursion and Isomorphic Labs are attracting billion-dollar commitments. <em>AI infrastructure and tooling</em> — the picks-and-shovels layer (observability, fine-tuning, deployment) is where durable value accrues as the application layer commoditizes. I look for companies with defensible data moats, clear feedback loops, and problems where the cost of being wrong is high enough that customers will pay for accuracy.</p>`,
       tags: [],
     },
     {
@@ -206,10 +209,11 @@ const FIELD_NOTES = {
   ],
 
   fromPeople: {
-    intro: "I actively build perspective through a structured mix of daily news, long-form analysis, and operator-led insights. I prioritize sources that sharpen my market understanding, surface emerging trends early, and deepen my judgment on what makes enduring companies.",
+    intro: "I actively build perspective through a structured mix of daily news, long-form analysis, and operator-led insights.",
     categories: [
       {
         label: "Macro & Global",
+        icon: "🌍",
         sources: [
           { name: "Financial Times", url: "https://www.ft.com", why: "My first read every morning. Anchors my thinking in global macro, geopolitics, and capital markets — contextualizing company-level decisions within broader economic shifts.", favourite: null },
           { name: "The Economist", url: "https://www.economist.com", why: "Structured, long-horizon analysis. Strengthens my ability to think probabilistically about global trends, policy, and second-order effects.", favourite: null },
@@ -217,6 +221,7 @@ const FIELD_NOTES = {
       },
       {
         label: "Weekly Deep Dives",
+        icon: "📬",
         sources: [
           { name: "Newcomer", url: "https://www.newcomer.co", why: "One of the most credible insider views into venture capital — fund dynamics, LP sentiment, and how capital is actually deployed behind the scenes.", favourite: null },
           { name: "Not Boring", url: "https://www.notboring.co", why: "Narrative-driven analysis of emerging industries. Invaluable for rapidly building context in unfamiliar sectors and spotting non-obvious opportunities.", favourite: "https://www.notboring.co/p/the-techno-industrial-revolution", favouriteName: "The Techno-Industrial Revolution" },
@@ -225,18 +230,21 @@ const FIELD_NOTES = {
       },
       {
         label: "Operator Lens",
+        icon: "🔧",
         sources: [
           { name: "First Round Review", url: "https://review.firstround.com", why: "Operator-first insights on company building — what works, what doesn't, and what execution excellence looks like from the inside.", favourite: "https://review.firstround.com/start-up-on-the-right-foot-build-a-customer-advisory-board/", favouriteName: "Build a Customer Advisory Board" },
         ],
       },
       {
         label: "Podcasts",
+        icon: "🎧",
         sources: [
           { name: "Acquired", url: "https://www.acquired.fm", why: "Deep dives into iconic companies — builds pattern recognition on how great businesses are built, scaled, and monetized over time.", favourite: null },
         ],
       },
       {
         label: "Specialized / Edge",
+        icon: "🔮",
         sources: [
           { name: "The Information", url: "https://www.theinformation.com", why: "High-signal reporting on private tech companies — staying ahead of market narratives and competitive dynamics.", favourite: null },
           { name: "ImpactAlpha", url: "https://impactalpha.com", why: "Keeps me close to developments in impact investing — a passion area for me.", favourite: null },

@@ -365,17 +365,31 @@ function renderDiaryRight() {
   const sourcesPanel = `
     <div class="diary-panel" data-panel="sources">
       <p class="sources-intro">${FIELD_NOTES.fromPeople.intro}</p>
-      ${FIELD_NOTES.fromPeople.categories.map(cat => `
-        <div class="sources-category">
-          <span class="sources-category-bubble">${cat.label}</span>
-          <ul class="sources-plain">
-            ${cat.sources.map(src => `
-              <li>
-                <a href="${src.url}" target="_blank" rel="noopener"><strong>${src.name}</strong></a> — ${src.why}
-                ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav">Favourite Read: ${src.favouriteName || 'Read'} &rarr;</a>` : ''}
-              </li>
-            `).join('')}
-          </ul>
+      ${FIELD_NOTES.fromPeople.categories.map((cat, i) => `
+        <div class="field-article expandable" style="transition-delay:${i * 100}ms" onclick="this.classList.toggle('expanded')">
+          <div class="field-article-header">
+            <div class="field-article-icon">${cat.icon || '📖'}</div>
+            <div>
+              <h3 class="field-article-title">${cat.label}</h3>
+              <p class="field-article-summary">${cat.sources.map(s => s.name).join(' · ')}</p>
+            </div>
+            <div class="expand-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+          </div>
+          <div class="field-article-body">
+            <div class="field-article-content">
+              ${cat.sources.map(src => `
+                <div class="source-card">
+                  <div class="source-card-header">
+                    <a href="${src.url}" target="_blank" rel="noopener" class="source-card-name">${src.name}</a>
+                  </div>
+                  <p class="source-card-why">${src.why}</p>
+                  ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav"><em>Favourite Read: ${src.favouriteName || 'Read'}</em> &rarr;</a>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
         </div>
       `).join('')}
     </div>
@@ -463,11 +477,20 @@ function renderTimeline() {
           ? `<a href="${item.url}" target="_blank" rel="noopener" class="rm-dot ${isFuture ? 'rm-future-dot' : ''} ${colorClass} rm-dot-link" title="Visit ${item.era}">${dotInner}</a>`
           : `<div class="rm-dot ${isFuture ? 'rm-future-dot' : ''} ${colorClass}">${dotInner}</div>`;
 
+        const mobileCardHtml = `
+          <div class="rm-mobile-card">
+            <span class="rm-era">${item.era}</span>
+            <h4 class="rm-title">${item.title}</h4>
+            <p class="rm-why">${item.why}</p>
+          </div>
+        `;
+
         return `
           <div class="rm-item ${isUp ? 'rm-up' : 'rm-down'} ${isFuture ? 'rm-future' : ''}" style="transition-delay:${i * 60}ms">
             <div class="rm-area rm-area-top">${isUp ? cardHtml : (noteHtml || '')}</div>
             ${dotHtml}
             <div class="rm-area rm-area-bottom">${isUp ? (noteHtml || '') : cardHtml}</div>
+            ${mobileCardHtml}
           </div>
         `;
       }).join('')}
