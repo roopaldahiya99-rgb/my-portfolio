@@ -1218,30 +1218,34 @@ img { max-width: 100%; display: block; }
 }
 
 .sources-fav {
-  display: inline-block;
-  font-size: 0.72rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
   font-family: var(--font-sans);
-  margin-top: 6px;
-  padding: 3px 10px;
-  border-radius: 16px;
-  background: var(--coral-pale);
-  border: 1px solid rgba(232,103,77,0.25);
-  color: var(--coral) !important;
-  font-weight: 500;
-  transition: background var(--trans), transform var(--trans);
+  margin-top: 8px;
+  color: var(--purple) !important;
+  font-weight: 600;
+  transition: color var(--trans), transform var(--trans);
+  text-decoration: none;
 }
 
 .sources-fav em {
   font-style: italic;
   color: inherit;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.sources-fav::after {
+  content: '★';
+  font-size: 0.7rem;
+  color: var(--amber);
 }
 
 .sources-fav:hover {
-  background: rgba(232,103,77,0.15);
+  color: var(--purple) !important;
   transform: translateX(3px);
-  color: var(--coral) !important;
-  text-decoration: none !important;
+  text-decoration: underline !important;
 }
 
 /* ═══════════════════════════════════════════════════════════

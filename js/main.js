@@ -373,7 +373,7 @@ function renderDiaryRight() {
               <div class="source-card">
                 <a href="${src.url}" target="_blank" rel="noopener" class="source-card-name">${src.name}</a>
                 <p class="source-card-why">${src.why}</p>
-                ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav"><em>Favourite Read: ${src.favouriteName || 'Read'}</em> &rarr;</a>` : ''}
+                ${src.favourite ? `<a href="${src.favourite}" target="_blank" rel="noopener" class="sources-fav"><em>Favourite: ${src.favouriteName || 'Read'}</em></a>` : ''}
               </div>
             `).join('')}
           </div>
