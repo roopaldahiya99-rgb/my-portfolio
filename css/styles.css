@@ -1504,7 +1504,6 @@ img { max-width: 100%; display: block; }
 
 .diary-panel-intro {
   font-size: 0.88rem;
-  font-style: italic;
   color: var(--ink-dim);
   margin-bottom: 18px;
   padding-left: 2px;
