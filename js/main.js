@@ -312,7 +312,7 @@ function renderDiaryRight() {
   // Build content panels
   const fieldPanel = `
     <div class="diary-panel active" data-panel="field">
-      <p class="diary-panel-intro">Every deal teaches you something — about markets, about founders, about your own judgment.</p>
+      <p class="diary-panel-intro">Lessons from dealwork — how to assess, what I believe, how to show up.</p>
       ${FIELD_NOTES.fromTheField.map((article, i) => `
         <div class="field-article expandable ${article.comingSoon ? 'coming-soon-article' : ''}" style="transition-delay:${i * 100}ms" onclick="this.classList.toggle('expanded')">
           <div class="field-article-header">
