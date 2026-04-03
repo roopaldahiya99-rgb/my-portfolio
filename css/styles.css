@@ -1254,12 +1254,29 @@ img { max-width: 100%; display: block; }
 .expand-icon {
   margin-left: auto;
   flex-shrink: 0;
-  color: var(--ink-faint);
-  transition: transform var(--trans);
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-dim);
+  transition: transform var(--trans), background var(--trans), border-color var(--trans);
+  background: var(--cream-mid);
+}
+
+.field-article:hover .expand-icon {
+  border-color: var(--green-light);
+  background: var(--green-pale);
+  color: var(--green);
 }
 
 .expanded .expand-icon {
   transform: rotate(180deg);
+  background: var(--green-pale);
+  border-color: var(--green-light);
+  color: var(--green);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1464,57 +1481,86 @@ img { max-width: 100%; display: block; }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   FIELD ARTICLES (Learning from the Field) — inside diary
+   FIELD ARTICLES — Notebook page style
 ═══════════════════════════════════════════════════════════ */
 .field-article {
-  background: linear-gradient(180deg, #faf8f2 0%, #f8f5ec 100%);
-  border: none;
-  border-left: 3px solid var(--green-light);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 22px 26px 22px 28px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 4px 6px 6px 4px;
+  padding: 24px 28px 22px 68px;
   cursor: pointer;
-  transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans), background var(--trans);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
   position: relative;
-  overflow: hidden;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  overflow: visible;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 2px 3px 0 rgba(0,0,0,0.03);
 }
 
+/* Hole-punch dots along left spine */
 .field-article::before {
-  display: none;
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0; bottom: 0;
+  width: 10px;
+  background:
+    radial-gradient(circle 4px at center, #e8e4dc 100%, transparent 100%) 0 25% / 10px 10px no-repeat,
+    radial-gradient(circle 4px at center, #e8e4dc 100%, transparent 100%) 0 50% / 10px 10px no-repeat,
+    radial-gradient(circle 4px at center, #e8e4dc 100%, transparent 100%) 0 75% / 10px 10px no-repeat;
+  pointer-events: none;
+}
+
+/* Red margin line */
+.field-article::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 48px;
+  width: 1.5px;
+  background: rgba(232, 103, 77, 0.28);
+  pointer-events: none;
 }
 
 .field-article:hover {
-  border-left-color: var(--green);
-  transform: translateX(4px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  background: rgba(232,245,237,0.15);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.1), 2px 4px 0 rgba(0,0,0,0.04);
+  transform: translateY(-2px);
 }
 
 .field-article-header {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 14px;
 }
 
+/* Icon as a coloured stamp tab */
 .field-article-icon {
-  font-size: 1.6rem;
   flex-shrink: 0;
-  margin-top: 2px;
+  width: 36px;
+  height: 36px;
+  background: var(--green-pale);
+  border: 1.5px solid var(--green-light);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-top: 1px;
 }
 
 .field-article-title {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.45rem;
   font-weight: 700;
   color: var(--ink);
   margin-bottom: 4px;
+  line-height: 1.2;
 }
 
 .field-article-summary {
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   color: var(--ink-dim);
   line-height: 1.6;
+  font-style: italic;
 }
 
 .field-article-body {
@@ -1527,9 +1573,17 @@ img { max-width: 100%; display: block; }
 .field-article.expanded .field-article-body {
   max-height: 2000px;
   opacity: 1;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--cream-dark);
+  margin-top: 18px;
+  padding-top: 18px;
+  /* ruled lines in expanded area */
+  background:
+    repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      rgba(58,125,86,0.07) 27px,
+      rgba(58,125,86,0.07) 28px
+    );
+  border-top: 1.5px solid rgba(58,125,86,0.15);
 }
 
 .field-article-content {
