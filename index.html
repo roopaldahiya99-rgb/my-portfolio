@@ -38,16 +38,8 @@
 
   <!-- ─── HERO ──────────────────────────────────────────────── -->
   <section id="hero">
-    <div id="map"></div>
 
-    <div class="map-legend">
-      <div class="legend-item"><span class="dot dot-early"></span> Early-Stage Investment</div>
-      <div class="legend-item"><span class="dot dot-growth"></span> Growth-Stage Investment</div>
-      <div class="legend-item"><span class="dot dot-portfolio"></span> Portfolio Management</div>
-      <div class="legend-item"><span class="dot dot-fund"></span> Fund Development</div>
-      <div class="legend-item"><span class="dot dot-ops"></span> Operational Experience</div>
-    </div>
-
+    <!-- overlay sits first so it's top of flex stack on mobile -->
     <div class="hero-overlay">
       <div class="hero-content">
         <h1 class="hero-title">Betting on <em>people</em> and <em>ideas</em>, globally.</h1>
@@ -73,6 +65,23 @@
         </div>
       </div>
     </div>
+
+    <!-- legend sits between stats and map on mobile; absolute on desktop -->
+    <div class="map-legend">
+      <div class="legend-item"><span class="dot dot-early"></span> Early-Stage Investment</div>
+      <div class="legend-item"><span class="dot dot-growth"></span> Growth-Stage Investment</div>
+      <div class="legend-item"><span class="dot dot-portfolio"></span> Portfolio Management</div>
+      <div class="legend-item"><span class="dot dot-fund"></span> Fund Development</div>
+      <div class="legend-item"><span class="dot dot-ops"></span> Operational Experience</div>
+    </div>
+
+    <!-- map panel -->
+    <div class="hero-map-container">
+      <div id="map"></div>
+      <div class="map-mobile-hint" id="mapMobileHint">👆 Tap a pin to explore</div>
+    </div>
+    <p class="map-tap-hint">Tap a pin to learn more</p>
+
   </section>
 
   <!-- ─── BELOW MAP: Deal Spotlight + Lessons Side by Side ─── -->

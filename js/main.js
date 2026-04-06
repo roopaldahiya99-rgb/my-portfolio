@@ -92,13 +92,19 @@ function initReveal() {
    MAP
 ════════════════════════════════════════════════════════ */
 function initMap() {
+  const isMobile = window.innerWidth <= 768;
+
   const map = L.map('map', {
     center: [38, -95],
     zoom: 2.4,
     zoomControl: false,
     scrollWheelZoom: false,
     attributionControl: true,
-    dragging: window.innerWidth > 768,
+    dragging: !isMobile,
+    tap: true,
+    tapTolerance: 15,
+    touchZoom: true,
+    zoomSnap: 0.25,
     worldCopyJump: true,
     maxBounds: null,
     maxBoundsViscosity: 0,
@@ -128,13 +134,20 @@ function initMap() {
     }).addTo(map);
   });
 
-  // Pin type → marker style
+  // Pin type → marker style (larger on mobile for easier tapping)
+  const pinSize   = isMobile ? [22, 22] : [14, 14];
+  const pinAnchor = isMobile ? [11, 11] : [7, 7];
+  const opsSize   = isMobile ? [28, 28] : [20, 20];
+  const opsAnchor = isMobile ? [14, 14] : [10, 10];
   const pinStyles = {
-    early:  { cls: 'pin-early',  size: [14, 14], anchor: [7, 7] },
-    growth: { cls: 'pin-growth', size: [14, 14], anchor: [7, 7] },
-    fund:   { cls: 'pin-fund',   size: [14, 14], anchor: [7, 7] },
-    ops:    { cls: 'pin-ops',    size: [20, 20], anchor: [10, 10] },
+    early:  { cls: 'pin-early',  size: pinSize,   anchor: pinAnchor },
+    growth: { cls: 'pin-growth', size: pinSize,   anchor: pinAnchor },
+    fund:   { cls: 'pin-fund',   size: pinSize,   anchor: pinAnchor },
+    ops:    { cls: 'pin-ops',    size: opsSize,   anchor: opsAnchor },
   };
+
+  // Collect all latlngs so we can fitBounds on mobile
+  const allLatLngs = [];
 
   // Render all pins
   DEAL_MAP.pins.forEach(pin => {
@@ -152,12 +165,14 @@ function initMap() {
       popupAnchor: [0, -14],
     });
 
+    allLatLngs.push([pin.lat, pin.lng]);
     const marker = L.marker([pin.lat, pin.lng], { icon }).addTo(map);
 
     const stagesHtml = (pin.stages || []).map(s => `<span class="popup-stage">${s}</span>`).join('');
     const sectorsHtml = (pin.sectors || []).filter(Boolean).map(s => `<span class="popup-sector">${s}</span>`).join('');
     const tagsHtml = (stagesHtml || sectorsHtml) ? `<div class="popup-tags">${stagesHtml}${sectorsHtml}</div>` : '';
 
+    const popupWidth = isMobile ? 230 : 280;
     marker.bindPopup(`
       <div class="pin-popup deal-popup">
         <div class="popup-header">
@@ -167,10 +182,28 @@ function initMap() {
         <p class="popup-spotlight">${pin.desc}</p>
         ${tagsHtml}
       </div>
-    `, { maxWidth: 280 });
+    `, { maxWidth: popupWidth });
 
-    marker.on('mouseover', function() { this.openPopup(); });
+    // Desktop: hover to open · Mobile: tap to open
+    marker.on('mouseover', function() { if (!isMobile) this.openPopup(); });
+    marker.on('click',     function() { this.openPopup(); });
   });
+
+  // On mobile, zoom/pan to fit all pins into view
+  if (isMobile) {
+    // Manually tuned view for the 335×210 mini-map:
+    // zoom 1 → world is 512px wide; container shows ~236° of longitude
+    // center lng -8 → visible range ≈ [-126 … +110] catches CA(-123) → VN(108)
+    // center lat 25 → visible range crops Antarctica & Arctic, shows all dots
+    map.setView([20, -8], 0.75, { animate: false });
+  }
+
+  // Fade out the "Tap a pin" hint after 3 seconds
+  const hint = document.getElementById('mapMobileHint');
+  if (hint) {
+    setTimeout(() => hint.classList.add('fade-out'), 3000);
+    setTimeout(() => { hint.style.display = 'none'; }, 3700);
+  }
 }
 
 /* ════════════════════════════════════════════════════════

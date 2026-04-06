@@ -203,6 +203,13 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 
+/* Full-screen map wrapper on desktop */
+.hero-map-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
 #map {
   position: absolute;
   inset: 0;
@@ -526,6 +533,39 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
   letter-spacing: 0.02em;
 }
+
+/* Below-map tap hint — mobile only */
+.map-tap-hint {
+  display: none;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--ink-faint);
+  text-align: center;
+  margin: 6px 20px 0;
+}
+
+/* Mobile tap hint on the map */
+.map-mobile-hint {
+  display: none; /* shown via media query */
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  background: rgba(30,32,48,0.72);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+.map-mobile-hint.fade-out { opacity: 0; }
 
 .map-legend {
   position: absolute;
@@ -1390,12 +1430,13 @@ img { max-width: 100%; display: block; }
 }
 
 .diary-date {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  font-weight: 500;
   color: var(--ink-faint);
   margin-bottom: 16px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
 }
 
 .diary-title {
@@ -2482,24 +2523,96 @@ footer {
   .nav-links.open { display: flex; }
   .nav-toggle { display: flex; }
 
-  .hero-overlay {
-    padding: 80px 20px 30px;
-    align-items: flex-start;
-    background: linear-gradient(
-      0deg,
-      rgba(250,247,240,0.95) 0%,
-      rgba(250,247,240,0.75) 60%,
-      transparent 100%
-    );
-    justify-content: center;
-    text-align: center;
+  /* ── Mobile hero: stacked layout, map becomes small panel ── */
+  #hero {
+    height: auto;
+    min-height: unset;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    background: var(--cream);
   }
 
-  .hero-stats   { margin: 0 auto 16px; }
-  .hero-deal-spotlight { max-width: 100%; margin: 0 auto; }
-  .hero-deal-header h3 { font-size: 0.9rem; }
+  /* Overlay becomes normal flow (no longer full-screen absolute) */
+  .hero-overlay {
+    position: static;
+    background: none;
+    padding: 90px 24px 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: center;
+    pointer-events: auto;
+    overflow: visible;
+    z-index: auto;
+  }
 
-  .map-legend     { bottom: 20px; right: 16px; }
+  .hero-content { max-width: 100%; }
+  .hero-stats   { margin: 0 auto 0; }
+  .scroll-hint  { display: none; }
+
+  /* Mini map panel below stats */
+  .hero-map-container {
+    position: relative;
+    inset: unset;
+    height: 210px;
+    margin: 16px 20px 0;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  }
+
+  /* Soft fade at bottom so map bleeds into page background */
+  .hero-map-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(
+      to bottom,
+      transparent 50%,
+      var(--cream) 100%
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  #map {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+  }
+
+  /* Legend: 2-column grid strip between stats and map */
+  .map-legend {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: unset;
+    flex-wrap: unset;
+    margin: 10px 20px 0;
+    padding: 8px 12px;
+    gap: 5px 8px;
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+  }
+  .legend-item { font-size: 0.62rem; gap: 5px; }
+  .dot { width: 7px; height: 7px; }
+
+  /* Bigger pin tap targets on mobile */
+  .pin-marker { width: 22px; height: 22px; }
+
+  .map-tap-hint { display: block; }
+
+  /* Tap hint inside mini map */
+  .map-mobile-hint {
+    display: block;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+  }
   #below-map { padding: 30px 20px 50px; }
   .below-map-grid { grid-template-columns: 1fr; }
   .section        { padding: var(--section-gap) 20px; }
