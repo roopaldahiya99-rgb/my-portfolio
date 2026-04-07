@@ -95,8 +95,8 @@ function initMap() {
   const isMobile = window.innerWidth <= 768;
 
   const map = L.map('map', {
-    center: [38, -95],
-    zoom: 2.4,
+    center: [25, 10],
+    zoom: isMobile ? 0.75 : 2.5,
     zoomControl: false,
     scrollWheelZoom: false,
     attributionControl: true,
@@ -104,13 +104,13 @@ function initMap() {
     tap: true,
     tapTolerance: 15,
     touchZoom: true,
-    zoomSnap: isMobile ? 0.25 : 1,
+    zoomSnap: isMobile ? 0.25 : 0.5,
     worldCopyJump: true,
     maxBounds: null,
     maxBoundsViscosity: 0,
   });
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19,
@@ -191,15 +191,6 @@ function initMap() {
     marker.on('mouseover', function() { if (!isMobile) this.openPopup(); });
     marker.on('click',     function() { this.openPopup(); });
   });
-
-  // On mobile, zoom/pan to fit all pins into view
-  if (isMobile) {
-    // Manually tuned view for the 335×210 mini-map:
-    // zoom 1 → world is 512px wide; container shows ~236° of longitude
-    // center lng -8 → visible range ≈ [-126 … +110] catches CA(-123) → VN(108)
-    // center lat 25 → visible range crops Antarctica & Arctic, shows all dots
-    map.setView([20, -8], 0.75, { animate: false });
-  }
 
   // Fade out the "Tap a pin" hint after 3 seconds
   const hint = document.getElementById('mapMobileHint');
