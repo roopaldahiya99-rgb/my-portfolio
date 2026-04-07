@@ -104,7 +104,7 @@ function initMap() {
     tap: true,
     tapTolerance: 15,
     touchZoom: true,
-    zoomSnap: 0.25,
+    zoomSnap: isMobile ? 0.25 : 1,
     worldCopyJump: true,
     maxBounds: null,
     maxBoundsViscosity: 0,
@@ -172,9 +172,9 @@ function initMap() {
     const sectorsHtml = (pin.sectors || []).filter(Boolean).map(s => `<span class="popup-sector">${s}</span>`).join('');
     const tagsHtml = (stagesHtml || sectorsHtml) ? `<div class="popup-tags">${stagesHtml}${sectorsHtml}</div>` : '';
 
-    const popupWidth = isMobile ? 230 : 280;
+    const popupWidth = isMobile ? 190 : 280;
     marker.bindPopup(`
-      <div class="pin-popup deal-popup">
+      <div class="pin-popup deal-popup${isMobile ? ' popup-mobile' : ''}">
         <div class="popup-header">
           <img class="popup-flag-img" src="https://flagcdn.com/w40/${pin.code}.png" alt="${pin.country} flag" />
           <h4>${pin.country}</h4>
@@ -182,7 +182,10 @@ function initMap() {
         <p class="popup-spotlight">${pin.desc}</p>
         ${tagsHtml}
       </div>
-    `, { maxWidth: popupWidth });
+    `, {
+      maxWidth: popupWidth,
+      autoPan: false,       // prevent map from panning when popup opens
+    });
 
     // Desktop: hover to open · Mobile: tap to open
     marker.on('mouseover', function() { if (!isMobile) this.openPopup(); });

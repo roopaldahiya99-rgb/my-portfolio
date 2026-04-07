@@ -542,7 +542,7 @@ img { max-width: 100%; display: block; }
   font-style: italic;
   color: var(--ink-faint);
   text-align: center;
-  margin: 6px 20px 0;
+  margin: 6px 20px 4px;
 }
 
 /* Mobile tap hint on the map */
@@ -713,6 +713,12 @@ img { max-width: 100%; display: block; }
 
 /* Map popup — deal spotlight */
 .pin-popup { min-width: 200px; }
+.popup-mobile { min-width: unset; }
+.popup-mobile .popup-flag-img { width: 20px; }
+.popup-mobile h4 { font-size: 0.82rem; }
+.popup-mobile .popup-spotlight { font-size: 0.74rem; margin-bottom: 6px; line-height: 1.4; }
+.popup-mobile .popup-stage,
+.popup-mobile .popup-sector { font-size: 0.58rem; padding: 2px 7px; }
 .popup-header {
   display: flex;
   align-items: center;
