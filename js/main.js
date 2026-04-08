@@ -695,11 +695,11 @@ function renderCommunities() {
       : c.name;
     return `
       <div class="community-card">
-        ${logoHtml}
-        <div class="community-card-text">
+        <div class="community-card-header">
+          ${logoHtml}
           <div class="community-name">${nameHtml}</div>
-          <div class="community-desc">${c.desc}</div>
         </div>
+        <div class="community-desc">${c.desc}</div>
       </div>
     `;
   }).join('');

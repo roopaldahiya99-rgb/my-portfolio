@@ -2341,13 +2341,19 @@ a.rm-dot-link::after {
 
 .community-card {
   display: flex;
-  align-items: flex-start;
-  gap: 14px;
+  flex-direction: column;
+  gap: 8px;
   background: var(--white);
   border: 1.5px solid var(--cream-dark);
   border-radius: var(--radius);
   padding: 14px 16px;
   transition: border-color var(--trans), transform var(--trans), box-shadow var(--trans);
+}
+
+.community-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .community-card:hover {
@@ -2381,8 +2387,6 @@ a.rm-dot-link::after {
   font-size: 1rem;
   color: var(--green);
 }
-
-.community-card-text { flex: 1; min-width: 0; }
 
 .community-name {
   font-family: var(--font-serif);
