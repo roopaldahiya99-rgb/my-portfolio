@@ -1653,7 +1653,7 @@ img { max-width: 100%; display: block; }
 }
 
 .field-article.expanded .field-article-body {
-  max-height: 2000px;
+  max-height: 20000px;
   opacity: 1;
   margin-top: 18px;
   padding-top: 18px;
@@ -1682,6 +1682,39 @@ img { max-width: 100%; display: block; }
   color: var(--green);
   font-weight: 600;
 }
+
+/* Colour-coded sector blocks inside the "Sectors I Love" field note */
+.sector-block {
+  border-left: 4px solid var(--block-color);
+  background: var(--block-pale);
+  border-radius: 4px 8px 8px 4px;
+  padding: 18px 22px 4px;
+  margin: 20px 0 24px;
+}
+
+.sector-block:first-of-type {
+  margin-top: 22px;
+}
+
+.sector-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--block-color);
+  margin-bottom: 12px;
+}
+
+.sector-block strong,
+.sector-block em {
+  color: var(--block-color);
+}
+
+.sector-quantum { --block-color: var(--sky); --block-pale: var(--sky-pale); }
+.sector-voice   { --block-color: var(--coral); --block-pale: var(--coral-pale); }
+.sector-battery { --block-color: var(--teal); --block-pale: var(--teal-pale); }
+.sector-labor   { --block-color: var(--purple); --block-pale: var(--purple-pale); }
 
 .field-article-tags {
   display: flex;
